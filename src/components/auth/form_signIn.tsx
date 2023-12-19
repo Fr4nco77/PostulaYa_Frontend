@@ -5,51 +5,100 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2, Eye, EyeOff } from "lucide-react";
-import { useState } from "react";
+import { ChangeEvent, useCallback, useState } from "react";
 import Link from "next/link";
+import { FormState, UserCredentials } from "@/lib/definitions";
+import { loginUser } from "@/lib/actions";
+import { useToast } from "../ui/use-toast";
+import { useRouter } from "next/navigation";
+import ErrorMessage from "./error_messages";
 
 interface FormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export default function Form({ className, ...props }: FormProps) {
+  const router = useRouter();
+  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [credentials, setCredentials] = useState<UserCredentials>({
+    email: "",
+    password: "",
+  });
+  const [formState, setFormState] = useState<FormState>({
+    errors: {},
+    message: null,
+  });
 
-  async function onSubmit(event: React.SyntheticEvent) {
-    event.preventDefault();
-    setIsLoading(true);
+  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
 
-    setTimeout(() => {
+    setCredentials((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  }, []);
+
+  const handleSubmit = useCallback(
+    async (e: ChangeEvent<HTMLFormElement>) => {
+      e.preventDefault();
+      setIsLoading(true);
+
+      const { errors, message, success, response } =
+        await loginUser(credentials);
+      setFormState({ errors, message });
       setIsLoading(false);
-    }, 3000);
-  }
+
+      if (!success) {
+        return toast({
+          variant: "destructive",
+          title: "Uh oh! Something went wrong.",
+          description: message,
+        });
+      }
+
+      localStorage.setItem("authorization", response);
+      setCredentials({
+        email: "",
+        password: "",
+      });
+
+      toast({ description: message });
+      setTimeout(() => router.push("/"), 2000);
+    },
+    [credentials],
+  );
 
   return (
     <div className={cn(className)} {...props}>
-      <form onSubmit={onSubmit}>
+      <form onSubmit={handleSubmit}>
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="email">
-              Email
-            </Label>
+            <Label htmlFor="email" className={formState.errors?.email && "text-red-500"}>Email</Label>
             <Input
               id="email"
-              placeholder="john@example.dev"
               type="email"
-              autoCapitalize="none"
-              autoComplete="email"
-              autoCorrect="off"
+              name="email"
+              placeholder="john@example.dev"
+              aria-describedby="email-error"
+              className={formState.errors?.email && "border-red-500"}
+              value={credentials.email}
+              onChange={handleChange}
               disabled={isLoading}
             />
+            <ErrorMessage errors={formState.errors?.email} errorKey="email" />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="password">
-              Password
-            </Label>
+            <Label htmlFor="password" className={formState.errors?.password && "text-red-500"}>Password</Label>
             <div className="flex w-full items-center space-x-2">
               <Input
                 id="password"
-                type={showPassword ? "text" : "password"}
+                name="password"
                 placeholder="••••••••••••"
+                aria-describedby="password-error"
+                type={showPassword ? "text" : "password"}
+                className={formState.errors?.password && "border-red-500"}
+                value={credentials.password}
+                onChange={handleChange}
                 disabled={isLoading}
               />
               <Button
@@ -62,6 +111,7 @@ export default function Form({ className, ...props }: FormProps) {
                 {showPassword ? <Eye /> : <EyeOff />}
               </Button>
             </div>
+            <ErrorMessage errors={formState.errors?.password} errorKey="password" />
           </div>
           <div className="flex items-end justify-end">
             <Link href="/auth/forgot_password">

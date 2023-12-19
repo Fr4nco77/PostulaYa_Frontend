@@ -7,6 +7,4 @@ export type UserCredentials = {
 export type FormState = {
     errors?: { [key: string]: string[] };
     message: null | string;
-    success: boolean;
-    response?: any;
 }

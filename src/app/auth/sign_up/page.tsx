@@ -22,7 +22,7 @@ export default function SignUp() {
             </h1>
             <span>it's time to adventure</span>
           </div>
-          <GoogleButton className="my-5 w-full" />
+          <GoogleButton className=" my-5 w-full" />
           <Separator />
           <Suspense fallback={<span>Loading Form</span>}>
             <Form className="my-5 w-full" />
