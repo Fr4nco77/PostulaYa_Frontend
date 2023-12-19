@@ -1,9 +1,13 @@
-import Form from "@/components/auth/form_forgotPassword";
+import Form from "@/components/auth/form-forgotPassword";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
 import { Suspense } from "react";
 import { buttonVariants } from "@/components/ui/button";
+import { Metadata } from "next";
 
+export const metadata: Metadata = {
+title: "Restablecer Contraseña"
+}
 export default function ForgotPassword() {
   return (
     <div className="h-screen w-screen">

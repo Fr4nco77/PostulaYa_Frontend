@@ -1,5 +1,10 @@
-import Form from "@/components/auth/form_resetPassword";
+import Form from "@/components/auth/form-resetPassword";
+import { Metadata } from "next";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Restablecer Contraseña",
+};
 
 export default function ResetPassword() {
   return (

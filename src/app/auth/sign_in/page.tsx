@@ -1,9 +1,14 @@
 import GoogleButton from "@/components/auth/GoogleButton";
-import Form from "@/components/auth/form_signIn";
+import Form from "@/components/auth/form-signIn";
 import { Separator } from "@/components/ui/separator";
+import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
+
+export const metadata: Metadata = {
+  title: "Inicio de Sesion",
+};
 
 export default function SingIn() {
   return (

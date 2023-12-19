@@ -13,9 +13,11 @@ export default function GoogleButton({ className, ...props }: ButtonProps) {
   const router = useRouter();
   const { toast } = useToast();
 
+  // Uso el hook useGoogleLogin para manejar la autenticación con Google
   const googleLogin = useGoogleLogin({
     onSuccess: async ({ code }) => {
       try {
+        // Envío una solicitud POST con el código de autorización para autenticar al usuario
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_BACKEND}/user/authenticateByGoogle`,
           {
@@ -28,20 +30,20 @@ export default function GoogleButton({ className, ...props }: ButtonProps) {
         );
         const { success, data } = await response.json();
 
-        if (success) {
-          toast({
-            description: data.message,
-          });
-
-          localStorage.setItem("authorization", data.response);
-          setTimeout(() => router.push("/"), 2000);
-        } else {
-          toast({
+        // Manejo la respuesta del backend en caso de exito y error
+        if (!success) {
+          return toast({
             variant: "destructive",
             title: data.name,
             description: data.message,
           });
         }
+
+        toast({
+          description: data.message,
+        });
+        localStorage.setItem("authorization", data.response);
+        setTimeout(() => router.push("/"), 2000);
       } catch (error) {
         toast({
           variant: "destructive",

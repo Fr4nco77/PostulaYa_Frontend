@@ -7,28 +7,28 @@ import { Label } from "@/components/ui/label";
 import { Loader2, Eye, EyeOff } from "lucide-react";
 import { ChangeEvent, useCallback, useState } from "react";
 import Link from "next/link";
-import { FormState, UserCredentials } from "@/lib/definitions";
+import { Errors, UserCredentials } from "@/lib/definitions";
 import { loginUser } from "@/lib/actions";
 import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
-import ErrorMessage from "./error_messages";
+import ErrorMessage from "../ui/error-message";
 
 interface FormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export default function Form({ className, ...props }: FormProps) {
   const router = useRouter();
   const { toast } = useToast();
+
+  //Estados del formulario
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [errors, setErrors] = useState<Errors>({});
   const [credentials, setCredentials] = useState<UserCredentials>({
     email: "",
     password: "",
   });
-  const [formState, setFormState] = useState<FormState>({
-    errors: {},
-    message: null,
-  });
 
+  //Manejador de cambios de los inputs
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
 
@@ -38,31 +38,33 @@ export default function Form({ className, ...props }: FormProps) {
     }));
   }, []);
 
+  //Manejador de submit del formulario
   const handleSubmit = useCallback(
     async (e: ChangeEvent<HTMLFormElement>) => {
       e.preventDefault();
       setIsLoading(true);
 
-      const { errors, message, success, response } =
-        await loginUser(credentials);
-      setFormState({ errors, message });
+      //Ejecuto "loginUser" para validar los datos provistos por el usuario y logearlo finalmente 
+      const { errors, success, data } = await loginUser(credentials);
+      setErrors(errors);
       setIsLoading(false);
-
+      
+      //Dependiendo de el resultado de exito/error de lo anterior manejo la ui
       if (!success) {
         return toast({
           variant: "destructive",
-          title: "Uh oh! Something went wrong.",
-          description: message,
+          title: data.name,
+          description: data.message,
         });
       }
-
-      localStorage.setItem("authorization", response);
+          //En caso de exito guardo el token de acceso en el localStorage
+      localStorage.setItem("authorization", data.response);
       setCredentials({
         email: "",
         password: "",
       });
 
-      toast({ description: message });
+      toast({ description: data.message });
       setTimeout(() => router.push("/"), 2000);
     },
     [credentials],
@@ -73,22 +75,29 @@ export default function Form({ className, ...props }: FormProps) {
       <form onSubmit={handleSubmit}>
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="email" className={formState.errors?.email && "text-red-500"}>Email</Label>
+            <Label htmlFor="email" className={errors?.email && "text-red-500"}>
+              Email
+            </Label>
             <Input
               id="email"
               type="email"
               name="email"
               placeholder="john@example.dev"
               aria-describedby="email-error"
-              className={formState.errors?.email && "border-red-500"}
+              className={errors?.email && "border-red-500"}
               value={credentials.email}
               onChange={handleChange}
               disabled={isLoading}
             />
-            <ErrorMessage errors={formState.errors?.email} errorKey="email" />
+            <ErrorMessage errors={errors?.email} errorKey="email" />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="password" className={formState.errors?.password && "text-red-500"}>Password</Label>
+            <Label
+              htmlFor="password"
+              className={errors?.password && "text-red-500"}
+            >
+              Password
+            </Label>
             <div className="flex w-full items-center space-x-2">
               <Input
                 id="password"
@@ -96,7 +105,7 @@ export default function Form({ className, ...props }: FormProps) {
                 placeholder="••••••••••••"
                 aria-describedby="password-error"
                 type={showPassword ? "text" : "password"}
-                className={formState.errors?.password && "border-red-500"}
+                className={errors?.password && "border-red-500"}
                 value={credentials.password}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -107,11 +116,12 @@ export default function Form({ className, ...props }: FormProps) {
                 size="icon"
                 variant="outline"
                 className="border-slate-600"
+                disabled={isLoading}
               >
                 {showPassword ? <Eye /> : <EyeOff />}
               </Button>
             </div>
-            <ErrorMessage errors={formState.errors?.password} errorKey="password" />
+            <ErrorMessage errors={errors?.password} errorKey="password" />
           </div>
           <div className="flex items-end justify-end">
             <Link href="/auth/forgot_password">

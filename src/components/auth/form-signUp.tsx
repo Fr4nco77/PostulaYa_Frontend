@@ -1,7 +1,7 @@
 "use client";
 
 import { ChangeEvent, useCallback, useState } from "react";
-import ErrorMessage from "./error_messages";
+import ErrorMessage from "../ui/error-message";
 import { Loader2, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "../ui/use-toast";
 import { cn } from "@/lib/utils";
 import { createUser } from "@/lib/actions";
-import { UserCredentials, FormState } from "@/lib/definitions";
+import { UserCredentials, Errors } from "@/lib/definitions";
 
 interface FormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -19,19 +19,17 @@ export default function Form({ className, ...props }: FormProps) {
   // Estados del formulario
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
+  const [errors, setErrors] = useState<Errors>({});
   const [credentials, setCredentials] = useState<UserCredentials>({
     username: "",
     email: "",
     password: "",
   });
-  const [formState, setFormState] = useState<FormState>({
-    errors: {},
-    message: null,
-  });
 
   // Manejador de cambio en los campos del formulario
   const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
+
     setCredentials((prevState) => ({
       ...prevState,
       [name]: value,
@@ -44,15 +42,17 @@ export default function Form({ className, ...props }: FormProps) {
       e.preventDefault();
       setIsLoading(true);
 
-      const { errors, message, success } = await createUser(credentials);
-      setFormState({ errors, message });
+      //Envio los datos para su verificacion y posteriormente registrar al usuario
+      const { errors, success, data } = await createUser(credentials);
+      setErrors(errors);
       setIsLoading(false);
 
+      //Manejo la ui dependiendo del resultado de la solicitud
       if (!success) {
         return toast({
           variant: "destructive",
-          title: "Uh oh! Something went wrong.",
-          description: message,
+          title: data.name,
+          description: data.message,
         });
       }
 
@@ -62,7 +62,7 @@ export default function Form({ className, ...props }: FormProps) {
         password: "",
       });
 
-      toast({ description: message });
+      toast({ description: data.message });
     },
     [credentials],
   );
@@ -74,7 +74,7 @@ export default function Form({ className, ...props }: FormProps) {
           <div className="grid gap-2">
             <Label
               htmlFor="username"
-              className={formState.errors?.username && "text-red-500"}
+              className={errors?.username && "text-red-500"}
             >
               Username
             </Label>
@@ -83,21 +83,15 @@ export default function Form({ className, ...props }: FormProps) {
               name="username"
               placeholder="John Doe"
               aria-describedby="username-error"
-              className={formState.errors?.username && "border-red-500"}
+              className={errors?.username && "border-red-500"}
               value={credentials.username}
               onChange={handleChange}
               disabled={isLoading}
             />
-            <ErrorMessage
-              errors={formState.errors?.username}
-              errorKey="username"
-            />
+            <ErrorMessage errors={errors?.username} errorKey="username" />
           </div>
           <div className="grid gap-2">
-            <Label
-              htmlFor="email"
-              className={formState.errors?.email && "text-red-500"}
-            >
+            <Label htmlFor="email" className={errors?.email && "text-red-500"}>
               Email
             </Label>
             <Input
@@ -106,17 +100,17 @@ export default function Form({ className, ...props }: FormProps) {
               placeholder="john@example.dev"
               type="email"
               aria-describedby="email-error"
-              className={formState.errors?.email && "border-red-500"}
+              className={errors?.email && "border-red-500"}
               value={credentials.email}
               onChange={handleChange}
               disabled={isLoading}
             />
-            <ErrorMessage errors={formState.errors?.email} errorKey="email" />
+            <ErrorMessage errors={errors?.email} errorKey="email" />
           </div>
           <div className="grid gap-2">
             <Label
               htmlFor="password"
-              className={formState.errors?.password && "text-red-500"}
+              className={errors?.password && "text-red-500"}
             >
               Password
             </Label>
@@ -127,7 +121,7 @@ export default function Form({ className, ...props }: FormProps) {
                 placeholder="••••••••••••"
                 type={showPassword ? "text" : "password"}
                 aria-describedby="password-error"
-                className={formState.errors?.password && "border-red-500"}
+                className={errors?.password && "border-red-500"}
                 value={credentials.password}
                 onChange={handleChange}
                 disabled={isLoading}
@@ -143,10 +137,7 @@ export default function Form({ className, ...props }: FormProps) {
                 {showPassword ? <Eye /> : <EyeOff />}
               </Button>
             </div>
-            <ErrorMessage
-              errorKey="password"
-              errors={formState.errors?.password}
-            />
+            <ErrorMessage errorKey="password" errors={errors?.password} />
           </div>
           <Button
             className="bg-yellow-400 text-black hover:bg-yellow-300"

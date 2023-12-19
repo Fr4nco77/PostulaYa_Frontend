@@ -1,9 +1,14 @@
 import GoogleButton from "@/components/auth/GoogleButton";
-import Form from "@/components/auth/form_signUp";
+import Form from "@/components/auth/form-signUp";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
 import { Suspense } from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Registro",
+};
 
 export default function SignUp() {
   return (
