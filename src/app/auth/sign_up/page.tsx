@@ -23,9 +23,8 @@ export default function SignUp() {
               alt="PostulaYa Logo"
             />
             <h1 className="mt-3 text-4xl ">
-              <strong>Create account</strong>
+              <strong>Crear Cuenta</strong>
             </h1>
-            <span>it's time to adventure</span>
           </div>
           <GoogleButton className=" my-5 w-full" />
           <Separator />
@@ -34,9 +33,9 @@ export default function SignUp() {
           </Suspense>
           <div className=" w-full">
             <span>
-              Already have an account?{" "}
+            ¿Ya tienes una cuenta?{" "}
               <Link href="/auth/sign_in">
-                <strong className="underline">Sign In</strong>
+                <strong className="underline">Ingresa aquí</strong>
               </Link>
             </span>
           </div>

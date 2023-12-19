@@ -30,9 +30,9 @@ export default function SingIn() {
               alt="PostulaYa Logo"
             />
             <h1 className="mt-3 text-4xl ">
-              <strong>Hello again 👋</strong>
+              <strong>Hola de nuevo 👋</strong>
             </h1>
-            <span>Let's continue from where you left off 💪</span>
+            <span>¡Listo para continuar! 💪</span>
           </div>
           <GoogleButton className="my-5 w-full" />
           <Separator />
@@ -41,9 +41,9 @@ export default function SingIn() {
           </Suspense>
           <div className="w-full  ">
             <span>
-              Don't have an account?{" "}
+              ¿Aún no tienes una cuenta?{" "}
               <Link href="/auth/sign_up">
-                <strong className="underline">Sign up</strong>
+                <strong className="underline">Regístrate aquí</strong>
               </Link>
             </span>
           </div>

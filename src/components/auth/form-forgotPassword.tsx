@@ -69,8 +69,8 @@ export default function Form({ className, ...props }: FormProps) {
             disabled={isLoading}
             className="bg-yellow-400 text-black hover:bg-yellow-300"
           >
-            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Send
-            email
+            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+            Enviar
           </Button>
         </div>
       </form>

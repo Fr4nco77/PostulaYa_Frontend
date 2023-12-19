@@ -76,7 +76,7 @@ export default function Form({ className, ...props }: FormProps) {
               htmlFor="username"
               className={errors?.username && "text-red-500"}
             >
-              Username
+              Nombre
             </Label>
             <Input
               id="username"
@@ -112,7 +112,7 @@ export default function Form({ className, ...props }: FormProps) {
               htmlFor="password"
               className={errors?.password && "text-red-500"}
             >
-              Password
+              Contraseña
             </Label>
             <div className="flex w-full items-center space-x-2">
               <Input
@@ -144,7 +144,7 @@ export default function Form({ className, ...props }: FormProps) {
             disabled={isLoading}
           >
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Sign Up with Email
+            Registrarme
           </Button>
         </div>
       </form>

@@ -96,7 +96,7 @@ export default function Form({ className, ...props }: FormProps) {
               htmlFor="password"
               className={errors?.password && "text-red-500"}
             >
-              Password
+              Contraseña
             </Label>
             <div className="flex w-full items-center space-x-2">
               <Input
@@ -126,7 +126,7 @@ export default function Form({ className, ...props }: FormProps) {
           <div className="flex items-end justify-end">
             <Link href="/auth/forgot_password">
               <strong className="text-sm underline">
-                Forgot your Password?
+              Olvidé mi contraseña
               </strong>
             </Link>
           </div>
@@ -135,7 +135,7 @@ export default function Form({ className, ...props }: FormProps) {
             className="bg-yellow-400 text-black hover:bg-yellow-300"
           >
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Sign In with Email
+            Ingresar
           </Button>
         </div>
       </form>

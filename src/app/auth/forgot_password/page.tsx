@@ -6,8 +6,8 @@ import { buttonVariants } from "@/components/ui/button";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-title: "Restablecer Contraseña"
-}
+  title: "Restablecer Contraseña",
+};
 export default function ForgotPassword() {
   return (
     <div className="h-screen w-screen">
@@ -16,15 +16,17 @@ export default function ForgotPassword() {
           <div className="w-full">
             <Link
               href="/auth/sign_in"
-              className={`${buttonVariants({ variant: "ghost", size: "sm" })} hover:bg-slate-200`}
+              className={`${buttonVariants({
+                variant: "ghost",
+                size: "sm",
+              })} hover:bg-slate-200`}
             >
               <ChevronLeft className="mr-2 h-4 w-4" /> Go back
-
             </Link>
-            <h1 className="mt-3 text-4xl font-bold">Reset password</h1>
+            <h1 className="mt-3 text-4xl font-bold">Recuperar Contraseña</h1>
             <p>
-              Include the email address associated with your account and we’ll
-              send you an email with instructions to reset your password.
+              Escribí tu email para que te enviemos un correo para restablecer
+              tu contraseña.
             </p>
           </div>
           <Suspense>

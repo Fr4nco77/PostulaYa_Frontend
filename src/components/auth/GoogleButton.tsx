@@ -65,7 +65,7 @@ export default function GoogleButton({ className, ...props }: ButtonProps) {
         onClick={googleLogin}
       >
         <GoogleLogo />
-        <span className="ml-2">Continue whith Google</span>
+        <span className="ml-2">Continua con Google</span>
       </Button>
     </div>
   );

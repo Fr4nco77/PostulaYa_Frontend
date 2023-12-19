@@ -11,8 +11,8 @@ export async function createUser(credentials: UserCredentials) {
             errors: validatedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Missing Fields",
-                message: 'Failed to registered'
+                name: "Campos vacios",
+                message: 'Registro fallido'
             },
         }
     }
@@ -38,8 +38,8 @@ export async function createUser(credentials: UserCredentials) {
             errors: {},
             success: false,
             data: {
-                name: "Internal Error",
-                message: "Failed to registered",
+                name: "Error interno",
+                message: "Registro fallido",
             }
         }
     }
@@ -55,8 +55,8 @@ export async function loginUser(credentials: UserCredentials) {
             errors: verifiedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Missing Fields",
-                message: 'Failed to login',
+                name: "Campos vacios",
+                message: 'Inicio de sesion fallido',
             }
         }
     }
@@ -82,8 +82,8 @@ export async function loginUser(credentials: UserCredentials) {
             errors: {},
             success: false,
             data: {
-                name: "Internal Error",
-                message: "Failed to login",
+                name: "Error interno",
+                message: "Inicio de sesion fallido",
             }
         }
     }
@@ -99,8 +99,8 @@ export async function sendResetEmail(email: string) {
             errors: verifiedField.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Missing Fields",
-                message: 'Failed to send email',
+                name: "Campos vacios",
+                message: 'Envio de email fallido',
             }
         }
     }
@@ -126,8 +126,8 @@ export async function sendResetEmail(email: string) {
             errors: {},
             success: false,
             data: {
-                name: "Internal Error",
-                message: "Failed to send email",
+                name: "Error interno",
+                message: "Envio de email fallido",
             }
         }
     }
@@ -143,8 +143,8 @@ export async function resetPassword(resetData: ResetData) {
             errors: verifiedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Missing Fields",
-                message: 'Failed to reset password',
+                name: "Campos vacios",
+                message: 'Restablecimiento de contraseña fallido',
             }
         }
     }
@@ -171,8 +171,8 @@ export async function resetPassword(resetData: ResetData) {
             errors: {},
             success: false,
             data: {
-                name: "Internal Error",
-                message: "Failed to reset password",
+                name: "Error interno",
+                message: "Restablecimiento de contraseña fallido",
             }
         }
     }

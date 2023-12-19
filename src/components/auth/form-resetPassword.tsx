@@ -78,7 +78,7 @@ export default function Form({ className, ...props }: FormProps) {
       <form onSubmit={handleSubmit}>
         <div className="grid gap-4">
           <div className="grid gap-2">
-            <Label htmlFor="password">New Password</Label>
+            <Label htmlFor="password">Nueva Contraseña</Label>
             <Input
               id="password"
               name="password"
@@ -90,7 +90,7 @@ export default function Form({ className, ...props }: FormProps) {
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="checkPassword">Confirm Password</Label>
+            <Label htmlFor="checkPassword">Confirmar contraseña</Label>
             <div className="flex w-full items-center space-x-2">
               <Input
                 id="checkPassword"
@@ -122,7 +122,7 @@ export default function Form({ className, ...props }: FormProps) {
             className="bg-yellow-400 text-black hover:bg-yellow-300"
           >
             {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}{" "}
-            Restore Password
+            Enviar
           </Button>
         </div>
       </form>
