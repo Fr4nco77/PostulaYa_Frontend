@@ -8,7 +8,7 @@ export default function Redirect() {
   const router = useRouter();
 
   useEffect(() => {
-    if (!token) {
+    if (!token || token === "error") {
       router.push("/auth/sign_in");
     } else {
       localStorage.setItem("authorization", token);
