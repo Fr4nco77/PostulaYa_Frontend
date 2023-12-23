@@ -3,7 +3,6 @@ import Form from "@/components/auth/form-signUp";
 import { Separator } from "@/components/ui/separator";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -28,12 +27,10 @@ export default function SignUp() {
           </div>
           <GoogleButton className=" my-5 w-full" />
           <Separator />
-          <Suspense fallback={<span>Loading Form</span>}>
-            <Form className="my-5 w-full" />
-          </Suspense>
+          <Form className="my-5 w-full" />
           <div className=" w-full">
             <span>
-            ¿Ya tienes una cuenta?{" "}
+              ¿Ya tienes una cuenta?{" "}
               <Link href="/auth/sign_in">
                 <strong className="underline">Ingresa aquí</strong>
               </Link>

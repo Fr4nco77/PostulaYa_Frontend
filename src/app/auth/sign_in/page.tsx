@@ -4,7 +4,6 @@ import { Separator } from "@/components/ui/separator";
 import { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Inicio de Sesion",
@@ -36,9 +35,7 @@ export default function SingIn() {
           </div>
           <GoogleButton className="my-5 w-full" />
           <Separator />
-          <Suspense fallback={<span>Loading Form</span>}>
-            <Form className="my-5 w-full" />
-          </Suspense>
+          <Form className="my-5 w-full" />
           <div className="w-full  ">
             <span>
               ¿Aún no tienes una cuenta?{" "}

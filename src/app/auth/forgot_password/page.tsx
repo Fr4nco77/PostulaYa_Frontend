@@ -1,7 +1,6 @@
 import Form from "@/components/auth/form-forgotPassword";
 import Link from "next/link";
 import { ChevronLeft } from "lucide-react";
-import { Suspense } from "react";
 import { buttonVariants } from "@/components/ui/button";
 import { Metadata } from "next";
 
@@ -29,9 +28,7 @@ export default function ForgotPassword() {
               tu contraseña.
             </p>
           </div>
-          <Suspense>
-            <Form className="my-6 w-full" />
-          </Suspense>
+          <Form className="my-6 w-full" />
         </div>
       </main>
     </div>

@@ -44,11 +44,11 @@ export default function Form({ className, ...props }: FormProps) {
       e.preventDefault();
       setIsLoading(true);
 
-      //Ejecuto "loginUser" para validar los datos provistos por el usuario y logearlo finalmente 
+      //Ejecuto "loginUser" para validar los datos provistos por el usuario y logearlo finalmente
       const { errors, success, data } = await loginUser(credentials);
       setErrors(errors);
       setIsLoading(false);
-      
+
       //Dependiendo de el resultado de exito/error de lo anterior manejo la ui
       if (!success) {
         return toast({
@@ -57,14 +57,19 @@ export default function Form({ className, ...props }: FormProps) {
           description: data.message,
         });
       }
-          //En caso de exito guardo el token de acceso en el localStorage
-      localStorage.setItem("authorization", data.response);
+
+      toast({ description: data.message });
       setCredentials({
         email: "",
         password: "",
       });
 
-      toast({ description: data.message });
+      //En caso de exito guardo la informacion provista en el localStorage
+      const { token, name, email, image } = data.response;
+      localStorage.setItem("authorization", token);
+      localStorage.setItem("user_name", name);
+      localStorage.setItem("user_email", email);
+      localStorage.setItem("user_image", image);
       setTimeout(() => router.push("/"), 2000);
     },
     [credentials],
@@ -126,7 +131,7 @@ export default function Form({ className, ...props }: FormProps) {
           <div className="flex items-end justify-end">
             <Link href="/auth/forgot_password">
               <strong className="text-sm underline">
-              Olvidé mi contraseña
+                Olvidé mi contraseña
               </strong>
             </Link>
           </div>

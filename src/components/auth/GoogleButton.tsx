@@ -42,7 +42,12 @@ export default function GoogleButton({ className, ...props }: ButtonProps) {
         toast({
           description: data.message,
         });
-        localStorage.setItem("authorization", data.response);
+
+        const { token, name, email, image } = data.response;
+        localStorage.setItem("authorization", token);
+        localStorage.setItem("user_name", name);
+        localStorage.setItem("user_email", email);
+        localStorage.setItem("user_image", image);
         setTimeout(() => router.push("/"), 2000);
       } catch (error) {
         toast({

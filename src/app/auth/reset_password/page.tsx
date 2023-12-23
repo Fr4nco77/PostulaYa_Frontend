@@ -1,6 +1,5 @@
 import Form from "@/components/auth/form-resetPassword";
 import { Metadata } from "next";
-import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Restablecer Contraseña",
@@ -14,9 +13,7 @@ export default function ResetPassword() {
           <header className="w-full">
             <h1 className="mt-3 text-4xl font-bold">Restablecer contraseña</h1>
           </header>
-          <Suspense>
-            <Form className="my-6 w-full" />
-          </Suspense>
+          <Form className="my-6 w-full" />
         </div>
       </main>
     </div>
