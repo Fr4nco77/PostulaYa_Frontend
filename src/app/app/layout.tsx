@@ -8,7 +8,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <SideNavbar>
           <ListItems />
         </SideNavbar>
-        <main>{children}</main>
+        <main className="ml-[72px]">{children}</main>
       </body>
     </html>
   );

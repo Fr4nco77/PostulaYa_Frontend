@@ -1,13 +1,37 @@
 "use client";
 
-import { ReactNode, createContext, useState } from "react";
-import Image from "next/image";
+import { ReactNode, createContext, useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import Image from "next/image";
+import Exit from "./button_exit";
+import { Skeleton } from "../skeleton";
+import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
 
 export const SidebarContext = createContext();
 
 export default function Sidebar({ children }: { children: ReactNode }) {
   const [expanded, setExpanded] = useState(false);
+  const [userInfo, setUserInfo] = useState({
+    name: "",
+    email: "",
+    image: "",
+  });
+
+  useEffect(() => {
+    const name = localStorage.getItem("user_name");
+    const email = localStorage.getItem("user_email");
+    const image = localStorage.getItem("user_image");
+
+    if (name && email && image) {
+      setUserInfo({
+        name,
+        email,
+        image,
+      });
+    }
+  }, []);
+
+  const { name, email, image } = userInfo;
 
   return (
     <nav className="absolute z-10 flex h-full flex-col border-r bg-black shadow-sm">
@@ -28,15 +52,19 @@ export default function Sidebar({ children }: { children: ReactNode }) {
       </div>
 
       <SidebarContext.Provider value={{ expanded }}>
-        <ul className="flex-1 px-3">{children}</ul>
+        <ul className="mt-4 flex-1 px-3">
+          {children}
+          <Exit />
+        </ul>
       </SidebarContext.Provider>
 
-      <div className="flex border-t border-gray-700 p-3">
-        <img
-          src="https://ui-avatars.com/api/?background=c7d2fe&color=3730a3&bold=true"
-          alt=""
-          className="h-10 w-10 rounded-md"
-        />
+      <div className="flex border-t border-gray-700 p-3 pl-4">
+        <Avatar>
+          <AvatarImage src={image} />
+          <AvatarFallback>
+            <Skeleton className="h-10 w-10 rounded-full" />
+          </AvatarFallback>
+        </Avatar>
         <div
           className={`
               flex items-center justify-between
@@ -44,10 +72,16 @@ export default function Sidebar({ children }: { children: ReactNode }) {
           `}
         >
           <div className="leading-4">
-            <h4 className="text-[1vw] font-semibold text-yellow-400">
-              John Doe
-            </h4>
-            <span className="text-[0.8vw] text-white">johndoe@gmail.com</span>
+            {name ? (
+              <h4 className="text-sm font-semibold text-yellow-400">{name}</h4>
+            ) : (
+              <Skeleton className="h-3 w-44 rounded-md" />
+            )}
+            {email ? (
+              <span className="text-sm text-white">{email}</span>
+            ) : (
+              <Skeleton className="mt-2 h-3 w-52 rounded-md" />
+            )}
           </div>
         </div>
       </div>

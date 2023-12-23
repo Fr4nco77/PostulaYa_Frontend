@@ -18,7 +18,7 @@ export default function Redirect() {
       localStorage.setItem("user_name", name!);
       localStorage.setItem("user_email", email!);
       localStorage.setItem("user_image", image!);
-      router.push("/dashboard");
+      router.push("/app");
     }
   }, []);
 }

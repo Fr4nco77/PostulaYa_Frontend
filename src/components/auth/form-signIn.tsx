@@ -70,7 +70,7 @@ export default function Form({ className, ...props }: FormProps) {
       localStorage.setItem("user_name", name);
       localStorage.setItem("user_email", email);
       localStorage.setItem("user_image", image);
-      setTimeout(() => router.push("/"), 2000);
+      setTimeout(() => router.push("/app"), 1000);
     },
     [credentials],
   );
