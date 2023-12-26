@@ -1,5 +1,6 @@
-import SideNavbar from "@/components/ui/sidebar/sidebar";
-import ListItems from "@/components/ui/sidebar/listItems";
+import SideNavbar from "@/components/sidebar/sidebar";
+import ListItems from "@/components/sidebar/listItems";
+import { Toaster } from "@/components/ui/toaster";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -9,6 +10,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           <ListItems />
         </SideNavbar>
         <main className="ml-[72px]">{children}</main>
+        <Toaster />
       </body>
     </html>
   );

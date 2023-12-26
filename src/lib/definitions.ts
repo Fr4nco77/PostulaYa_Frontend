@@ -17,3 +17,17 @@ export type ResetData = {
 export type Errors = {
     [key: string]: string[]
 }
+
+export type Application = {
+    position: string,
+    modality: string | null,
+    type: string | null,
+    recluter?: string,
+    company_name: string,
+    company_ubication: string,
+    url?: string,
+    skills: {
+        id: string,
+        name: string
+    }[],
+}

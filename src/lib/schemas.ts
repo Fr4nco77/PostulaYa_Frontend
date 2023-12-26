@@ -54,3 +54,53 @@ export const validateRestorePassword = validatePassword.extend({
                 message: "Invalid token"
             })
 });
+
+export const validateApplication = z.object({
+    position:
+        z.string({
+            invalid_type_error: "Posición invalida"
+        })
+            .trim()
+            .min(3, 'La posición debe tener al menos 3 caracteres')
+            .max(25, 'La posición no puede tener más de 25 caracteres'),
+    modality:
+        z.enum(["Presencial", "Remoto"]),
+    type:
+        z.enum(["Full-Time", "Part-Time"]),
+    recluter:
+        z.optional(
+            z.string({
+                invalid_type_error: "Reclutador invalido"
+            })
+                .trim()
+                .min(1, 'El nombre del reclutador no puede estar vacío')),
+    company_name:
+        z.string({
+            invalid_type_error: "Empresa invalida"
+        })
+            .trim()
+            .nonempty('El nombre de la empresa no puede estar vacío'),
+    company_ubication:
+        z.string({
+            invalid_type_error: "Ubicacion invalida"
+        })
+            .trim()
+            .nonempty('La ubicación de la empresa no puede estar vacía'),
+    url:
+        z.optional(
+            z.string({
+                invalid_type_error: "Url invalido"
+            })
+                .trim()
+                .url("El url no es valido")
+        ),
+    skills:
+        z.array(
+            z.string({
+                invalid_type_error: 'Habilidad invalida'
+            })
+                .trim()
+                .min(1, 'Habilidad invalida')
+        )
+            .min(3, "Debes colocar un minimo de tres habilidades"),
+})

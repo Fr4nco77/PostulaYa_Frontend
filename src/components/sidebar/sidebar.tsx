@@ -4,8 +4,8 @@ import { ReactNode, createContext, useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
 import Image from "next/image";
 import Exit from "./button_exit";
-import { Skeleton } from "../skeleton";
-import { Avatar, AvatarFallback, AvatarImage } from "../avatar";
+import { Skeleton } from "../ui/skeleton";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 
 export const SidebarContext = createContext();
 
