@@ -1,24 +1,23 @@
 "use client";
 
 import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect } from "react";
+import Cookies from "js-cookie";
 
 export default function Redirect() {
-  const token = useSearchParams().get("token");
-  const name = useSearchParams().get("name");
-  const email = useSearchParams().get("email");
-  const image = useSearchParams().get("image");
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+  const name = searchParams.get("name");
+  const email = searchParams.get("email");
+  const image = searchParams.get("image");
 
-  useEffect(() => {
-    if (!token || token === "error") {
-      router.push("/auth/sign_in");
-    } else {
-      localStorage.setItem("authorization", token);
-      localStorage.setItem("user_name", name!);
-      localStorage.setItem("user_email", email!);
-      localStorage.setItem("user_image", image!);
-      router.push("/app");
-    }
-  }, []);
+  if (!token || token === "error" || !name || !email || !image) {
+    return router.push("/auth/sign_in");
+  }
+
+  Cookies.set("authorization", token);
+  Cookies.set("_username", name);
+  Cookies.set("_email", email);
+  Cookies.set("_image", image);
+  return router.push("/app");
 }

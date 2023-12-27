@@ -6,6 +6,7 @@ import { useGoogleLogin } from "@react-oauth/google";
 import { Button } from "@/components/ui/button";
 import { useToast } from "../ui/use-toast";
 import GoogleLogo from "./GoogleLogo";
+import Cookies from "js-cookie";
 
 interface ButtonProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -44,10 +45,10 @@ export default function GoogleButton({ className, ...props }: ButtonProps) {
         });
 
         const { token, name, email, image } = data.response;
-        localStorage.setItem("authorization", token);
-        localStorage.setItem("user_name", name);
-        localStorage.setItem("user_email", email);
-        localStorage.setItem("user_image", image);
+        Cookies.set("authorization", token);
+        Cookies.set("_username", name);
+        Cookies.set("_email", email);
+        Cookies.set("_image", image);
         setTimeout(() => router.push("/app"), 1000);
       } catch (error) {
         toast({

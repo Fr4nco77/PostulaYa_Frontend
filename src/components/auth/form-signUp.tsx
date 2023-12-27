@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import ErrorMessage from "../ui/error-message";
 import { Loader2, Eye, EyeOff } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -9,7 +9,7 @@ import { Label } from "@/components/ui/label";
 import { useToast } from "../ui/use-toast";
 import { cn } from "@/lib/utils";
 import { createUser } from "@/lib/actions";
-import { UserCredentials, Errors } from "@/lib/definitions";
+import { Errors } from "@/lib/definitions";
 
 interface FormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -20,56 +20,32 @@ export default function Form({ className, ...props }: FormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errors, setErrors] = useState<Errors>({});
-  const [credentials, setCredentials] = useState<UserCredentials>({
-    username: "",
-    email: "",
-    password: "",
-  });
 
-  // Manejador de cambio en los campos del formulario
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { value, name } = e.target;
+  // Manejador de envío del formulario (server action)
+  const handleSubmit = useCallback(async (formData: FormData) => {
+    const rawFormData = Object.fromEntries(formData.entries());
+    setIsLoading(true);
 
-    setCredentials((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }, []);
+    //Envio los datos para su verificacion y posteriormente registrar al usuario
+    const { errors, success, data } = await createUser(rawFormData);
+    setErrors(errors);
+    setIsLoading(false);
 
-  // Manejador de envío del formulario
-  const handleSubmit = useCallback(
-    async (e: ChangeEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      setIsLoading(true);
-
-      //Envio los datos para su verificacion y posteriormente registrar al usuario
-      const { errors, success, data } = await createUser(credentials);
-      setErrors(errors);
-      setIsLoading(false);
-
-      //Manejo la ui dependiendo del resultado de la solicitud
-      if (!success) {
-        return toast({
-          variant: "destructive",
-          title: data.name,
-          description: data.message,
-        });
-      }
-
-      setCredentials({
-        username: "",
-        email: "",
-        password: "",
+    //Manejo la ui dependiendo del resultado de la solicitud
+    if (!success) {
+      return toast({
+        variant: "destructive",
+        title: data.name,
+        description: data.message,
       });
+    }
 
-      toast({ description: data.message });
-    },
-    [credentials],
-  );
+    toast({ description: data.message });
+  }, []);
 
   return (
     <div className={cn(className)} {...props}>
-      <form onSubmit={handleSubmit}>
+      <form action={handleSubmit}>
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Label
@@ -84,8 +60,6 @@ export default function Form({ className, ...props }: FormProps) {
               placeholder="John Doe"
               aria-describedby="username-error"
               className={errors?.username && "border-red-500"}
-              value={credentials.username}
-              onChange={handleChange}
               disabled={isLoading}
             />
             <ErrorMessage errors={errors?.username} errorKey="username" />
@@ -101,8 +75,6 @@ export default function Form({ className, ...props }: FormProps) {
               type="email"
               aria-describedby="email-error"
               className={errors?.email && "border-red-500"}
-              value={credentials.email}
-              onChange={handleChange}
               disabled={isLoading}
             />
             <ErrorMessage errors={errors?.email} errorKey="email" />
@@ -122,8 +94,6 @@ export default function Form({ className, ...props }: FormProps) {
                 type={showPassword ? "text" : "password"}
                 aria-describedby="password-error"
                 className={errors?.password && "border-red-500"}
-                value={credentials.password}
-                onChange={handleChange}
                 disabled={isLoading}
               />
               <Button

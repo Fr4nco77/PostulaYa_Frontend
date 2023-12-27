@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Label } from "../ui/label";
-import { ChangeEvent, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import { Loader2 } from "lucide-react";
 import { Errors } from "@/lib/definitions";
 import { useToast } from "../ui/use-toast";
@@ -19,36 +19,30 @@ export default function Form({ className, ...props }: FormProps) {
   //Estados del formulario
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Errors>({});
-  const [email, setEmail] = useState<string>("");
 
   //Manejador del submit del formulario
-  const handleSubmit = useCallback(
-    async (e: ChangeEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      setIsLoading(true);
+  const handleSubmit = useCallback(async (formData: FormData) => {
+    const email = formData.get("email");
+    setIsLoading(true);
 
-      //se ejecuta sendResetEmail para validar la informacion y enviar el email de restablecimiento
-      const { errors, success, data } = await sendResetEmail(email);
-      setErrors(errors);
-      setIsLoading(false);
+    //se ejecuta sendResetEmail para validar la informacion y enviar el email de restablecimiento
+    const { errors, success, data } = await sendResetEmail(email);
+    setErrors(errors);
+    setIsLoading(false);
 
-      //Dependiendo del resultado anterior se maneja la ui
-      if (!success) {
-        return toast({
-          variant: "destructive",
-          title: data.name,
-          description: data.message,
-        });
-      }
-
-      setEmail("");
-      toast({ description: data.message });
-    },
-    [email],
-  );
+    //Dependiendo del resultado anterior se maneja la ui
+    if (!success) {
+      return toast({
+        variant: "destructive",
+        title: data.name,
+        description: data.message,
+      });
+    }
+    toast({ description: data.message });
+  }, []);
   return (
     <div className={cn(className)} {...props}>
-      <form onSubmit={handleSubmit}>
+      <form action={handleSubmit}>
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="email" className={errors?.email && "text-red-500"}>
@@ -56,16 +50,16 @@ export default function Form({ className, ...props }: FormProps) {
             </Label>
             <Input
               id="email"
-              value={email}
+              name="email"
               placeholder="john@example.dev"
               aria-describedby="email-error"
               className={errors?.email && "border-red-500"}
               disabled={isLoading}
-              onChange={(e) => setEmail(e.target.value)}
             />
           </div>
           <ErrorMessage errors={errors?.email} errorKey="email" />
           <Button
+            type="submit"
             disabled={isLoading}
             className="bg-yellow-400 text-black hover:bg-yellow-300"
           >

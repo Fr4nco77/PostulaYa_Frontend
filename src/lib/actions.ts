@@ -1,8 +1,10 @@
+'use server';
+
 import { validateApplication, validateCredentials, validateEmail, validateRegister, validateRestorePassword } from "./schemas";
-import { Application, ResetData, UserCredentials } from "./definitions";
+import { Application, FormValue, RawFormData } from "./definitions";
 import { removeEmptyStrings } from "./utils";
 
-export async function createUser(credentials: UserCredentials) {
+export async function createUser(credentials: RawFormData) {
     // Valida los campos de entrada del usuario
     const validatedFields = validateRegister.safeParse(credentials)
 
@@ -12,7 +14,7 @@ export async function createUser(credentials: UserCredentials) {
             errors: validatedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Campos vacios",
+                name: "Datos invalidos",
                 message: 'Registro fallido'
             },
         }
@@ -46,7 +48,7 @@ export async function createUser(credentials: UserCredentials) {
     }
 }
 
-export async function loginUser(credentials: UserCredentials) {
+export async function loginUser(credentials: RawFormData) {
     // Valida los campos de entrada del usuario
     const verifiedFields = validateCredentials.safeParse(credentials);
 
@@ -56,7 +58,7 @@ export async function loginUser(credentials: UserCredentials) {
             errors: verifiedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Campos vacios",
+                name: "Datos invalidos",
                 message: 'Inicio de sesion fallido',
             }
         }
@@ -90,7 +92,7 @@ export async function loginUser(credentials: UserCredentials) {
     }
 }
 
-export async function sendResetEmail(email: string) {
+export async function sendResetEmail(email: FormValue) {
     // Valida los campos de entrada del usuario
     const verifiedField = validateEmail.safeParse({ email });
 
@@ -100,7 +102,7 @@ export async function sendResetEmail(email: string) {
             errors: verifiedField.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Campos vacios",
+                name: "Datos Invalidos",
                 message: 'Envio de email fallido',
             }
         }
@@ -134,7 +136,7 @@ export async function sendResetEmail(email: string) {
     }
 }
 
-export async function resetPassword(resetData: ResetData) {
+export async function resetPassword(resetData: RawFormData) {
     // Valida los campos de entrada del usuario
     const verifiedFields = validateRestorePassword.safeParse(resetData);
 

@@ -5,13 +5,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Loader2, Eye, EyeOff } from "lucide-react";
-import { ChangeEvent, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 import Link from "next/link";
-import { Errors, UserCredentials } from "@/lib/definitions";
+import { Errors } from "@/lib/definitions";
 import { loginUser } from "@/lib/actions";
 import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
 import ErrorMessage from "../ui/error-message";
+import Cookies from "js-cookie";
 
 interface FormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
@@ -23,61 +24,39 @@ export default function Form({ className, ...props }: FormProps) {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errors, setErrors] = useState<Errors>({});
-  const [credentials, setCredentials] = useState<UserCredentials>({
-    email: "",
-    password: "",
-  });
 
-  //Manejador de cambios de los inputs
-  const handleChange = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
+  //Manejador de submit del formulario (server action)
+  const handleSubmit = useCallback(async (formData: FormData) => {
+    const rawFormData = Object.fromEntries(formData.entries());
+    setIsLoading(true);
 
-    setCredentials((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  }, []);
+    //Ejecuto "loginUser" para validar los datos provistos por el usuario y logearlo finalmente
+    const { errors, success, data } = await loginUser(rawFormData);
+    setErrors(errors);
+    setIsLoading(false);
 
-  //Manejador de submit del formulario
-  const handleSubmit = useCallback(
-    async (e: ChangeEvent<HTMLFormElement>) => {
-      e.preventDefault();
-      setIsLoading(true);
-
-      //Ejecuto "loginUser" para validar los datos provistos por el usuario y logearlo finalmente
-      const { errors, success, data } = await loginUser(credentials);
-      setErrors(errors);
-      setIsLoading(false);
-
-      //Dependiendo de el resultado de exito/error de lo anterior manejo la ui
-      if (!success) {
-        return toast({
-          variant: "destructive",
-          title: data.name,
-          description: data.message,
-        });
-      }
-
-      toast({ description: data.message });
-      setCredentials({
-        email: "",
-        password: "",
+    //Dependiendo de el resultado de exito/error de lo anterior manejo la ui
+    if (!success) {
+      return toast({
+        variant: "destructive",
+        title: data.name,
+        description: data.message,
       });
+    }
+    toast({ description: data.message });
 
-      //En caso de exito guardo la informacion provista en el localStorage
-      const { token, name, email, image } = data.response;
-      localStorage.setItem("authorization", token);
-      localStorage.setItem("user_name", name);
-      localStorage.setItem("user_email", email);
-      localStorage.setItem("user_image", image);
-      setTimeout(() => router.push("/app"), 1000);
-    },
-    [credentials],
-  );
+    //En caso de exito guardo la informacion provista en cookies
+    const { token, name, email, image } = data.response;
+    Cookies.set("authorization", token);
+    Cookies.set("_username", name);
+    Cookies.set("_email", email);
+    Cookies.set("_image", image);
+    setTimeout(() => router.push("/app"), 1000);
+  }, []);
 
   return (
     <div className={cn(className)} {...props}>
-      <form onSubmit={handleSubmit}>
+      <form action={handleSubmit}>
         <div className="grid gap-4">
           <div className="grid gap-2">
             <Label htmlFor="email" className={errors?.email && "text-red-500"}>
@@ -90,8 +69,6 @@ export default function Form({ className, ...props }: FormProps) {
               placeholder="john@example.dev"
               aria-describedby="email-error"
               className={errors?.email && "border-red-500"}
-              value={credentials.email}
-              onChange={handleChange}
               disabled={isLoading}
             />
             <ErrorMessage errors={errors?.email} errorKey="email" />
@@ -111,8 +88,6 @@ export default function Form({ className, ...props }: FormProps) {
                 aria-describedby="password-error"
                 type={showPassword ? "text" : "password"}
                 className={errors?.password && "border-red-500"}
-                value={credentials.password}
-                onChange={handleChange}
                 disabled={isLoading}
               />
               <Button
@@ -136,6 +111,7 @@ export default function Form({ className, ...props }: FormProps) {
             </Link>
           </div>
           <Button
+            type="submit"
             disabled={isLoading}
             className="bg-yellow-400 text-black hover:bg-yellow-300"
           >

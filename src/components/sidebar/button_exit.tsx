@@ -4,18 +4,20 @@ import { useContext } from "react";
 import { useRouter } from "next/navigation";
 import { SidebarContext } from "./sidebar";
 import { ArrowLeft } from "lucide-react";
+import Cookies from "js-cookie";
 
 export default function Item() {
   const { expanded } = useContext(SidebarContext);
   const router = useRouter();
 
-  const exit = () => {
-    localStorage.clear();
-    router.push("/auth/sign_in");
-  };
-
   return (
-    <button className="mt-4" onClick={exit}>
+    <button
+      className="mt-4"
+      onClick={() => {
+        Cookies.remove("authorization");
+        // router.push("/auth/sign_in");
+      }}
+    >
       <li className="group relative my-1 flex cursor-pointer items-center rounded-md px-3 py-2 font-medium text-yellow-400 transition-colors hover:bg-yellow-400 hover:text-black">
         <ArrowLeft />
         <span

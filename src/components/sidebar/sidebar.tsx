@@ -6,7 +6,7 @@ import Image from "next/image";
 import Exit from "./button_exit";
 import { Skeleton } from "../ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-
+import Cookie from "js-cookie";
 export const SidebarContext = createContext();
 
 export default function Sidebar({ children }: { children: ReactNode }) {
@@ -18,9 +18,9 @@ export default function Sidebar({ children }: { children: ReactNode }) {
   });
 
   useEffect(() => {
-    const name = localStorage.getItem("user_name");
-    const email = localStorage.getItem("user_email");
-    const image = localStorage.getItem("user_image");
+    const name = Cookie.get("_username");
+    const email = Cookie.get("_email");
+    const image = Cookie.get("_image");
 
     if (name && email && image) {
       setUserInfo({
