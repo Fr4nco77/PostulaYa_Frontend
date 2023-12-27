@@ -15,7 +15,7 @@ export default function Item() {
       className="mt-4"
       onClick={() => {
         Cookies.remove("authorization");
-        // router.push("/auth/sign_in");
+        router.push("/auth/sign_in");
       }}
     >
       <li className="group relative my-1 flex cursor-pointer items-center rounded-md px-3 py-2 font-medium text-yellow-400 transition-colors hover:bg-yellow-400 hover:text-black">
