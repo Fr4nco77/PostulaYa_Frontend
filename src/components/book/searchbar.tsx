@@ -12,6 +12,7 @@ import {
   limit,
 } from "./data";
 import CreateApplication from "./button-create";
+import ClearFilters from "./button-clearFilters";
 
 interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
   token: string;
@@ -52,6 +53,7 @@ export default function Searchbar({ className, token }: SearchProps) {
             />
           </div>
         </div>
+        <ClearFilters />
         <CreateApplication token={token} />
       </div>
     </div>
