@@ -1,6 +1,6 @@
 "use client";
 
-import { ChangeEvent, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Loader2, Plus } from "lucide-react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -15,82 +15,60 @@ import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
 import { addSkill, createApplication } from "@/lib/actions";
 import { useToast } from "../ui/use-toast";
-import { Application, Errors } from "@/lib/definitions";
+import { Errors, Skills } from "@/lib/definitions";
 import ErrorMessage from "../ui/error-message";
 
-export default function Form() {
+export default function Form({ token }: { token: string }) {
   const { toast } = useToast();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [errors, setErrors] = useState<Errors>({});
-  const [application, setApplication] = useState<Application>({
-    position: "",
-    modality: null,
-    type: null,
-    recluter: "",
-    company_name: "",
-    company_ubication: "",
-    url: "",
-    skills: [],
-  });
-
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-
-    setApplication((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
-
-  const handleSelectChange = (name: string, value: string) => {
-    setApplication((prevState) => ({
-      ...prevState,
-      [name]: value,
-    }));
-  };
+  const [skills, setSkills] = useState<Skills>([]);
 
   const addSkills = async () => {
-    const value = inputRef.current!.value.trim();
+    const inputValue = inputRef.current!.value.trim();
 
-    if (value) {
-      const { skill, error } = await addSkill(value);
+    if (inputValue) {
+      const { skill, error } = await addSkill(inputValue);
 
       if (error) {
+        const { title, name } = error;
         toast({
           variant: "destructive",
-          title: error.title,
-          description: error.name,
+          title,
+          description: name,
         });
       } else {
-        const existSkill = application.skills.some(
+        const existingSkill = skills.find(
           (obj) => obj.id === skill.id && obj.name === skill.name,
         );
-        if (!existSkill) {
-          setApplication((prevState) => ({
-            ...prevState,
-            skills: [...prevState.skills, skill],
-          }));
+
+        if (!existingSkill) {
+          setSkills((prevState) => [...prevState, skill]);
         }
       }
       inputRef.current!.value = "";
     }
   };
 
-  const removeSkill = (id: string) => {
-    const skillsFiltered = application.skills.filter((obj) => obj.id !== id);
+  const removeSkill = useCallback(
+    (id: string) => {
+      const skillsFiltered = skills.filter((obj) => obj.id !== id);
+      setSkills(skillsFiltered);
+    },
+    [skills],
+  );
 
-    setApplication((prevState) => ({
-      ...prevState,
-      skills: skillsFiltered,
-    }));
-  };
-
-  const handleSubmit = async (e: ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const handleSubmit = useCallback(async (formData: FormData) => {
+    const rawFormData = Object.fromEntries(formData.entries());
+    const skillsIds = skills?.map((obj) => obj.id);
     setIsLoading(true);
 
-    const { errors, success, data } = await createApplication(application);
+    const { errors, success, data } = await createApplication({
+      rawFormData,
+      skillsIds,
+      token,
+    });
     setErrors(errors);
     setIsLoading(false);
 
@@ -102,23 +80,14 @@ export default function Form() {
       });
     }
 
-    setApplication({
-      position: "",
-      modality: null,
-      type: null,
-      company_name: "",
-      company_ubication: "",
-      skills: [],
-    });
-
     toast({
       title: data.name,
       description: data.message,
     });
-  };
+  }, []);
 
   return (
-    <form onSubmit={handleSubmit} className="grid gap-4 py-4">
+    <form action={handleSubmit} className="grid gap-4 py-4">
       <div className="grid grid-cols-4 items-center gap-4">
         <Label htmlFor="position" className="text-right">
           Posicion
@@ -126,10 +95,8 @@ export default function Form() {
         <Input
           id="position"
           name="position"
-          value={application.position}
           placeholder="Full-Stack Developer"
           className="col-span-3"
-          onChange={handleInputChange}
           disabled={isLoading}
         />
       </div>
@@ -138,10 +105,7 @@ export default function Form() {
           Modalidad
         </Label>
         <div id="modality">
-          <Select
-            disabled={isLoading}
-            onValueChange={(value) => handleSelectChange("modality", value)}
-          >
+          <Select name="modality" disabled={isLoading}>
             <SelectTrigger className="w-40">
               <SelectValue placeholder="" />
             </SelectTrigger>
@@ -157,10 +121,7 @@ export default function Form() {
           Tipo
         </Label>
         <div id="type">
-          <Select
-            disabled={isLoading}
-            onValueChange={(value) => handleSelectChange("type", value)}
-          >
+          <Select disabled={isLoading} name="type">
             <SelectTrigger className="w-40">
               <SelectValue placeholder="" />
             </SelectTrigger>
@@ -178,10 +139,8 @@ export default function Form() {
         <Input
           id="recluter"
           name="recluter"
-          value={application.recluter}
           placeholder="Pedro Duarte"
           className="col-span-3"
-          onChange={handleInputChange}
           disabled={isLoading}
         />
       </div>
@@ -192,10 +151,8 @@ export default function Form() {
         <Input
           id="company_name"
           name="company_name"
-          value={application.company_name}
           placeholder="Dream Company S.A"
           className="col-span-3"
-          onChange={handleInputChange}
           disabled={isLoading}
         />
       </div>
@@ -206,10 +163,8 @@ export default function Form() {
         <Input
           id="company_ubication"
           name="company_ubication"
-          value={application.company_ubication}
           placeholder="Francia"
           className="col-span-3"
-          onChange={handleInputChange}
           disabled={isLoading}
         />
       </div>
@@ -220,10 +175,8 @@ export default function Form() {
         <Input
           id="url"
           name="url"
-          value={application.url}
           placeholder="https://listofJobs/jobs/13192898319"
           className="col-span-3"
-          onChange={handleInputChange}
           disabled={isLoading}
         />
       </div>
@@ -248,7 +201,7 @@ export default function Form() {
         </Button>
       </div>
       <div className="flex flex-wrap gap-1">
-        {application.skills?.map(({ id, name }) => (
+        {skills?.map(({ id, name }) => (
           <Badge
             id={id}
             key={id}

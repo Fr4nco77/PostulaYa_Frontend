@@ -1,10 +1,13 @@
 'use server';
 
+import { unstable_noStore as noStore } from "next/cache";
 import { validateApplication, validateCredentials, validateEmail, validateRegister, validateRestorePassword } from "./schemas";
-import { Application, FormValue, RawFormData } from "./definitions";
+import { FormValue, RawFormData } from "./definitions";
 import { removeEmptyStrings } from "./utils";
 
 export async function createUser(credentials: RawFormData) {
+    noStore();
+
     // Valida los campos de entrada del usuario
     const validatedFields = validateRegister.safeParse(credentials)
 
@@ -49,6 +52,8 @@ export async function createUser(credentials: RawFormData) {
 }
 
 export async function loginUser(credentials: RawFormData) {
+    noStore();
+
     // Valida los campos de entrada del usuario
     const verifiedFields = validateCredentials.safeParse(credentials);
 
@@ -93,6 +98,8 @@ export async function loginUser(credentials: RawFormData) {
 }
 
 export async function sendResetEmail(email: FormValue) {
+    noStore();
+
     // Valida los campos de entrada del usuario
     const verifiedField = validateEmail.safeParse({ email });
 
@@ -137,6 +144,8 @@ export async function sendResetEmail(email: FormValue) {
 }
 
 export async function resetPassword(resetData: RawFormData) {
+    noStore();
+
     // Valida los campos de entrada del usuario
     const verifiedFields = validateRestorePassword.safeParse(resetData);
 
@@ -146,7 +155,7 @@ export async function resetPassword(resetData: RawFormData) {
             errors: verifiedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Campos vacios",
+                name: "Datos Invalidos",
                 message: 'Restablecimiento de contraseña fallido',
             }
         }
@@ -182,6 +191,8 @@ export async function resetPassword(resetData: RawFormData) {
 }
 
 export const addSkill = async (name: string) => {
+    noStore();
+
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/skill`, {
             method: "POST",
@@ -208,18 +219,19 @@ export const addSkill = async (name: string) => {
     }
 }
 
-export async function createApplication(application: Application) {
-    const skills = application.skills?.map((obj) => obj.id);
-    const data = removeEmptyStrings(application);
-    const dataVerified = validateApplication.safeParse({ ...data, skills });
+export async function createApplication({ rawFormData, skillsIds, token }: { rawFormData: RawFormData, skillsIds: string[], token: string }) {
+    noStore();
+
+    const data = removeEmptyStrings(rawFormData);
+    const dataVerified = validateApplication.safeParse({ ...data, skills: skillsIds });
 
     if (!dataVerified.success) {
         return {
             errors: dataVerified.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Campos vacios",
-                message: 'Creacion de applicacion fallido',
+                name: "Datos invalidos",
+                message: 'Creacion de applicacion fallida',
             }
         }
     }
@@ -229,7 +241,7 @@ export async function createApplication(application: Application) {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
-                "Authorization": `Bearer ${localStorage.getItem("authorization")!}`
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify(dataVerified.data)
         })

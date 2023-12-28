@@ -1,4 +1,3 @@
-
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -11,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import Form from "./form-create";
 
-export default function DialogDemo() {
+export default function DialogDemo({ token }: { token: string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -24,7 +23,7 @@ export default function DialogDemo() {
             ¿Que puedes contarnos acerca de ese trebajo?
           </DialogDescription>
         </DialogHeader>
-        <Form />
+        <Form token={token} />
       </DialogContent>
     </Dialog>
   );

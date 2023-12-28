@@ -1,5 +1,6 @@
 import { type ClassValue, clsx } from "clsx"
 import { twMerge } from "tailwind-merge"
+import { RawFormData } from "./definitions";
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
@@ -11,7 +12,7 @@ export function formatedQuery(searchParams: { [key: string]: string }) {
     modality: searchParams?.modality || '',
     type: searchParams?.type || '',
     page: searchParams?.page || '1',
-    order: searchParams?.order || 'asc',
+    order: searchParams?.order || 'desc',
     limit: searchParams?.limit || '6',
   };
 
@@ -22,6 +23,18 @@ export function formatedQuery(searchParams: { [key: string]: string }) {
 
   return `?${query}`;
 }
+
+export const removeEmptyStrings = (obj: RawFormData) => {
+  const newObj = { ...obj } as { [key: string]: string };
+
+  for (const prop in newObj) {
+    if (newObj[prop].trim() === '') {
+      delete newObj[prop];
+    }
+  }
+
+  return newObj;
+};
 
 export const generatePagination = (currentPage: number, totalPages: number) => {
   // Si el número total de páginas es 7 o menos,
