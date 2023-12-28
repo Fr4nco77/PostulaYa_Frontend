@@ -34,7 +34,7 @@ export default function Sidebar({ children }: { children: ReactNode }) {
   const { name, email, image } = userInfo;
 
   return (
-    <nav className="absolute z-10 flex h-full flex-col border-r bg-black shadow-sm">
+    <nav className="absolute z-10 flex h-full flex-col border-r bg-[#181818] shadow-sm">
       <div className="flex items-center justify-between p-4 pb-2">
         <Image
           src="/amarillopng.png"
