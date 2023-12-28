@@ -22,12 +22,12 @@ export default function SearchInput({ placeholder }: { placeholder: string }) {
 
   return (
     <div className="flex flex-1 flex-shrink-0">
-        <Input
-          id="search"
-          placeholder={placeholder}
-          onChange={(e) => handleSearch(e.target.value)}
-          defaultValue={searchParams.get("query")?.toString()}
-        />
+      <Input
+        id="search"
+        placeholder={placeholder}
+        onChange={(e) => handleSearch(e.target.value)}
+        defaultValue={searchParams.get("query")?.toString()}
+      />
     </div>
   );
 }
