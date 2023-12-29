@@ -6,6 +6,21 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
+export function configCookies() {
+  // Obtener la fecha actual
+  const currentDate = new Date();
+
+  // Calcular la fecha de expiración sumando 12 horas en milisegundos
+  const expirationTime = currentDate.getTime() + 12 * 60 * 60 * 1000;
+
+  // Crear un nuevo objeto Date con la fecha de expiración
+  const expires = new Date(expirationTime);
+  return {
+    expires,
+    secure: false
+  }
+}
+
 export function formatedQuery(searchParams: { [key: string]: string }) {
   const params = {
     query: searchParams?.query || '',

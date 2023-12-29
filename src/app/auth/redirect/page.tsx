@@ -2,6 +2,7 @@
 
 import { useSearchParams, useRouter } from "next/navigation";
 import Cookies from "js-cookie";
+import { configCookies } from "@/lib/utils";
 
 export default function Redirect() {
   const router = useRouter();
@@ -15,9 +16,10 @@ export default function Redirect() {
     return router.push("/auth/sign_in");
   }
 
-  Cookies.set("authorization", token);
-  Cookies.set("_username", name);
-  Cookies.set("_email", email);
-  Cookies.set("_image", image);
+  const config = configCookies();
+  Cookies.set("authorization", token, config);
+  Cookies.set("_username", name, config);
+  Cookies.set("_email", email, config);
+  Cookies.set("_image", image, config);
   return router.push("/app");
 }

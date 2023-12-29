@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { cn } from "@/lib/utils";
+import { cn, configCookies } from "@/lib/utils";
 import { useGoogleLogin } from "@react-oauth/google";
 import { Button } from "@/components/ui/button";
 import { useToast } from "../ui/use-toast";
@@ -45,10 +45,11 @@ export default function GoogleButton({ className, ...props }: ButtonProps) {
         });
 
         const { token, name, email, image } = data.response;
-        Cookies.set("authorization", token);
-        Cookies.set("_username", name);
-        Cookies.set("_email", email);
-        Cookies.set("_image", image);
+        const config = configCookies();
+        Cookies.set("authorization", token, config);
+        Cookies.set("_username", name, config);
+        Cookies.set("_email", email, config);
+        Cookies.set("_image", image, config);
         setTimeout(() => router.push("/app"), 1000);
       } catch (error) {
         toast({

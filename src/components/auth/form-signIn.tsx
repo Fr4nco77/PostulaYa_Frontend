@@ -1,6 +1,6 @@
 "use client";
 
-import { cn } from "@/lib/utils";
+import { cn, configCookies } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -46,11 +46,12 @@ export default function Form({ className, ...props }: FormProps) {
     toast({ description: data.message });
 
     //En caso de exito guardo la informacion provista en cookies
+    const config = configCookies();
     const { token, name, email, image } = data.response;
-    Cookies.set("authorization", token);
-    Cookies.set("_username", name);
-    Cookies.set("_email", email);
-    Cookies.set("_image", image);
+    Cookies.set("authorization", token, config);
+    Cookies.set("_username", name, config);
+    Cookies.set("_email", email, config);
+    Cookies.set("_image", image, config);
     setTimeout(() => router.push("/app"), 1000);
   }, []);
 
