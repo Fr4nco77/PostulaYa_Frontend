@@ -1,6 +1,6 @@
 'use server';
 
-import { unstable_noStore as noStore } from "next/cache";
+import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { validateApplication, validateCredentials, validateEmail, validateRegister, validateRestorePassword } from "./schemas";
 import { FormValue, RawFormData } from "./definitions";
 import { removeEmptyStrings } from "./utils";
@@ -219,13 +219,13 @@ export const addSkill = async (name: string) => {
     }
 }
 
-export async function createApplication({ rawFormData, skillsIds, token }: { rawFormData: RawFormData, skillsIds: string[], token: string }) {
+export async function createApplication({ rawFormData, skills, token }: { rawFormData: RawFormData, skills: string[], token: string }) {
     noStore();
 
     const data = removeEmptyStrings(rawFormData);
-    const dataVerified = validateApplication.safeParse({ ...data, skills: skillsIds });
-
+    const dataVerified = validateApplication.safeParse({ ...data, skills });
     if (!dataVerified.success) {
+        console.log(dataVerified.error.flatten().fieldErrors)
         return {
             errors: dataVerified.error.flatten().fieldErrors,
             success: false,
@@ -246,6 +246,7 @@ export async function createApplication({ rawFormData, skillsIds, token }: { raw
             body: JSON.stringify(dataVerified.data)
         })
         const { success, data } = await response.json();
+        revalidatePath("/app/book");
 
         return {
             errors: {},
@@ -259,6 +260,33 @@ export async function createApplication({ rawFormData, skillsIds, token }: { raw
             data: {
                 name: "Error interno",
                 message: 'Creacion de applicacion fallido',
+            }
+        }
+    }
+}
+
+export async function deleteApplication({ token, applicationID }: { token: string, applicationID: string }) {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/application/${applicationID}`, {
+            method: "DELETE",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        const { data, success } = await response.json();
+        revalidatePath("/app/book")
+
+        return {
+            success,
+            data
+        }
+    } catch (error) {
+        return {
+            success: false,
+            data: {
+                name: "Error Interno",
+                message: "Ocurrio un error al eliminar la postulacion"
             }
         }
     }

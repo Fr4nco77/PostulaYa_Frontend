@@ -19,7 +19,7 @@ export default async function Book({
   return (
     <div className="h-screen w-full flex-1">
       <main className="flex h-full w-full flex-col items-center justify-center p-10">
-        <Searchbar token={token} className="h-10 w-full max-w-5xl" />
+        <Searchbar token={token} className="h-10 w-full max-w-6xl" />
         <Separator className="my-3 w-full max-w-5xl bg-gray-800" />
         <Suspense key={query} fallback={<h1>loading</h1>}>
           <Table query={query} token={token} />

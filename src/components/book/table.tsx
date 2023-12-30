@@ -10,7 +10,7 @@ import {
 import { columns } from "./data";
 import { ApplicationQuery } from "@/lib/definitions";
 import { fetchApplications } from "@/lib/data";
-import { Button } from "../ui/button";
+import Actions from "./actions";
 
 export default async function ApplicationTable({
   query,
@@ -51,7 +51,7 @@ export default async function ApplicationTable({
               <TableCell>{row.company_name}</TableCell>
               <TableCell>{row.status}</TableCell>
               <TableCell>
-                <Button size="icon">...</Button>
+                <Actions token={token} applicationID={row._id} />
               </TableCell>
             </TableRow>
           );
