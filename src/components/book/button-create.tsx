@@ -10,7 +10,7 @@ import {
 } from "@/components/ui/dialog";
 import Form from "./form-create";
 
-export default function DialogDemo({ token }: { token: string }) {
+export default function CreateApplication({ token }: { token: string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>

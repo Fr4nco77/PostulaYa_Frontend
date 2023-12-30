@@ -63,10 +63,10 @@ export default function Form({ token }: { token: string }) {
     const rawFormData = Object.fromEntries(formData.entries());
     const skillsIds = skills?.map((obj) => obj.id);
     setIsLoading(true);
-
+    
     const { errors, success, data } = await createApplication({
       rawFormData,
-      skillsIds,
+      skills: skillsIds,
       token,
     });
     setErrors(errors);
