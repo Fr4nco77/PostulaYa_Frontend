@@ -225,7 +225,6 @@ export async function createApplication({ rawFormData, skills, token }: { rawFor
     const data = removeEmptyStrings(rawFormData);
     const dataVerified = validateApplication.safeParse({ ...data, skills });
     if (!dataVerified.success) {
-        console.log(dataVerified.error.flatten().fieldErrors)
         return {
             errors: dataVerified.error.flatten().fieldErrors,
             success: false,

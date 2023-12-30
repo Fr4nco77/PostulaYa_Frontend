@@ -59,32 +59,35 @@ export default function Form({ token }: { token: string }) {
     [skills],
   );
 
-  const handleSubmit = useCallback(async (formData: FormData) => {
-    const rawFormData = Object.fromEntries(formData.entries());
-    const skillsIds = skills?.map((obj) => obj.id);
-    setIsLoading(true);
-    
-    const { errors, success, data } = await createApplication({
-      rawFormData,
-      skills: skillsIds,
-      token,
-    });
-    setErrors(errors);
-    setIsLoading(false);
+  const handleSubmit = useCallback(
+    async (formData: FormData) => {
+      const rawFormData = Object.fromEntries(formData.entries());
+      const skillsIds = skills?.map((obj) => obj.id);
+      setIsLoading(true);
 
-    if (!success) {
-      return toast({
-        variant: "destructive",
+      const { errors, success, data } = await createApplication({
+        rawFormData,
+        skills: skillsIds,
+        token,
+      });
+      setErrors(errors);
+      setIsLoading(false);
+
+      if (!success) {
+        return toast({
+          variant: "destructive",
+          title: data.name,
+          description: data.message,
+        });
+      }
+
+      toast({
         title: data.name,
         description: data.message,
       });
-    }
-
-    toast({
-      title: data.name,
-      description: data.message,
-    });
-  }, []);
+    },
+    [skills],
+  );
 
   return (
     <form action={handleSubmit} className="grid gap-4 py-4">
