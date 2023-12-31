@@ -18,7 +18,7 @@ export async function fetchApplications({ query, token }: ApplicationQuery) {
             data
         }
     } catch (error) {
-        console.log(error)
+        // console.log(error)
         return {
             success: false,
             data: {
@@ -45,7 +45,86 @@ export async function fetchApplicationsPages({ query, token }: ApplicationQuery)
             totalPages: data.response.totalPages
         }
     } catch (error) {
-        console.log(error);
+        // console.log(error);
         throw new Error('Failed to fetch total number of pages.');
+    }
+}
+
+export async function fetchApplicationByID({ token, application }: { token: string, application: string }) {
+
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/application/${application}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        const { success, data } = await response.json();
+
+        return {
+            success,
+            data
+        }
+    } catch (error) {
+        return {
+            success: false,
+            data: {
+                name: "Error Interno",
+                message: "Ocurrio un error al acceder a la postulacion"
+            }
+        }
+    }
+}
+
+export async function fetchSkillsByID({ skills }: { skills: string[] }) {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/skill`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ids: skills})
+        })
+        const { success, data } = await response.json();
+
+        return {
+            success,
+            data
+        }
+    } catch (error) {
+        return {
+            success: false,
+            data: {
+                name: "Error Interno",
+                message: "Ocurrio un error inesperado"
+            }
+        }
+    }
+}
+
+export async function fetchUser({ token }: { token: string }) {
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/user`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            }
+        })
+        const { success, data } = await response.json();
+
+        return {
+            success,
+            data
+        }
+    } catch (error) {
+        return {
+            success: false,
+            data: {
+                name: "Eror Interno",
+                message: "Ocurrio un error inesperado"
+            }
+        }
     }
 }

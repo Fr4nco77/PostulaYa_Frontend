@@ -56,11 +56,11 @@ export default function Actions({
         <DropdownMenuContent sideOffset={5}>
           <DropdownMenuItem>
             <Link
-              href={`/app/${applicationID}`}
+              href={`/app/book/${applicationID}`}
               className="flex items-start justify-start"
             >
               <Eye className="mr-2 h-5 w-5" />
-              <span>Ver</span>
+              <span>Detalles</span>
             </Link>
           </DropdownMenuItem>
           <AlertDialogTrigger asChild>

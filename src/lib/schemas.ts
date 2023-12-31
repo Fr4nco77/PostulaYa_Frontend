@@ -104,3 +104,8 @@ export const validateApplication = z.object({
         )
             .min(3, "Debes colocar un minimo de tres habilidades"),
 })
+
+export const validateUpdateApplication = validateApplication.extend({
+    status: 
+        z.enum(["Postulado", "En Proceso", "Finalizado"])
+})

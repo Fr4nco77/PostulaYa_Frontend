@@ -1,7 +1,7 @@
 'use server';
 
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
-import { validateApplication, validateCredentials, validateEmail, validateRegister, validateRestorePassword } from "./schemas";
+import { validateApplication, validateCredentials, validateEmail, validateRegister, validateRestorePassword, validateUpdateApplication } from "./schemas";
 import { FormValue, RawFormData } from "./definitions";
 import { removeEmptyStrings } from "./utils";
 
@@ -205,7 +205,7 @@ export const addSkill = async (name: string) => {
 
         return {
             skill: {
-                id: data.response._id,
+                _id: data.response._id,
                 name: data.response.name
             }
         }
@@ -259,6 +259,51 @@ export async function createApplication({ rawFormData, skills, token }: { rawFor
             data: {
                 name: "Error interno",
                 message: 'Creacion de applicacion fallido',
+            }
+        }
+    }
+}
+
+export async function updateApplication({ rawFormData, skills, token, applicationID }: { rawFormData: RawFormData, skills: string[], token: string, applicationID: string }) {
+    noStore();
+
+    const data = removeEmptyStrings(rawFormData);
+    const dataVerified = validateUpdateApplication.safeParse({ ...data, skills });
+    if (!dataVerified.success) {
+        return {
+            errors: dataVerified.error.flatten().fieldErrors,
+            success: false,
+            data: {
+                name: "Datos invalidos",
+                message: 'Creacion de applicacion fallida',
+            }
+        }
+    }
+
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/application/${applicationID}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ data: dataVerified.data })
+        })
+        const { success, data } = await response.json();
+        revalidatePath(`/app/book/${applicationID}`);
+
+        return {
+            errors: {},
+            success,
+            data
+        }
+    } catch (error) {
+        return {
+            errors: {},
+            success: false,
+            data: {
+                name: "Error interno",
+                message: 'Actualizacion de applicacion fallida',
             }
         }
     }
