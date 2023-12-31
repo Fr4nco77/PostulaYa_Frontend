@@ -40,7 +40,7 @@ export default function Form({ token }: { token: string }) {
         });
       } else {
         const existingSkill = skills.find(
-          (obj) => obj.id === skill.id && obj.name === skill.name,
+          (obj) => obj._id === skill._id && obj.name === skill.name,
         );
 
         if (!existingSkill) {
@@ -52,8 +52,8 @@ export default function Form({ token }: { token: string }) {
   };
 
   const removeSkill = useCallback(
-    (id: string) => {
-      const skillsFiltered = skills.filter((obj) => obj.id !== id);
+    (_id: string) => {
+      const skillsFiltered = skills.filter((obj) => obj._id !== _id);
       setSkills(skillsFiltered);
     },
     [skills],
@@ -62,7 +62,7 @@ export default function Form({ token }: { token: string }) {
   const handleSubmit = useCallback(
     async (formData: FormData) => {
       const rawFormData = Object.fromEntries(formData.entries());
-      const skillsIds = skills?.map((obj) => obj.id);
+      const skillsIds = skills?.map((obj) => obj._id);
       setIsLoading(true);
 
       const { errors, success, data } = await createApplication({
@@ -204,11 +204,11 @@ export default function Form({ token }: { token: string }) {
         </Button>
       </div>
       <div className="flex flex-wrap gap-1">
-        {skills?.map(({ id, name }) => (
+        {skills?.map(({ _id, name }) => (
           <Badge
-            id={id}
-            key={id}
-            onClick={() => removeSkill(id)}
+            id={_id}
+            key={_id}
+            onClick={() => removeSkill(_id)}
           >{`${name}`}</Badge>
         ))}
       </div>

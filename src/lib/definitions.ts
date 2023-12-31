@@ -21,6 +21,6 @@ export type ApplicationQuery = {
 }
 
 export type Skills = {
-    id: string,
+    _id: string,
     name: string
 }[]
