@@ -80,7 +80,7 @@ export async function fetchApplicationByID({ token, application }: { token: stri
 export async function fetchSkillsByID({ skills }: { skills: string[] }) {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/skill`, {
-            method: "PATCH",
+            method: "POST",
             headers: {
                 "Content-Type": "application/json",
             },

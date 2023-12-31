@@ -194,7 +194,7 @@ export const addSkill = async (name: string) => {
     noStore();
 
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/skill`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/skill/findOrCreate`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
