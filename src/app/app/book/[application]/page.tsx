@@ -1,5 +1,7 @@
-import { DeleteApplication } from "@/components/book/application/button-delete";
-import EditApplication from "@/components/book/application/button-edit";
+import { DeleteApplication } from "@/components/book/application/button-deleteApplication";
+import EditApplication from "@/components/book/application/button-editApplication";
+import CreateNote from "@/components/book/application/createNote";
+import Notes from "@/components/book/application/notes";
 import Skills from "@/components/book/application/skills";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
@@ -105,7 +107,10 @@ export default async function Application({
           </div>
         </main>
         <Separator orientation="vertical" className="mx-3 bg-black" />
-        <aside></aside>
+        <aside className="h-full w-1/2">
+          <Notes applicationID={_id}/>
+          <CreateNote applicationID={_id}/>
+        </aside>
       </div>
     </div>
   );

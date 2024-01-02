@@ -106,6 +106,25 @@ export const validateApplication = z.object({
 })
 
 export const validateUpdateApplication = validateApplication.extend({
-    status: 
+    status:
         z.enum(["Postulado", "En Proceso", "Finalizado"])
+})
+
+export const validateUpdateNote = z.object({
+    title: z.string({
+        invalid_type_error: "Titulo invalido"
+    })
+        .min(1, "Titulo invalido")
+    ,
+    body: z.string({
+        invalid_type_error: "Nota invalida"
+    })
+        .min(1, "Nota invalida")
+})
+
+export const validateCreateNote = validateUpdateNote.extend({
+    applicationID: z.string({
+        invalid_type_error: "AplicationID invalido"
+    })
+        .min(1, "AplicationID invalido")
 })

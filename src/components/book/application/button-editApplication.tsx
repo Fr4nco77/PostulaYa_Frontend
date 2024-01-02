@@ -7,7 +7,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Form from "./form-edit";
+import Form from "./form-editApplication";
 import { Application } from "@/lib/definitions";
 
 export default function EditApplication({
