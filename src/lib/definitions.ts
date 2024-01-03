@@ -33,6 +33,7 @@ export type Application = {
     recluter: string;
     company_name: string;
     company_ubication: string;
+    platform: string;
     url: string;
     status: string;
     skills: Skills;

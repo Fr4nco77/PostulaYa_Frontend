@@ -37,10 +37,10 @@ export default async function Application({
     recluter,
     company_name,
     company_ubication,
+    platform,
     url,
     status,
     skills,
-    notes,
     created_at,
     updated_at,
   } = data.response.application;
@@ -88,6 +88,10 @@ export default async function Application({
             </span>
           </div>
           <span className="text-md mb-2">
+            Plataforma de postulacion:{" "}
+            <strong className="text-lg">{platform}</strong>
+          </span>
+          <span className="text-md mb-2">
             Más informacion:{" "}
             <Link
               href={url !== "N/A" ? url : null}
@@ -108,8 +112,8 @@ export default async function Application({
         </main>
         <Separator orientation="vertical" className="mx-3 bg-black" />
         <aside className="h-full w-1/2">
-          <Notes applicationID={_id}/>
-          <CreateNote applicationID={_id}/>
+          <Notes applicationID={_id} />
+          <CreateNote applicationID={_id} />
         </aside>
       </div>
     </div>

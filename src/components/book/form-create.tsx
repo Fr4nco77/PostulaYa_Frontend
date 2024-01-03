@@ -115,6 +115,7 @@ export default function Form({ token }: { token: string }) {
             <SelectContent>
               <SelectItem value="Presencial">Presencial</SelectItem>
               <SelectItem value="Remoto">Remoto</SelectItem>
+              <SelectItem value="Hibrido">Hibrido</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -170,6 +171,26 @@ export default function Form({ token }: { token: string }) {
           className="col-span-3"
           disabled={isLoading}
         />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="platform" className="text-right">
+          Plataforma de Postulacion
+        </Label>
+        <div id="platform">
+          <Select name="platform" disabled={isLoading}>
+            <SelectTrigger className="w-40">
+              <SelectValue placeholder="" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Linkedin">Linkedin</SelectItem>
+              <SelectItem value="Indeed">Indeed</SelectItem>
+              <SelectItem value="Glassdoor">Glassdoor</SelectItem>
+              <SelectItem value="Get on Board">Get on Board</SelectItem>
+              <SelectItem value="Computrabajo">Computrabajo</SelectItem>
+              <SelectItem value="Otra">Otra</SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
         <Label htmlFor="url" className="text-right">

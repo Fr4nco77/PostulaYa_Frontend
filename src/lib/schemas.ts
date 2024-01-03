@@ -64,7 +64,7 @@ export const validateApplication = z.object({
             .min(3, 'La posición debe tener al menos 3 caracteres')
             .max(25, 'La posición no puede tener más de 25 caracteres'),
     modality:
-        z.enum(["Presencial", "Remoto"]),
+        z.enum(["Presencial", "Remoto", "Hibrido"]),
     type:
         z.enum(["Full-Time", "Part-Time"]),
     recluter:
@@ -86,6 +86,8 @@ export const validateApplication = z.object({
         })
             .trim()
             .nonempty('La ubicación de la empresa no puede estar vacía'),
+    platform:
+        z.enum(["Linkedin", "Indeed", "Glassdoor", "Get on Board", "Computrabajo", "Otra"]),
     url:
         z.optional(
             z.string({
