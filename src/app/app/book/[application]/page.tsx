@@ -93,13 +93,17 @@ export default async function Application({
           </span>
           <span className="text-md mb-2">
             Más informacion:{" "}
-            <Link
-              href={url !== "N/A" ? url : null}
-              target="_blank"
-              className="text-lg underline hover:text-white"
-            >
-              {url}
-            </Link>
+            {url !== "N/A" ? (
+              <Link
+                href={url}
+                target="_blank"
+                className="text-lg underline hover:text-white"
+              >
+                {url}
+              </Link>
+            ) : (
+              <span>{url}</span>
+            )}
           </span>
           <Skills skills={skills} token={token} />
           <div className="flex w-full items-center justify-end gap-5">
