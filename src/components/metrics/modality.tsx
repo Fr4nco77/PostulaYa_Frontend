@@ -1,7 +1,8 @@
 "use client";
+
 import { useState, useEffect } from "react";
-import { fetchStatusMetrics } from "@/lib/data";
-import { Pie } from "react-chartjs-2";
+import { fetchModalityMetrics } from "@/lib/data";
+import { PolarArea } from "react-chartjs-2";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -27,12 +28,12 @@ ChartJS.register(
   Colors,
 );
 
-export default function Status({ token }: { token: string }) {
+export default function Modality({ token }: { token: string }) {
   const [isLoading, setIsLoading] = useState(true);
   const [chartData, setChartData] = useState<any>(null);
 
   useEffect(() => {
-    fetchStatusMetrics({ token }).then(({ success, data }) => {
+    fetchModalityMetrics({ token }).then(({ success, data }) => {
       if (!success) {
         return (
           <div>
@@ -56,6 +57,6 @@ export default function Status({ token }: { token: string }) {
   }, []);
 
   return (
-    <div>{isLoading ? <div>Loading...</div> : <Pie data={chartData} />}</div>
+    <div>{isLoading ? <div>Loading...</div> : <PolarArea data={chartData} />}</div>
   );
 }

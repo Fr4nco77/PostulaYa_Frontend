@@ -1,6 +1,7 @@
 "use client";
+
 import { useState, useEffect } from "react";
-import { fetchStatusMetrics } from "@/lib/data";
+import { fetchSkillsMetrics } from "@/lib/data";
 import { Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -27,12 +28,12 @@ ChartJS.register(
   Colors,
 );
 
-export default function Status({ token }: { token: string }) {
+export default function Skills({ token }: { token: string }) {
   const [isLoading, setIsLoading] = useState(true);
   const [chartData, setChartData] = useState<any>(null);
 
   useEffect(() => {
-    fetchStatusMetrics({ token }).then(({ success, data }) => {
+    fetchSkillsMetrics({ token }).then(({ success, data }) => {
       if (!success) {
         return (
           <div>
@@ -45,7 +46,7 @@ export default function Status({ token }: { token: string }) {
         labels: data.response.labels,
         datasets: [
           {
-            label: "# de Postulaciones",
+            label: "# de Habilidades",
             data: data.response.data,
           },
         ],
