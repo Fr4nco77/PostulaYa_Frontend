@@ -1,8 +1,8 @@
 'use server';
 
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
-import { validateApplication, validateCreateNote, validateCredentials, validateEmail, validateRegister, validateRestorePassword, validateUpdateApplication, validateUpdateNote } from "./schemas";
-import { FormValue, RawFormData } from "./definitions";
+import { validateApplication, validateCreateNote, validateCredentials, validateUpdateUser, validateEmail, validateRegister, validateRestorePassword, validateUpdateApplication, validateUpdateNote } from "./schemas";
+import { FormValue, RawFormData, User } from "./definitions";
 import { removeEmptyStrings } from "./utils";
 
 export async function createUser(credentials: RawFormData) {
@@ -46,6 +46,50 @@ export async function createUser(credentials: RawFormData) {
             data: {
                 name: "Error interno",
                 message: "Registro fallido",
+            }
+        }
+    }
+}
+
+export async function updateUser({ token, userData }: { token: string, userData: User }) {
+    noStore();
+
+    const verifiedFields = validateUpdateUser.safeParse(userData);
+
+    if (!verifiedFields.success) {
+        return {
+            errors: verifiedFields.error.flatten().fieldErrors,
+            success: false,
+            data: {
+                name: "Datos invalidos",
+                message: 'Actualizacion de usuario fallida',
+            }
+        }
+    }
+
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/user/update`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(verifiedFields.data)
+        })
+        const { success, data } = await response.json();
+
+        return {
+            errors: {},
+            success,
+            data
+        }
+    } catch (error) {
+        return {
+            errors: {},
+            success: false,
+            data: {
+                name: "Error interno",
+                message: "Actualizacion fallida",
             }
         }
     }

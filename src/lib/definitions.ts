@@ -41,3 +41,9 @@ export type Application = {
     created_at: string;
     updated_at: string;
 }
+
+export type User = {
+    username?: string;
+    image?: string;
+    skills?: string[];
+}

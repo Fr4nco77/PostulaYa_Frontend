@@ -293,6 +293,8 @@ export async function fetchSkillsMetrics({ token }: { token: string }) {
 }
 
 export async function fetchTopSkills({ token }: { token: string }) {
+    noStore();
+    
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/metric/topskills`, {
             method: "GET",

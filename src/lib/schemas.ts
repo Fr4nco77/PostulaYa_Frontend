@@ -55,6 +55,33 @@ export const validateRestorePassword = validatePassword.extend({
             })
 });
 
+export const validateUpdateUser = z.object({
+    username:
+        z.optional(
+            z.string({
+                invalid_type_error: "Nombre de usuario invalido"
+            })
+                .trim()
+                .min(1, "Nombre de usuario invalido")
+        ),
+    image:
+        z.optional(
+            z.string({
+                invalid_type_error: "Imagen invalida"
+            })
+                .trim()
+                .min(1, "Imagen invalida")
+        ),
+    skills:
+        z.optional(
+            z.array(
+                z.string({
+                    invalid_type_error: "Habilidad invalida"
+                })
+            )
+        )
+})
+
 export const validateApplication = z.object({
     position:
         z.string({
