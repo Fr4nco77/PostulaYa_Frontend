@@ -1,7 +1,7 @@
 'use server';
 
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
-import { validateApplication, validateCreateNote, validateCredentials, validateUpdateUser, validateEmail, validateRegister, validateRestorePassword, validateUpdateApplication, validateUpdateNote } from "./schemas";
+import { validateApplication, validateCreateNote, validateCredentials, validateUpdateUser, validateEmail, validateRegister, validateRestorePassword, validateUpdateApplication, validateUpdateNote, validateFeedback } from "./schemas";
 import { FormValue, RawFormData, User } from "./definitions";
 import { removeEmptyStrings } from "./utils";
 
@@ -493,6 +493,50 @@ export async function deleteNote({ _id }: { _id: string }) {
         }
     } catch (error) {
         return {
+            success: false,
+            data: {
+                name: "Error Interno",
+                message: "Ocurrio un error inesperado"
+            }
+        }
+    }
+}
+
+export async function sendFeedback({ token, rawFormData }: { token: string, rawFormData: RawFormData }) {
+    noStore();
+    
+    const verifiedFields = validateFeedback.safeParse(rawFormData);
+
+    if (!verifiedFields.success) {
+        return {
+            errors: verifiedFields.error.flatten().fieldErrors,
+            success: false,
+            data: {
+                name: "Campos Invalidos",
+                message: "Envio de Feedback Fallido"
+            }
+        }
+    }
+
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/feedback`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify(verifiedFields.data)
+        })
+        const { success, data } = await response.json();
+
+        return {
+            errors: {},
+            success,
+            data
+        }
+    } catch (error) {
+        return {
+            errors: {},
             success: false,
             data: {
                 name: "Error Interno",

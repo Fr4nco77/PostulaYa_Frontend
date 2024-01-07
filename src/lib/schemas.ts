@@ -157,3 +157,18 @@ export const validateCreateNote = validateUpdateNote.extend({
     })
         .min(1, "AplicationID invalido")
 })
+
+export const validateFeedback = z.object({
+    subject:
+        z.string({
+            invalid_type_error: "Asunto invalido"
+        })
+            .trim()
+            .min(1, "El asunto es invalido"),
+    body:
+        z.string({
+            invalid_type_error: "Contendio invalido"
+        })
+            .trim()
+            .min(1, "Contenido invalido")
+})
