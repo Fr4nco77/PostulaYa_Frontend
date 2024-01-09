@@ -48,7 +48,7 @@ export default function Form({ className, ...props }: FormProps) {
     }
 
     toast({ variant: "warning", description: data.message });
-    router.push("/auth/sign_in");
+    router.push("/sign_in");
   }, []);
 
   return (
