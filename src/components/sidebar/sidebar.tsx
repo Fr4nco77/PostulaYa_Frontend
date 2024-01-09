@@ -1,89 +1,44 @@
-"use client";
-
-import { ReactNode, createContext, useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { HTMLAttributes } from "react";
 import Image from "next/image";
 import Exit from "./button_exit";
 import { Skeleton } from "../ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
-import Cookie from "js-cookie";
-export const SidebarContext = createContext();
+import { cookies } from "next/headers";
+import { cn } from "@/lib/utils";
 
-export default function Sidebar({ children }: { children: ReactNode }) {
-  const [expanded, setExpanded] = useState(false);
-  const [userInfo, setUserInfo] = useState({
-    name: "",
-    email: "",
-    image: "",
-  });
+interface SidebarProps extends HTMLAttributes<HTMLDivElement> {}
 
-  useEffect(() => {
-    const name = Cookie.get("_username");
-    const email = Cookie.get("_email");
-    const image = Cookie.get("_image");
-
-    if (name && email && image) {
-      setUserInfo({
-        name,
-        email,
-        image,
-      });
-    }
-  }, []);
-
-  const { name, email, image } = userInfo;
+export default function Sidebar({
+  children,
+  className,
+  ...props
+}: SidebarProps) {
+  const userImage = cookies().get("_image")?.value!;
 
   return (
-    <nav className="absolute z-10 flex h-full flex-col border-r bg-[#181818] shadow-sm">
+    <nav
+      className={cn("flex flex-col bg-yellow-400 shadow-lg", className)}
+      {...props}
+    >
       <div className="flex items-center justify-between p-4 pb-2">
         <Image
-          src="/amarillopng.png"
+          src="/Logo_simple.svg"
           alt="PostulaYa logo"
-          width={expanded ? 120 : 0}
-          height={120}
-          className="overflow-hidden transition-all"
+          width={40}
+          height={40}
         />
-        <button
-          onClick={() => setExpanded((curr) => !curr)}
-          className="rounded-lg bg-gray-700 p-1.5 text-yellow-400 hover:bg-yellow-400 hover:text-black"
-        >
-          {expanded ? <X /> : <Menu />}
-        </button>
       </div>
-
-      <SidebarContext.Provider value={{ expanded }}>
-        <ul className="mt-4 flex-1 px-3">
-          {children}
-          <Exit />
-        </ul>
-      </SidebarContext.Provider>
-
-      <div className="flex border-t border-gray-700 p-3 pl-4">
-        <Avatar>
-          <AvatarImage src={image} />
+      <ul className="mt-4 flex-1 px-3">
+        {children}
+        <Exit className="mt-4" />
+      </ul>
+      <div className="flex border-t border-[rgb(8,11,28)] p-3 pl-4">
+        <Avatar className="border border-[rgb(8,11,28)]">
+          <AvatarImage src={userImage} />
           <AvatarFallback>
             <Skeleton className="h-10 w-10 rounded-full" />
           </AvatarFallback>
         </Avatar>
-        <div
-          className={`
-              flex items-center justify-between
-              overflow-hidden transition-all ${expanded ? "ml-3 w-52" : "w-0"}
-          `}
-        >
-          <div className="leading-4">
-            {name ? (
-              <h4 className="text-sm font-semibold text-yellow-400">{name}</h4>
-            ) : (
-              <Skeleton className="h-3 w-44 rounded-md" />
-            )}
-            {email ? (
-              <span className="text-sm text-white">{email}</span>
-            ) : (
-              <Skeleton className="mt-2 h-3 w-52 rounded-md" />
-            )}
-          </div>
-        </div>
       </div>
     </nav>
   );

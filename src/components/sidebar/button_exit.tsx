@@ -1,44 +1,34 @@
 "use client";
 
-import { useContext } from "react";
 import { useRouter } from "next/navigation";
-import { SidebarContext } from "./sidebar";
 import { ArrowLeft } from "lucide-react";
 import Cookies from "js-cookie";
+import { HTMLAttributes } from "react";
 
-export default function Item() {
-  const { expanded } = useContext(SidebarContext);
+interface ButtonProps extends HTMLAttributes<HTMLButtonElement> {}
+
+export default function Item({ className, ...props }: ButtonProps) {
   const router = useRouter();
 
   return (
     <button
-      className="mt-4"
+      className={className}
       onClick={() => {
         Cookies.remove("authorization");
-        router.push("/auth/sign_in");
+        router.push("/sign_in");
       }}
+      {...props}
     >
-      <li className="group relative my-1 flex cursor-pointer items-center rounded-md px-3 py-2 font-medium text-yellow-400 transition-colors hover:bg-yellow-400 hover:text-black">
+      <li className="group relative my-1 flex cursor-pointer items-center rounded-md px-3 py-2 font-medium text-[rgb(8,11,28)] transition-colors hover:bg-[rgb(8,11,28)] hover:text-yellow-400">
         <ArrowLeft />
-        <span
-          className={`flex overflow-hidden transition-all ${
-            expanded ? "ml-3 w-52" : "w-0"
-          }`}
+        <div
+          className="invisible absolute left-full z-10 ml-6 -translate-x-3 rounded-md
+            bg-[rgb(8,11,28)] px-2 py-1
+            text-sm text-yellow-400 opacity-20 transition-all
+            group-hover:visible group-hover:translate-x-0 group-hover:opacity-100"
         >
           Salir
-        </span>
-        {!expanded && (
-          <div
-            className={`
-            invisible absolute left-full ml-6 -translate-x-3 rounded-md
-            bg-yellow-400 px-2 py-1
-            text-sm text-black opacity-20 transition-all
-            group-hover:visible group-hover:translate-x-0 group-hover:opacity-100
-        `}
-          >
-            Salir
-          </div>
-        )}
+        </div>
       </li>
     </button>
   );
