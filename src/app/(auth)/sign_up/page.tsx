@@ -1,9 +1,9 @@
 import GoogleButton from "@/components/auth/GoogleButton";
 import Form from "@/components/auth/form-signUp";
 import { Separator } from "@/components/ui/separator";
-import Image from "next/image";
 import Link from "next/link";
 import { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Registro",
@@ -15,11 +15,13 @@ export default function SignUp() {
       <main className="flex h-full w-full items-center justify-center lg:w-1/2">
         <div className="flex w-full max-w-md flex-col items-center justify-center p-10 lg:max-w-lg">
           <div className="w-full">
-            <Image
-              src="/amarillopng.png"
-              width={200}
-              height={50}
-              alt="PostulaYa Logo"
+          <Image
+              src="/Logo_borderBlack.svg"
+              alt="logo PostulaYa"
+              width={0}
+              height={0}
+              priority={true}
+              className="mb-1 h-auto w-4/6 lg:hidden"
             />
             <h1 className="mt-3 text-4xl ">
               <strong>Crear Cuenta</strong>
@@ -31,19 +33,23 @@ export default function SignUp() {
           <div className=" w-full">
             <span>
               ¿Ya tienes una cuenta?{" "}
-              <Link href="/auth/sign_in">
+              <Link href="/sign_in">
                 <strong className="underline">Ingresa aquí</strong>
               </Link>
             </span>
           </div>
         </div>
       </main>
-      <section className="hidden h-full w-1/2 bg-yellow-500 lg:block">
-        <div className="flex h-full w-full items-center justify-center">
-          <span>
-            <strong>Diseño Pendiente</strong>
-          </span>
-        </div>
+      <section className="relative hidden h-full w-1/2 lg:block">
+        <Image
+          src="/sign_up.svg"
+          alt="Sign up page"
+          width={undefined}
+          height={undefined}
+          priority={true}
+          fill={true}
+          className="object-cover object-left"
+        />
       </section>
     </div>
   );

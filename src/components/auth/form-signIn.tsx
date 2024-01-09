@@ -1,39 +1,35 @@
 "use client";
 
-import { cn, configCookies } from "@/lib/utils";
+import { configCookies } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { Loader2, Eye, EyeOff } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { useCallback, useState } from "react";
 import Link from "next/link";
 import { Errors } from "@/lib/definitions";
-import { loginUser } from "@/lib/actions";
+import { loginUser } from "@/lib/actions/user";
 import { useToast } from "../ui/use-toast";
 import { useRouter } from "next/navigation";
 import ErrorMessage from "../ui/error-message";
 import Cookies from "js-cookie";
+import { ButtonSubmit } from "../ui/button-submit";
 
 interface FormProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 export default function Form({ className, ...props }: FormProps) {
   const router = useRouter();
   const { toast } = useToast();
-
-  //Estados del formulario
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [errors, setErrors] = useState<Errors>({});
 
-  //Manejador de submit del formulario (server action)
+  //Manejador de submit del formulario
   const handleSubmit = useCallback(async (formData: FormData) => {
     const rawFormData = Object.fromEntries(formData.entries());
-    setIsLoading(true);
 
     //Ejecuto "loginUser" para validar los datos provistos por el usuario y logearlo finalmente
     const { errors, success, data } = await loginUser(rawFormData);
     setErrors(errors);
-    setIsLoading(false);
 
     //Dependiendo de el resultado de exito/error de lo anterior manejo la ui
     if (!success) {
@@ -43,7 +39,7 @@ export default function Form({ className, ...props }: FormProps) {
         description: data.message,
       });
     }
-    toast({ description: data.message });
+    toast({ variant: "warning", description: data.message });
 
     //En caso de exito guardo la informacion provista en cookies
     const config = configCookies();
@@ -56,7 +52,7 @@ export default function Form({ className, ...props }: FormProps) {
   }, []);
 
   return (
-    <div className={cn(className)} {...props}>
+    <div className={className} {...props}>
       <form action={handleSubmit}>
         <div className="grid gap-4">
           <div className="grid gap-2">
@@ -70,7 +66,6 @@ export default function Form({ className, ...props }: FormProps) {
               placeholder="john@example.dev"
               aria-describedby="email-error"
               className={errors?.email && "border-red-500"}
-              disabled={isLoading}
             />
             <ErrorMessage errors={errors?.email} errorKey="email" />
           </div>
@@ -89,7 +84,6 @@ export default function Form({ className, ...props }: FormProps) {
                 aria-describedby="password-error"
                 type={showPassword ? "text" : "password"}
                 className={errors?.password && "border-red-500"}
-                disabled={isLoading}
               />
               <Button
                 type="button"
@@ -97,7 +91,6 @@ export default function Form({ className, ...props }: FormProps) {
                 size="icon"
                 variant="outline"
                 className="border-slate-600"
-                disabled={isLoading}
               >
                 {showPassword ? <Eye /> : <EyeOff />}
               </Button>
@@ -105,20 +98,13 @@ export default function Form({ className, ...props }: FormProps) {
             <ErrorMessage errors={errors?.password} errorKey="password" />
           </div>
           <div className="flex items-end justify-end">
-            <Link href="/auth/forgot_password">
+            <Link href="/forgot_password">
               <strong className="text-sm underline">
                 Olvidé mi contraseña
               </strong>
             </Link>
           </div>
-          <Button
-            type="submit"
-            disabled={isLoading}
-            className="bg-yellow-400 text-black hover:bg-yellow-300"
-          >
-            {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-            Ingresar
-          </Button>
+          <ButtonSubmit>Ingresar</ButtonSubmit>
         </div>
       </form>
     </div>

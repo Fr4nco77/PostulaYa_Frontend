@@ -3,26 +3,26 @@ import { z } from "zod";
 export const validateEmail = z.object({
     email:
         z.string({
-            required_error: "Email is required"
+            required_error: "Email es requerido"
         })
             .trim()
             .toLowerCase()
             .email({
-                message: "Invalid email"
+                message: "Email invalido"
             })
 });
 
 export const validatePassword = z.object({
     password:
         z.string({
-            required_error: "Password is required"
+            required_error: "Contraseña es requerida"
         })
             .trim()
             .min(8, {
-                message: "Must be 8 or more characters long"
+                message: "Debe tener más de 8 caracteres"
             })
             .max(20, {
-                message: "Must be 20 or fewer characters long"
+                message: "Debe tener menos de 20 caracteres"
             })
 });
 
@@ -31,14 +31,14 @@ export const validateCredentials = validateEmail.merge(validatePassword);
 export const validateRegister = z.object({
     username:
         z.string({
-            required_error: "Username is required"
+            required_error: "Nombre es requerido"
         })
             .trim()
             .min(3, {
-                message: "Must be 3 or more characters long"
+                message: "Debe tener más de tres caracteres"
             })
             .max(15, {
-                message: "Must be 15 or fewer characters long"
+                message: "Debe tener menos de 15 caracteres"
             })
 
 }).merge(validateEmail).merge(validatePassword);

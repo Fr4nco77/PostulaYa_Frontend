@@ -11,7 +11,7 @@ export function configCookies() {
   const currentDate = new Date();
 
   // Calcular la fecha de expiración sumando 12 horas en milisegundos
-  const expirationTime = currentDate.getTime() + 12 * 60 * 60 * 1000;
+  const expirationTime = currentDate.getTime() + 9 * 60 * 60 * 1000;
 
   // Crear un nuevo objeto Date con la fecha de expiración
   const expires = new Date(expirationTime);

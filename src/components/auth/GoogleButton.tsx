@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { cn, configCookies } from "@/lib/utils";
+import { configCookies } from "@/lib/utils";
 import { useGoogleLogin } from "@react-oauth/google";
 import { Button } from "@/components/ui/button";
 import { useToast } from "../ui/use-toast";
@@ -41,10 +41,12 @@ export default function GoogleButton({ className, ...props }: ButtonProps) {
         }
 
         toast({
+          variant: "warning",
           description: data.message,
         });
-
+        //En caso de exito seteo las cookies
         const { token, name, email, image } = data.response;
+
         const config = configCookies();
         Cookies.set("authorization", token, config);
         Cookies.set("_username", name, config);
@@ -54,7 +56,7 @@ export default function GoogleButton({ className, ...props }: ButtonProps) {
       } catch (error) {
         toast({
           variant: "destructive",
-          title: "Ha ocurrido un error",
+          title: "Error Interno",
           description:
             "Si el problema persiste, comunícate con el administrador.",
         });
@@ -64,7 +66,7 @@ export default function GoogleButton({ className, ...props }: ButtonProps) {
   });
 
   return (
-    <div className={cn(className)} {...props}>
+    <div className={className} {...props}>
       <Button
         variant="outline"
         type="button"
