@@ -3,11 +3,13 @@ import ListItems from "@/components/sidebar/listItems";
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
-    <div className="h-screen w-screen md:flex">
-      <SideNavbar className="h-auto w-full md:h-full md:w-auto">
+    <div className="h-screen w-screen lg:flex">
+      <SideNavbar className="h-auto w-full lg:h-full lg:w-auto">
         <ListItems />
       </SideNavbar>
-      <div className="flex h-auto w-full items-center justify-center p-5">{children}</div>
+      <div className="flex h-auto w-full items-center justify-center p-5">
+        {children}
+      </div>
     </div>
   );
 }

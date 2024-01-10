@@ -18,32 +18,32 @@ export default function Sidebar({
   return (
     <nav
       className={cn(
-        "flex bg-yellow-400 shadow-lg max-md:items-center max-md:justify-between md:flex-col",
+        "flex bg-yellow-400 shadow-lg max-lg:items-center max-lg:justify-between lg:flex-col",
         className,
       )}
       {...props}
     >
-      <div className="flex items-center justify-center p-2 md:p-4 md:pb-2">
+      <div className="flex items-center justify-center p-2 lg:p-4 lg:pb-2">
         <Image
           src="/Logo_simple.svg"
           alt="PostulaYa logo"
           width={40}
           height={40}
-          className="sm:hidden md:block"
+          className="sm:hidden lg:block"
         />
         <Image
           src="/Logo_borderBlack.svg"
           alt="PostulaYa logo"
           width={130}
           height={40}
-          className="hidden sm:max-md:block"
+          className="hidden sm:max-lg:block"
         />
       </div>
-      <ul className="flex px-3 max-md:items-center max-md:justify-center md:mt-4 md:flex-1 md:flex-col">
+      <ul className="flex px-3 max-lg:items-center max-lg:justify-center lg:mt-4 lg:flex-1 lg:flex-col">
         {children}
-        <Exit className="ml-6 md:ml-0 md:mt-6" />
+        <Exit className="ml-6 lg:ml-0 lg:mt-6" />
       </ul>
-      <div className="hidden border-t border-[rgb(8,11,28)] p-3 pl-4 md:flex">
+      <div className="hidden border-t border-[rgb(8,11,28)] p-3 pl-4 lg:flex">
         <Avatar className="border border-[rgb(8,11,28)]">
           <AvatarImage src={userImage} />
           <AvatarFallback>
