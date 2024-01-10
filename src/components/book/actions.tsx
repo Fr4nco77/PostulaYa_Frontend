@@ -21,7 +21,7 @@ import { Eye, MoreVertical, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useRef } from "react";
 import { useToast } from "../ui/use-toast";
-import { deleteApplication } from "@/lib/actions";
+import { deleteApplication } from "@/lib/actions/application";
 
 export default function Actions({
   token,
@@ -31,7 +31,7 @@ export default function Actions({
   applicationID: string;
 }) {
   const { toast } = useToast();
-  const dropdownTriggerRef = useRef(null);
+  const dropdownTriggerRef = useRef<any>(null);
 
   const handlerDelete = useCallback(async () => {
     const { data, success } = await deleteApplication({ token, applicationID });
@@ -43,6 +43,7 @@ export default function Actions({
       });
     }
     toast({
+      variant: "warning",
       description: data.message,
     });
   }, []);
@@ -82,8 +83,8 @@ export default function Actions({
             ¿Quieres eliminar esta postulacion?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            Esta accion no puede ser desecha. Cada postulacion es imporatante
-            para medir tu progreso y fortalecerlo.
+            Ten en cuenta que cada postulacion es imporatante para medir y
+            fortalecer tu progreso.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

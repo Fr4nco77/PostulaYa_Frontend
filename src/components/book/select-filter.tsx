@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback } from "react";
+import { HTMLAttributes, useCallback } from "react";
 import {
   Select,
   SelectContent,
@@ -9,14 +9,21 @@ import {
   SelectValue,
 } from "../ui/select";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { cn } from "@/lib/utils";
 import { FilterProps } from "@/lib/definitions";
 
+interface SelectFilterProps
+  extends HTMLAttributes<HTMLDivElement>,
+    FilterProps {}
+
 export default function Filter({
+  className,
   placeholder,
   names,
   values,
   query,
-}: FilterProps) {
+  ...props
+}: SelectFilterProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -32,11 +39,11 @@ export default function Filter({
       }
       replace(`${pathname}?${params.toString()}`);
     },
-    [searchParams, pathname, replace],
+    [searchParams],
   );
 
   return (
-    <div className="flex flex-1 flex-shrink-0">
+    <div className={cn("flex flex-1", className)} {...props}>
       <Select
         defaultValue={searchParams.get(query)?.toString()}
         onValueChange={handleFilter}

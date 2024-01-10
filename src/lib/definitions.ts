@@ -8,7 +8,7 @@ export type Errors = {
     [key: string]: string[];
 }
 
-export type FilterProps = {
+export interface FilterProps {
     placeholder: string;
     names: string[];
     values: string[];

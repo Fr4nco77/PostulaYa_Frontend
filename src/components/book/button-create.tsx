@@ -3,7 +3,6 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -14,7 +13,9 @@ export default function CreateApplication({ token }: { token: string }) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline">Agregar</Button>
+        <Button variant="outline" className="bg-yellow-400 hover:bg-yellow-300">
+          Agregar
+        </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[450px]">
         <DialogHeader>

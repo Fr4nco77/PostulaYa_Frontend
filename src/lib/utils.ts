@@ -24,6 +24,7 @@ export function configCookies() {
 export function formatedQuery(searchParams: { [key: string]: string }) {
   const params = {
     query: searchParams?.query || '',
+    status: searchParams?.status || '',
     modality: searchParams?.modality || '',
     type: searchParams?.type || '',
     page: searchParams?.page || '1',

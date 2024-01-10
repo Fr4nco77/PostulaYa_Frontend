@@ -1,7 +1,7 @@
 "use client";
 
-import { useCallback, useRef, useState } from "react";
-import { Loader2, Plus } from "lucide-react";
+import { HTMLAttributes, useCallback, useRef, useState } from "react";
+import { Loader2, Plus, X } from "lucide-react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
 import {
@@ -13,12 +13,18 @@ import {
 } from "../ui/select";
 import { Badge } from "../ui/badge";
 import { Button } from "../ui/button";
-import { addSkill, createApplication } from "@/lib/actions";
+import { addSkill, createApplication } from "@/lib/actions/application";
 import { useToast } from "../ui/use-toast";
 import { Errors, Skills } from "@/lib/definitions";
 import ErrorMessage from "../ui/error-message";
+import { ButtonSubmit } from "../ui/button-submit";
+import { cn } from "@/lib/utils";
 
-export default function Form({ token }: { token: string }) {
+interface FormProps extends HTMLAttributes<HTMLFormElement> {
+  token: string;
+}
+
+export default function Form({ className, token, ...props }: FormProps) {
   const { toast } = useToast();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -27,6 +33,7 @@ export default function Form({ token }: { token: string }) {
 
   const addSkills = async () => {
     const inputValue = inputRef.current!.value.trim();
+    setIsLoading(true);
 
     if (inputValue) {
       const { skill, error } = await addSkill(inputValue);
@@ -49,6 +56,7 @@ export default function Form({ token }: { token: string }) {
       }
       inputRef.current!.value = "";
     }
+    setIsLoading(false);
   };
 
   const removeSkill = useCallback(
@@ -63,7 +71,6 @@ export default function Form({ token }: { token: string }) {
     async (formData: FormData) => {
       const rawFormData = Object.fromEntries(formData.entries());
       const skillsIds = skills?.map((obj) => obj._id);
-      setIsLoading(true);
 
       const { errors, success, data } = await createApplication({
         rawFormData,
@@ -71,7 +78,6 @@ export default function Form({ token }: { token: string }) {
         token,
       });
       setErrors(errors);
-      setIsLoading(false);
 
       if (!success) {
         return toast({
@@ -82,6 +88,7 @@ export default function Form({ token }: { token: string }) {
       }
 
       toast({
+        variant: "warning",
         title: data.name,
         description: data.message,
       });
@@ -90,7 +97,11 @@ export default function Form({ token }: { token: string }) {
   );
 
   return (
-    <form action={handleSubmit} className="grid gap-4 py-4">
+    <form
+      action={handleSubmit}
+      className={cn("grid gap-4 py-4", className)}
+      {...props}
+    >
       <div className="grid grid-cols-4 items-center gap-4">
         <Label htmlFor="position" className="text-right">
           Posicion
@@ -100,17 +111,60 @@ export default function Form({ token }: { token: string }) {
           name="position"
           placeholder="Full-Stack Developer"
           className="col-span-3"
-          disabled={isLoading}
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="company_name" className="text-right">
+          Empresa
+        </Label>
+        <Input
+          id="company_name"
+          name="company_name"
+          placeholder="Dream Company S.A"
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="company_ubication" className="text-right">
+          Ubicacion
+        </Label>
+        <Input
+          id="company_ubication"
+          name="company_ubication"
+          placeholder="Francia"
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="recluter" className="text-right">
+          {"Reclutador (opcional)"}
+        </Label>
+        <Input
+          id="recluter"
+          name="recluter"
+          placeholder="Pedro Duarte"
+          className="col-span-3"
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label htmlFor="url" className="text-right">
+          {"Enlace a postulacion (opcional)"}
+        </Label>
+        <Input
+          id="url"
+          name="url"
+          placeholder="https://listofJobs/jobs/13192898319"
+          className="col-span-3"
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
         <Label htmlFor="modality" className="text-right">
           Modalidad
         </Label>
-        <div id="modality">
-          <Select name="modality" disabled={isLoading}>
-            <SelectTrigger className="w-40">
-              <SelectValue placeholder="" />
+        <div id="modality" className="col-span-3">
+          <Select name="modality">
+            <SelectTrigger>
+              <SelectValue placeholder="¿Cómo se llevará a cabo?" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="Presencial">Presencial</SelectItem>
@@ -124,10 +178,10 @@ export default function Form({ token }: { token: string }) {
         <Label htmlFor="type" className="text-right">
           Tipo
         </Label>
-        <div id="type">
-          <Select disabled={isLoading} name="type">
-            <SelectTrigger className="w-40">
-              <SelectValue placeholder="" />
+        <div id="type" className="col-span-3">
+          <Select name="type">
+            <SelectTrigger>
+              <SelectValue placeholder="¿Cuanto tiempo te exige?" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="Full-Time">Full-Time</SelectItem>
@@ -137,49 +191,13 @@ export default function Form({ token }: { token: string }) {
         </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="recluter" className="text-right">
-          {"Reclutador (opcional)"}
-        </Label>
-        <Input
-          id="recluter"
-          name="recluter"
-          placeholder="Pedro Duarte"
-          className="col-span-3"
-          disabled={isLoading}
-        />
-      </div>
-      <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="company_name" className="text-right">
-          Empresa
-        </Label>
-        <Input
-          id="company_name"
-          name="company_name"
-          placeholder="Dream Company S.A"
-          className="col-span-3"
-          disabled={isLoading}
-        />
-      </div>
-      <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="company_ubication" className="text-right">
-          Ubicacion
-        </Label>
-        <Input
-          id="company_ubication"
-          name="company_ubication"
-          placeholder="Francia"
-          className="col-span-3"
-          disabled={isLoading}
-        />
-      </div>
-      <div className="grid grid-cols-4 items-center gap-4">
         <Label htmlFor="platform" className="text-right">
           Plataforma de Postulacion
         </Label>
-        <div id="platform">
-          <Select name="platform" disabled={isLoading}>
-            <SelectTrigger className="w-40">
-              <SelectValue placeholder="" />
+        <div id="platform" className="col-span-3">
+          <Select name="platform">
+            <SelectTrigger>
+              <SelectValue placeholder="¿Cual usaste?" />
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="Linkedin">Linkedin</SelectItem>
@@ -193,51 +211,31 @@ export default function Form({ token }: { token: string }) {
         </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="url" className="text-right">
-          {"Enlace a postulacion (opcional)"}
-        </Label>
-        <Input
-          id="url"
-          name="url"
-          placeholder="https://listofJobs/jobs/13192898319"
-          className="col-span-3"
-          disabled={isLoading}
-        />
-      </div>
-      <ErrorMessage errors={errors?.url} errorKey="url" />
-      <div className="flex items-center gap-4">
         <Label htmlFor="skill" className="text-right">
           Habilidades necesarias
         </Label>
-        <Input
-          id="skill"
-          ref={inputRef}
-          placeholder="NextJs"
-          disabled={isLoading}
-        />
-        <Button
-          size={"icon"}
-          type="button"
-          onClick={addSkills}
-          disabled={isLoading}
-        >
-          <Plus />
-        </Button>
+        <div className="col-span-3 flex gap-2">
+          <Input id="skill" ref={inputRef} placeholder="NextJs" />
+          <Button
+            size={"icon"}
+            type="button"
+            onClick={addSkills}
+            disabled={isLoading}
+          >
+            {isLoading ? <Loader2 className="animate-spin" /> : <Plus />}
+          </Button>
+        </div>
       </div>
       <div className="flex flex-wrap gap-1">
         {skills?.map(({ _id, name }) => (
-          <Badge
-            id={_id}
-            key={_id}
-            onClick={() => removeSkill(_id)}
-          >{`${name}`}</Badge>
+          <Badge id={_id} key={_id} onClick={() => removeSkill(_id)}>
+            {`${name}`}
+            <X width={17} height={17} />
+          </Badge>
         ))}
       </div>
       <ErrorMessage errors={errors?.skills} errorKey="skill" />
-      <Button type="submit" disabled={isLoading}>
-        {isLoading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}Agregar
-        postulacion
-      </Button>
+      <ButtonSubmit>Agregar</ButtonSubmit>
     </form>
   );
 }

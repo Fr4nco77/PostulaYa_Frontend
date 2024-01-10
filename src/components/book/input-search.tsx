@@ -3,8 +3,13 @@
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import { Input } from "../ui/input";
+import { HTMLAttributes } from "react";
 
-export default function SearchInput({ placeholder }: { placeholder: string }) {
+interface SearchinputProps extends HTMLAttributes<HTMLInputElement> {
+  placeholder: string;
+}
+
+export default function SearchInput({ ...props }: SearchinputProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -21,13 +26,11 @@ export default function SearchInput({ placeholder }: { placeholder: string }) {
   }, 500);
 
   return (
-    <div className="flex flex-1 flex-shrink-0">
-      <Input
-        id="search"
-        placeholder={placeholder}
-        onChange={(e) => handleSearch(e.target.value)}
-        defaultValue={searchParams.get("query")?.toString()}
-      />
-    </div>
+    <Input
+      id="search"
+      onChange={(e) => handleSearch(e.target.value)}
+      defaultValue={searchParams.get("query")?.toString()}
+      {...props}
+    />
   );
 }

@@ -85,7 +85,7 @@ export const validateUpdateUser = z.object({
 export const validateApplication = z.object({
     position:
         z.string({
-            invalid_type_error: "Posición invalida"
+            invalid_type_error: "Posición Invalida"
         })
             .trim()
             .min(3, 'La posición debe tener al menos 3 caracteres')
@@ -97,39 +97,39 @@ export const validateApplication = z.object({
     recluter:
         z.optional(
             z.string({
-                invalid_type_error: "Reclutador invalido"
+                invalid_type_error: "Reclutador Invalido"
             })
                 .trim()
-                .min(1, 'El nombre del reclutador no puede estar vacío')),
+                .min(1, 'Reclutador Invalido')),
     company_name:
         z.string({
-            invalid_type_error: "Empresa invalida"
+            invalid_type_error: "Empresa Invalida"
         })
             .trim()
-            .nonempty('El nombre de la empresa no puede estar vacío'),
+            .min(1, 'Empresa Invalida'),
     company_ubication:
         z.string({
-            invalid_type_error: "Ubicacion invalida"
+            invalid_type_error: "Ubicacion Invalida"
         })
             .trim()
-            .nonempty('La ubicación de la empresa no puede estar vacía'),
+            .min(1, "Ubicacion Invalida"),
     platform:
         z.enum(["Linkedin", "Indeed", "Glassdoor", "Get on Board", "Computrabajo", "Otra"]),
     url:
         z.optional(
             z.string({
-                invalid_type_error: "Url invalido"
+                invalid_type_error: "Url Invalido"
             })
                 .trim()
-                .url("El url no es valido")
+                .url("Url Invalido")
         ),
     skills:
         z.array(
             z.string({
-                invalid_type_error: 'Habilidad invalida'
+                invalid_type_error: 'Habilidad/es Invalida'
             })
                 .trim()
-                .min(1, 'Habilidad invalida')
+                .min(1, 'Habilidades Invalidas')
         )
             .min(3, "Debes colocar un minimo de tres habilidades"),
 })
