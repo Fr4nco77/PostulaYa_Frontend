@@ -89,7 +89,7 @@ export default function Actions({
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction onClick={handlerDelete}>
+          <AlertDialogAction className="bg-red-600" onClick={handlerDelete}>
             Eliminar
           </AlertDialogAction>
         </AlertDialogFooter>
