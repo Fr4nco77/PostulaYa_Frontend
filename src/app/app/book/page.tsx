@@ -1,7 +1,7 @@
 import Pagination from "@/components/book/pagination";
 import Searchbar from "@/components/book/searchbar";
 import Table from "@/components/book/table";
-import { fetchApplicationsPages } from "@/lib/data";
+import { fetchApplicationsPages } from "@/lib/data/application";
 import React, { Suspense } from "react";
 import { cookies } from "next/headers";
 import { formatedQuery } from "@/lib/utils";

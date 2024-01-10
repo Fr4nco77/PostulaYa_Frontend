@@ -5,7 +5,7 @@ import Notes from "@/components/book/application/notes";
 import Skills from "@/components/book/application/skills";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
-import { fetchApplicationByID } from "@/lib/data";
+import { fetchApplicationByID } from "@/lib/data/application";
 import { cookies } from "next/headers";
 import Link from "next/link";
 

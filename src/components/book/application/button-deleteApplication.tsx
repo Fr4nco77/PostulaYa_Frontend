@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { deleteApplication } from "@/lib/actions";
+import { deleteApplication } from "@/lib/actions/application";
 import { useRouter } from "next/navigation";
 import { useCallback } from "react";
 

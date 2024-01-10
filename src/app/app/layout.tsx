@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
       <SideNavbar className="h-auto w-full lg:h-full lg:w-auto">
         <ListItems />
       </SideNavbar>
-      <div className="flex h-auto w-full items-center justify-center p-5">
+      <div className="flex h-auto w-full items-center justify-center p-5 lg:h-full">
         {children}
       </div>
     </div>

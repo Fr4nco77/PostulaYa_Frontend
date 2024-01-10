@@ -13,7 +13,8 @@ import {
 } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { addSkill, updateApplication } from "@/lib/actions";
+import { addSkill } from "@/lib/actions/application";
+import { updateApplication } from "@/lib/actions";
 import { useToast } from "@/components/ui/use-toast";
 import { Application, Errors, Skills } from "@/lib/definitions";
 import ErrorMessage from "@/components/ui/error-message";

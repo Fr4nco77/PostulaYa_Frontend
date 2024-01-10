@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/table";
 import { columns } from "./data";
 import { ApplicationQuery } from "@/lib/definitions";
-import { fetchApplications } from "@/lib/data";
+import { fetchApplications } from "@/lib/data/application";
 import Actions from "./actions";
 import { Badge } from "../ui/badge";
 import clsx from "clsx";
