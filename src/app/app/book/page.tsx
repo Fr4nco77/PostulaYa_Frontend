@@ -5,6 +5,7 @@ import { fetchApplicationsPages } from "@/lib/data";
 import React, { Suspense } from "react";
 import { cookies } from "next/headers";
 import { formatedQuery } from "@/lib/utils";
+import TableSkeleton from "@/components/book/table-skeleton";
 
 export default async function Book({
   searchParams,
@@ -21,7 +22,7 @@ export default async function Book({
         token={token}
         className="h-auto w-full max-w-2xl rounded-2xl bg-slate-100 p-3 shadow-xl"
       />
-      <Suspense key={query} fallback={<h1>loading</h1>}>
+      <Suspense key={query} fallback={<TableSkeleton />}>
         <Table query={query} token={token} />
       </Suspense>
       <Pagination totalPages={totalPages} />
