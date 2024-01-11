@@ -148,7 +148,7 @@ export default function Form({ className, token, ...props }: FormProps) {
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
         <Label htmlFor="url" className="text-right">
-          {"Enlace a postulacion (opcional)"}
+          Enlace a postulacion
         </Label>
         <Input
           id="url"

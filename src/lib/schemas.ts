@@ -116,13 +116,12 @@ export const validateApplication = z.object({
     platform:
         z.enum(["Linkedin", "Indeed", "Glassdoor", "Get on Board", "Computrabajo", "Otra"]),
     url:
-        z.optional(
-            z.string({
-                invalid_type_error: "Url Invalido"
-            })
-                .trim()
-                .url("Url Invalido")
-        ),
+        z.string({
+            invalid_type_error: "Url Invalido"
+        })
+            .trim()
+            .url("Url Invalido")
+    ,
     skills:
         z.array(
             z.string({
@@ -136,7 +135,17 @@ export const validateApplication = z.object({
 
 export const validateUpdateApplication = validateApplication.extend({
     status:
-        z.enum(["Postulado", "En Proceso", "Finalizado"])
+        z.enum(["Postulado", "En Proceso", "Finalizado"]),
+    skills: z.optional(
+        z.array(
+            z.string({
+                invalid_type_error: 'Habilidad/es Invalida'
+            })
+                .trim()
+                .min(1, 'Habilidades Invalidas')
+        )
+            .min(3, "Debes colocar un minimo de tres habilidades"),
+    )
 })
 
 export const validateUpdateNote = z.object({
