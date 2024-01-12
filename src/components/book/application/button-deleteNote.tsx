@@ -2,11 +2,22 @@
 
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
-import { deleteNote } from "@/lib/actions";
+import { deleteNote } from "@/lib/actions/note";
+import { cn } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
+import { HTMLAttributes } from "react";
 
-export default function DeleteNote({ _id }: { _id: string }) {
+interface DeleteNoteProps extends HTMLAttributes<HTMLButtonElement> {
+  _id: string;
+}
+
+export default function DeleteNote({
+  className,
+  _id,
+  ...props
+}: DeleteNoteProps) {
   const { toast } = useToast();
+
   const handleDelete = async () => {
     const { success, data } = await deleteNote({ _id });
 
@@ -18,10 +29,16 @@ export default function DeleteNote({ _id }: { _id: string }) {
       });
     }
 
-    toast({ description: data.message });
+    toast({ variant: "warning", description: data.message });
   };
   return (
-    <Button size="icon" onClick={handleDelete}>
+    <Button
+      variant="ghost"
+      size="icon"
+      onClick={handleDelete}
+      className={cn("rounded-full text-slate-900 hover:bg-red-600", className)}
+      {...props}
+    >
       <Trash2 />
     </Button>
   );

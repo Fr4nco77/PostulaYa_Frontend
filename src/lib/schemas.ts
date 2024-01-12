@@ -148,10 +148,23 @@ export const validateUpdateApplication = validateApplication.extend({
     )
 })
 
+export const validateUpdateSkills = z.object({
+    skills:
+        z.array(
+            z.string({
+                invalid_type_error: 'Habilidad/es Invalida'
+            })
+                .trim()
+                .min(1, 'Habilidad/es Invalidas')
+        )
+            .min(3, "Debes colocar un minimo de tres habilidades"),
+})
+
 export const validateUpdateNote = z.object({
     title: z.string({
         invalid_type_error: "Titulo invalido"
     })
+        .trim()
         .min(1, "Titulo invalido")
     ,
     body: z.string({
@@ -164,6 +177,7 @@ export const validateCreateNote = validateUpdateNote.extend({
     applicationID: z.string({
         invalid_type_error: "AplicationID invalido"
     })
+        .trim()
         .min(1, "AplicationID invalido")
 })
 

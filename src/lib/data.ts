@@ -1,60 +1,5 @@
 import { unstable_noStore as noStore } from "next/cache";
 
-export async function fetchSkillsByID({ skills }: { skills: string[] }) {
-    noStore();
-
-    try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/skill`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ ids: skills })
-        })
-        const { success, data } = await response.json();
-
-        return {
-            success,
-            data
-        }
-    } catch (error) {
-        return {
-            success: false,
-            data: {
-                name: "Error Interno",
-                message: "Ocurrio un error inesperado"
-            }
-        }
-    }
-}
-
-export async function fetchNotes({ applicationID }: { applicationID: string }) {
-    noStore();
-
-    try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/note/${applicationID}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-        const { success, data } = await response.json();
-
-        return {
-            success,
-            data
-        }
-    } catch (error) {
-        return {
-            success: false,
-            data: {
-                name: "Error Interno",
-                message: "Ocurrio un error inesperado"
-            }
-        }
-    }
-}
-
 export async function fetchUser({ token }: { token: string }) {
     noStore();
 
@@ -83,7 +28,7 @@ export async function fetchUser({ token }: { token: string }) {
     }
 }
 
-export async function fetchApplicationsMetrics({token}: {token: string}) {
+export async function fetchApplicationsMetrics({ token }: { token: string }) {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/metric/application`, {
             method: "GET",
@@ -160,7 +105,7 @@ export async function fetchStatusMetrics({ token }: { token: string }) {
     }
 }
 
-export async function fetchModalityMetrics({token}: {token: string}) {
+export async function fetchModalityMetrics({ token }: { token: string }) {
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/metric/modality`, {
             method: "GET",
@@ -216,7 +161,7 @@ export async function fetchSkillsMetrics({ token }: { token: string }) {
 
 export async function fetchTopSkills({ token }: { token: string }) {
     noStore();
-    
+
     try {
         const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/metric/topskills`, {
             method: "GET",

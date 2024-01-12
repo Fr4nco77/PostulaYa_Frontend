@@ -7,23 +7,25 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import Form from "./form-editApplication";
-import { Application } from "@/lib/definitions";
-import { Pencil } from "lucide-react";
-import { HTMLAttributes } from "react";
+import { Skills } from "@/lib/definitions";
 import { cn } from "@/lib/utils";
+import { Plus } from "lucide-react";
+import { HTMLAttributes } from "react";
+import Form from "./form-editSkills";
 
-interface EditApplicationProps extends HTMLAttributes<HTMLButtonElement> {
+interface EditSkillsProps extends HTMLAttributes<HTMLButtonElement> {
   token: string;
-  application: Application;
+  skills: Skills;
+  applicationID: string;
 }
 
-export default function EditApplication({
+export default function EditSkills({
   className,
   token,
-  application,
+  skills,
+  applicationID,
   ...props
-}: EditApplicationProps) {
+}: EditSkillsProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
@@ -36,15 +38,19 @@ export default function EditApplication({
           )}
           {...props}
         >
-          <Pencil />
+          <Plus />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[450px]">
         <DialogHeader>
-          <DialogTitle>Editar Postulacion</DialogTitle>
-          <DialogDescription>¿Que ha cambiado?</DialogDescription>
+          <DialogTitle>Editar Habilidades</DialogTitle>
+          <DialogDescription>¿Algo ha cambiado?</DialogDescription>
         </DialogHeader>
-        <Form token={token} application={application} />
+        <Form
+          token={token}
+          applicationID={applicationID}
+          currentSkills={skills}
+        />
       </DialogContent>
     </Dialog>
   );

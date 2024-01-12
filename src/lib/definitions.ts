@@ -20,10 +20,12 @@ export type ApplicationQuery = {
     token: string;
 }
 
-export type Skills = {
+export type Skill = {
     _id: string;
     name: string;
-}[]
+}
+
+export type Skills = Skill[]
 
 export type Application = {
     _id: string;
@@ -40,6 +42,12 @@ export type Application = {
     notes?: string[];
     created_at: string;
     updated_at: string;
+}
+
+export type Note = {
+    _id: string;
+    title: string;
+    body: string;
 }
 
 export type User = {

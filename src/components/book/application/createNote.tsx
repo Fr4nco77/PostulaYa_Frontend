@@ -1,34 +1,36 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
+import { ButtonSubmit } from "@/components/ui/button-submit";
 import ErrorMessage from "@/components/ui/error-message";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-import { createNote } from "@/lib/actions";
+import { createNote } from "@/lib/actions/note";
 import { Errors } from "@/lib/definitions";
-import { useState } from "react";
+import { cn } from "@/lib/utils";
+import { HTMLAttributes, useCallback, useState } from "react";
+
+interface CreateNoteProps extends HTMLAttributes<HTMLFormElement> {
+  applicationID: string;
+}
 
 export default function CreateNote({
+  className,
   applicationID,
-}: {
-  applicationID: string;
-}) {
+  ...props
+}: CreateNoteProps) {
   const [errors, setErrors] = useState<Errors>({});
-  const [isLoading, setIsLoading] = useState<boolean>(false);
   const { toast } = useToast();
 
-  const handleCreate = async (formData: FormData) => {
+  const handleCreate = useCallback(async (formData: FormData) => {
     const rawFormData = Object.fromEntries(formData.entries());
-    setIsLoading(true);
 
     const { errors, success, data } = await createNote({
       rawFormData,
       applicationID,
     });
     setErrors(errors);
-    setIsLoading(false);
 
     if (!success) {
       return toast({
@@ -38,40 +40,38 @@ export default function CreateNote({
       });
     }
 
-    toast({ description: data.message });
-  };
+    toast({ variant: "warning", description: data.message });
+  }, []);
+
   return (
-    <div className="mt-3 h-1/3 w-full rounded-xl bg-black p-4 shadow-xl">
-      <form
-        action={handleCreate}
-        className="flex h-full w-full flex-col items-center justify-center gap-2 "
-      >
-        <div className="h-1/4 w-full">
-          <Label htmlFor="title" hidden className="text-right">
-            Titulo
-          </Label>
-          <Input id="title" name="title" placeholder="Titulo" />
-          <ErrorMessage errors={errors.title} errorKey="title" />
-        </div>
-        <div className="h-2/4 w-full">
-          <Label htmlFor="body" hidden className="text-right">
-            Nota
-          </Label>
-          <Textarea
-            id="body"
-            name="body"
-            placeholder="Nota"
-            className="resize-none"
-          />
-          <ErrorMessage errors={errors.body} errorKey="body" />
-        </div>
-        <Button
-          type="submit"
-          className="h-1/4 w-full  bg-yellow-400 text-black"
-        >
-          Agregar Nota
-        </Button>
-      </form>
-    </div>
+    <form
+      action={handleCreate}
+      className={cn(
+        "flex flex-col gap-2 ",
+        className,
+      )}
+      {...props}
+    >
+      <div className="h-auto w-full">
+        <Label htmlFor="title" hidden>
+          Titulo
+        </Label>
+        <Input id="title" name="title" placeholder="Recomendaciones de RRHH" />
+        <ErrorMessage errors={errors.title} errorKey="Titulo" />
+      </div>
+      <div className="h-auto w-full">
+        <Label htmlFor="body" hidden>
+          Nota
+        </Label>
+        <Textarea
+          id="body"
+          name="body"
+          placeholder="Nota"
+          className="resize-none"
+        />
+        <ErrorMessage errors={errors.body} errorKey="body" />
+      </div>
+      <ButtonSubmit>Agregar Nota</ButtonSubmit>
+    </form>
   );
 }

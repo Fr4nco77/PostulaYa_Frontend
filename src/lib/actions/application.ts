@@ -1,6 +1,8 @@
+'use server';
+
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { removeEmptyStrings } from "../utils";
-import { validateApplication } from "../schemas";
+import { validateApplication, validateUpdateApplication, validateUpdateSkills } from "../schemas";
 import { RawFormData } from "../definitions";
 
 export const addSkill = async (name: string) => {
@@ -104,4 +106,96 @@ export async function deleteApplication({ token, applicationID }: { token: strin
             }
         }
     }
+}
+
+export async function updateApplication({ rawFormData, token, applicationID }: { rawFormData: RawFormData, token: string, applicationID: string }) {
+    noStore();
+
+    const data = removeEmptyStrings(rawFormData);
+    const dataVerified = validateUpdateApplication.safeParse(data);
+    if (!dataVerified.success) {
+        return {
+            errors: dataVerified.error.flatten().fieldErrors,
+            success: false,
+            data: {
+                name: "Datos Invalidos/Incompletos",
+                message: 'Actualizacion de postulacion fallida',
+            }
+        }
+    }
+
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/application/${applicationID}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ data: dataVerified.data })
+        })
+        const { success, data } = await response.json();
+        revalidatePath(`/app/book/${applicationID}`);
+
+        return {
+            errors: {},
+            success,
+            data
+        }
+    } catch (error) {
+        console.log(error)
+        return {
+            errors: {},
+            success: false,
+            data: {
+                name: "Error Interno",
+                message: 'Actualizacion de postulacion fallida',
+            }
+        }
+    }
+}
+
+export async function updateSkills({ token, applicationID, skills }: { token: string, applicationID: string, skills: string[] }) {
+    noStore();
+    
+    const verifiedSkills = validateUpdateSkills.safeParse({skills});
+    if (!verifiedSkills.success) {
+        return {
+            errors: verifiedSkills.error.flatten().fieldErrors,
+            success: false,
+            data: {
+                name: "Datos Invalidos",
+                message: "Error al actualizar las habilidades",
+            }
+        }
+    }
+
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/application/${applicationID}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ data: verifiedSkills.data })
+        })
+        const { success, data } = await response.json();
+        revalidatePath(`/app/book/${applicationID}`);
+
+        return {
+            errors: {},
+            success,
+            data
+        }
+    } catch (error) {
+        console.log(error);
+        return {
+            errors: {},
+            success: false,
+            data: {
+                name: "Error Interno",
+                message: "Ocurrio un error inesperado"
+            }
+        }
+    }
+
 }
