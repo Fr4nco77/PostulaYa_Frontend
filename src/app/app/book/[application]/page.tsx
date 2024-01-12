@@ -66,10 +66,7 @@ export default async function Application({
               token={token}
               application={data.response.application}
             />
-            <DeleteApplication
-              token={token}
-              applicationID={_id}
-            />
+            <DeleteApplication token={token} applicationID={_id} />
           </div>
         </header>
         <main className="flex w-full flex-col gap-2 rounded-lg bg-slate-100 p-3 shadow-xl">
@@ -106,16 +103,13 @@ export default async function Application({
           <span>
             Plataforma usada: <strong>{platform}</strong>
           </span>
-          <span>
-            Más informacion:{" "}
-            <Link
-              href={url}
-              target="_blank"
-              className="text-indigo-700 underline hover:text-indigo-500"
-            >
-              {url}
-            </Link>
-          </span>
+          <Link
+            href={url}
+            target="_blank"
+            className="text-indigo-700 hover:text-indigo-500"
+          >
+            Mas Informacion...
+          </Link>
           <div className="flex flex-wrap items-center gap-2">
             <span>
               Creacion: <strong>{created_at.split("T")[0]}</strong>
