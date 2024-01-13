@@ -120,7 +120,9 @@ export default function Form({
         ))}
       </div>
       <ErrorMessage errors={errors?.skills} errorKey="skill" />
-      <ButtonSubmit>Guardar cambios</ButtonSubmit>
+      <ButtonSubmit disabled={currentSkills.length === skills.length}>
+        Guardar cambios
+      </ButtonSubmit>
     </form>
   );
 }
