@@ -5,6 +5,8 @@ import { Skeleton } from "../ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { cookies } from "next/headers";
 import { cn } from "@/lib/utils";
+import ButtonUser from "./button_user";
+import ButtonFeedback from "./button_feedback";
 
 interface SidebarProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -14,6 +16,7 @@ export default function Sidebar({
   ...props
 }: SidebarProps) {
   const userImage = cookies().get("_image")?.value!;
+  const token = cookies().get("authorization")?.value!;
 
   return (
     <nav
@@ -41,6 +44,8 @@ export default function Sidebar({
       </div>
       <ul className="flex px-3 max-lg:items-center max-lg:justify-center lg:mt-4 lg:flex-1 lg:flex-col">
         {children}
+        <ButtonUser token={token}/>
+        <ButtonFeedback token={token}/>
         <Exit className="ml-6 lg:ml-0 lg:mt-6" />
       </ul>
       <div className="hidden border-t border-[rgb(8,11,28)] p-3 pl-4 lg:flex">

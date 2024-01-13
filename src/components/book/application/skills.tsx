@@ -1,5 +1,5 @@
 import { Badge } from "@/components/ui/badge";
-import { fetchUser } from "@/lib/data";
+import { fetchUser } from "@/lib/data/user";
 import { Skill, Skills } from "@/lib/definitions";
 import { cn } from "@/lib/utils";
 import { HTMLAttributes } from "react";
