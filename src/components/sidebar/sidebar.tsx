@@ -30,6 +30,7 @@ export default function Sidebar({
         <Image
           src="/Logo_simple.svg"
           alt="PostulaYa logo"
+          priority
           width={40}
           height={40}
           className="sm:hidden lg:block"
@@ -37,6 +38,7 @@ export default function Sidebar({
         <Image
           src="/Logo_borderBlack.svg"
           alt="PostulaYa logo"
+          priority
           width={130}
           height={40}
           className="hidden sm:max-lg:block"
