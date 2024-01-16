@@ -2,12 +2,12 @@
 
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { RawFormData } from "../definitions";
-import { validateCreateNote, validateUpdateNote } from "../schemas";
+import { validateNote } from "../schemas/note";
 
-export async function createNote({ rawFormData, applicationID }: { rawFormData: RawFormData, applicationID: string }) {
+export async function createNote({ token, rawFormData }: { token: string, rawFormData: RawFormData }) {
     noStore();
 
-    const dataVerified = validateCreateNote.safeParse({ ...rawFormData, applicationID });
+    const dataVerified = validateNote.safeParse(rawFormData);
     if (!dataVerified.success) {
         return {
             errors: dataVerified.error.flatten().fieldErrors,
@@ -24,11 +24,12 @@ export async function createNote({ rawFormData, applicationID }: { rawFormData: 
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify(dataVerified.data)
         })
         const { success, data } = await response.json();
-        revalidatePath(`/app/book/${applicationID}`);
+        revalidatePath("app/note");
 
         return {
             errors: {},
@@ -47,10 +48,10 @@ export async function createNote({ rawFormData, applicationID }: { rawFormData: 
     }
 }
 
-export async function updateNote({ _id, rawFormData }: { _id: string, rawFormData: RawFormData }) {
+export async function updateNote({ _id, token, rawFormData }: { _id: string, token: string, rawFormData: RawFormData }) {
     noStore();
 
-    const dataVerified = validateUpdateNote.safeParse(rawFormData);
+    const dataVerified = validateNote.safeParse(rawFormData);
     if (!dataVerified.success) {
         return {
             errors: dataVerified.error.flatten().fieldErrors,
@@ -67,11 +68,12 @@ export async function updateNote({ _id, rawFormData }: { _id: string, rawFormDat
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             },
             body: JSON.stringify(dataVerified.data)
         })
         const { success, data } = await response.json();
-        revalidatePath(`/app/book/${_id}`);
+        revalidatePath("app/note");
 
         return {
             errors: {},
@@ -90,7 +92,36 @@ export async function updateNote({ _id, rawFormData }: { _id: string, rawFormDat
     }
 }
 
-export async function deleteNote({ _id }: { _id: string }) {
+export async function addFavorite({ _id, token, favorite }: { _id: string, token: string, favorite: boolean }) {
+    noStore();
+
+    try {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/note/${_id}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
+            },
+            body: JSON.stringify({ favorite })
+        })
+        const { success } = await response.json();
+        revalidatePath("app/note");
+
+        return {
+            success
+        }
+    } catch (error) {
+        return {
+            success: false,
+            data: {
+                name: "Error Interno",
+                message: "Ocurrio un error inesperado"
+            }
+        }
+    }
+}
+
+export async function deleteNote({ _id, token }: { _id: string, token: string }) {
     noStore();
 
     try {
@@ -98,16 +129,11 @@ export async function deleteNote({ _id }: { _id: string }) {
             method: "DELETE",
             headers: {
                 "Content-Type": "application/json",
+                "Authorization": `Bearer ${token}`
             }
         })
         const { success, data } = await response.json();
-        if (!success) {
-            return {
-                success: success,
-                data: data
-            }
-        }
-        revalidatePath(`/app/book/${_id}`)
+        revalidatePath("/app/note")
 
         return {
             success,

@@ -11,25 +11,22 @@ import { Errors } from "@/lib/definitions";
 import { cn } from "@/lib/utils";
 import { HTMLAttributes, useCallback, useState } from "react";
 
-interface CreateNoteProps extends HTMLAttributes<HTMLFormElement> {
-  applicationID: string;
+interface FormCreateNoteProps extends HTMLAttributes<HTMLFormElement> {
+  token: string;
 }
 
-export default function CreateNote({
+export default function FormCreateNote({
   className,
-  applicationID,
+  token,
   ...props
-}: CreateNoteProps) {
+}: FormCreateNoteProps) {
   const [errors, setErrors] = useState<Errors>({});
   const { toast } = useToast();
 
   const handleCreate = useCallback(async (formData: FormData) => {
     const rawFormData = Object.fromEntries(formData.entries());
 
-    const { errors, success, data } = await createNote({
-      rawFormData,
-      applicationID,
-    });
+    const { errors, success, data } = await createNote({ token, rawFormData });
     setErrors(errors);
 
     if (!success) {
@@ -46,10 +43,7 @@ export default function CreateNote({
   return (
     <form
       action={handleCreate}
-      className={cn(
-        "flex flex-col gap-2 ",
-        className,
-      )}
+      className={cn("flex flex-col gap-2 ", className)}
       {...props}
     >
       <div className="h-auto w-full">

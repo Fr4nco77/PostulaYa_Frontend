@@ -5,21 +5,23 @@ import { useToast } from "@/components/ui/use-toast";
 import { deleteNote } from "@/lib/actions/note";
 import { cn } from "@/lib/utils";
 import { Trash2 } from "lucide-react";
-import { HTMLAttributes } from "react";
+import { HTMLAttributes, useCallback } from "react";
 
 interface DeleteNoteProps extends HTMLAttributes<HTMLButtonElement> {
   _id: string;
+  token: string;
 }
 
 export default function DeleteNote({
   className,
   _id,
+  token,
   ...props
 }: DeleteNoteProps) {
   const { toast } = useToast();
 
-  const handleDelete = async () => {
-    const { success, data } = await deleteNote({ _id });
+  const handleDelete = useCallback(async () => {
+    const { success, data } = await deleteNote({ _id, token });
 
     if (!success) {
       return toast({
@@ -30,7 +32,8 @@ export default function DeleteNote({
     }
 
     toast({ variant: "warning", description: data.message });
-  };
+  }, []);
+
   return (
     <Button
       variant="ghost"

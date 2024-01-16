@@ -48,6 +48,7 @@ export type Note = {
     _id: string;
     title: string;
     body: string;
+    favorite?: boolean;
 }
 
 export type User = {

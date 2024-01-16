@@ -1,7 +1,5 @@
 import { DeleteApplication } from "@/components/book/application/button-deleteApplication";
 import EditApplication from "@/components/book/application/button-editApplication";
-import CreateNote from "@/components/book/application/createNote";
-import Notes from "@/components/book/application/notes";
 import Skills from "@/components/book/application/skills";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
@@ -126,16 +124,9 @@ export default async function Application({
           applicationID={_id}
         />
       </div>
-      <div className="flex w-full flex-col gap-3 md:max-w-sm md:flex-col-reverse">
-        <CreateNote
-          applicationID={_id}
-          className="w-full rounded-lg bg-slate-100 p-3 shadow-xl"
-        />
-        <Notes
-          applicationID={_id}
-          className="max-h-64 w-full rounded-lg bg-slate-100 shadow-xl"
-        />
-      </div>
+      {/* <div className="flex w-full flex-col gap-3 md:max-w-sm md:flex-col-reverse">
+        
+      </div> */}
     </div>
   );
 }

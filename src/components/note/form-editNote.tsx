@@ -10,14 +10,22 @@ import { updateNote } from "@/lib/actions/note";
 import { Errors, Note } from "@/lib/definitions";
 import { useState } from "react";
 
-export default function Form({ _id, title, body }: Note) {
+interface FormProps extends Note {
+  token: string;
+}
+
+export default function Form({ _id, token, title, body }: FormProps) {
   const { toast } = useToast();
   const [errors, setErrors] = useState<Errors>({});
 
   const handleEdit = async (formData: FormData) => {
     const rawFormData = Object.fromEntries(formData.entries());
 
-    const { errors, success, data } = await updateNote({ _id, rawFormData });
+    const { errors, success, data } = await updateNote({
+      _id,
+      token,
+      rawFormData,
+    });
     setErrors(errors);
 
     if (!success) {
@@ -30,32 +38,23 @@ export default function Form({ _id, title, body }: Note) {
 
     toast({ variant: "warning", description: data.message });
   };
+
   return (
-    <form action={handleEdit} className="grid gap-4 py-4">
-      <div className="grid grid-cols-5 items-center gap-4">
-        <Label htmlFor="title" className="text-right">
+    <form action={handleEdit} className="flex flex-col gap-2 ">
+      <div className="h-auto w-full">
+        <Label htmlFor="title" hidden>
           Titulo
         </Label>
-        <Input
-          id="title"
-          name="title"
-          defaultValue={title}
-          className="col-span-4"
-        />
+        <Input id="title" name="title" defaultValue={title} />
+        <ErrorMessage errors={errors.title} errorKey="title" />
       </div>
-      <ErrorMessage errors={errors.title} errorKey="title" />
-      <div className="grid grid-cols-5 items-center gap-4">
-        <Label htmlFor="body" className="text-right">
+      <div className="h-auto w-full">
+        <Label htmlFor="body" hidden>
           Nota
         </Label>
-        <Textarea
-          id="body"
-          name="body"
-          defaultValue={body}
-          className="col-span-4"
-        />
+        <Textarea id="body" name="body" defaultValue={body} />
+        <ErrorMessage errors={errors.body} errorKey="body" />
       </div>
-      <ErrorMessage errors={errors.body} errorKey="body" />
       <ButtonSubmit>Guardar Cambios</ButtonSubmit>
     </form>
   );

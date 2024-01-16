@@ -78,33 +78,6 @@ export async function fetchApplicationsPages({ query, token }: ApplicationQuery)
     }
 }
 
-export async function fetchNotes({ applicationID }: { applicationID: string }) {
-    noStore();
-
-    try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/note/${applicationID}`, {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-            },
-        })
-        const { success, data } = await response.json();
-
-        return {
-            success,
-            data
-        }
-    } catch (error) {
-        return {
-            success: false,
-            data: {
-                name: "Error Interno",
-                message: "Ocurrio un error inesperado"
-            }
-        }
-    }
-}
-
 export async function fetchSkillsByID({ skills }: { skills: string[] }) {
     noStore();
 

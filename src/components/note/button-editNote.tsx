@@ -6,27 +6,31 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Eraser } from "lucide-react";
+import { Pencil } from "lucide-react";
 import Form from "./form-editNote";
 import { Note } from "@/lib/definitions";
 
-export function EditNote({ _id, title, body }: Note) {
+interface EditProps extends Note {
+  token: string;
+}
+
+export function EditNote({ _id, token, title, body, favorite }: EditProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
         <Button
           variant="ghost"
           size="icon"
-          className="rounded-full hover:bg-slate-200 h-7 w-7 p-1"
+          className="h-7 w-7 rounded-full p-1 hover:bg-slate-200"
         >
-          <Eraser />
+          <Pencil />
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-[425px]">
         <DialogHeader>
           <DialogTitle>Editar Nota</DialogTitle>
         </DialogHeader>
-        <Form _id={_id} title={title} body={body} />
+        <Form _id={_id} token={token} title={title} body={body} favorite={favorite}/>
       </DialogContent>
     </Dialog>
   );
