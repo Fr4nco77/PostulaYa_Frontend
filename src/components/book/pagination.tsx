@@ -19,7 +19,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   };
 
   return (
-    <div className="inline-flex rounded-2xl bg-slate-100 p-3 shadow-xl">
+    <footer className="inline-flex rounded-2xl bg-slate-100 p-3 shadow-xl">
       <PaginationArrow
         direction="left"
         href={createPageURL(currentPage - 1)}
@@ -52,7 +52,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
         href={createPageURL(currentPage + 1)}
         isDisabled={currentPage >= totalPages}
       />
-    </div>
+    </footer>
   );
 }
 
