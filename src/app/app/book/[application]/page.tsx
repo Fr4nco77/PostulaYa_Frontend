@@ -1,6 +1,7 @@
 import { DeleteApplication } from "@/components/book/application/button-deleteApplication";
 import EditApplication from "@/components/book/application/button-editApplication";
 import Skills from "@/components/book/application/skills";
+import Interviews from "@/components/book/application/interview/interview";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -47,7 +48,7 @@ export default async function Application({
   } = data.response.application;
 
   return (
-    <div className="flex w-full flex-col items-center justify-center gap-5 py-5 md:flex-row">
+    <div className="flex w-full flex-col items-start justify-center gap-5 md:flex-row">
       <div className="flex w-full flex-col items-center gap-3 md:max-w-sm lg:max-w-md">
         <header className="flex w-full items-center justify-between">
           <Link
@@ -124,9 +125,13 @@ export default async function Application({
           applicationID={_id}
         />
       </div>
-      {/* <div className="flex w-full flex-col gap-3 md:max-w-sm md:flex-col-reverse">
-        
-      </div> */}
+      <Interviews
+        token={token}
+        application={_id}
+        position={position}
+        company={company_name}
+        className="flex w-full grow flex-col md:max-h-fit md:max-w-sm md:mt-14"
+      />
     </div>
   );
 }

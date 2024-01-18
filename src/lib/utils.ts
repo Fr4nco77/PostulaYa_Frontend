@@ -85,3 +85,33 @@ export const generatePagination = (currentPage: number, totalPages: number) => {
   ];
 };
 
+export const formatedInterviewData = ({ data }: { data: { [key: string]: string } }) => {
+  const questionAnswers = Object.entries(data)
+    .filter(([key]) => key.startsWith("question-") || key.startsWith("answer-"))
+    .reduce((acc: any, [key, value]) => {
+      const [, id] = key.split("-");
+      const isQuestion = key.startsWith("question-");
+
+      if (!acc[id]) {
+        acc[id] = { id, question: "", answer: "" };
+      }
+
+      if (isQuestion) {
+        acc[id].question = value;
+      } else {
+        acc[id].answer = value;
+      }
+
+      return acc;
+    }, {});
+
+  // Convertir el objeto en arrays de preguntas y respuestas
+  const questions = Object.values(questionAnswers).map(({ question }: any) => question);
+  const answers = Object.values(questionAnswers).map(({ answer }: any) => answer);
+
+  return {
+    ...data,
+    questions,
+    answers
+  }
+}
