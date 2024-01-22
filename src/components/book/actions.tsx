@@ -83,8 +83,8 @@ export default function Actions({
             ¿Quieres eliminar esta postulacion?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            Ten en cuenta que cada postulacion es imporatante para medir y
-            fortalecer tu progreso.
+            "Ten en cuenta que cada postulación es importante para medir y
+            fortalecer tu progreso."
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

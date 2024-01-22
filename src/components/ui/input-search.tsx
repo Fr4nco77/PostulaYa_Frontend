@@ -2,7 +2,7 @@
 
 import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
-import { Input } from "../ui/input";
+import { Input } from "./input";
 import { HTMLAttributes } from "react";
 
 interface SearchinputProps extends HTMLAttributes<HTMLInputElement> {

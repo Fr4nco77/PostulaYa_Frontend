@@ -1,6 +1,6 @@
 "use client";
 
-import { HTMLAttributes, useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState } from "react";
 import { Loader2, Plus, X } from "lucide-react";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -18,13 +18,8 @@ import { useToast } from "../ui/use-toast";
 import { Errors, Skills } from "@/lib/definitions";
 import ErrorMessage from "../ui/error-message";
 import { ButtonSubmit } from "../ui/button-submit";
-import { cn } from "@/lib/utils";
 
-interface FormProps extends HTMLAttributes<HTMLFormElement> {
-  token: string;
-}
-
-export default function Form({ className, token, ...props }: FormProps) {
+export default function Form({ token }: { token: string }) {
   const { toast } = useToast();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -97,11 +92,7 @@ export default function Form({ className, token, ...props }: FormProps) {
   );
 
   return (
-    <form
-      action={handleSubmit}
-      className={cn("grid gap-4 py-4", className)}
-      {...props}
-    >
+    <form action={handleSubmit} className="grid gap-4 py-4">
       <div className="grid grid-cols-4 items-center gap-4">
         <Label htmlFor="position" className="text-right">
           Posicion
@@ -114,23 +105,24 @@ export default function Form({ className, token, ...props }: FormProps) {
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="company_name" className="text-right">
+        <Label htmlFor="company" className="text-right">
           Empresa
         </Label>
         <Input
-          id="company_name"
-          name="company_name"
+          id="company"
+          name="company"
           placeholder="Dream Company S.A"
           className="col-span-3"
         />
       </div>
+      <input type="hidden" name="category" value="IT" />
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="company_ubication" className="text-right">
+        <Label htmlFor="location" className="text-right">
           Ubicacion
         </Label>
         <Input
-          id="company_ubication"
-          name="company_ubication"
+          id="location"
+          name="location"
           placeholder="Francia"
           className="col-span-3"
         />
@@ -215,7 +207,12 @@ export default function Form({ className, token, ...props }: FormProps) {
           Habilidades necesarias
         </Label>
         <div className="col-span-3 flex gap-2">
-          <Input id="skill" ref={inputRef} placeholder="NextJs" />
+          <Input
+            id="skill"
+            ref={inputRef}
+            placeholder="NextJs"
+            aria-describedby="skill-error"
+          />
           <Button
             size={"icon"}
             type="button"

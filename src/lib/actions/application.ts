@@ -27,8 +27,8 @@ export const addSkill = async (name: string) => {
     } catch (error) {
         return {
             error: {
-                title: "Error Interno",
-                name: "Error al agregar la habilidad"
+                title: "Error interno.",
+                name: "Error al agregar la habilidad."
             }
         }
     }
@@ -44,8 +44,8 @@ export async function createApplication({ rawFormData, skills, token }: { rawFor
             errors: dataVerified.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos invalidos/incompletos",
-                message: 'Creacion de applicacion fallida',
+                name: "Datos inválidos/incompletos.",
+                message: "Creación de aplicación fallida.",
             }
         }
     }
@@ -72,8 +72,8 @@ export async function createApplication({ rawFormData, skills, token }: { rawFor
             errors: {},
             success: false,
             data: {
-                name: "Error interno",
-                message: 'Creacion de applicacion fallido',
+                name: "Error interno.",
+                message: "Creación de aplicación fallida.",
             }
         }
     }
@@ -101,8 +101,8 @@ export async function deleteApplication({ token, applicationID }: { token: strin
         return {
             success: false,
             data: {
-                name: "Error Interno",
-                message: "Ocurrio un error al eliminar la postulacion"
+                name: "Error interno",
+                message: "Ocurrio un error al eliminar la postulación."
             }
         }
     }
@@ -156,8 +156,8 @@ export async function updateApplication({ rawFormData, token, applicationID }: {
 
 export async function updateSkills({ token, applicationID, skills }: { token: string, applicationID: string, skills: string[] }) {
     noStore();
-    
-    const verifiedSkills = validateUpdateSkills.safeParse({skills});
+
+    const verifiedSkills = validateUpdateSkills.safeParse({ skills });
     if (!verifiedSkills.success) {
         return {
             errors: verifiedSkills.error.flatten().fieldErrors,

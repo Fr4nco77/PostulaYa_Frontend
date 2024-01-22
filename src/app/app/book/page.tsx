@@ -1,4 +1,4 @@
-import Pagination from "@/components/book/pagination";
+import Pagination from "@/components/ui/pagination";
 import Searchbar from "@/components/book/searchbar";
 import Table from "@/components/book/table";
 import { fetchApplicationsPages } from "@/lib/data/application";
@@ -18,10 +18,7 @@ export default async function Book({
 
   return (
     <main className="flex h-full w-full flex-col items-center justify-center gap-5">
-      <Searchbar
-        token={token}
-        className="h-auto w-full max-w-2xl rounded-2xl bg-slate-100 p-3 shadow-xl"
-      />
+      <Searchbar token={token} />
       <Suspense key={query} fallback={<TableSkeleton />}>
         <Table query={query} token={token} />
       </Suspense>

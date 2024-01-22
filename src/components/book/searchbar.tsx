@@ -1,7 +1,6 @@
-import { cn } from "@/lib/utils";
 import React from "react";
-import Search from "./input-search";
-import Filter from "./select-filter";
+import Search from "../ui/input-search";
+import Filter from "../ui/select-filter";
 import {
   modalitysNames,
   modalitysValues,
@@ -15,13 +14,9 @@ import {
 } from "./data";
 import CreateApplication from "./button-create";
 
-interface SearchProps extends React.HTMLAttributes<HTMLDivElement> {
-  token: string;
-}
-
-export default function Searchbar({ className, token }: SearchProps) {
+export default function Searchbar({ token }: {token: string;}) {
   return (
-    <div className={cn(className)}>
+    <div className="h-auto w-full max-w-2xl rounded-2xl bg-slate-100 p-3 shadow-xl">
       <div className="flex h-full w-full flex-col gap-5">
         <Search placeholder="¿Que estas buscando?" />
         <div className="flex flex-wrap gap-2">

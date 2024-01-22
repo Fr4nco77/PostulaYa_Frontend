@@ -1,6 +1,6 @@
 import { cn } from "@/lib/utils";
-import Search from "../book/input-search";
-import Filter from "../book/select-filter";
+import Search from "../ui/input-search";
+import Filter from "../ui/select-filter";
 import { HTMLAttributes } from "react";
 import { limit } from "../book/data";
 

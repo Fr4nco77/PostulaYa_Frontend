@@ -21,9 +21,16 @@ export default async function ApplicationTable({
 
   if (!success) {
     return (
-      <div className="flex flex-col items-center justify-center">
-        <h1>{data.name}</h1>
-        <p>{data.message}</p>
+      <div className="flex w-full max-w-7xl grow flex-col items-center justify-center rounded-2xl bg-slate-100 p-3 shadow-xl">
+        <h1 className="text-2xl font-bold">{data.name}</h1>
+        <span>{data.message}</span>
+      </div>
+    );
+  } else if (!data.response.applications.length) {
+    return (
+      <div className="flex w-full max-w-7xl grow flex-col items-center justify-center rounded-2xl bg-slate-100 p-3 shadow-xl">
+        <h1 className="text-2xl font-bold">No se encontraron coincidencias</h1>
+        <span>¡Anímate a aplicar y forma parte de nuestro equipo!</span>
       </div>
     );
   }
@@ -43,10 +50,10 @@ export default async function ApplicationTable({
         {applications?.map((row: any) => {
           return (
             <TableRow key={row._id}>
-              <TableCell>{row.created_at.split("T")[0]}</TableCell>
+              <TableCell >{row.created_at.split("T")[0]}</TableCell>
               <TableCell>{row.position}</TableCell>
-              <TableCell>{row.company_name}</TableCell>
-              <TableCell>{row.company_ubication}</TableCell>
+              <TableCell>{row.company}</TableCell>
+              <TableCell>{row.location}</TableCell>
               <TableCell>{row.recluter}</TableCell>
               <TableCell>
                 <Badge

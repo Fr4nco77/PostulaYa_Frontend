@@ -10,4 +10,4 @@ export const orderValues = ["asc", "desc"];
 export const limit = ["6", "10", "15", "20"];
 
 //Data para la tabla
-export const columns = ["Fecha", "Posicion", "Empresa", "Ubicacion", "Reclutador", "Modalidad", "Tipo", "Estado"];
+export const columns = ["Fecha", "Posicion", "Empresa", "Ubicacion", "Reclutador", "Modalidad", "Tipo", "Estado", "Acciones"];

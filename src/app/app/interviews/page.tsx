@@ -1,4 +1,4 @@
-import Pagination from "@/components/book/pagination";
+import Pagination from "@/components/ui/pagination";
 import Interviews from "@/components/interview/interviews";
 import SearchBar from "@/components/interview/searchbar";
 import { fetchInterviewsPages } from "@/lib/data/interview";

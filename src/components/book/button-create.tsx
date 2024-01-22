@@ -17,11 +17,11 @@ export default function CreateApplication({ token }: { token: string }) {
           Agregar
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[450px]">
+      <DialogContent className="max-h-screen overflow-y-auto sm:max-w-[450px]">
         <DialogHeader>
-          <DialogTitle>Agregar Postulacion</DialogTitle>
+          <DialogTitle>Agregar postulación</DialogTitle>
           <DialogDescription>
-            ¿Que puedes contarnos acerca de ese trebajo?
+            ¿Qué puedes contarnos acerca de ese trabajo?
           </DialogDescription>
         </DialogHeader>
         <Form token={token} />

@@ -3,7 +3,7 @@ import { z } from "zod";
 export const validateApplication = z.object({
     position:
         z.string({
-            invalid_type_error: "Posición Invalida"
+            invalid_type_error: "Posición inválida."
         })
             .trim()
             .min(3, 'La posición debe tener al menos 3 caracteres')
@@ -15,40 +15,46 @@ export const validateApplication = z.object({
     recluter:
         z.optional(
             z.string({
-                invalid_type_error: "Reclutador Invalido"
+                invalid_type_error: "Reclutador inválido."
             })
                 .trim()
-                .min(1, 'Reclutador Invalido')),
-    company_name:
+                .min(1, 'Reclutador inválido.')),
+    company:
         z.string({
-            invalid_type_error: "Empresa Invalida"
+            invalid_type_error: "Empresa inválida."
         })
             .trim()
-            .min(1, 'Empresa Invalida'),
-    company_ubication:
+            .min(1, "Empresa inválida."),
+    category:
         z.string({
-            invalid_type_error: "Ubicacion Invalida"
+            invalid_type_error: "Categoria inválida."
         })
             .trim()
-            .min(1, "Ubicacion Invalida"),
+            .min(1, "Categoria inválida."),
+    location:
+        z.string({
+            invalid_type_error: "Ubicación inválida."
+        })
+            .trim()
+            .min(1, "Ubicación inválida."),
     platform:
         z.enum(["Linkedin", "Indeed", "Glassdoor", "Get on Board", "Computrabajo", "Otra"]),
     url:
         z.string({
-            invalid_type_error: "Url Invalido"
+            invalid_type_error: "Url inválido."
         })
             .trim()
-            .url("Url Invalido")
+            .url("Url inválido")
     ,
     skills:
         z.array(
             z.string({
-                invalid_type_error: 'Habilidad/es Invalida'
+                invalid_type_error: 'Habilidad/es inválida/s.'
             })
                 .trim()
-                .min(1, 'Habilidades Invalidas')
+                .min(1, 'Habilidad/es inválida/s.')
         )
-            .min(3, "Debes colocar un minimo de tres habilidades"),
+            .min(3, "Debes colocar un mínimo de tres habilidades."),
 })
 
 export const validateUpdateApplication = validateApplication.extend({
