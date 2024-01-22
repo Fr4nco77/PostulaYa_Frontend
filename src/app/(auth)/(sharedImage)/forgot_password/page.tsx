@@ -35,7 +35,7 @@ export default function ForgotPassword() {
           contraseña.
         </p>
       </div>
-      <Form className="my-6 w-full" />
+      <Form />
     </div>
   );
 }

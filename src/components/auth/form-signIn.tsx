@@ -15,9 +15,7 @@ import ErrorMessage from "../ui/error-message";
 import Cookies from "js-cookie";
 import { ButtonSubmit } from "../ui/button-submit";
 
-interface FormProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export default function Form({ className, ...props }: FormProps) {
+export default function Form() {
   const router = useRouter();
   const { toast } = useToast();
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -43,70 +41,62 @@ export default function Form({ className, ...props }: FormProps) {
 
     //En caso de exito guardo la informacion provista en cookies
     const config = configCookies();
-    const { token, name, email, image } = data.response;
+    const { token, image } = data.response;
     Cookies.set("authorization", token, config);
-    Cookies.set("_username", name, config);
-    Cookies.set("_email", email, config);
     Cookies.set("_image", image, config);
     setTimeout(() => router.push("/app"), 1000);
   }, []);
 
   return (
-    <div className={className} {...props}>
-      <form action={handleSubmit}>
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email" className={errors?.email && "text-red-500"}>
-              Email
-            </Label>
-            <Input
-              id="email"
-              type="email"
-              name="email"
-              placeholder="john@example.dev"
-              aria-describedby="email-error"
-              className={errors?.email && "border-red-500"}
-            />
-            <ErrorMessage errors={errors?.email} errorKey="email" />
-          </div>
-          <div className="grid gap-2">
-            <Label
-              htmlFor="password"
-              className={errors?.password && "text-red-500"}
-            >
-              Contraseña
-            </Label>
-            <div className="flex w-full items-center space-x-2">
-              <Input
-                id="password"
-                name="password"
-                placeholder="••••••••••••"
-                aria-describedby="password-error"
-                type={showPassword ? "text" : "password"}
-                className={errors?.password && "border-red-500"}
-              />
-              <Button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                size="icon"
-                variant="outline"
-                className="border-slate-600"
-              >
-                {showPassword ? <Eye /> : <EyeOff />}
-              </Button>
-            </div>
-            <ErrorMessage errors={errors?.password} errorKey="password" />
-          </div>
-          <div className="flex items-end justify-end">
-            <Link href="/forgot_password">
-              <strong className="text-sm underline">
-                Olvidé mi contraseña
-              </strong>
-            </Link>
-          </div>
-          <ButtonSubmit>Ingresar</ButtonSubmit>
+    <form className="my-5 grid w-full gap-4" action={handleSubmit}>
+      <div className="grid gap-2">
+        <Label htmlFor="email" className={errors?.email && "text-red-500"}>
+          Email
+        </Label>
+        <Input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="john@example.dev"
+          aria-describedby="email-error"
+          className={errors?.email && "border-red-500"}
+        />
+        <ErrorMessage errors={errors?.email} errorKey="email" />
+      </div>
+      <div className="grid gap-2">
+        <Label
+          htmlFor="password"
+          className={errors?.password && "text-red-500"}
+        >
+          Contraseña
+        </Label>
+        <div className="flex w-full items-center space-x-2">
+          <Input
+            id="password"
+            name="password"
+            placeholder="••••••••••••"
+            aria-describedby="password-error"
+            type={showPassword ? "text" : "password"}
+            className={errors?.password && "border-red-500"}
+          />
+          <Button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            size="icon"
+            variant="outline"
+            className="border-slate-600"
+          >
+            {showPassword ? <Eye /> : <EyeOff />}
+          </Button>
         </div>
-      </form>
-    </div>
+        <ErrorMessage errors={errors?.password} errorKey="password" />
+      </div>
+      <div className="flex items-end justify-end">
+        <Link href="/forgot_password">
+          <strong className="text-sm underline">Olvidé mi contraseña</strong>
+        </Link>
+      </div>
+      <ButtonSubmit>Ingresar</ButtonSubmit>
+    </form>
   );
 }

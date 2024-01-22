@@ -2,7 +2,7 @@
 
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { removeEmptyStrings } from "../utils";
-import { validateApplication, validateUpdateApplication, validateUpdateSkills } from "../schemas";
+import { validateApplication, validateUpdateApplication, validateUpdateSkills } from "@/lib/schemas/application";
 import { RawFormData } from "../definitions";
 
 export const addSkill = async (name: string) => {

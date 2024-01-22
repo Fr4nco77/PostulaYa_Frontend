@@ -28,7 +28,7 @@ export default function SingIn() {
       </header>
       <GoogleButton className="my-5 w-full" />
       <Separator />
-      <Form className="my-5 w-full" />
+      <Form />
       <div className="w-full">
         <span>
           ¿Aún no tienes una cuenta?{" "}

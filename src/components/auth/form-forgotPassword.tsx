@@ -9,9 +9,7 @@ import ErrorMessage from "../ui/error-message";
 import { sendResetEmail } from "@/lib/actions/user";
 import { ButtonSubmit } from "../ui/button-submit";
 
-interface FormProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export default function Form({ className, ...props }: FormProps) {
+export default function Form() {
   const { toast } = useToast();
   const [errors, setErrors] = useState<Errors>({});
 
@@ -33,27 +31,23 @@ export default function Form({ className, ...props }: FormProps) {
     }
     toast({ variant: "warning", description: data.message });
   }, []);
-  
+
   return (
-    <div className={className} {...props}>
-      <form action={handleSubmit}>
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="email" className={errors?.email && "text-red-500"}>
-              Email
-            </Label>
-            <Input
-              id="email"
-              name="email"
-              placeholder="john@example.dev"
-              aria-describedby="email-error"
-              className={errors?.email && "border-red-500"}
-            />
-          </div>
-          <ErrorMessage errors={errors?.email} errorKey="email" />
-          <ButtonSubmit>Enviar</ButtonSubmit>
-        </div>
-      </form>
-    </div>
+    <form className="my-6 grid w-full gap-4" action={handleSubmit}>
+      <div className="grid gap-2">
+        <Label htmlFor="email" className={errors?.email && "text-red-500"}>
+          Email
+        </Label>
+        <Input
+          id="email"
+          name="email"
+          placeholder="john@example.dev"
+          aria-describedby="email-error"
+          className={errors?.email && "border-red-500"}
+        />
+      </div>
+      <ErrorMessage errors={errors?.email} errorKey="email" />
+      <ButtonSubmit>Enviar</ButtonSubmit>
+    </form>
   );
 }

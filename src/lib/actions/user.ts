@@ -2,7 +2,7 @@
 
 import { unstable_noStore as noStore, revalidatePath } from "next/cache";
 import { FormValue, RawFormData, User } from "../definitions";
-import { validateCredentials, validateEmail, validateFeedback, validateRegister, validateRestorePassword, validateUpdateUser } from "../schemas";
+import { validateEmail, validateCredentials, validateRegister, validateRestorePassword, validateUpdateUser, validateFeedback } from "@/lib/schemas/user";
 
 export async function createUser(credentials: RawFormData) {
     noStore();
@@ -16,8 +16,8 @@ export async function createUser(credentials: RawFormData) {
             errors: validatedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos Invalidos",
-                message: 'Registro Fallido'
+                name: "Datos inválidos.",
+                message: 'Registro fallido.'
             },
         }
     }
@@ -43,8 +43,8 @@ export async function createUser(credentials: RawFormData) {
             errors: {},
             success: false,
             data: {
-                name: "Error Interno",
-                message: "Registro Fallido",
+                name: "Error interno.",
+                message: "Registro fallido.",
             }
         }
     }
@@ -62,8 +62,8 @@ export async function loginUser(credentials: RawFormData) {
             errors: verifiedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos Invalidos",
-                message: 'Inicio de sesion fallido',
+                name: "Datos inválidos",
+                message: 'Inicio de sesión fallido',
             }
         }
     }
@@ -89,8 +89,8 @@ export async function loginUser(credentials: RawFormData) {
             errors: {},
             success: false,
             data: {
-                name: "Error Interno",
-                message: "Inicio de sesion fallido",
+                name: "Error interno",
+                message: "Inicio de sesión fallido",
             }
         }
     }
@@ -108,8 +108,8 @@ export async function sendResetEmail(email: FormValue) {
             errors: verifiedField.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos Invalidos",
-                message: 'Envio de email fallido',
+                name: "Datos inválidos.",
+                message: 'Envio de email fallido.',
             }
         }
     }
@@ -135,8 +135,8 @@ export async function sendResetEmail(email: FormValue) {
             errors: {},
             success: false,
             data: {
-                name: "Error interno",
-                message: "Envio de email fallido",
+                name: "Error interno.",
+                message: "Envio de email fallido.",
             }
         }
     }
@@ -155,8 +155,8 @@ export async function resetPassword(resetData: RawFormData) {
             errors: verifiedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos Invalidos",
-                message: 'Restablecimiento de contraseña fallido',
+                name: "Datos inválidos.",
+                message: 'Restablecimiento de contraseña fallido.',
             }
         }
     }
@@ -183,8 +183,8 @@ export async function resetPassword(resetData: RawFormData) {
             errors: {},
             success: false,
             data: {
-                name: "Error interno",
-                message: "Restablecimiento de contraseña fallido",
+                name: "Error interno.",
+                message: "Restablecimiento de contraseña fallido.",
             }
         }
     }
@@ -200,8 +200,8 @@ export async function updateUser({ token, userData }: { token: string, userData:
             errors: verifiedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos invalidos",
-                message: 'Actualizacion de usuario fallida',
+                name: "Datos inválidos.",
+                message: 'Actualizacion de usuario fallida.',
             }
         }
     }
@@ -228,8 +228,8 @@ export async function updateUser({ token, userData }: { token: string, userData:
             errors: {},
             success: false,
             data: {
-                name: "Error Interno",
-                message: "Actualizacion Fallida",
+                name: "Error interno.",
+                message: "Actualizacion fallida.",
             }
         }
     }
@@ -245,8 +245,8 @@ export async function sendFeedback({ token, rawFormData }: { token: string, rawF
             errors: verifiedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Campos Invalidos",
-                message: "Envio de Feedback Fallido"
+                name: "Campos inválidos.",
+                message: "Envio de feedback fallido."
             }
         }
     }
@@ -272,8 +272,8 @@ export async function sendFeedback({ token, rawFormData }: { token: string, rawF
             errors: {},
             success: false,
             data: {
-                name: "Error Interno",
-                message: "Ocurrio un error inesperado"
+                name: "Error interno.",
+                message: "Ocurrio un error inesperado."
             }
         }
     }

@@ -8,8 +8,7 @@ export const metadata: Metadata = {
 
 export default function ResetPassword() {
   return (
-    <div className="h-screen w-screen">
-      <main className="flex h-full w-full items-center justify-center">
+      <main className="flex h-screen w-screen items-center justify-center">
         <div className="flex h-full w-full max-w-md flex-col items-center justify-center p-10 lg:max-w-lg">
           <header className="w-full">
             <Image
@@ -23,9 +22,8 @@ export default function ResetPassword() {
             <h1 className="mt-3 text-2xl font-bold">Restablecer contraseña</h1>
             <span>Ingresa tu nueva contraseña</span>
           </header>
-          <Form className="my-6 w-full" />
+          <Form />
         </div>
       </main>
-    </div>
   );
 }

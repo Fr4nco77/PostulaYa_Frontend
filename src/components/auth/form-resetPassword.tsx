@@ -12,9 +12,7 @@ import { useToast } from "../ui/use-toast";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ButtonSubmit } from "../ui/button-submit";
 
-interface FormProps extends React.HTMLAttributes<HTMLDivElement> {}
-
-export default function Form({ className, ...props }: FormProps) {
+export default function Form() {
   const token = useSearchParams().get("token");
   const router = useRouter();
   const { toast } = useToast();
@@ -30,7 +28,7 @@ export default function Form({ className, ...props }: FormProps) {
     if (password !== checkPassword) {
       return toast({
         variant: "destructive",
-        description: "Las contraseñas no coinciden",
+        description: "Las contraseñas no coinciden.",
       });
     }
 
@@ -52,43 +50,39 @@ export default function Form({ className, ...props }: FormProps) {
   }, []);
 
   return (
-    <div className={className} {...props}>
-      <form action={handleSubmit}>
-        <div className="grid gap-4">
-          <div className="grid gap-2">
-            <Label htmlFor="password">Nueva Contraseña</Label>
-            <Input
-              id="password"
-              name="password"
-              placeholder="••••••••••••"
-              type={showPassword ? "text" : "password"}
-            />
-          </div>
-          <div className="grid gap-2">
-            <Label htmlFor="checkPassword">Confirmar contraseña</Label>
-            <div className="flex w-full items-center space-x-2">
-              <Input
-                id="checkPassword"
-                name="checkPassword"
-                placeholder="••••••••••••"
-                aria-describedby="password-error"
-                type={showPassword ? "text" : "password"}
-              />
-              <Button
-                type="button"
-                onClick={() => setShowPassword(!showPassword)}
-                size="icon"
-                variant="outline"
-                className="border-slate-600"
-              >
-                {showPassword ? <Eye /> : <EyeOff />}
-              </Button>
-            </div>
-            <ErrorMessage errors={errors?.password} errorKey="password" />
-          </div>
-          <ButtonSubmit>Restablecer</ButtonSubmit>
+    <form className="my-6 grid w-full gap-4" action={handleSubmit}>
+      <div className="grid gap-2">
+        <Label htmlFor="password">Nueva Contraseña</Label>
+        <Input
+          id="password"
+          name="password"
+          placeholder="••••••••••••"
+          type={showPassword ? "text" : "password"}
+        />
+      </div>
+      <div className="grid gap-2">
+        <Label htmlFor="checkPassword">Confirmar contraseña</Label>
+        <div className="flex w-full items-center space-x-2">
+          <Input
+            id="checkPassword"
+            name="checkPassword"
+            placeholder="••••••••••••"
+            aria-describedby="password-error"
+            type={showPassword ? "text" : "password"}
+          />
+          <Button
+            type="button"
+            onClick={() => setShowPassword(!showPassword)}
+            size="icon"
+            variant="outline"
+            className="border-slate-600"
+          >
+            {showPassword ? <Eye /> : <EyeOff />}
+          </Button>
         </div>
-      </form>
-    </div>
+        <ErrorMessage errors={errors?.password} errorKey="password" />
+      </div>
+      <ButtonSubmit>Restablecer</ButtonSubmit>
+    </form>
   );
 }

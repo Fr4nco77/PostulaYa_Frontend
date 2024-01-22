@@ -15,7 +15,7 @@ export default function SignUp() {
       <main className="flex h-full w-full items-center justify-center lg:w-1/2">
         <div className="flex w-full max-w-md flex-col items-center justify-center p-10 lg:max-w-lg">
           <div className="w-full">
-          <Image
+            <Image
               src="/Logo_borderBlack.svg"
               alt="logo PostulaYa"
               width={0}
@@ -27,10 +27,10 @@ export default function SignUp() {
               <strong>Crear Cuenta</strong>
             </h1>
           </div>
-          <GoogleButton className=" my-5 w-full" />
+          <GoogleButton className="my-5 w-full" />
           <Separator />
-          <Form className="my-5 w-full" />
-          <div className=" w-full">
+          <Form />
+          <div className="w-full">
             <span>
               ¿Ya tienes una cuenta?{" "}
               <Link href="/sign_in">
