@@ -44,11 +44,11 @@ export default function Sidebar({
           className="hidden sm:max-lg:block"
         />
       </div>
-      <ul className="flex px-3 max-lg:items-center max-lg:justify-center lg:mt-4 lg:flex-1 lg:flex-col">
+      <ul className="flex items-center max-lg:overflow-x-auto lg:mt-4 lg:grow lg:flex-col">
         {children}
-        <ButtonUser token={token}/>
-        <ButtonFeedback token={token}/>
-        <Exit className="ml-6 lg:ml-0 lg:mt-6" />
+        <ButtonUser token={token} />
+        <ButtonFeedback token={token} />
+        <Exit className="lg:mt-6" />
       </ul>
       <div className="hidden border-t border-[rgb(8,11,28)] p-3 pl-4 lg:flex">
         <Avatar className="border border-[rgb(8,11,28)]">

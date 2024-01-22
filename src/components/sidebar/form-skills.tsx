@@ -12,19 +12,14 @@ import { Badge } from "../ui/badge";
 import ErrorMessage from "../ui/error-message";
 import { ButtonSubmit } from "../ui/button-submit";
 import { updateUser } from "@/lib/actions/user";
-import { cn } from "@/lib/utils";
-
-interface FormProps extends HTMLAttributes<HTMLFormElement> {
-  token: string;
-  currentSkills: Skills;
-}
 
 export default function Form({
-  className,
   token,
   currentSkills,
-  ...props
-}: FormProps) {
+}: {
+  token: string;
+  currentSkills: Skills;
+}) {
   const { toast } = useToast();
   const inputRef = useRef<HTMLInputElement>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -85,17 +80,18 @@ export default function Form({
   };
 
   return (
-    <form
-      action={handleSubmit}
-      className={cn("flex flex-col gap-4 py-4", className)}
-      {...props}
-    >
+    <form action={handleSubmit} className="flex w-full flex-col gap-4 py-4">
       <div className="flex w-full items-center gap-4">
         <Label htmlFor="skill" hidden>
           Habilidad
         </Label>
         <div className="flex w-full gap-2">
-          <Input id="skill" ref={inputRef} placeholder="NextJs" />
+          <Input
+            id="skill"
+            ref={inputRef}
+            placeholder="NextJs"
+            aria-describedby="skill-error"
+          />
           <Button
             size={"icon"}
             type="button"

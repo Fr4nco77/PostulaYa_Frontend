@@ -10,7 +10,6 @@ import { Rocket } from "lucide-react";
 import Form from "./form-feedback";
 
 export default async function ButtonFeedback({ token }: { token: string }) {
-
   return (
     <Sheet>
       <SheetTrigger asChild>
@@ -30,15 +29,14 @@ export default async function ButtonFeedback({ token }: { token: string }) {
         <SheetHeader>
           <SheetTitle>Sugerencias</SheetTitle>
           <SheetDescription>
-            El objetivo de PostulaYa es convertirse en la herramienta definitiva
-            para medir el progreso de tu búsqueda laboral y, sobre todo,
-            ayudarte a conseguir ese trabajo que tanto deseas. 🚀
+            "El propósito de PostulaYa es convertirse en la herramienta
+            definitiva para ayudarte a conseguir el empleo que buscas. 🚀
             <br /> Nos encantaría escucharte: si necesitas algo, encuentras
             algún inconveniente o simplemente quieres saludarnos, estamos aquí
             para ti. 😊 <br />
           </SheetDescription>
         </SheetHeader>
-        <Form token={token} className="mt-3 w-full" />
+        <Form token={token} />
       </SheetContent>
     </Sheet>
   );

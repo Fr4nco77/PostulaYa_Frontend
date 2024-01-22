@@ -1,5 +1,12 @@
 import Item from "./item";
-import { BarChart, Bird, Book, StickyNote } from "lucide-react";
+import {
+  BarChart,
+  Bird,
+  Book,
+  MessageSquare,
+  Newspaper,
+  StickyNote,
+} from "lucide-react";
 
 export default function ListItems() {
   return (
@@ -7,6 +14,8 @@ export default function ListItems() {
       <Item icon={<BarChart />} text="Dashboard" to="/app" />
       <Item icon={<Book />} text="Bitacora" to="/app/book" />
       <Item icon={<StickyNote />} text="Notas" to="/app/notes" />
+      <Item icon={<Newspaper />} text="Vacantes" to="/app/applications" />
+      <Item icon={<MessageSquare />} text="Entrevistas" to="/app/interviews" />
       {/* <Item icon={<Bird />} text="Nosotros" to="/app/about" /> */}
     </>
   );

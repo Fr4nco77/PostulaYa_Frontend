@@ -37,7 +37,7 @@ export default async function ButtonUser({ token }: { token: string }) {
             conocimientos
           </SheetDescription>
         </SheetHeader>
-        <Form token={token} currentSkills={skills} className="w-full" />
+        <Form token={token} currentSkills={skills} />
       </SheetContent>
     </Sheet>
   );
