@@ -95,12 +95,17 @@ export default function Form({
       className={cn("grid gap-4 py-4", className)}
       {...props}
     >
-      <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="" className="text-right">
-          Habilidad
-        </Label>
-        <div id="skill" className="col-span-3 flex items-center gap-2">
-          <Input name="skill" ref={inputRef} placeholder="React" />
+      <div className="flex flex-col items-center gap-4">
+        <div id="skill" className="flex w-full items-center gap-2">
+          <Label htmlFor="skill" hidden>
+            Habilidad
+          </Label>
+          <Input
+            name="skill"
+            ref={inputRef}
+            placeholder="React"
+            aria-describedby="skill-error"
+          />
           <Button
             size="icon"
             type="button"
@@ -120,7 +125,7 @@ export default function Form({
         ))}
       </div>
       <ErrorMessage errors={errors?.skills} errorKey="skill" />
-      <ButtonSubmit disabled={currentSkills.length === skills.length}>
+      <ButtonSubmit>
         Guardar cambios
       </ButtonSubmit>
     </form>

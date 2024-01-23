@@ -5,7 +5,7 @@ import { RawFormData } from "../definitions";
 import { formatedInterviewData, removeEmptyStrings } from "../utils";
 import { validateCreate } from "../schemas/interview";
 
-export const createInterview = async ({ token, rawFormData }: { token: string, rawFormData: RawFormData }) => {
+export const createInterview = async ({ token, rawFormData, application }: { token: string, rawFormData: RawFormData, application: string }) => {
     noStore();
 
     const data = removeEmptyStrings(rawFormData);
@@ -16,8 +16,8 @@ export const createInterview = async ({ token, rawFormData }: { token: string, r
             errors: dataVerified.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos invalidos/incompletos",
-                message: 'Registro de entrevista fallida',
+                name: "Datos inválidos/incompletos.",
+                message: 'Registro de entrevista fallida.',
             }
         }
     }
@@ -32,6 +32,7 @@ export const createInterview = async ({ token, rawFormData }: { token: string, r
             body: JSON.stringify(dataVerified.data)
         })
         const { success, data } = await response.json();
+        revalidatePath(`/app/book/${application}`);
 
         return {
             errors: {},
@@ -43,8 +44,8 @@ export const createInterview = async ({ token, rawFormData }: { token: string, r
             errors: {},
             success: false,
             data: {
-                name: "Error interno",
-                message: 'Registro de entrevista fallido',
+                name: "Error interno.",
+                message: 'Registro de entrevista fallido.',
             }
         }
     }
@@ -72,8 +73,8 @@ export const deleteInterview = async ({ token, interview, application }: { token
         return {
             success: false,
             data: {
-                name: "Error interno",
-                message: 'Registro de entrevista fallido',
+                name: "Error interno.",
+                message: 'Registro de entrevista fallido.',
             }
         }
     }

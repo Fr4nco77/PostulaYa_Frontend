@@ -21,8 +21,8 @@ export async function fetchUser({ token }: { token: string }) {
         return {
             success: false,
             data: {
-                name: "Eror Interno",
-                message: "Ocurrio un error inesperado"
+                name: "Eror interno.",
+                message: "Ocurrio un error inesperado."
             }
         }
     }

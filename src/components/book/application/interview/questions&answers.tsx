@@ -48,6 +48,7 @@ export default function Questions_Answers() {
                 id={`question-${question.id}`}
                 name={`question-${question.id}`}
                 placeholder="¿Cual es tu ultimo proyecto?"
+                aria-describedby="questions-error"
               />
               {questions.length !== 1 && (
                 <Button

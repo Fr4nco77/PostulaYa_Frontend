@@ -1,6 +1,6 @@
 import { DeleteApplication } from "@/components/book/application/button-deleteApplication";
 import EditApplication from "@/components/book/application/button-editApplication";
-import Skills from "@/components/book/application/skills";
+import Skills from "@/components/book/application/skills/skills";
 import Interviews from "@/components/book/application/interview/interview";
 import { Badge } from "@/components/ui/badge";
 import { buttonVariants } from "@/components/ui/button";
@@ -37,8 +37,8 @@ export default async function Application({
     modality,
     type,
     recluter,
-    company_name,
-    company_ubication,
+    company,
+    location,
     platform,
     url,
     status,
@@ -83,10 +83,10 @@ export default async function Application({
           </div>
           <Separator className="bg-gray-500" />
           <span>
-            Empresa: <strong>{company_name}</strong>
+            Empresa: <strong>{company}</strong>
           </span>
           <span className="col-span-2">
-            Ubicacion: <strong>{company_ubication}</strong>
+            Ubicacion: <strong>{location}</strong>
           </span>
           <span className="col-span-2">
             Reclutador: <strong>{recluter}</strong>
@@ -129,8 +129,8 @@ export default async function Application({
         token={token}
         application={_id}
         position={position}
-        company={company_name}
-        className="flex w-full grow flex-col md:max-h-fit md:max-w-sm md:mt-14"
+        company={company}
+        className="flex h-full w-full flex-col md:mt-14 md:max-w-sm"
       />
     </div>
   );

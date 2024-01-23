@@ -33,8 +33,8 @@ export type Application = {
     modality: string;
     type: string;
     recluter: string;
-    company_name: string;
-    company_ubication: string;
+    company: string;
+    location: string;
     platform: string;
     url: string;
     status: string;
@@ -55,4 +55,17 @@ export type User = {
     username?: string;
     image?: string;
     skills?: string[];
+}
+
+export type Interview = {
+    interviewer: string;
+    duration: string;
+    preparation: string;
+    feeling: string;
+    questions: string[];
+    answers: string[];
+    feedback: string;
+    observation: string;
+    likes: string[];
+    created_at: string;
 }

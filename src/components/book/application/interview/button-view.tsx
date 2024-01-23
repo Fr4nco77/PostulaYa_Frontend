@@ -17,48 +17,18 @@ import {
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import { Textarea } from "@/components/ui/textarea";
+import { Interview } from "@/lib/definitions";
 import { Eye } from "lucide-react";
-import { HTMLAttributes } from "react";
 
-interface InterviewProps extends HTMLAttributes<HTMLButtonElement> {
-  interviewer: string;
-  duration: string;
-  preparation: string;
-  feeling: string;
-  questions: string[];
-  answers: string[];
-  feedback: string;
-  observation: string;
-  likes: string[];
-  created_at: string;
-}
-
-export function ViewInterview({
-  className,
-  interviewer,
-  duration,
-  preparation,
-  feeling,
-  questions,
-  answers,
-  feedback,
-  observation,
-  likes,
-  created_at,
-  ...props
-}: InterviewProps) {
+export function ViewInterview({ interview }: { interview: Interview }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <Button
           size="icon"
           variant="ghost"
-          className={cn(
-            "rounded-2xl text-slate-900 hover:bg-slate-200",
-            className,
-          )}
-          {...props}
+          className="rounded-2xl text-slate-900 hover:bg-slate-200"
         >
           <Eye />
         </Button>
@@ -66,33 +36,44 @@ export function ViewInterview({
       <AlertDialogContent className="max-h-screen overflow-y-auto">
         <AlertDialogHeader>
           <AlertDialogTitle>
-            Entrevista del {created_at.split("T")[0]}
+            Entrevista del {interview.created_at.split("T")[0]}
           </AlertDialogTitle>
           <AlertDialogDescription className="grid grid-cols-2 items-center">
-            <span>{`Entrevistador: ${interviewer}`}</span>
-            <span>{`Duracion: ${duration}`}</span>
+            <span>{`Entrevistador: ${interview.interviewer}`}</span>
+            <span>{`Duracion: ${interview.duration}`}</span>
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <div className="flex w-full flex-col gap-2">
-          <span>{`Sensacion: ${feeling}`}</span>
-          <span>Preparacion</span>
-          <p>{preparation}</p>
-          <h3>Preguntas/Actividades</h3>
+        <div className="flex max-h-screen w-full flex-col gap-2 overflow-y-auto">
+          <span>
+            <strong>Sensación</strong>
+            {`: ${interview.feeling}`}
+          </span>
+          <div className="flex w-full flex-col">
+            <h3 className="text-lg font-bold">Preparación</h3>
+            <Textarea disabled value={interview.preparation} />
+          </div>
+          <h3 className="text-lg font-bold">Preguntas/Actividades</h3>
           <Accordion type="single" collapsible>
-            {questions?.map((question, index) => {
+            {interview.questions?.map((question, index) => {
               return (
                 <AccordionItem key={index} value={`item-${index}`}>
                   <AccordionTrigger>{question}</AccordionTrigger>
-                  <AccordionContent>{answers[index]}</AccordionContent>
+                  <AccordionContent>
+                    {interview.answers[index]}
+                  </AccordionContent>
                 </AccordionItem>
               );
             })}
           </Accordion>
-          <span>Feedback</span>
-          <p>{feedback}</p>
-          <span>Observaciones</span>
-          <p>{observation}</p>
-          <span>{`Agradecimientos: ${likes}`}</span>
+          <div className="flex w-full flex-col">
+            <h3 className="text-lg font-bold">Feedback</h3>
+            <Textarea disabled value={interview.feedback} />
+          </div>
+          <div className="flex w-full flex-col">
+            <h3 className="text-lg font-bold">Observaciones</h3>
+            <Textarea disabled value={interview.observation} />
+          </div>
+          {/* <span>{`Agradecimientos: ${interview.likes}`}</span> */}
         </div>
         <AlertDialogFooter>
           <AlertDialogCancel>Cerrar</AlertDialogCancel>

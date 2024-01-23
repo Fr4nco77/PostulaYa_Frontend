@@ -82,24 +82,24 @@ export default function Form({
         </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="company_name" className="text-right">
+        <Label htmlFor="company" className="text-right">
           Empresa
         </Label>
         <Input
-          id="company_name"
-          name="company_name"
-          defaultValue={application.company_name}
+          id="company"
+          name="company"
+          defaultValue={application.company}
           className="col-span-3"
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="company_ubication" className="text-right">
+        <Label htmlFor="location" className="text-right">
           Ubicacion
         </Label>
         <Input
-          id="company_ubication"
-          name="company_ubication"
-          defaultValue={application.company_ubication}
+          id="location"
+          name="location"
+          defaultValue={application.location}
           className="col-span-3"
         />
       </div>

@@ -9,22 +9,36 @@ import {
 } from "@/components/ui/dialog";
 import { Plus } from "lucide-react";
 import FormCreateInterview from "./form-create";
+import { cn } from "@/lib/utils";
+import { HTMLAttributes } from "react";
 
-export default function CreateInterview({
-  token,
-  application,
-  position,
-  company,
-}: {
+interface CreateProps extends HTMLAttributes<HTMLButtonElement> {
   token: string;
   application: string;
   position: string;
   company: string;
-}) {
+}
+
+export default function CreateInterview({
+  className,
+  token,
+  application,
+  position,
+  company,
+  ...props
+}: CreateProps) {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="outline" className="bg-yellow-400 hover:bg-yellow-300">
+        <Button
+          size="icon"
+          variant="ghost"
+          className={cn(
+            "rounded-2xl text-slate-900 hover:bg-slate-200",
+            className,
+          )}
+          {...props}
+        >
           <Plus />
         </Button>
       </DialogTrigger>
@@ -33,7 +47,7 @@ export default function CreateInterview({
           <DialogTitle>Registrar Entrevista</DialogTitle>
           <DialogDescription>
             Por favor tomate este tiempo para registrar todo lo que paso, esta
-            informacion te sera de gran utilidad, no te guardes ningun detalle.
+            informacion te sera de gran utilidad.
           </DialogDescription>
         </DialogHeader>
         <FormCreateInterview

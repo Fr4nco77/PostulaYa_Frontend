@@ -19,15 +19,6 @@ export default async function Skills({
 }: SkillsProps) {
   const { success, data } = await fetchUser({ token });
 
-  if (!success) {
-    return (
-      <div>
-        <h1>{data.name}</h1>
-        <span>{data.message}</span>
-      </div>
-    );
-  }
-
   const userSkills = data.response.skills;
   const userSkillNames = userSkills.map((skill: Skill) => skill.name);
   const requiredSkills = skills?.map((skill: Skill) => skill.name);
@@ -36,12 +27,9 @@ export default async function Skills({
   ).length;
 
   return (
-    <section
-      className={cn("flex flex-col gap-2 p-3", className)}
-      {...props}
-    >
+    <section className={cn("flex flex-col gap-2 p-3", className)} {...props}>
       <div className="flex items-center justify-between">
-        <h3 className="text-lg">Habilidades Requeridas</h3>
+        <h2 className="text-xl font-bold">Habilidades Requeridas</h2>
         <EditSkills
           token={token}
           applicationID={applicationID}
@@ -58,7 +46,7 @@ export default async function Skills({
         ) : (
           <span>
             De momento no tienes ninguna habilidad de las requeridas para este
-            puesto, pero ya sabes cuales pueden ser tus nuevas habilidades
+            puesto.
           </span>
         )}
         <div className="flex flex-wrap gap-2">

@@ -118,8 +118,8 @@ export async function updateApplication({ rawFormData, token, applicationID }: {
             errors: dataVerified.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos Invalidos/Incompletos",
-                message: 'Actualizacion de postulacion fallida',
+                name: "Datos inválidos/incompletos",
+                message: 'Actualizacion de postulación fallida.',
             }
         }
     }
@@ -142,13 +142,12 @@ export async function updateApplication({ rawFormData, token, applicationID }: {
             data
         }
     } catch (error) {
-        console.log(error)
         return {
             errors: {},
             success: false,
             data: {
-                name: "Error Interno",
-                message: 'Actualizacion de postulacion fallida',
+                name: "Error interno.",
+                message: 'Actualizacion de postulación fallida.',
             }
         }
     }

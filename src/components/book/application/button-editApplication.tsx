@@ -39,7 +39,7 @@ export default function EditApplication({
           <Pencil />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[450px]">
+      <DialogContent className="sm:max-w-[450px] max-h-screen overflow-auto">
         <DialogHeader>
           <DialogTitle>Editar Postulacion</DialogTitle>
           <DialogDescription>¿Que ha cambiado?</DialogDescription>

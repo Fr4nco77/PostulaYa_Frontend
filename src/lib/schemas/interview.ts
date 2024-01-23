@@ -3,33 +3,33 @@ import { z } from "zod";
 export const validateCreate = z.object({
     application:
         z.string({
-            invalid_type_error: "Aplicacion Invalida"
+            invalid_type_error: "Aplicacion inválida."
         })
             .trim()
-            .min(1, "Aplicacion Invalida"),
+            .min(1, "Aplicacion inválida."),
     position:
         z.string({
-            invalid_type_error: "Posicion Invalida"
+            invalid_type_error: "Posición inválida."
         })
             .trim()
-            .min(1, "Posicion Invalida"),
+            .min(1, "Posición inválida."),
     company:
         z.string({
-            invalid_type_error: "Empresa Invalida"
+            invalid_type_error: "Empresa inválida."
         })
             .trim()
-            .min(1, "Empresa Invalida"),
+            .min(1, "Empresa inválida."),
     interviewer:
         z.string({
-            invalid_type_error: "Entrevistador Invalido"
+            invalid_type_error: "Entrevistador inválido."
         })
             .trim()
-            .min(1, "Entrevistador"),
+            .min(1, "Entrevistador inválido."),
     duration:
         z.custom((value) => {
             const number = Number(value);
             if (isNaN(number) || number < 1) {
-                return { message: "Duracion Invalida" };
+                return { message: "Duración inválida." };
             }
 
             return true
@@ -38,45 +38,45 @@ export const validateCreate = z.object({
     preparation:
         z.optional(
             z.string({
-                invalid_type_error: "Preparacion Invalida"
+                invalid_type_error: "Preparación inválida."
             })
                 .trim()
-                .min(1, "Preparacion Invalida")
+                .min(1, "Preparación inválida.")
         ),
     feeling:
         z.enum(["Inseguro", "Preocupado", "Neutral", "Confiado", "Muy motivado"]),
     feedback:
         z.optional(
             z.string({
-                invalid_type_error: "Feedback Invalido"
+                invalid_type_error: "Feedback inválido"
             })
                 .trim()
-                .min(1, "Feedback Invalido")
+                .min(1, "Feedback inválido")
         ),
     observation:
         z.optional(
             z.string({
-                invalid_type_error: "Observacion Invalida"
+                invalid_type_error: "Observación inválida."
             })
                 .trim()
-                .min(1, "Observacion Invalida")
+                .min(1, "Observación inválida.")
         ),
     questions:
         z.array(
             z.string({
-                invalid_type_error: "Pregunta Invalida"
+                invalid_type_error: "Pregunta inválida."
             })
                 .trim()
-                .min(1, "Pregunta Invalida")
+                .min(1, "Pregunta inválida.")
         )
-            .min(3, "Por lo menos debes registrar tres preguntas y respuestas"),
+            .min(3, "Por lo menos debes registrar tres preguntas y respuestas."),
     answers:
         z.array(
             z.string({
-                invalid_type_error: "Respuesta Invalida"
+                invalid_type_error: "Respuesta inválida."
             })
                 .trim()
-                .min(1, "Respuesta Invalida")
+                .min(1, "Respuesta inválida.")
         )
-            .min(3, "Por lo menos debes registrar tres preguntas y respuestas"),
+            .min(3, "Por lo menos debes registrar tres preguntas y respuestas."),
 })
