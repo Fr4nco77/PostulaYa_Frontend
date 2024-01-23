@@ -12,7 +12,10 @@ export function ButtonSubmit({ children, className, ...props }: buttonProps) {
   return (
     <Button
       type="submit"
-      className={cn("bg-yellow-400 text-black hover:bg-yellow-300", className)}
+      className={cn(
+        "bg-yellow-400 text-black hover:bg-slate-900 hover:text-yellow-400",
+        className,
+      )}
       disabled={pending}
       {...props}
     >

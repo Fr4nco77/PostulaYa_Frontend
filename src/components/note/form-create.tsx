@@ -8,18 +8,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { createNote } from "@/lib/actions/note";
 import { Errors } from "@/lib/definitions";
-import { cn } from "@/lib/utils";
-import { HTMLAttributes, useCallback, useState } from "react";
+import { useCallback, useState } from "react";
 
-interface FormCreateNoteProps extends HTMLAttributes<HTMLFormElement> {
-  token: string;
-}
-
-export default function FormCreateNote({
-  className,
-  token,
-  ...props
-}: FormCreateNoteProps) {
+export default function FormCreateNote({ token }: { token: string }) {
   const [errors, setErrors] = useState<Errors>({});
   const { toast } = useToast();
 
@@ -41,16 +32,17 @@ export default function FormCreateNote({
   }, []);
 
   return (
-    <form
-      action={handleCreate}
-      className={cn("flex flex-col gap-2 ", className)}
-      {...props}
-    >
+    <form action={handleCreate} className="flex flex-col gap-2 ">
       <div className="h-auto w-full">
         <Label htmlFor="title" hidden>
           Titulo
         </Label>
-        <Input id="title" name="title" placeholder="Recomendaciones de RRHH" />
+        <Input
+          id="title"
+          name="title"
+          placeholder="Recomendaciones de RRHH"
+          aria-describedby="title-error"
+        />
         <ErrorMessage errors={errors.title} errorKey="Titulo" />
       </div>
       <div className="h-auto w-full">
@@ -62,6 +54,7 @@ export default function FormCreateNote({
           name="body"
           placeholder="Nota"
           className="resize-none"
+          aria-describedby="body-error"
         />
         <ErrorMessage errors={errors.body} errorKey="body" />
       </div>

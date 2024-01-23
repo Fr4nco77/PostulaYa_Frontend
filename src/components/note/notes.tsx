@@ -19,22 +19,28 @@ export default async function Notes({
   const { success, data } = await fetchNotes({ token });
   if (!success) {
     return (
-      <>
-        <h1>{data.name}</h1>
+      <div className="flex-cole flex h-full w-full items-center justify-center">
+        <h1 className="text-3xl font-bold">{data.name}</h1>
         <span>{data.message}</span>
-      </>
+      </div>
     );
   }
 
   return (
     <main
-      className={cn("gap-5 overflow-y-auto border p-3 lg:max-h-fit lg:gap-8", className)}
+      className={cn(
+        "gap-5 overflow-y-auto rounded-lg border bg-slate-50 p-3 lg:gap-8",
+        className,
+      )}
       {...props}
     >
       {data.response.length ? (
         data.response?.map(({ _id, title, body, favorite }: Note) => {
           return (
-            <div key={_id} className="w-full rounded-xl p-3 shadow-md md:max-w-xs lg:max-w-sm">
+            <div
+              key={_id}
+              className="w-full rounded-xl bg-slate-100 p-3 shadow-md md:max-w-xs"
+            >
               <div className="flex items-center justify-between">
                 <h1>{title}</h1>
                 <div className="flex items-center gap-2">
@@ -54,7 +60,9 @@ export default async function Notes({
           );
         })
       ) : (
-        <span>No hay notas agregadas</span>
+        <div className="flex h-full items-center justify-center">
+          <span className="text-xl font-medium">No hay notas agregadas</span>
+        </div>
       )}
     </main>
   );
