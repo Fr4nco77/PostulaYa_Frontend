@@ -10,6 +10,7 @@ import clsx from "clsx";
 import { ChevronLeft } from "lucide-react";
 import { cookies } from "next/headers";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 
 export default async function Application({
   params,
@@ -23,12 +24,7 @@ export default async function Application({
   });
 
   if (!success) {
-    return (
-      <>
-        <h1>{data.name}</h1>
-        <p>{data.message}</p>
-      </>
-    );
+    notFound()
   }
 
   const {
