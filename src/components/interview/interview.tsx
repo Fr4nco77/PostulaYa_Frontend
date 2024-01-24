@@ -1,3 +1,4 @@
+import { Eye } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -14,18 +15,20 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "../ui/alert-dialog";
+import { Button } from "../ui/button";
+import { Textarea } from "../ui/textarea";
 
 export default function Interview({ interview }: { interview: any }) {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <div className="flex w-full cursor-pointer items-center justify-between hover:bg-slate-200">
-          <div className="flex gap-3">
-            <span>{interview.company}</span>
-            <span>{interview.position}</span>
-          </div>
-          <span>{interview.created_at.split("T")[0]}</span>
-        </div>
+        <Button
+          size="icon"
+          variant="ghost"
+          className="rounded-full text-slate-900 hover:bg-yellow-400"
+        >
+          <Eye />
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent className="max-h-screen overflow-y-auto">
         <AlertDialogHeader>
@@ -37,18 +40,29 @@ export default function Interview({ interview }: { interview: any }) {
             <span>{`Entrevistado: ${interview.user.username}`}</span>
           </AlertDialogDescription>
         </AlertDialogHeader>
-        <span>{`Duracion: ${interview.duration}`}</span>
-        <div className="flex w-full flex-col">
-          <span>Preparacion</span>
-          <p>{interview.preparation}</p>
+        <div className="flex max-h-screen w-full flex-col gap-2 overflow-y-auto">
+          <span>
+            <strong>Duración</strong>
+            {`: ${interview.duration}`}
+          </span>
         </div>
-        <span>Preguntas/Actividades</span>
+        <div className="flex w-full flex-col">
+          <h3 className="text-lg font-bold">Preparación</h3>
+          <Textarea disabled value={interview.preparation} />
+        </div>
+        <h3 className="text-lg font-bold">Preguntas/Actividades</h3>
         <Accordion type="single" collapsible>
           {interview.questions?.map((question: string, index: number) => {
             return (
               <AccordionItem key={index} value={`item-${index}`}>
                 <AccordionTrigger>{question}</AccordionTrigger>
-                <AccordionContent>{interview.answers[index]}</AccordionContent>
+                <AccordionContent>
+                  <Textarea
+                    disabled
+                    value={interview.answers[index]}
+                    className="resize-none border-none "
+                  />
+                </AccordionContent>
               </AccordionItem>
             );
           })}

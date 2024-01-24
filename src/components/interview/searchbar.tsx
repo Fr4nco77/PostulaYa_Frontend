@@ -1,15 +1,11 @@
-import { cn } from "@/lib/utils";
 import Search from "../ui/input-search";
 import Filter from "../ui/select-filter";
-import { HTMLAttributes } from "react";
 import { limit } from "../book/data";
 
-interface SearchProps extends HTMLAttributes<HTMLDivElement> {}
-
-export default function SearchBar({ className, ...props }: SearchProps) {
+export default function SearchBar() {
   return (
-    <header className={cn("gap-5", className)} {...props}>
-      <Search placeholder="Empresa" />
+    <header className="flex w-full max-w-2xl gap-5 rounded-2xl bg-slate-100 p-3 shadow-xl">
+      <Search placeholder="Dime cual empresa o puesto esta buscando" />
       <Filter
         placeholder="Cantidad"
         query="limit"

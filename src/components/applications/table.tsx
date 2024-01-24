@@ -101,7 +101,7 @@ export default async function ApplicationTable({ query }: { query: string }) {
                   <Button
                     size="sm"
                     variant="outline"
-                    className="hover:bg-yellow-400"
+                    className="hover:bg-slate-900 hover:text-yellow-400"
                   >
                     PostulaYa
                   </Button>

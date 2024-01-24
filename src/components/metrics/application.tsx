@@ -16,6 +16,7 @@ export default async function Applications({ token }: { token: string }) {
     averagePostulationsPerDay,
     fullTimeApplications,
     partTimeApplications,
+    averageResponseTime,
   } = data.response;
 
   return (
@@ -24,6 +25,7 @@ export default async function Applications({ token }: { token: string }) {
       <span>Promedio diario de Postulaciones: {averagePostulationsPerDay}</span>
       <span>Porcentaje de Postulaciones Full-Time: {fullTimeApplications}</span>
       <span>Porcentaje de Postulaciones Part-Time: {partTimeApplications}</span>
+      <span>Tiempo promedio de respuesta: {averageResponseTime} dias</span>
     </div>
   );
 }
