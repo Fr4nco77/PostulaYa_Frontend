@@ -58,8 +58,8 @@ export function ViewInterview({ interview }: { interview: Interview }) {
               return (
                 <AccordionItem key={index} value={`item-${index}`}>
                   <AccordionTrigger>{question}</AccordionTrigger>
-                  <AccordionContent>
-                    {interview.answers[index]}
+                  <AccordionContent >
+                  <Textarea disabled value={interview.answers[index]} className="border-none resize-none" />
                   </AccordionContent>
                 </AccordionItem>
               );
