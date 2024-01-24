@@ -49,8 +49,8 @@ export async function fetchApplicationByID({ token, application }: { token: stri
         return {
             success: false,
             data: {
-                name: "Error Interno",
-                message: "Ocurrio un error al acceder a la postulacion"
+                name: "Error interno.",
+                message: "Ocurrio un error al acceder a la postulación."
             }
         }
     }
@@ -72,7 +72,6 @@ export async function fetchApplicationsPages({ query, token }: ApplicationQuery)
             totalPages: data.response.totalPages
         }
     } catch (error) {
-        // console.log(error);
         throw new Error('Failed to fetch total number of pages.');
     }
 }
@@ -98,8 +97,8 @@ export async function fetchSkillsByID({ skills }: { skills: string[] }) {
         return {
             success: false,
             data: {
-                name: "Error Interno",
-                message: "Ocurrio un error inesperado"
+                name: "Error interno.",
+                message: "Ocurrio un error inesperado."
             }
         }
     }
@@ -124,8 +123,8 @@ export async function fetchAllApplications({ query }: { query: string }) {
         return {
             success: false,
             data: {
-                name: "Error Interno",
-                message: "Ocurrio un error inesperado"
+                name: "Error interno.",
+                message: "Ocurrio un error inesperado."
             }
         }
     }
@@ -151,8 +150,8 @@ export async function fetchAllPagesApplications({ query }: { query: string }) {
         return {
             success: false,
             data: {
-                name: "Error Interno",
-                message: "Ocurrio un error inesperado"
+                name: "Error interno.",
+                message: "Ocurrio un error inesperado."
             }
         }
     }
