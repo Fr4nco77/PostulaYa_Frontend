@@ -102,7 +102,7 @@ export default function Form({
           </Button>
         </div>
       </div>
-      <div className="flex max-h-96 flex-wrap gap-1 overflow-y-scroll">
+      <div className="flex max-h-96 flex-wrap gap-1 overflow-y-auto">
         {skills?.map(({ _id, name }) => (
           <Badge id={_id} key={_id} onClick={() => removeSkill(_id)}>
             {`${name}`}
