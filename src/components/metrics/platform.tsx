@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, HTMLAttributes } from "react";
 import { Radar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -16,14 +16,9 @@ import {
   RadialLinearScale,
   LineElement,
 } from "chart.js";
-import { fetchPlatforms } from "@/lib/data";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../ui/select";
+import { fetchPlatforms } from "@/lib/data/metrics";
+import { Skeleton } from "../ui/skeleton";
+import { cn } from "@/lib/utils";
 
 ChartJS.register(
   CategoryScale,
@@ -39,56 +34,47 @@ ChartJS.register(
   RadialLinearScale,
 );
 
-export default function ApplicationsByTime({ token }: { token: string }) {
+interface PlatformsProps extends HTMLAttributes<HTMLDivElement> {
+  token: string;
+}
+
+export default function Platforms({
+  className,
+  token,
+  ...props
+}: PlatformsProps) {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [chartData, setChartData] = useState<any>(null);
-  const [period, setPeriod] = useState<"month" | "year">("month");
 
   useEffect(() => {
-    fetchPlatforms({ token, period }).then(({ success, data }) => {
-      if (!success) {
-        return (
-          <div>
-            <h1>{data.name}</h1>
-            <span>{data.message}</span>
-          </div>
-        );
+    fetchPlatforms({ token }).then(({ success, data }) => {
+      if (success) {
+        const values = {
+          labels: data.response.labels,
+          datasets: [
+            {
+              label: "Postulaciones",
+              data: data.response.data,
+            },
+          ],
+        };
+        setChartData(values);
+        setIsLoading(false);
       }
-
-      const values = {
-        labels: data.response.labels,
-        datasets: [
-          {
-            label: "# de Postulaciones",
-            data: data.response.data,
-          },
-        ],
-      };
-      setChartData(values);
-      setIsLoading(false);
     });
-  }, [period]);
+  }, []);
   return (
-    <div>
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center rounded-xl bg-slate-100 shadow-lg",
+        className,
+      )}
+      {...props}
+    >
       {isLoading ? (
-        <div>Loading...</div>
+        <Skeleton className="h-full w-full" />
       ) : (
-        <div>
-          <Select
-            name="period"
-            defaultValue={period}
-            onValueChange={(value: "month" | "year") => setPeriod(value)}
-          >
-            <SelectTrigger className="w-40">
-              <SelectValue placeholder="" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="month">Mensual</SelectItem>
-              <SelectItem value="year">Anual</SelectItem>
-            </SelectContent>
-          </Select>
-          <Radar data={chartData} />
-        </div>
+        <Radar data={chartData} />
       )}
     </div>
   );

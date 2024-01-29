@@ -1,9 +1,6 @@
 "use client";
-
 import { useState, useEffect, HTMLAttributes } from "react";
-import { cn } from "@/lib/utils";
-import { Skeleton } from "../ui/skeleton";
-import { fetchStatusMetrics } from "@/lib/data/metrics";
+import { fetchTypesMetrics } from "@/lib/data/metrics";
 import { Pie } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -17,6 +14,8 @@ import {
   Filler,
   Colors,
 } from "chart.js";
+import { cn } from "@/lib/utils";
+import { Skeleton } from "../ui/skeleton";
 
 ChartJS.register(
   CategoryScale,
@@ -30,16 +29,16 @@ ChartJS.register(
   Colors,
 );
 
-interface StatusProps extends HTMLAttributes<HTMLDivElement> {
+interface TypesProps extends HTMLAttributes<HTMLDivElement> {
   token: string;
 }
 
-export default function Status({ className, token, ...props }: StatusProps) {
+export default function Types({ className, token, ...props }: TypesProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [chartData, setChartData] = useState<any>(null);
 
   useEffect(() => {
-    fetchStatusMetrics({ token }).then(({ success, data }) => {
+    fetchTypesMetrics({ token }).then(({ success, data }) => {
       if (success) {
         const values = {
           labels: data.response.labels,
@@ -50,7 +49,6 @@ export default function Status({ className, token, ...props }: StatusProps) {
             },
           ],
         };
-
         setChartData(values);
         setIsLoading(false);
       }
@@ -60,13 +58,13 @@ export default function Status({ className, token, ...props }: StatusProps) {
   return (
     <div
       className={cn(
-        "flex flex-col items-center justify-center shadow-lg bg-slate-100 rounded-xl",
+        "flex flex-col items-center justify-center rounded-xl bg-slate-100 shadow-lg",
         className,
       )}
       {...props}
     >
       {isLoading ? (
-        <Skeleton className="h-max w-full" />
+        <Skeleton className="h-full w-full" />
       ) : (
         <Pie data={chartData} />
       )}

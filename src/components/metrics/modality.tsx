@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { fetchModalityMetrics } from "@/lib/data";
+import { useState, useEffect, HTMLAttributes } from "react";
+import { fetchModalityMetrics } from "@/lib/data/metrics";
 import { PolarArea } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -15,6 +15,8 @@ import {
   Filler,
   Colors,
 } from "chart.js";
+import { Skeleton } from "../ui/skeleton";
+import { cn } from "@/lib/utils";
 
 ChartJS.register(
   CategoryScale,
@@ -28,35 +30,49 @@ ChartJS.register(
   Colors,
 );
 
-export default function Modality({ token }: { token: string }) {
+interface ModalityProps extends HTMLAttributes<HTMLDivElement> {
+  token: string;
+}
+
+export default function Modality({
+  className,
+  token,
+  ...props
+}: ModalityProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [chartData, setChartData] = useState<any>(null);
 
   useEffect(() => {
     fetchModalityMetrics({ token }).then(({ success, data }) => {
-      if (!success) {
-        return (
-          <div>
-            <h1>{data.name}</h1>
-            <span>{data.message}</span>
-          </div>
-        );
+      if (success) {
+        const values = {
+          labels: data.response.labels,
+          datasets: [
+            {
+              label: "Postulaciones",
+              data: data.response.data,
+            },
+          ],
+        };
+        setChartData(values);
+        setIsLoading(false);
       }
-      const values = {
-        labels: data.response.labels,
-        datasets: [
-          {
-            label: "# de Postulaciones",
-            data: data.response.data,
-          },
-        ],
-      };
-      setChartData(values);
-      setIsLoading(false);
     });
   }, []);
 
   return (
-    <div>{isLoading ? <div>Loading...</div> : <PolarArea data={chartData} />}</div>
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center rounded-xl bg-slate-100 shadow-lg",
+        className,
+      )}
+      {...props}
+    >
+      {isLoading ? (
+        <Skeleton className="h-full w-full" />
+      ) : (
+        <PolarArea data={chartData} />
+      )}
+    </div>
   );
 }
