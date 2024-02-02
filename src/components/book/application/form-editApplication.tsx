@@ -46,8 +46,7 @@ export default function Form({
 
     toast({
       variant: "warning",
-      title: data.name,
-      description: data.message,
+      title: data.message,
     });
   }, []);
 

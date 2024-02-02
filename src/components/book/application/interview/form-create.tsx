@@ -56,8 +56,7 @@ export default function FormCreateInterview({
 
     toast({
       variant: "warning",
-      title: data.name,
-      description: data.message,
+      title: data.message,
     });
   }, []);
 

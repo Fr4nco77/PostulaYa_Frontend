@@ -36,7 +36,7 @@ export default function Form({ _id, token, title, body }: FormProps) {
       });
     }
 
-    toast({ variant: "warning", description: data.message });
+    toast({ variant: "warning", title: data.message });
   };
 
   return (

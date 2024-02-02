@@ -29,7 +29,7 @@ export default function Form() {
         description: data.message,
       });
     }
-    toast({ variant: "warning", description: data.message });
+    toast({ variant: "warning", title: data.message });
   }, []);
 
   return (

@@ -84,8 +84,7 @@ export default function Form({ token }: { token: string }) {
 
       toast({
         variant: "warning",
-        title: data.name,
-        description: data.message,
+        title: data.message,
       });
     },
     [skills],

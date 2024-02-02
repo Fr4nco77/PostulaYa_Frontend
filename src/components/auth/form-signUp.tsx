@@ -33,7 +33,7 @@ export default function Form() {
       });
     }
 
-    toast({ variant: "warning", description: data.message });
+    toast({ variant: "warning", title: data.message });
   }, []);
 
   return (

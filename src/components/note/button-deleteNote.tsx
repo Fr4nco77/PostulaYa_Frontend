@@ -31,7 +31,7 @@ export default function DeleteNote({
       });
     }
 
-    toast({ variant: "warning", description: data.message });
+    toast({ variant: "warning", title: data.message });
   }, []);
 
   return (

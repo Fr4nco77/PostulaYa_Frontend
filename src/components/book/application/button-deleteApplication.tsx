@@ -44,7 +44,7 @@ export function DeleteApplication({
       });
     }
 
-    toast({ variant: "warning", description: data.message });
+    toast({ variant: "warning", title: data.message });
     router.push("/app/book");
   }, [token, applicationID]);
 
