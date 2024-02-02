@@ -5,8 +5,8 @@ import { Skeleton } from "../ui/skeleton";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { cookies } from "next/headers";
 import { cn } from "@/lib/utils";
-import ButtonUser from "./button_user";
-import ButtonFeedback from "./button_feedback";
+import ButtonSkills from "./button_skills";
+import MobilMenu from "./menuMobil";
 
 interface SidebarProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -21,40 +21,42 @@ export default function Sidebar({
   return (
     <nav
       className={cn(
-        "flex bg-yellow-400 shadow-lg max-lg:items-center max-lg:justify-between lg:flex-col",
+        "flex items-center justify-between bg-slate-100 px-6 py-4 shadow-lg lg:flex-col",
         className,
       )}
       {...props}
     >
-      <div className="flex items-center justify-center p-2 lg:p-4 lg:pb-2">
-        <Image
-          src="/Logo_simple.svg"
-          alt="PostulaYa logo"
-          priority
-          width={40}
-          height={40}
-          className="sm:hidden lg:block"
-        />
-        <Image
-          src="/Logo_borderBlack.svg"
-          alt="PostulaYa logo"
-          priority
-          width={130}
-          height={40}
-          className="hidden sm:max-lg:block"
-        />
-      </div>
-      <ul className="flex items-center max-lg:overflow-x-auto lg:mt-4 lg:grow lg:flex-col">
+      <Image
+        src="/Logo_simple.svg"
+        alt="PostulaYa"
+        priority={true}
+        width={40}
+        height={0}
+        className="mx-auto hidden h-auto lg:block"
+      />
+      <Image
+        src="Logo.svg"
+        alt="PostulaYa"
+        width={157.61}
+        height={0}
+        priority={true}
+        className="h-auto lg:hidden"
+      />
+      <MobilMenu>
         {children}
-        <ButtonUser token={token} />
-        <ButtonFeedback token={token} />
-        <Exit className="lg:mt-6" />
+        <ButtonSkills token={token} />
+        <Exit />
+      </MobilMenu>
+      <ul className="hidden gap-2 md:flex lg:mt-4 lg:grow lg:flex-col">
+        {children}
+        <ButtonSkills token={token} />
+        <Exit />
       </ul>
-      <div className="hidden border-t border-[rgb(8,11,28)] p-3 pl-4 lg:flex">
-        <Avatar className="border border-[rgb(8,11,28)]">
-          <AvatarImage src={userImage} />
+      <div className="hidden lg:block">
+        <Avatar className="mb-1 border border-[rgb(8,11,28)]">
+          <AvatarImage src={userImage} className="h-auto w-full" />
           <AvatarFallback>
-            <Skeleton className="h-10 w-10 rounded-full" />
+            <Skeleton className="h-full w-full rounded-full" />
           </AvatarFallback>
         </Avatar>
       </div>
