@@ -12,28 +12,34 @@ export const metadata: Metadata = {
 export default function SingIn() {
   return (
     <div className="flex w-full max-w-md flex-col items-center justify-center p-10 lg:max-w-lg">
-      <header className="w-full ">
-        <Image
-          src="/Logo_borderBlack.svg"
-          alt="logo PostulaYa"
-          width={0}
-          height={0}
-          priority={true}
-          className="mb-1 h-auto w-4/6 lg:hidden"
-        />
+      <header className="mb-4 w-full">
+        <Link href="/">
+          <Image
+            src="/Logo.svg"
+            alt="PostulaYa"
+            width={172.5}
+            height={52.5}
+            priority={true}
+          />
+        </Link>
         <h1 className="mt-3 text-4xl ">
           <strong>Hola de nuevo 👋</strong>
         </h1>
-        <span>¡Listo para continuar! 💪</span>
       </header>
       <GoogleButton className="my-5 w-full" />
       <Separator />
       <Form />
-      <div className="w-full">
+      <div className="w-full text-center">
         <span>
           ¿Aún no tienes una cuenta?{" "}
-          <Link href="/sign_up">
-            <strong className="underline">Regístrate aquí</strong>
+          <Link
+            href="/sign_up"
+            className="group relative inline-block cursor-pointer text-slate-900"
+          >
+            <strong className="relative">
+              Regístrate aquí
+              <span className="absolute inset-x-0 bottom-0 h-0.5 origin-bottom scale-x-0 transform bg-slate-900 transition-transform duration-300 group-hover:scale-x-100"></span>
+            </strong>
           </Link>
         </span>
       </div>

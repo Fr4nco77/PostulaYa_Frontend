@@ -13,7 +13,14 @@ export default function NavBar({ className, ...props }: NavBarProps) {
       className={cn("flex items-end justify-between px-6 py-4", className)}
       {...props}
     >
-      <Image src="Logo.svg" alt="PostulaYa" width={157.61} height={48} />
+      <Image
+        src="Logo.svg"
+        alt="PostulaYa"
+        width={157.61}
+        height={0}
+        priority={true}
+        className="h-auto"
+      />
       <MobilMenu />
       <ul className="hidden list-none items-center gap-6 text-sm font-semibold lg:flex">
         <Link

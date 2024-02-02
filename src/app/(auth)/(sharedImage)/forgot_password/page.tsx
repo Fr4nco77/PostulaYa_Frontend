@@ -22,12 +22,12 @@ export default function ForgotPassword() {
           <ChevronLeft className="mr-2 h-4 w-4" /> Volver
         </Link>
         <Image
-          src="/Logo_borderBlack.svg"
-          alt="logo PostulaYa"
-          width={0}
-          height={0}
+          src="/Logo.svg"
+          alt="PostulaYa"
+          width={172.5}
+          height={52.5}
           priority={true}
-          className="mb-1 h-auto w-4/6 lg:hidden"
+          className="mb-1"
         />
         <h1 className="mt-3 text-4xl font-bold">Recuperar Contraseña</h1>
         <p>

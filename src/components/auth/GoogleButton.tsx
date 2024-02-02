@@ -70,7 +70,7 @@ export default function GoogleButton({ className, ...props }: ButtonProps) {
       <Button
         variant="outline"
         type="button"
-        className="w-full border-slate-600"
+        className="w-full border-slate-600 hover:bg-slate-900 hover:text-yellow-400"
         onClick={googleLogin}
       >
         <GoogleLogo />

@@ -92,8 +92,14 @@ export default function Form() {
         <ErrorMessage errors={errors?.password} errorKey="password" />
       </div>
       <div className="flex items-end justify-end">
-        <Link href="/forgot_password">
-          <strong className="text-sm underline">Olvidé mi contraseña</strong>
+        <Link
+          href="/forgot_password"
+          className="group relative inline-block cursor-pointer text-slate-700 transition-colors duration-300 hover:text-slate-900"
+        >
+          <strong className="relative text-sm">
+            Olvidé mi contraseña
+            <span className="absolute inset-x-0 bottom-0 h-0.5 origin-bottom scale-x-0 transform bg-slate-900 transition-transform duration-300 group-hover:scale-x-100"></span>
+          </strong>
         </Link>
       </div>
       <ButtonSubmit>Ingresar</ButtonSubmit>
