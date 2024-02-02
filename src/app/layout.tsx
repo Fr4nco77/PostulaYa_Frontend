@@ -10,6 +10,8 @@ export const metadata: Metadata = {
     template: "%s · PostulaYa",
     default: "PostulaYa",
   },
+  description:
+    "Optimiza tu búsqueda laboral con PostulaYa: registra postulaciones, analiza estadísticas y organiza tu historial profesional. Una guía estratégica para avanzar hacia tu empleo soñado. ¡Descubre más con PostulaYa!",
 };
 
 export default function RootLayout({
@@ -27,7 +29,7 @@ export default function RootLayout({
           sizes="<generated>"
         />
       </head>
-      <body className={`${inter.className} bg-slate-50`}>
+      <body className={`${inter.className} scroll-smooth bg-slate-50`}>
         {children}
         <Toaster />
       </body>
