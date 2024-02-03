@@ -84,7 +84,7 @@ export default function Form() {
             onClick={() => setShowPassword(!showPassword)}
             size="icon"
             variant="outline"
-            className="border-slate-600"
+            className="border-slate-600 hover:bg-slate-900 hover:text-yellow-400"
           >
             {showPassword ? <Eye /> : <EyeOff />}
           </Button>
