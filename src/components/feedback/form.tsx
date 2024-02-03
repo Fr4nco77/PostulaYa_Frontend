@@ -7,7 +7,6 @@ import { Errors } from "@/lib/definitions";
 import { useToast } from "../ui/use-toast";
 import { useCallback, useState } from "react";
 import { sendFeedback } from "@/lib/actions/user";
-import ErrorMessage from "../ui/error-message";
 import { ButtonSubmit } from "../ui/button-submit";
 
 export default function Form({ token }: { token: string }) {
@@ -30,34 +29,42 @@ export default function Form({ token }: { token: string }) {
       });
     }
 
-    toast({ description: data.message });
+    toast({ title: data.message });
   }, []);
 
   return (
     <form
-      className="mt-3 flex w-full flex-col items-center justify-center gap-1"
+      className="mt-6 flex w-full flex-col items-center gap-3 "
       action={handleCreate}
     >
       <div className="w-full">
-        <Label htmlFor="subject">Asunto</Label>
+        <Label
+          htmlFor="subject"
+          className={`text-lg ${errors?.subject && "text-red-500"}`}
+        >
+          Asunto
+        </Label>
         <Input
           id="subject"
           name="subject"
-          placeholder="Gracias"
-          aria-describedby="subject-error"
+          placeholder="¡Gracias PostulaYa!"
+          className={errors?.subject && "border-red-500"}
         />
       </div>
-      <ErrorMessage errors={errors.subject} errorKey="subject" />
       <div className="w-full">
-        <Label htmlFor="body">Contenido</Label>
+        <Label
+          htmlFor="body"
+          className={`text-lg ${errors?.body && "text-red-500"}`}
+        >
+          Contenido
+        </Label>
         <Textarea
           id="body"
           name="body"
-          aria-describedby="body-error"
-          placeholder="Gracias a ustedes potencie mi busqueda laboral y encontre el trabajo que neesitaba"
+          placeholder="Gracias a PostulaYa, mi búsqueda de empleo ha alcanzado un nuevo nivel de eficiencia y estrategia. Estoy realmente impresionado y agradecido."
+          className={`lg:resize-none ${errors?.body && "border-red-500"}`}
         />
       </div>
-      <ErrorMessage errors={errors.body} errorKey="body" />
       <ButtonSubmit className="w-full">Enviar</ButtonSubmit>
     </form>
   );
