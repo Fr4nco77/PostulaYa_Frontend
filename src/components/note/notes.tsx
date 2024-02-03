@@ -39,10 +39,10 @@ export default async function Notes({
           return (
             <div
               key={_id}
-              className="w-full rounded-xl bg-slate-100 p-3 shadow-md md:max-w-xs"
+              className="w-full max-w-xs rounded-xl bg-yellow-400 p-3 shadow-md"
             >
               <div className="flex items-center justify-between">
-                <h1>{title}</h1>
+                <h4 className="truncate font-medium">{title}</h4>
                 <div className="flex items-center gap-2">
                   <AddFavorite _id={_id} token={token} favorite={favorite!} />
                   <EditNote

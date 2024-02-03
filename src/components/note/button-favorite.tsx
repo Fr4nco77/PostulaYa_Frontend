@@ -42,10 +42,13 @@ export default function AddFavorite({
     <Button
       size="icon"
       variant="ghost"
-      className={clsx("h-7 w-7 rounded-full p-1 text-slate-900", {
-        "bg-yellow-400 hover:bg-yellow-300": favorite,
-        "hover:bg-slate-900 hover:text-yellow-400": !favorite,
-      })}
+      className={clsx(
+        "h-7 w-7 rounded-full p-1 hover:bg-slate-900 hover:text-yellow-400",
+        {
+          "text-slate-900": favorite,
+          "text-yellow-600": !favorite,
+        },
+      )}
       onClick={handleFavorite}
       disabled={isLoading}
     >

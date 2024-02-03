@@ -9,7 +9,6 @@ import { useToast } from "../ui/use-toast";
 import { Errors, Skill, Skills } from "@/lib/definitions";
 import { addSkill } from "@/lib/actions/application";
 import { Badge } from "../ui/badge";
-import ErrorMessage from "../ui/error-message";
 import { ButtonSubmit } from "../ui/button-submit";
 import { updateUser } from "@/lib/actions/user";
 
@@ -90,13 +89,14 @@ export default function Form({
             id="skill"
             ref={inputRef}
             placeholder="NextJs"
-            aria-describedby="skill-error"
+            className={errors?.skills && "border-red-500"}
           />
           <Button
             size={"icon"}
             type="button"
             onClick={addSkills}
             disabled={isLoading}
+            className="hover:bg-slate-900 hover:text-yellow-400"
           >
             {isLoading ? <Loader2 className="animate-spin" /> : <Plus />}
           </Button>
@@ -104,13 +104,17 @@ export default function Form({
       </div>
       <div className="flex max-h-96 flex-wrap gap-1 overflow-y-auto">
         {skills?.map(({ _id, name }) => (
-          <Badge id={_id} key={_id} onClick={() => removeSkill(_id)}>
+          <Badge
+            id={_id}
+            key={_id}
+            onClick={() => removeSkill(_id)}
+            className="cursor-pointer hover:bg-slate-900 hover:text-yellow-400"
+          >
             {`${name}`}
             <X width={17} height={17} />
           </Badge>
         ))}
       </div>
-      <ErrorMessage errors={errors?.skills} errorKey="skill" />
       <ButtonSubmit disabled={skills.length === currentSkills.length}>
         Guardar Cambios
       </ButtonSubmit>
