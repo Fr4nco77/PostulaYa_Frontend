@@ -1,7 +1,6 @@
 "use client";
 
 import { ButtonSubmit } from "@/components/ui/button-submit";
-import ErrorMessage from "@/components/ui/error-message";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -40,10 +39,9 @@ export default function FormCreateNote({ token }: { token: string }) {
         <Input
           id="title"
           name="title"
-          placeholder="Recomendaciones de RRHH"
-          aria-describedby="title-error"
+          placeholder="Preparativos Entrevista"
+          className={errors?.title && "border-red-500"}
         />
-        <ErrorMessage errors={errors.title} errorKey="Titulo" />
       </div>
       <div className="h-auto w-full">
         <Label htmlFor="body" hidden>
@@ -52,11 +50,9 @@ export default function FormCreateNote({ token }: { token: string }) {
         <Textarea
           id="body"
           name="body"
-          placeholder="Nota"
-          className="resize-none"
-          aria-describedby="body-error"
+          placeholder="Investigar la empresa, repasar logros y mostrar confianza."
+          className={`resize-none ${errors?.body && "border-red-500"}`}
         />
-        <ErrorMessage errors={errors.body} errorKey="body" />
       </div>
       <ButtonSubmit>Agregar Nota</ButtonSubmit>
     </form>

@@ -1,14 +1,19 @@
 import ButtonCreate from "@/components/note/button-create";
 import Notes from "@/components/note/notes";
+import { Metadata } from "next";
 import { cookies } from "next/headers";
+
+export const metadata: Metadata = {
+  title: "Notas",
+};
 
 export default function NotesPage() {
   const token = cookies().get("authorization")?.value!;
 
   return (
-    <div className="flex h-full max-w-6xl flex-grow flex-col items-center gap-5 rounded-lg bg-slate-100 px-3 py-5 shadow-xl ">
+    <div className="flex h-full max-w-3xl flex-grow flex-col items-center gap-5 rounded-lg bg-slate-100 p-3 shadow-xl lg:p-6 xl:max-w-6xl">
       <header className="flex w-full items-center justify-between px-5">
-        <h1 className="text-2xl font-bold">Notas</h1>
+        <h1 className="text-4xl font-black">Notas</h1>
         <ButtonCreate token={token} />
       </header>
       <Notes

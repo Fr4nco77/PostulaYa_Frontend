@@ -1,7 +1,6 @@
 "use client";
 
 import { ButtonSubmit } from "@/components/ui/button-submit";
-import ErrorMessage from "@/components/ui/error-message";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -45,15 +44,23 @@ export default function Form({ _id, token, title, body }: FormProps) {
         <Label htmlFor="title" hidden>
           Titulo
         </Label>
-        <Input id="title" name="title" defaultValue={title} />
-        <ErrorMessage errors={errors.title} errorKey="title" />
+        <Input
+          id="title"
+          name="title"
+          defaultValue={title}
+          className={errors?.title && "border-red-500"}
+        />
       </div>
       <div className="h-auto w-full">
         <Label htmlFor="body" hidden>
           Nota
         </Label>
-        <Textarea id="body" name="body" defaultValue={body} />
-        <ErrorMessage errors={errors.body} errorKey="body" />
+        <Textarea
+          id="body"
+          name="body"
+          defaultValue={body}
+          className={`resize-none ${errors?.body && "border-red-500"}`}
+        />
       </div>
       <ButtonSubmit>Guardar Cambios</ButtonSubmit>
     </form>

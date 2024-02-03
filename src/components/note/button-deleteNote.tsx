@@ -30,8 +30,6 @@ export default function DeleteNote({
         description: data.message,
       });
     }
-
-    toast({ variant: "warning", title: data.message });
   }, []);
 
   return (

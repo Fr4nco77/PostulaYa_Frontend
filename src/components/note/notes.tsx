@@ -19,8 +19,8 @@ export default async function Notes({
   const { success, data } = await fetchNotes({ token });
   if (!success) {
     return (
-      <div className="flex-cole flex h-full w-full items-center justify-center">
-        <h1 className="text-3xl font-bold">{data.name}</h1>
+      <div className="flex h-full w-full flex-col items-center justify-center">
+        <h2 className="text-3xl font-bold">{data.name}</h2>
         <span>{data.message}</span>
       </div>
     );

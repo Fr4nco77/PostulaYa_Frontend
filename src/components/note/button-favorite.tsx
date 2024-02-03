@@ -44,7 +44,7 @@ export default function AddFavorite({
       variant="ghost"
       className={clsx("h-7 w-7 rounded-full p-1 text-slate-900", {
         "bg-yellow-400 hover:bg-yellow-300": favorite,
-        "hover:bg-slate-200": !favorite,
+        "hover:bg-slate-900 hover:text-yellow-400": !favorite,
       })}
       onClick={handleFavorite}
       disabled={isLoading}

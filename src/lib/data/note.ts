@@ -22,7 +22,7 @@ export async function fetchNotes({ token }: { token: string }) {
             success: false,
             data: {
                 name: "Error Interno",
-                message: "Ocurrio un error inesperado"
+                message: "Ocurrió un error inesperado."
             }
         }
     }
