@@ -6,7 +6,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { columns } from "./data";
+import { columnsBook } from "@/lib/dataComponents";
 import { ApplicationQuery } from "@/lib/definitions";
 import { fetchApplications } from "@/lib/data/application";
 import Actions from "./actions";
@@ -50,7 +50,7 @@ export default async function ApplicationTable({
     <Table>
       <TableHeader>
         <TableRow>
-          {columns?.map((column) => {
+          {columnsBook?.map((column) => {
             return <TableHead key={column}>{column}</TableHead>;
           })}
         </TableRow>

@@ -10,7 +10,7 @@ import {
   orderValues,
   statusNames,
   statusValues,
-} from "./data";
+} from "@/lib/dataComponents";
 import CreateApplication from "./button-create";
 
 export default function Searchbar({ token }: { token: string }) {

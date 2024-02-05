@@ -8,7 +8,7 @@ import { formatedQuery } from "@/lib/utils";
 import TableSkeleton from "@/components/book/table-skeleton";
 import { Metadata } from "next";
 import Filter from "@/components/ui/select-filter";
-import { limit } from "@/components/book/data";
+import { limit } from "@/lib/dataComponents";
 import { Separator } from "@/components/ui/separator";
 import Status from "@/components/book/charts/status";
 import ApplicationsByTime from "@/components/book/charts/applications";

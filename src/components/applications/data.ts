@@ -1,1 +1,0 @@
-export const columns = ["Fecha", "Posicion", "Empresa", "Ubicacion", "Habilidades", "Modalidad", "Tipo", "Enlace"];
