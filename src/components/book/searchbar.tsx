@@ -8,50 +8,41 @@ import {
   typesValues,
   orderNames,
   orderValues,
-  limit,
   statusNames,
   statusValues,
 } from "./data";
 import CreateApplication from "./button-create";
 
-export default function Searchbar({ token }: {token: string;}) {
+export default function Searchbar({ token }: { token: string }) {
   return (
-    <div className="h-auto w-full max-w-2xl rounded-2xl bg-slate-100 p-3 shadow-xl">
-      <div className="flex h-full w-full flex-col gap-5">
-        <Search placeholder="¿Que estas buscando?" />
-        <div className="flex flex-wrap gap-2">
-          <Filter
-            placeholder="Estado"
-            query="status"
-            names={statusNames}
-            values={statusValues}
-          />
-          <Filter
-            placeholder="Modalidad"
-            query="modality"
-            names={modalitysNames}
-            values={modalitysValues}
-          />
-          <Filter
-            placeholder="Tipo"
-            query="type"
-            names={typesNames}
-            values={typesValues}
-          />
-          <Filter
-            placeholder="Orden"
-            query="order"
-            names={orderNames}
-            values={orderValues}
-          />
-          <Filter
-            placeholder="Cantidad"
-            query="limit"
-            names={limit}
-            values={limit}
-          />
-          <CreateApplication token={token} />
-        </div>
+    <div className="flex h-auto w-full flex-col items-center justify-between gap-2 lg:flex-row">
+      <Search placeholder="Posición, empresa, ubicación o reclutador" className="max-w-[472.55px] xl:max-w-md lg:max-xl:max-w-xs" />
+      <div className="flex flex-wrap gap-2">
+        <Filter
+          placeholder="Estado"
+          query="status"
+          names={statusNames}
+          values={statusValues}
+        />
+        <Filter
+          placeholder="Modalidad"
+          query="modality"
+          names={modalitysNames}
+          values={modalitysValues}
+        />
+        <Filter
+          placeholder="Tipo"
+          query="type"
+          names={typesNames}
+          values={typesValues}
+        />
+        <Filter
+          placeholder="Orden"
+          query="order"
+          names={orderNames}
+          values={orderValues}
+        />
+        <CreateApplication token={token} />
       </div>
     </div>
   );

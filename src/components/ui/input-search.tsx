@@ -4,12 +4,13 @@ import { useSearchParams, usePathname, useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 import { Input } from "./input";
 import { HTMLAttributes } from "react";
+import { cn } from "@/lib/utils";
 
 interface SearchinputProps extends HTMLAttributes<HTMLInputElement> {
   placeholder: string;
 }
 
-export default function SearchInput({ ...props }: SearchinputProps) {
+export default function SearchInput({ className, ...props }: SearchinputProps) {
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -30,6 +31,7 @@ export default function SearchInput({ ...props }: SearchinputProps) {
       id="search"
       onChange={(e) => handleSearch(e.target.value)}
       defaultValue={searchParams.get("query")?.toString()}
+      className={cn(className)}
       {...props}
     />
   );

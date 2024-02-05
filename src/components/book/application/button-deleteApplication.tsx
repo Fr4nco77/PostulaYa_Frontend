@@ -43,8 +43,6 @@ export function DeleteApplication({
         description: data.message,
       });
     }
-
-    toast({ variant: "warning", title: data.message });
     router.push("/app/book");
   }, [token, applicationID]);
 
@@ -65,17 +63,20 @@ export function DeleteApplication({
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>
-            ¿Quieres eliminar esta postulacion?
+          <AlertDialogTitle className="text-3xl font-black text-slate-900">
+            ¿Seguro que quieres eliminar esta postulación?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            Ten en cuenta que cada postulacion es importante para medir y
-            fortalecer tu progreso.
+            Cada aplicación es valiosa para evaluar y potenciar tu progreso en
+            la búsqueda laboral.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction className="bg-red-600" onClick={handleDelete}>
+          <AlertDialogAction
+            className="bg-red-600 hover:bg-red-500"
+            onClick={handleDelete}
+          >
             Eliminar
           </AlertDialogAction>
         </AlertDialogFooter>

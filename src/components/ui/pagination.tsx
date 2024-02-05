@@ -19,7 +19,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
   };
 
   return (
-    <footer className="inline-flex rounded-2xl bg-slate-100 p-3 shadow-xl">
+    <div className="inline-flex">
       <PaginationArrow
         direction="left"
         href={createPageURL(currentPage - 1)}
@@ -52,7 +52,7 @@ export default function Pagination({ totalPages }: { totalPages: number }) {
         href={createPageURL(currentPage + 1)}
         isDisabled={currentPage >= totalPages}
       />
-    </footer>
+    </div>
   );
 }
 
@@ -72,7 +72,7 @@ function PaginationNumber({
     {
       "rounded-l-md": position === "first" || position === "single",
       "rounded-r-md": position === "last" || position === "single",
-      "z-10 bg-yellow-400 text-black": isActive,
+      "z-10 bg-[rgb(8,11,28)] text-yellow-400": isActive,
       "hover:bg-gray-200": !isActive && position !== "middle",
       "text-gray-300": position === "middle",
     },

@@ -93,63 +93,106 @@ export default function Form({ token }: { token: string }) {
   return (
     <form action={handleSubmit} className="grid gap-4 py-4">
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="position" className="text-right">
-          Posicion
+        <Label
+          htmlFor="position"
+          className={`text-right ${errors?.position && "text-red-500"}`}
+        >
+          Posición
         </Label>
         <Input
           id="position"
           name="position"
           placeholder="Full-Stack Developer"
-          className="col-span-3"
+          className={`col-span-3 ${errors?.position && "border-red-500"}`}
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="company" className="text-right">
+        <Label
+          htmlFor="company"
+          className={`text-right ${errors?.company && "text-red-500"}`}
+        >
           Empresa
         </Label>
         <Input
           id="company"
           name="company"
           placeholder="Dream Company S.A"
-          className="col-span-3"
+          className={`col-span-3 ${errors?.company && "border-red-500"}`}
         />
       </div>
-      <input type="hidden" name="category" value="IT" />
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="location" className="text-right">
-          Ubicacion
+        <Label
+          htmlFor="location"
+          className={`text-right ${errors?.location && "text-red-500"}`}
+        >
+          Ubicación
         </Label>
         <Input
           id="location"
           name="location"
           placeholder="Francia"
-          className="col-span-3"
+          className={`col-span-3 ${errors?.location && "border-red-500"}`}
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="recluter" className="text-right">
+        <Label
+          htmlFor="recluter"
+          className={`text-right ${errors?.recluter && "text-red-500"}`}
+        >
           {"Reclutador (opcional)"}
         </Label>
         <Input
           id="recluter"
           name="recluter"
           placeholder="Pedro Duarte"
-          className="col-span-3"
+          className={`col-span-3 ${errors?.recluter && "border-red-500"}`}
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="url" className="text-right">
-          Enlace a postulacion
+        <Label
+          htmlFor="category"
+          className={`text-right ${errors?.category && "text-red-500"}`}
+        >
+          Rubro
         </Label>
-        <Input
-          id="url"
-          name="url"
-          placeholder="https://listofJobs/jobs/13192898319"
-          className="col-span-3"
-        />
+        <div id="category" className="col-span-3">
+          <Select name="category">
+            <SelectTrigger>
+              <SelectValue placeholder="¿Cual es el sector?" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Tecnología e Informática">
+                Tecnología e Informática
+              </SelectItem>
+              <SelectItem value="Salud y Ciencias Médicas">
+                Salud y Ciencias Médicas
+              </SelectItem>
+              <SelectItem value="Marketing y Publicidad">
+                Marketing y Publicidad
+              </SelectItem>
+              <SelectItem value="Educación">Educación</SelectItem>
+              <SelectItem value="Finanzas y Contabilidad">
+                Finanzas y Contabilidad
+              </SelectItem>
+              <SelectItem value="Ingeniería y Construcción">
+                Ingeniería y Construcción
+              </SelectItem>
+              <SelectItem value="Recursos Humanos">Recursos Humanos</SelectItem>
+              <SelectItem value="Servicios al Cliente">
+                Atención al Cliente
+              </SelectItem>
+              <SelectItem value="Gastronomía y Hospitalidad">
+                Gastronomía y Hostelería
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="modality" className="text-right">
+        <Label
+          htmlFor="modality"
+          className={`text-right ${errors?.modality && "text-red-500"}`}
+        >
           Modalidad
         </Label>
         <div id="modality" className="col-span-3">
@@ -166,7 +209,10 @@ export default function Form({ token }: { token: string }) {
         </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="type" className="text-right">
+        <Label
+          htmlFor="type"
+          className={`text-right ${errors?.type && "text-red-500"}`}
+        >
           Tipo
         </Label>
         <div id="type" className="col-span-3">
@@ -182,7 +228,10 @@ export default function Form({ token }: { token: string }) {
         </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="platform" className="text-right">
+        <Label
+          htmlFor="platform"
+          className={`text-right ${errors?.platform && "text-red-500"}`}
+        >
           Plataforma de Postulacion
         </Label>
         <div id="platform" className="col-span-3">
@@ -202,7 +251,24 @@ export default function Form({ token }: { token: string }) {
         </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="skill" className="text-right">
+        <Label
+          htmlFor="url"
+          className={`text-right ${errors?.url && "text-red-500"}`}
+        >
+          Enlace a postulacion
+        </Label>
+        <Input
+          id="url"
+          name="url"
+          placeholder="https://listofJobs/jobs/13192898319"
+          className={`col-span-3 ${errors?.url && "border-red-500"}`}
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label
+          htmlFor="skill"
+          className={`text-right ${errors?.skills && "text-red-500"}`}
+        >
           Habilidades necesarias
         </Label>
         <div className="col-span-3 flex gap-2">
@@ -211,12 +277,14 @@ export default function Form({ token }: { token: string }) {
             ref={inputRef}
             placeholder="NextJs"
             aria-describedby="skill-error"
+            className={errors?.skills && "border-red-500"}
           />
           <Button
             size={"icon"}
             type="button"
             onClick={addSkills}
             disabled={isLoading}
+            className="hover:bg-slate-900 hover:text-yellow-400"
           >
             {isLoading ? <Loader2 className="animate-spin" /> : <Plus />}
           </Button>
@@ -224,7 +292,12 @@ export default function Form({ token }: { token: string }) {
       </div>
       <div className="flex flex-wrap gap-1">
         {skills?.map(({ _id, name }) => (
-          <Badge id={_id} key={_id} onClick={() => removeSkill(_id)}>
+          <Badge
+            id={_id}
+            key={_id}
+            onClick={() => removeSkill(_id)}
+            className="cursor-pointer hover:bg-slate-900 hover:text-yellow-400"
+          >
             {`${name}`}
             <X width={17} height={17} />
           </Badge>

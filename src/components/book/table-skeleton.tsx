@@ -28,9 +28,6 @@ export default function TableSkeleton() {
             <Skeleton className="w-25 h-4 rounded-lg" />
           </TableCell>
           <TableCell>
-            <Skeleton className="w-35 h-4 rounded-lg" />
-          </TableCell>
-          <TableCell>
             <Skeleton className="h-4 w-20 rounded-lg" />
           </TableCell>
           <TableCell>
@@ -40,7 +37,7 @@ export default function TableSkeleton() {
             <Skeleton className="h-4 w-20 rounded-lg" />
           </TableCell>
           <TableCell>
-            <Skeleton className="h-8 w-3 rounded-lg" />
+            <Skeleton className="h-2 w-10 rounded-lg" />
           </TableCell>
         </TableRow>,
       );

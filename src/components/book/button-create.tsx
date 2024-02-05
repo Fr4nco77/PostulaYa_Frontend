@@ -15,14 +15,16 @@ export default function CreateApplication({ token }: { token: string }) {
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="bg-yellow-400 hover:bg-slate-900 hover:text-yellow-400"
+          className="flex flex-grow bg-yellow-400 hover:bg-slate-900 hover:text-yellow-400"
         >
           Agregar
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-screen overflow-y-auto sm:max-w-[450px]">
+      <DialogContent className="bg-slate-50 max-h-screen overflow-y-auto max-w-md">
         <DialogHeader>
-          <DialogTitle>Agregar postulación</DialogTitle>
+          <DialogTitle className="text-3xl font-black text-slate-900">
+            Agregar postulación
+          </DialogTitle>
           <DialogDescription>
             ¿Qué puedes contarnos acerca de ese trabajo?
           </DialogDescription>

@@ -17,7 +17,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Eye, MoreVertical, Trash2 } from "lucide-react";
+import { Eye, MoreHorizontal, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useRef } from "react";
 import { useToast } from "../ui/use-toast";
@@ -42,20 +42,16 @@ export default function Actions({
         description: data.message,
       });
     }
-    toast({
-      variant: "warning",
-      description: data.message,
-    });
   }, []);
 
   return (
     <AlertDialog>
       <DropdownMenu>
         <DropdownMenuTrigger className="outline-none" ref={dropdownTriggerRef}>
-          <MoreVertical />
+          <MoreHorizontal />
         </DropdownMenuTrigger>
         <DropdownMenuContent sideOffset={5}>
-          <DropdownMenuItem>
+          <DropdownMenuItem className="cursor-pointer focus:bg-[rgb(8,11,28)] focus:text-yellow-400">
             <Link
               href={`/app/book/${applicationID}`}
               className="flex items-start justify-start"
@@ -65,7 +61,7 @@ export default function Actions({
             </Link>
           </DropdownMenuItem>
           <AlertDialogTrigger asChild>
-            <DropdownMenuItem>
+            <DropdownMenuItem className="cursor-pointer focus:bg-red-600">
               <Trash2 className="mr-2 h-5 w-5" /> Eliminar
             </DropdownMenuItem>
           </AlertDialogTrigger>
@@ -79,17 +75,20 @@ export default function Actions({
         }}
       >
         <AlertDialogHeader>
-          <AlertDialogTitle>
-            ¿Quieres eliminar esta postulacion?
+          <AlertDialogTitle className="text-3xl font-black text-slate-900">
+            ¿Seguro que quieres eliminar esta postulación?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            "Ten en cuenta que cada postulación es importante para medir y
-            fortalecer tu progreso."
+            Cada aplicación es valiosa para evaluar y potenciar tu progreso en
+            la búsqueda laboral.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
-          <AlertDialogAction className="bg-red-600" onClick={handlerDelete}>
+          <AlertDialogAction
+            className="bg-red-600 hover:bg-red-500"
+            onClick={handlerDelete}
+          >
             Eliminar
           </AlertDialogAction>
         </AlertDialogFooter>

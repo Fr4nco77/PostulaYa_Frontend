@@ -53,7 +53,7 @@ export default function Filter({
         </SelectTrigger>
         <SelectContent>
           {values?.map((value: string, index: number) => (
-            <SelectItem key={value} value={value}>
+            <SelectItem key={value} value={value} className="focus:bg-[rgb(8,11,28)] focus:text-yellow-400">
               {names[index]}
             </SelectItem>
           ))}
