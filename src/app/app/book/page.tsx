@@ -29,7 +29,7 @@ export default async function Book({
   const { totalPages } = await fetchApplicationsPages({ query, token });
 
   return (
-    <main className="flex h-full w-full max-w-[850px] flex-col items-center justify-center gap-3 xl:max-w-7xl">
+    <main className="flex h-full w-full max-w-[850px] flex-col gap-3 xl:max-w-7xl">
       <div className="hidden h-28 w-full items-center justify-between lg:flex">
         <ApplicationsByTime token={token} className="h-full w-96" />
         <Status token={token} className="h-full w-72 " />
