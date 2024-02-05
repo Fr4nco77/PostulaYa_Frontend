@@ -11,7 +11,7 @@ export default function Feedback() {
   const token = cookies().get("authorization")?.value!;
   return (
     <main className="flex w-full flex-col items-start gap-6 md:flex-row lg:max-w-3xl xl:max-w-4xl">
-      <div className="flex flex-col items-center gap-2 rounded-lg bg-slate-100 p-3">
+      <div className="flex flex-col items-center gap-2 rounded-lg shadow-xl bg-slate-100 p-3">
         <div>
           <h1 className="text-4xl font-black tracking-tight text-gray-900">
             Apóyanos
@@ -32,7 +32,7 @@ export default function Feedback() {
         width={383}
         height={0}
         priority
-        className="h-auto rounded-3xl "
+        className="h-auto rounded-lg "
       />
     </main>
   );
