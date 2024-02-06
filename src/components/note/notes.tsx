@@ -55,7 +55,11 @@ export default async function Notes({
                   <DeleteNote _id={_id} token={token} className="h-7 w-7 p-1" />
                 </div>
               </div>
-              <Textarea defaultValue={body} className="resize-none" disabled />
+              <Textarea
+                defaultValue={body}
+                disabled
+                className="resize-none disabled:cursor-text"
+              />
             </div>
           );
         })

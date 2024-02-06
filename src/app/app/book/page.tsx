@@ -5,7 +5,7 @@ import { fetchApplicationsPages } from "@/lib/data/application";
 import React, { Suspense } from "react";
 import { cookies } from "next/headers";
 import { formatedQuery } from "@/lib/utils";
-import TableSkeleton from "@/components/book/table-skeleton";
+import TableSkeleton from "@/components/ui/table-skeleton";
 import { Metadata } from "next";
 import Filter from "@/components/ui/select-filter";
 import { limit } from "@/lib/dataComponents";
@@ -38,7 +38,16 @@ export default async function Book({
       </div>
       <Separator className="hidden lg:block" />
       <Searchbar token={token} />
-      <Suspense key={query} fallback={<TableSkeleton />}>
+      <Suspense
+        key={query}
+        fallback={
+          <TableSkeleton
+            rowCount={Number(searchParams.limit) || 6}
+            cellCount={8}
+            displayHeader
+          />
+        }
+      >
         <Table query={query} token={token} />
       </Suspense>
       <div className="flex w-full flex-col-reverse items-center justify-center gap-4 sm:justify-end md:flex-row md:gap-8">

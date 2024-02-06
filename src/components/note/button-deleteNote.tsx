@@ -37,7 +37,7 @@ export default function DeleteNote({
       variant="ghost"
       size="icon"
       onClick={handleDelete}
-      className={cn("rounded-full text-slate-900 hover:bg-red-600", className)}
+      className={cn("rounded-full text-slate-900 hover:bg-red-500", className)}
       {...props}
     >
       <Trash2 />
