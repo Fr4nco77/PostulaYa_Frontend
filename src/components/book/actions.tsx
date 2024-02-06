@@ -17,7 +17,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
-import { Eye, MoreHorizontal, Trash2 } from "lucide-react";
+import { FileText, MoreHorizontal, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useCallback, useRef } from "react";
 import { useToast } from "../ui/use-toast";
@@ -56,12 +56,12 @@ export default function Actions({
               href={`/app/book/${applicationID}`}
               className="flex items-start justify-start"
             >
-              <Eye className="mr-2 h-5 w-5" />
+              <FileText className="mr-2 h-5 w-5" />
               <span>Detalles</span>
             </Link>
           </DropdownMenuItem>
           <AlertDialogTrigger asChild>
-            <DropdownMenuItem className="cursor-pointer focus:bg-red-600">
+            <DropdownMenuItem className="cursor-pointer focus:bg-red-500">
               <Trash2 className="mr-2 h-5 w-5" /> Eliminar
             </DropdownMenuItem>
           </AlertDialogTrigger>

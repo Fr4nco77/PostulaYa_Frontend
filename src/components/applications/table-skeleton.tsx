@@ -7,7 +7,7 @@ import {
   TableBody,
   TableCell,
 } from "../ui/table";
-import { columns } from "./data";
+import { columnsApplications } from "@/lib/dataComponents";
 
 export default function TableSkeleton() {
   const generateRows = () => {
@@ -49,7 +49,7 @@ export default function TableSkeleton() {
     <Table>
       <TableHeader>
         <TableRow>
-          {columns?.map((column) => {
+          {columnsApplications?.map((column) => {
             return (
               <TableHead key={column}>
                 <Skeleton className="h-4 w-20 rounded-lg" />

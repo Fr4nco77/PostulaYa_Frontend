@@ -16,7 +16,10 @@ import CreateApplication from "./button-create";
 export default function Searchbar({ token }: { token: string }) {
   return (
     <div className="flex h-auto w-full flex-col items-center justify-between gap-2 lg:flex-row">
-      <Search placeholder="Posición, empresa, ubicación o reclutador" className="max-w-[472.55px] xl:max-w-md lg:max-xl:max-w-xs" />
+      <Search
+        placeholder="¿Posición, empresa, ubicación o reclutador?"
+        className="max-w-[472.55px] lg:max-xl:max-w-xs xl:max-w-md"
+      />
       <div className="flex flex-wrap gap-2">
         <Filter
           placeholder="Estado"

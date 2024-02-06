@@ -8,6 +8,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Form from "./form-create";
+import { Plus } from "lucide-react";
 
 export default function CreateApplication({ token }: { token: string }) {
   return (
@@ -17,6 +18,7 @@ export default function CreateApplication({ token }: { token: string }) {
           variant="outline"
           className="flex flex-grow bg-yellow-400 hover:bg-slate-900 hover:text-yellow-400"
         >
+          <Plus className="mr-1"/>
           Agregar
         </Button>
       </DialogTrigger>
