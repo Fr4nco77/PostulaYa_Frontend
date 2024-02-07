@@ -7,6 +7,11 @@ import { fetchAllPagesApplications } from "@/lib/data/application";
 import { limit } from "@/lib/dataComponents";
 import { formatedQuery } from "@/lib/utils";
 import { Suspense } from "react";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Vacantes"
+}
 
 export default async function Applications({
   searchParams,
