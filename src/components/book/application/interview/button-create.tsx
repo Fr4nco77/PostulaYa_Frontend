@@ -34,7 +34,7 @@ export default function CreateInterview({
           size="icon"
           variant="ghost"
           className={cn(
-            "rounded-2xl text-slate-900 hover:bg-slate-200",
+            "text-slate-900 transition duration-300 hover:bg-slate-900 hover:text-yellow-400",
             className,
           )}
           {...props}
@@ -42,9 +42,11 @@ export default function CreateInterview({
           <Plus />
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-screen overflow-y-auto sm:max-w-[450px]">
+      <DialogContent className="max-h-screen overflow-y-auto">
         <DialogHeader>
-          <DialogTitle>Registrar Entrevista</DialogTitle>
+          <DialogTitle className="text-3xl font-black text-slate-900">
+            Registrar Entrevista
+          </DialogTitle>
           <DialogDescription>
             Por favor tomate este tiempo para registrar todo lo que paso, esta
             informacion te sera de gran utilidad.

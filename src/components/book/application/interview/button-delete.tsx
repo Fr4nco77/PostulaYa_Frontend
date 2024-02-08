@@ -56,9 +56,8 @@ export function DeleteInterview({
       <AlertDialogTrigger asChild>
         <Button
           size="icon"
-          variant="ghost"
           className={cn(
-            "rounded-2xl text-slate-900 hover:bg-red-600",
+            "bg-red-200 text-red-600 transition duration-300 hover:bg-red-500 hover:text-slate-900",
             className,
           )}
           {...props}
@@ -68,17 +67,22 @@ export function DeleteInterview({
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>
+          <AlertDialogTitle className="text-3xl font-black text-slate-900">
             ¿Quieres eliminar esta entrevista?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            Ten en cuenta que las entrevistas son fundamentales para medir tu
-            progreso y son de gran utilidad para la comunidad
+            Considera que las entrevistas desempeñan un papel fundamental en la
+            evaluación y fortalecimiento de tu búsqueda laboral, y son de gran
+            utilidad tanto para tu desarrollo profesional como para la comunidad
+            en general.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction className="bg-red-600" onClick={handleDelete}>
+          <AlertDialogAction
+            className="bg-red-200 text-red-600 hover:bg-red-500 hover:text-slate-50"
+            onClick={handleDelete}
+          >
             Eliminar
           </AlertDialogAction>
         </AlertDialogFooter>

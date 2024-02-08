@@ -26,12 +26,14 @@ export default function Questions_Answers() {
   return (
     <div className="flex w-full flex-col">
       <div className="mb-4 flex w-full items-center justify-between">
-        <h3>Preguntas/Actividades de la entrevista</h3>
+        <h3 className="text-xl font-black text-slate-900">
+          Preguntas/Actividades de la entrevista
+        </h3>
         <Button
           type="button"
           size="icon"
           variant="ghost"
-          className="rounded-full text-gray-500 hover:bg-transparent"
+          className="text-slate-900 hover:bg-slate-900 hover:text-yellow-400"
           onClick={addQuestion}
         >
           <Plus />
@@ -55,7 +57,7 @@ export default function Questions_Answers() {
                   type="button"
                   variant="ghost"
                   size="icon"
-                  className="rounded-full text-gray-500 hover:bg-transparent"
+                  className="text-gray-500 hover:bg-transparent hover:text-red-500"
                   onClick={() => removeQuestion(question.id)}
                 >
                   <Trash2 />

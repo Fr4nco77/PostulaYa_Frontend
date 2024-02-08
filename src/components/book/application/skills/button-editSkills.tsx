@@ -33,7 +33,7 @@ export default function EditSkills({
           size="icon"
           variant="ghost"
           className={cn(
-            "rounded-2xl text-slate-900 hover:bg-slate-200",
+            "text-slate-900 transition duration-300 hover:bg-slate-900 hover:text-yellow-400",
             className,
           )}
           {...props}
@@ -41,9 +41,11 @@ export default function EditSkills({
           <Plus />
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-[450px]">
+      <DialogContent className="bg-slate-50">
         <DialogHeader>
-          <DialogTitle>Editar Habilidades</DialogTitle>
+          <DialogTitle className="text-4xl font-black text-slate-900">
+            Editar Habilidades
+          </DialogTitle>
           <DialogDescription>¿Algo ha cambiado?</DialogDescription>
         </DialogHeader>
         <Form

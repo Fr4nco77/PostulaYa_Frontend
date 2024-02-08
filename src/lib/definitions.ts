@@ -31,6 +31,7 @@ export type Application = {
     _id: string;
     position: string;
     modality: string;
+    category: string;
     type: string;
     recluter: string;
     company: string;

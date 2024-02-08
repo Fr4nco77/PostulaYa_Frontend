@@ -104,10 +104,12 @@ export default function Form({
             ref={inputRef}
             placeholder="React"
             aria-describedby="skill-error"
+            className={errors?.skills && "border-red-500"}
           />
           <Button
             size="icon"
             type="button"
+            className="bg-slate-900 text-slate-50 hover:bg-slate-900 hover:text-yellow-400"
             disabled={isLoading}
             onClick={addSkills}
           >
@@ -117,16 +119,19 @@ export default function Form({
       </div>
       <div className="flex flex-wrap gap-1">
         {skills?.map(({ _id, name }) => (
-          <Badge id={_id} key={_id} onClick={() => removeSkill(_id)}>
+          <Badge
+            id={_id}
+            key={_id}
+            onClick={() => removeSkill(_id)}
+            className="cursor-pointer bg-slate-900 text-slate-50 hover:bg-slate-900 hover:text-yellow-400"
+          >
             {`${name}`}
             <X width={17} height={17} />
           </Badge>
         ))}
       </div>
       <ErrorMessage errors={errors?.skills} errorKey="skill" />
-      <ButtonSubmit>
-        Guardar cambios
-      </ButtonSubmit>
+      <ButtonSubmit>Guardar cambios</ButtonSubmit>
     </form>
   );
 }

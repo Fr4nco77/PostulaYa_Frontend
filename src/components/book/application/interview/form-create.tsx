@@ -42,7 +42,7 @@ export default function FormCreateInterview({
     const { errors, success, data } = await createInterview({
       token,
       rawFormData,
-      application
+      application,
     });
     setErrors(errors);
 
@@ -66,41 +66,39 @@ export default function FormCreateInterview({
       <input type="text" hidden name="position" defaultValue={position} />
       <input type="text" hidden name="company" defaultValue={company} />
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="interviewer" className="text-right">
+        <Label
+          htmlFor="interviewer"
+          className={`text-right ${errors?.interviewer && "text-red-500"}`}
+        >
           Entrevistador
         </Label>
         <Input
           id="interviewer"
           name="interviewer"
           placeholder="Mary Doe"
-          className="col-span-3"
+          className={`col-span-3 ${errors?.interviewer && "border-red-500"}`}
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="duration" className="text-right">
-          {"Duracion (en minutos)"}
+        <Label
+          htmlFor="duration"
+          className={`text-right ${errors?.duration && "text-red-500"}`}
+        >
+          {"Duración (en minutos)"}
         </Label>
         <Input
           id="duration"
           name="duration"
           type="number"
           placeholder="40"
-          className="col-span-3"
+          className={`col-span-3 ${errors?.duration && "border-red-500"}`}
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="preparation" className="text-right">
-          {"Preparacion (Opcional)"}
-        </Label>
-        <Textarea
-          id="preparation"
-          name="preparation"
-          placeholder="Investigar la empresa, contactar con empleados de la empresa"
-          className="col-span-3 resize-none"
-        />
-      </div>
-      <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="feeling" className="text-right">
+        <Label
+          htmlFor="feeling"
+          className={`text-right ${errors?.feeling && "text-red-500"}`}
+        >
           Sentimiento
         </Label>
         <div id="feeling" className="col-span-3">
@@ -119,25 +117,45 @@ export default function FormCreateInterview({
         </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="feedback" className="text-right">
+        <Label
+          htmlFor="preparation"
+          className={`text-right ${errors?.preparation && "text-red-500"}`}
+        >
+          {"Preparación (Opcional)"}
+        </Label>
+        <Textarea
+          id="preparation"
+          name="preparation"
+          placeholder="He enfocado mi tiempo en destacar mi experiencia relevante, resaltar mis logros profesionales y afinar mi capacidad para comunicar mis habilidades"
+          className={`col-span-3 resize-none ${errors?.preparation && "border-red-500"}`}
+        />
+      </div>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label
+          htmlFor="feedback"
+          className={`text-right ${errors?.feedback && "text-red-500"}`}
+        >
           {"Feedback (Opcional)"}
         </Label>
         <Textarea
           id="feedback"
           name="feedback"
-          placeholder="El entrevistador me dijo que..."
-          className="col-span-3 resize-none"
+          placeholder="Tu desempeño durante la entrevista fue impresionante. Destacaron especialmente tu habilidad para comunicar tus logros de manera clara y efectiva, así como tu enfoque proactivo para abordar los desafíos"
+          className={`col-span-3 resize-none ${errors?.feedback && "border-red-500"}`}
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="observation" className="text-right">
+        <Label
+          htmlFor="observation"
+          className={`text-right ${errors?.observation && "text-red-500"}`}
+        >
           {"Observaciones (Opcional)"}
         </Label>
         <Textarea
           id="observation"
           name="observation"
-          placeholder="¿Que tal fue la entrevista?"
-          className="col-span-3 resize-none"
+          placeholder="En algunos momentos, podría haber proporcionado ejemplos más específicos para respaldar mis experiencias y habilidades."
+          className={`col-span-3 resize-none ${errors?.observation && "border-red-500"}`}
         />
       </div>
       <Questions_Answers />

@@ -4,6 +4,7 @@ import CreateInterview from "./button-create";
 import { fetchUserInterviews } from "@/lib/data/interview";
 import { ViewInterview } from "./button-view";
 import { DeleteInterview } from "./button-delete";
+import { Separator } from "@/components/ui/separator";
 
 interface InterviewsProps extends HTMLAttributes<HTMLDivElement> {
   token: string;
@@ -37,7 +38,7 @@ export default async function Interviews({
       {...props}
     >
       <div className="flex w-full items-center justify-between">
-        <h2 className="text-xl font-bold">Entrevistas</h2>
+        <h2 className="text-slate text-2xl font-black">Entrevistas</h2>
         <CreateInterview
           token={token}
           application={application}
@@ -52,20 +53,23 @@ export default async function Interviews({
       ) : (
         data.response.interviews.map((interview: any) => {
           return (
-            <div
-              key={interview._id}
-              className="flex w-full items-center justify-between"
-            >
-              <span>{interview.created_at.split("T")[0]}</span>
-              <div className="flex items-center gap-2">
-                <ViewInterview interview={interview} />
-                <DeleteInterview
-                  token={token}
-                  interview={interview._id}
-                  application={interview.application}
-                />
+            <>
+              <Separator className="bg-slate-300" />
+              <div
+                key={interview._id}
+                className="flex w-full items-center justify-between"
+              >
+                <span className="font-medium">{interview.created_at.split("T")[0]}</span>
+                <div className="flex items-center gap-2">
+                  <ViewInterview interview={interview} />
+                  <DeleteInterview
+                    token={token}
+                    interview={interview._id}
+                    application={interview.application}
+                  />
+                </div>
               </div>
-            </div>
+            </>
           );
         })
       )}

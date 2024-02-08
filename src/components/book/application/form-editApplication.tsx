@@ -53,18 +53,24 @@ export default function Form({
   return (
     <form action={handleUpdate} className="grid gap-4 py-4">
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="position" className="text-right">
+        <Label
+          htmlFor="position"
+          className={`text-right ${errors?.position && "text-red-500"}`}
+        >
           Posicion
         </Label>
         <Input
           id="position"
           name="position"
           defaultValue={application.position}
-          className="col-span-3"
+          className={`col-span-3 ${errors?.position && "border-red-500"}`}
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="status" className="text-right">
+        <Label
+          htmlFor="status"
+          className={`text-right ${errors?.status && "text-red-500"}`}
+        >
           Estado
         </Label>
         <div id="status" className="col-span-3">
@@ -81,51 +87,92 @@ export default function Form({
         </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="company" className="text-right">
+        <Label
+          htmlFor="company"
+          className={`text-right ${errors?.company && "text-red-500"}`}
+        >
           Empresa
         </Label>
         <Input
           id="company"
           name="company"
           defaultValue={application.company}
-          className="col-span-3"
+          className={`col-span-3 ${errors?.company && "border-red-500"}`}
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="location" className="text-right">
-          Ubicacion
+        <Label
+          htmlFor="location"
+          className={`text-right ${errors?.location && "text-red-500"}`}
+        >
+          Ubicación
         </Label>
         <Input
           id="location"
           name="location"
           defaultValue={application.location}
-          className="col-span-3"
+          className={`col-span-3 ${errors?.location && "border-red-500"}`}
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="recluter" className="text-right">
+        <Label
+          htmlFor="recluter"
+          className={`text-right ${errors?.recluter && "text-red-500"}`}
+        >
           Reclutador
         </Label>
         <Input
           id="recluter"
           name="recluter"
           defaultValue={application.recluter}
-          className="col-span-3"
+          className={`col-span-3 ${errors?.recluter && "border-red-500"}`}
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="url" className="text-right">
-          Enlace a postulacion
+        <Label
+          htmlFor="category"
+          className={`text-right ${errors?.category && "text-red-500"}`}
+        >
+          Rubro
         </Label>
-        <Input
-          id="url"
-          name="url"
-          defaultValue={application.url}
-          className="col-span-3"
-        />
+        <div id="category" className="col-span-3">
+          <Select defaultValue={application.category} name="category">
+            <SelectTrigger>
+              <SelectValue placeholder="" />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectItem value="Tecnología e Informática">
+                Tecnología e Informática
+              </SelectItem>
+              <SelectItem value="Salud y Ciencias Médicas">
+                Salud y Ciencias Médicas
+              </SelectItem>
+              <SelectItem value="Marketing y Publicidad">
+                Marketing y Publicidad
+              </SelectItem>
+              <SelectItem value="Educación">Educación</SelectItem>
+              <SelectItem value="Finanzas y Contabilidad">
+                Finanzas y Contabilidad
+              </SelectItem>
+              <SelectItem value="Ingeniería y Construcción">
+                Ingeniería y Construcción
+              </SelectItem>
+              <SelectItem value="Recursos Humanos">Recursos Humanos</SelectItem>
+              <SelectItem value="Servicios al Cliente">
+                Atención al Cliente
+              </SelectItem>
+              <SelectItem value="Gastronomía y Hospitalidad">
+                Gastronomía y Hostelería
+              </SelectItem>
+            </SelectContent>
+          </Select>
+        </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="modality" className="text-right">
+        <Label
+          htmlFor="modality"
+          className={`text-right ${errors?.modality && "text-red-500"}`}
+        >
           Modalidad
         </Label>
         <div id="modality" className="col-span-3">
@@ -142,7 +189,10 @@ export default function Form({
         </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="type" className="text-right">
+        <Label
+          htmlFor="type"
+          className={`text-right ${errors?.type && "text-red-500"}`}
+        >
           Tipo
         </Label>
         <div id="type" className="col-span-3">
@@ -158,8 +208,11 @@ export default function Form({
         </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
-        <Label htmlFor="platform" className="text-right">
-          Plataforma de Postulacion
+        <Label
+          htmlFor="platform"
+          className={`text-right ${errors?.platform && "text-red-500"}`}
+        >
+          Plataforma de Postulación
         </Label>
         <div id="platform" className="col-span-3">
           <Select name="platform" defaultValue={application.platform}>
@@ -177,8 +230,25 @@ export default function Form({
           </Select>
         </div>
       </div>
-      <ErrorMessage errors={errors?.url} errorKey="url" />
-      <ButtonSubmit>Editar Postulacion</ButtonSubmit>
+      <div className="grid grid-cols-4 items-center gap-4">
+        <Label
+          htmlFor="url"
+          className={`text-right ${errors?.url && "text-red-500"}`}
+        >
+          Enlace a postulación
+        </Label>
+        <Input
+          id="url"
+          name="url"
+          defaultValue={application.url}
+          className={`col-span-3 ${errors?.url && "border-red-500"}`}
+        />
+      </div>
+      <ErrorMessage
+        errors={errors?.position || errors?.url}
+        errorKey="position"
+      />
+      <ButtonSubmit>Editar Postulación</ButtonSubmit>
     </form>
   );
 }
