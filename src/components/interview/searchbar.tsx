@@ -1,17 +1,22 @@
 import Search from "../ui/input-search";
 import Filter from "../ui/select-filter";
-import { limit } from "../book/data";
+import { categoryNames, categoryValues } from "@/lib/dataComponents";
 
 export default function SearchBar() {
   return (
-    <header className="flex w-full max-w-2xl gap-5 rounded-2xl bg-slate-100 p-3 shadow-xl">
-      <Search placeholder="Dime cual empresa o puesto esta buscando" />
-      <Filter
-        placeholder="Cantidad"
-        query="limit"
-        names={limit}
-        values={limit}
+    <header className="flex h-auto w-full items-center gap-2 md:gap-6">
+      <Search
+        placeholder="¿Cuál empresa o puesto estas buscando?"
+        className="max-w-md"
       />
+      <div className="flex flex-wrap gap-2">
+        <Filter
+          placeholder="Categoria"
+          query="category"
+          names={categoryNames}
+          values={categoryValues}
+        />
+      </div>
     </header>
   );
 }

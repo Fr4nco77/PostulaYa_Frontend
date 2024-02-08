@@ -303,7 +303,7 @@ export default function Form({ token }: { token: string }) {
           </Badge>
         ))}
       </div>
-      <ErrorMessage errors={errors?.skills} errorKey="skill" />
+      <ErrorMessage errors={errors?.position || errors?.skills} errorKey="skill" />
       <ButtonSubmit>Agregar</ButtonSubmit>
     </form>
   );

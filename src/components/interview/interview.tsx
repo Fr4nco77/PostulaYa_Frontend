@@ -1,4 +1,4 @@
-import { Eye } from "lucide-react";
+import { FileText } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -6,51 +6,65 @@ import {
   AccordionTrigger,
 } from "../ui/accordion";
 import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "../ui/alert-dialog";
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "../ui/dialog";
 import { Button } from "../ui/button";
 import { Textarea } from "../ui/textarea";
+import { Separator } from "../ui/separator";
 
 export default function Interview({ interview }: { interview: any }) {
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
+    <Dialog>
+      <DialogTrigger asChild>
         <Button
           size="icon"
-          variant="ghost"
-          className="rounded-full text-slate-900 hover:bg-yellow-400"
+          className="bg-yellow-400 text-slate-900 hover:bg-slate-900 hover:text-yellow-400"
         >
-          <Eye />
+          <FileText />
         </Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent className="max-h-screen overflow-y-auto">
-        <AlertDialogHeader>
-          <AlertDialogTitle>
-            {`${interview.position} (${interview.company})`}
-          </AlertDialogTitle>
-          <AlertDialogDescription className="grid grid-cols-2 items-center">
-            <span>{`Entrevistador: ${interview.interviewer}`}</span>
-            <span>{`Entrevistado: ${interview.user.username}`}</span>
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <div className="flex max-h-screen w-full flex-col gap-2 overflow-y-auto">
+      </DialogTrigger>
+      <DialogContent className="bg-slate-50 max-h-screen overflow-y-auto">
+        <DialogHeader>
+          <DialogTitle className="text-3xl font-black text-slate-900">
+            {interview.position}
+          </DialogTitle>
+          <Separator className="bg-slate-400" />
+          <DialogDescription className="flex flex-col items-start gap-1 text-slate-900">
+            <span>
+              <strong>Empresa:</strong>
+              {` ${interview.company}`}
+            </span>
+            <span>
+              <strong>Entrevistador:</strong>
+              {` ${interview.interviewer}`}
+            </span>
+          </DialogDescription>
+        </DialogHeader>
+        <div className="grid grid-cols-2 items-center">
           <span>
-            <strong>Duración</strong>
-            {`: ${interview.duration}`}
+            <strong>Fecha:</strong>
+            {` ${interview.created_at.split("T")[0]}`}
+          </span>
+          <span>
+            <strong>Duración:</strong>
+            {` ${interview.duration}`}
           </span>
         </div>
         <div className="flex w-full flex-col">
-          <h3 className="text-lg font-bold">Preparación</h3>
-          <Textarea disabled value={interview.preparation} />
+          <strong>Preparación:</strong>
+          <Textarea
+            disabled
+            value={interview.preparation}
+            className="disabled:cursor-text"
+          />
         </div>
-        <h3 className="text-lg font-bold">Preguntas/Actividades</h3>
+        <strong>Preguntas/Actividades</strong>
         <Accordion type="single" collapsible>
           {interview.questions?.map((question: string, index: number) => {
             return (
@@ -60,19 +74,20 @@ export default function Interview({ interview }: { interview: any }) {
                   <Textarea
                     disabled
                     value={interview.answers[index]}
-                    className="resize-none border-none "
+                    className="disabled:cursor-text"
                   />
                 </AccordionContent>
               </AccordionItem>
             );
           })}
         </Accordion>
-        <AlertDialogFooter>
-          <AlertDialogCancel className="bg-slate-900 text-slate-100">
-            Cerrar
-          </AlertDialogCancel>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+        <DialogFooter>
+          <span className="text-xs">
+            *La información presentada es de carácter referencial y puede estar
+            sujeta a cambios.
+          </span>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 }

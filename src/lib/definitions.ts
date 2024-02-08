@@ -58,7 +58,10 @@ export type User = {
 }
 
 export type Interview = {
+    position: string;
+    company: string;
     interviewer: string;
+    user: {[key: string]: string};
     duration: string;
     preparation: string;
     feeling: string;
