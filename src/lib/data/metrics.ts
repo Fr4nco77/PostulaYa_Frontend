@@ -19,7 +19,7 @@ export async function fetchApplicationsMetrics({ token }: { token: string }) {
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error inesperado."
             }
         }
@@ -45,7 +45,7 @@ export async function fetchApplicationsByTime({ token, period }: { token: string
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error inesperado."
             }
         }
@@ -70,7 +70,7 @@ export async function fetchStatusMetrics({ token }: { token: string }) {
         return {
             success: false,
             data: {
-                name: "Eror interno.",
+                name: "Eror Interno",
                 message: "Ocurrio un error inesperado."
             }
         }
@@ -96,7 +96,7 @@ export async function fetchModalityMetrics({ token }: { token: string }) {
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error inesperado."
             }
         }
@@ -122,7 +122,7 @@ export async function fetchTypesMetrics({ token }: { token: string }) {
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error inesperado."
             }
         }
@@ -149,7 +149,7 @@ export async function fetchSkillsMetrics({ token }: { token: string }) {
             success: false,
             data: {
                 data: {
-                    name: "Error interno.",
+                    name: "Error Interno",
                     message: "Ocurrio un error inesperado."
                 }
             }
@@ -179,7 +179,7 @@ export async function fetchTopSkills({ token }: { token: string }) {
             success: false,
             data: {
                 data: {
-                    name: "Error interno.",
+                    name: "Error Interno",
                     message: "Ocurrio un error inesperado."
                 }
             }
@@ -206,7 +206,7 @@ export async function fetchPlatforms({ token }: { token: string }) {
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error inesperado."
             }
         }
@@ -232,7 +232,7 @@ export async function fetchFeelings({ token }: { token: string }) {
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error inesperado."
             }
         }

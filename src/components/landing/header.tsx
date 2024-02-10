@@ -15,20 +15,21 @@ export default function Header() {
                 <h1 className="relative text-4xl font-black tracking-tight text-gray-900 sm:text-6xl xl:text-7xl">
                   Transforma tu búsqueda laboral con PostulaYa
                 </h1>
-                <h2 className="relative mt-6 text-lg text-gray-500 sm:text-xl">
+                <p className="relative mt-6 text-lg text-gray-500 sm:text-xl">
                   Descubre la plataforma que te brinda estadísticas claras,
                   organización eficiente y preparación estratégica para alcanzar
                   tu empleo soñado.
-                </h2>
+                </p>
               </div>
               <Link
                 href="/sign_up"
+                aria-label="Registrarse en PostulaYa"
                 className={buttonVariants({
                   className:
-                    "mt-10 space-y-4 bg-yellow-400 text-slate-900 hover:bg-slate-900 hover:text-yellow-400",
+                    "mt-10 space-y-4 font-semibold bg-yellow-400 text-slate-900 transition duration-300 hover:bg-slate-900 hover:text-yellow-400",
                 })}
               >
-                Pruebalo 100% Gratis
+                Descubre tu Próximo Empleo
               </Link>
             </div>
           </div>
@@ -74,7 +75,7 @@ export default function Header() {
               <Image
                 className="w-full rounded-l-3xl lg:w-auto 2xl:h-full 2xl:max-w-none 2xl:rounded-3xl"
                 src="/landing_header.jpg"
-                alt="PostulaYa"
+                alt="Plataforma para búsqueda laboral: Gestiona postulaciones, entrevistas y obtén información valiosa en PostulaYa"
                 priority={true}
                 width={1080}
                 height={720}

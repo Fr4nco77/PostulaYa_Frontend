@@ -13,24 +13,27 @@ export default function Form({ token }: { token: string }) {
   const { toast } = useToast();
   const [errors, setErrors] = useState<Errors>({});
 
-  const handleCreate = useCallback(async (formData: FormData) => {
-    const rawFormData = Object.fromEntries(formData.entries());
-    const { errors, success, data } = await sendFeedback({
-      token,
-      rawFormData,
-    });
-    setErrors(errors);
-
-    if (!success) {
-      return toast({
-        variant: "destructive",
-        title: data.name,
-        description: data.message,
+  const handleCreate = useCallback(
+    async (formData: FormData) => {
+      const rawFormData = Object.fromEntries(formData.entries());
+      const { errors, success, data } = await sendFeedback({
+        token,
+        rawFormData,
       });
-    }
+      setErrors(errors);
 
-    toast({ title: data.message });
-  }, []);
+      if (!success) {
+        return toast({
+          variant: "destructive",
+          title: data.name,
+          description: data.message,
+        });
+      }
+
+      toast({ title: data.message });
+    },
+    [toast, token],
+  );
 
   return (
     <form
@@ -47,7 +50,7 @@ export default function Form({ token }: { token: string }) {
         <Input
           id="subject"
           name="subject"
-          placeholder="¡Gracias PostulaYa!"
+          placeholder="Sugerencia de mejora"
           className={errors?.subject && "border-red-500"}
         />
       </div>
@@ -61,8 +64,10 @@ export default function Form({ token }: { token: string }) {
         <Textarea
           id="body"
           name="body"
-          placeholder="Gracias a PostulaYa, mi búsqueda de empleo ha alcanzado un nuevo nivel de eficiencia y estrategia. Estoy realmente impresionado y agradecido."
-          className={`lg:resize-none ${errors?.body && "border-red-500"}`}
+          placeholder="Comparte tus comentarios y sugerencias..."
+          className={`resize-none border-slate-600 ${
+            errors?.body && "border-red-500"
+          }`}
         />
       </div>
       <ButtonSubmit className="w-full">Enviar</ButtonSubmit>

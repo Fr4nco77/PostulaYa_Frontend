@@ -4,8 +4,8 @@ import Filter from "../ui/select-filter";
 import {
   modalitysNames,
   modalitysValues,
-  typesNames,
-  typesValues,
+  workdaysNames,
+  workdaysValues,
   orderNames,
   orderValues,
   statusNames,
@@ -20,7 +20,7 @@ export default function Searchbar({ token }: { token: string }) {
         placeholder="¿Posición, empresa, ubicación o reclutador?"
         className="max-w-[472.55px] lg:max-xl:max-w-xs xl:max-w-md"
       />
-      <div className="flex flex-wrap gap-2">
+      <div className="flex gap-2 max-lg:flex-wrap">
         <Filter
           placeholder="Estado"
           query="status"
@@ -34,10 +34,10 @@ export default function Searchbar({ token }: { token: string }) {
           values={modalitysValues}
         />
         <Filter
-          placeholder="Tipo"
-          query="type"
-          names={typesNames}
-          values={typesValues}
+          placeholder="Jornada"
+          query="workday"
+          names={workdaysNames}
+          values={workdaysValues}
         />
         <Filter
           placeholder="Orden"

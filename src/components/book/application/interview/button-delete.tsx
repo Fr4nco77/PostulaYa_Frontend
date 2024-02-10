@@ -49,7 +49,7 @@ export function DeleteInterview({
     }
 
     toast({ variant: "warning", title: data.message });
-  }, [interview, application]);
+  }, [interview, application, toast, token]);
 
   return (
     <AlertDialog>
@@ -80,7 +80,7 @@ export function DeleteInterview({
         <AlertDialogFooter>
           <AlertDialogCancel>Cancel</AlertDialogCancel>
           <AlertDialogAction
-            className="bg-red-200 text-red-600 hover:bg-red-500 hover:text-slate-50"
+            className="bg-red-200 text-red-600 transition duration-300 hover:bg-red-500 hover:text-slate-50"
             onClick={handleDelete}
           >
             Eliminar

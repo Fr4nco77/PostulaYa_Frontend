@@ -21,7 +21,7 @@ export async function fetchApplications({ query, token }: ApplicationQuery) {
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Si el error persiste comunicate con el administrador."
             }
         }
@@ -49,7 +49,7 @@ export async function fetchApplicationByID({ token, application }: { token: stri
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error al acceder a la postulación."
             }
         }
@@ -97,7 +97,7 @@ export async function fetchSkillsByID({ skills }: { skills: string[] }) {
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error inesperado."
             }
         }
@@ -123,7 +123,7 @@ export async function fetchAllApplications({ query }: { query: string }) {
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error inesperado."
             }
         }
@@ -150,7 +150,7 @@ export async function fetchAllPagesApplications({ query }: { query: string }) {
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error inesperado."
             }
         }

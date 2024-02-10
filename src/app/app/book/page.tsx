@@ -30,12 +30,12 @@ export default async function Book({
 
   return (
     <main className="flex h-full w-full max-w-[850px] flex-col gap-3 xl:max-w-7xl">
-      <div className="hidden h-28 w-full items-center justify-between lg:flex">
+      <section className="hidden h-28 w-full items-center justify-between lg:flex">
         <ApplicationsByTime token={token} className="h-full w-96" />
         <Status token={token} className="h-full w-72 " />
         <Modalitys token={token} className="hidden h-full w-60 xl:block" />
         <Types token={token} className="hidden h-full w-60 xl:block" />
-      </div>
+      </section>
       <Separator className="hidden lg:block" />
       <Searchbar token={token} />
       <Suspense
@@ -50,7 +50,7 @@ export default async function Book({
       >
         <Table query={query} token={token} />
       </Suspense>
-      <div className="flex w-full flex-col-reverse items-center justify-center gap-4 sm:justify-end md:flex-row md:gap-8">
+      <section className="flex w-full flex-col-reverse items-center justify-center gap-4 sm:justify-end md:flex-row md:gap-8">
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">Postulaciones por pagina</span>
           <Filter
@@ -62,7 +62,7 @@ export default async function Book({
           />
         </div>
         <Pagination totalPages={totalPages} />
-      </div>
+      </section>
     </main>
   );
 }

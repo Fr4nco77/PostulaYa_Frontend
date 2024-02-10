@@ -6,9 +6,9 @@ export default function Features() {
     >
       <div className="lg:mx-auto lg:grid lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-6 xl:gap-12 2xl:gap-24">
         <div className="mx-auto max-w-xl space-y-6 px-4 sm:px-6 lg:col-start-2 lg:mx-0 lg:px-0 lg:py-28 lg:pr-8 xl:py-32 2xl:mx-0">
-          <h4 className="relative text-4xl font-extrabold tracking-tight text-gray-900">
+          <h3 className="relative text-4xl font-extrabold tracking-tight text-gray-900">
             Gestiona y potencia tu búsqueda
-          </h4>
+          </h3>
           <p className="relative mt-4 text-lg leading-relaxed text-gray-500 sm:text-xl">
             Observa tu avance de manera clara y precisa mediante nuestro
             completo panel de control. Accede a estadísticas esenciales que
@@ -22,16 +22,16 @@ export default function Features() {
             <img
               src={`https://images.unsplash.com/photo-1516321497487-e288fb19713f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMzczODV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDY3Mjc0ODh8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080`}
               className="3xl:max-w-3xl ml-auto max-h-screen w-auto rounded-r-2xl object-contain lg:right-0 2xl:max-h-[44rem] 2xl:max-w-2xl 2xl:rounded-2xl"
-              alt="Obtén estadísticas clave"
+              alt="Visualización de Estadísticas Clave de Postulaciones Diarias y Tiempo de Respuesta"
             />
           </div>
         </div>
       </div>
       <div className="mt-12 sm:mt-20 md:mt-24 lg:mx-auto lg:mt-0 lg:grid lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-6 xl:mt-28 xl:gap-12 2xl:gap-24">
         <div className="mx-auto max-w-xl space-y-6 px-4 sm:px-6 lg:mx-auto lg:max-w-3xl lg:py-28 xl:py-32 xl:pl-12 2xl:mx-0 2xl:justify-self-end 2xl:pl-20">
-          <h4 className="relative text-4xl font-extrabold tracking-tight text-gray-900">
+          <h3 className="relative text-4xl font-extrabold tracking-tight text-gray-900">
             Organiza tus postulaciones
-          </h4>
+          </h3>
           <p className="relative mt-4 text-lg leading-relaxed text-gray-500 sm:text-xl">
             Utiliza nuestra Bitácora para registrar, buscar y organizar tus
             postulaciones de manera eficiente. Mantén un seguimiento detallado
@@ -44,16 +44,16 @@ export default function Features() {
             <img
               src={`https://images.unsplash.com/photo-1585399000684-d2f72660f092?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMzczODV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDY3Mjc0ODh8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080`}
               className="3xl:max-w-3xl mr-auto max-h-screen w-auto  rounded-l-2xl object-contain lg:left-0 2xl:max-h-[44rem] 2xl:max-w-2xl 2xl:rounded-2xl"
-              alt="Organiza tus postulaciones"
+              alt="Bitácora de Postulaciones: Registra y Organiza Eficientemente tus Postulaciones"
             />
           </div>
         </div>
       </div>
       <div className="mt-12 sm:mt-20 md:mt-24 lg:mx-auto lg:mt-0 lg:grid lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-6 xl:mt-28 xl:gap-12 2xl:gap-24">
         <div className="mx-auto max-w-xl space-y-6 px-4 sm:px-6 lg:col-start-2 lg:mx-0 lg:px-0 lg:py-28 lg:pr-8 xl:py-32 2xl:mx-0">
-          <h4 className="relative text-4xl font-extrabold tracking-tight text-gray-900">
+          <h3 className="relative text-4xl font-extrabold tracking-tight text-gray-900">
             Escribe tu trayectoria
-          </h4>
+          </h3>
           <p className="relative mt-4 text-lg leading-relaxed text-gray-500 sm:text-xl">
             Con la función de creacion de Notas, captura ideas, reflexiones y
             recordatorios clave. Personaliza tu espacio y utiliza tus
@@ -65,16 +65,16 @@ export default function Features() {
             <img
               src={`https://images.unsplash.com/photo-1516321497487-e288fb19713f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMzczODV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDY3Mjc0ODh8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080`}
               className="3xl:max-w-3xl ml-auto max-h-screen w-auto rounded-r-2xl object-contain lg:right-0 2xl:max-h-[44rem] 2xl:max-w-2xl 2xl:rounded-2xl"
-              alt="Obtén estadísticas clave"
+              alt="Creación de Notas en PostulaYa: Captura Ideas y Reflexiones para Impulsar tu Éxito Laboral"
             />
           </div>
         </div>
       </div>
       <div className="mt-12 sm:mt-20 md:mt-24 lg:mx-auto lg:mt-0 lg:grid lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-6 xl:mt-28 xl:gap-12 2xl:gap-24">
         <div className="mx-auto max-w-xl space-y-6 px-4 sm:px-6 lg:mx-auto lg:max-w-3xl lg:py-28 xl:py-32 xl:pl-12 2xl:mx-0 2xl:justify-self-end 2xl:pl-20">
-          <h4 className="relative text-4xl font-extrabold tracking-tight text-gray-900">
+          <h3 className="relative text-4xl font-extrabold tracking-tight text-gray-900">
             Encuentra tu próxima oportunidad
-          </h4>
+          </h3>
           <p className="relative mt-4 text-lg leading-relaxed text-gray-500 sm:text-xl">
             Explora oportunidades laborales diariamente. Nuestra sección de
             vacantes te conecta con oportunidades agregadas por la comunidad,
@@ -87,16 +87,16 @@ export default function Features() {
             <img
               src={`https://images.unsplash.com/photo-1585399000684-d2f72660f092?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMzczODV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDY3Mjc0ODh8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080`}
               className="3xl:max-w-3xl mr-auto max-h-screen w-auto  rounded-l-2xl object-contain lg:left-0 2xl:max-h-[44rem] 2xl:max-w-2xl 2xl:rounded-2xl"
-              alt="Organiza tus postulaciones"
+              alt="Exploración de Vacantes en PostulaYa: Conéctate con Oportunidades Laborales Constantemente Actualizadas"
             />
           </div>
         </div>
       </div>
       <div className="mt-12 sm:mt-20 md:mt-24 lg:mx-auto lg:mt-0 lg:grid lg:grid-flow-col-dense lg:grid-cols-2 lg:gap-6 xl:mt-28 xl:gap-12 2xl:gap-24">
         <div className="mx-auto max-w-xl space-y-6 px-4 sm:px-6 lg:col-start-2 lg:mx-0 lg:px-0 lg:py-28 lg:pr-8 xl:py-32 2xl:mx-0">
-          <h4 className="relative text-4xl font-extrabold tracking-tight text-gray-900">
+          <h3 className="relative text-4xl font-extrabold tracking-tight text-gray-900">
             Preparate estratégicamente
-          </h4>
+          </h3>
           <p className="relative mt-4 text-lg leading-relaxed text-gray-500 sm:text-xl">
             Prepárate como un profesional. En la sección de entrevistas, accede
             a una lista detallada de entrevistas realizadas por otros usuarios.
@@ -109,7 +109,7 @@ export default function Features() {
             <img
               src={`https://images.unsplash.com/photo-1516321497487-e288fb19713f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMzczODV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDY3Mjc0ODh8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080`}
               className="3xl:max-w-3xl ml-auto max-h-screen w-auto rounded-r-2xl object-contain lg:right-0 2xl:max-h-[44rem] 2xl:max-w-2xl 2xl:rounded-2xl"
-              alt="Obtén estadísticas clave"
+              alt="Sección de Entrevistas en PostulaYa: Revisa Preguntas Frecuentes para una Preparación Asertiva"
             />
           </div>
         </div>

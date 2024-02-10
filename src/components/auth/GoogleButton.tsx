@@ -45,12 +45,10 @@ export default function GoogleButton({ className, ...props }: ButtonProps) {
           title: data.message,
         });
         //En caso de exito seteo las cookies
-        const { token, name, email, image } = data.response;
+        const { token, image } = data.response;
 
         const config = configCookies();
         Cookies.set("authorization", token, config);
-        Cookies.set("_username", name, config);
-        Cookies.set("_email", email, config);
         Cookies.set("_image", image, config);
         setTimeout(() => router.push("/app"), 1000);
       } catch (error) {
@@ -70,7 +68,7 @@ export default function GoogleButton({ className, ...props }: ButtonProps) {
       <Button
         variant="outline"
         type="button"
-        className="w-full border-slate-600 hover:bg-slate-900 hover:text-yellow-400"
+        className="w-full border-slate-600 transition duration-300 hover:bg-slate-900 hover:text-yellow-400"
         onClick={googleLogin}
       >
         <GoogleLogo />

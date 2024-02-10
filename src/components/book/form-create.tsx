@@ -18,6 +18,15 @@ import { useToast } from "../ui/use-toast";
 import { Errors, Skills } from "@/lib/definitions";
 import ErrorMessage from "../ui/error-message";
 import { ButtonSubmit } from "../ui/button-submit";
+import {
+  categoryNames,
+  categoryValues,
+  modalitysNames,
+  modalitysValues,
+  platformValues,
+  workdaysNames,
+  workdaysValues,
+} from "@/lib/dataComponents";
 
 export default function Form({ token }: { token: string }) {
   const { toast } = useToast();
@@ -87,7 +96,7 @@ export default function Form({ token }: { token: string }) {
         title: data.message,
       });
     },
-    [skills],
+    [toast, token, skills],
   );
 
   return (
@@ -144,7 +153,7 @@ export default function Form({ token }: { token: string }) {
         <Input
           id="recluter"
           name="recluter"
-          placeholder="Pedro Duarte"
+          placeholder="Gabriela Rodríguez"
           className={`col-span-3 ${errors?.recluter && "border-red-500"}`}
         />
       </div>
@@ -161,29 +170,14 @@ export default function Form({ token }: { token: string }) {
               <SelectValue placeholder="¿Cual es el sector?" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="Tecnología e Informática">
-                Tecnología e Informática
-              </SelectItem>
-              <SelectItem value="Salud y Ciencias Médicas">
-                Salud y Ciencias Médicas
-              </SelectItem>
-              <SelectItem value="Marketing y Publicidad">
-                Marketing y Publicidad
-              </SelectItem>
-              <SelectItem value="Educación">Educación</SelectItem>
-              <SelectItem value="Finanzas y Contabilidad">
-                Finanzas y Contabilidad
-              </SelectItem>
-              <SelectItem value="Ingeniería y Construcción">
-                Ingeniería y Construcción
-              </SelectItem>
-              <SelectItem value="Recursos Humanos">Recursos Humanos</SelectItem>
-              <SelectItem value="Servicios al Cliente">
-                Atención al Cliente
-              </SelectItem>
-              <SelectItem value="Gastronomía y Hospitalidad">
-                Gastronomía y Hostelería
-              </SelectItem>
+              {categoryNames.map((category, index) => {
+                if (!index) return;
+                return (
+                  <SelectItem key={category} value={categoryValues[index]}>
+                    {category}
+                  </SelectItem>
+                );
+              })}
             </SelectContent>
           </Select>
         </div>
@@ -201,28 +195,39 @@ export default function Form({ token }: { token: string }) {
               <SelectValue placeholder="¿Cómo se llevará a cabo?" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="Presencial">Presencial</SelectItem>
-              <SelectItem value="Remoto">Remoto</SelectItem>
-              <SelectItem value="Hibrido">Hibrido</SelectItem>
+              {modalitysNames.map((modality, index) => {
+                if (!index) return;
+                return (
+                  <SelectItem key={modality} value={modalitysValues[index]}>
+                    {modality}
+                  </SelectItem>
+                );
+              })}
             </SelectContent>
           </Select>
         </div>
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
         <Label
-          htmlFor="type"
+          htmlFor="workday"
           className={`text-right ${errors?.type && "text-red-500"}`}
         >
-          Tipo
+          Jornada
         </Label>
-        <div id="type" className="col-span-3">
-          <Select name="type">
+        <div id="workday" className="col-span-3">
+          <Select name="workday">
             <SelectTrigger>
               <SelectValue placeholder="¿Cuanto tiempo te exige?" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="Full-Time">Full-Time</SelectItem>
-              <SelectItem value="Part-Time">Part-Time</SelectItem>
+              {workdaysNames.map((workday, index) => {
+                if (!index) return;
+                return (
+                  <SelectItem key={workday} value={workdaysValues[index]}>
+                    {workday}
+                  </SelectItem>
+                );
+              })}
             </SelectContent>
           </Select>
         </div>
@@ -240,12 +245,13 @@ export default function Form({ token }: { token: string }) {
               <SelectValue placeholder="¿Cual usaste?" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="Linkedin">Linkedin</SelectItem>
-              <SelectItem value="Indeed">Indeed</SelectItem>
-              <SelectItem value="Glassdoor">Glassdoor</SelectItem>
-              <SelectItem value="Get on Board">Get on Board</SelectItem>
-              <SelectItem value="Computrabajo">Computrabajo</SelectItem>
-              <SelectItem value="Otra">Otra</SelectItem>
+              {platformValues.map((platform, index) => {
+                return (
+                  <SelectItem key={platform} value={platform}>
+                    {platform}
+                  </SelectItem>
+                );
+              })}
             </SelectContent>
           </Select>
         </div>
@@ -260,7 +266,7 @@ export default function Form({ token }: { token: string }) {
         <Input
           id="url"
           name="url"
-          placeholder="https://listofJobs/jobs/13192898319"
+          placeholder="https://www.empleo.com/postulacion"
           className={`col-span-3 ${errors?.url && "border-red-500"}`}
         />
       </div>
@@ -275,7 +281,7 @@ export default function Form({ token }: { token: string }) {
           <Input
             id="skill"
             ref={inputRef}
-            placeholder="NextJs"
+            placeholder="React"
             aria-describedby="skill-error"
             className={errors?.skills && "border-red-500"}
           />
@@ -284,7 +290,7 @@ export default function Form({ token }: { token: string }) {
             type="button"
             onClick={addSkills}
             disabled={isLoading}
-            className="hover:bg-slate-900 hover:text-yellow-400"
+            className="transition duration-300 hover:bg-slate-900 hover:text-yellow-400"
           >
             {isLoading ? <Loader2 className="animate-spin" /> : <Plus />}
           </Button>
@@ -296,14 +302,17 @@ export default function Form({ token }: { token: string }) {
             id={_id}
             key={_id}
             onClick={() => removeSkill(_id)}
-            className="cursor-pointer hover:bg-slate-900 hover:text-yellow-400"
+            className="cursor-pointer transition duration-300 hover:bg-slate-900 hover:text-yellow-400"
           >
             {`${name}`}
             <X width={17} height={17} />
           </Badge>
         ))}
       </div>
-      <ErrorMessage errors={errors?.position || errors?.skills} errorKey="skill" />
+      <ErrorMessage
+        errors={errors?.position || errors?.skills}
+        errorKey="skill"
+      />
       <ButtonSubmit>Agregar</ButtonSubmit>
     </form>
   );

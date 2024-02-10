@@ -34,7 +34,7 @@ export default function Form() {
     }
 
     toast({ variant: "warning", title: data.message });
-  }, []);
+  }, [toast]);
 
   return (
     <form className="my-5 grid w-full gap-4" action={handleSubmit}>

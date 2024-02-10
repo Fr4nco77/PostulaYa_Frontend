@@ -53,7 +53,7 @@ export function ViewInterview({ interview }: { interview: Interview }) {
             <Textarea
               disabled
               value={interview.preparation}
-              className="resize-none disabled:cursor-text"
+              className="disabled:cursor-text disabled:border-slate-600"
             />
           </div>
           <h3 className="text-xl font-extrabold">Preguntas/Actividades</h3>
@@ -66,7 +66,7 @@ export function ViewInterview({ interview }: { interview: Interview }) {
                     <Textarea
                       disabled
                       value={interview.answers[index]}
-                      className="resize-none disabled:cursor-text"
+                      className="disabled:cursor-text disabled:border-slate-600"
                     />
                   </AccordionContent>
                 </AccordionItem>
@@ -78,7 +78,7 @@ export function ViewInterview({ interview }: { interview: Interview }) {
             <Textarea
               disabled
               value={interview.feedback}
-              className="resize-none disabled:cursor-text"
+              className="disabled:cursor-text disabled:border-slate-600"
             />
           </div>
           <div className="flex w-full flex-col">
@@ -86,7 +86,7 @@ export function ViewInterview({ interview }: { interview: Interview }) {
             <Textarea
               disabled
               value={interview.observation}
-              className="resize-none disabled:cursor-text"
+              className="disabled:cursor-text disabled:border-slate-600"
             />
           </div>
         </div>

@@ -23,15 +23,15 @@ export default async function MobilMenu() {
               src="Logo.svg"
               alt="PostulaYa"
               width={157.61}
-              height={0}
+              height={47.99}
               priority={true}
-              className="h-auto"
             />
           </SheetTitle>
         </SheetHeader>
         <ul className="flex flex-col gap-6 py-6">
           <Link
             href="/#¿PostulaYa?"
+            aria-label="Ir a la sección ¿PostulaYa?"
             className="group relative inline-block cursor-pointer text-slate-700 transition-colors duration-300 hover:text-slate-900"
           >
             <li className="relative">
@@ -41,6 +41,7 @@ export default async function MobilMenu() {
           </Link>
           <Link
             href="/#Caracteristicas"
+            aria-label="Ir a la sección Características"
             className="group relative inline-block cursor-pointer text-slate-700 transition-colors duration-300 hover:text-slate-900"
           >
             <li className="relative">
@@ -52,17 +53,19 @@ export default async function MobilMenu() {
         <div className="flex flex-col gap-3">
           <Link
             href="/sign_in"
+            aria-label="Iniciar sesión en PostulaYa"
             className={buttonVariants({
-              className: "hover:text-yellow-400",
+              className: "transition duration-300 hover:text-yellow-400",
             })}
           >
             Ingresar
           </Link>
           <Link
             href="/sign_up"
+            aria-label="Registrarse en PostulaYa"
             className={buttonVariants({
               className:
-                "bg-yellow-400 text-slate-900 hover:bg-slate-900 hover:text-yellow-400",
+                "bg-yellow-400 text-slate-900 transition duration-300 hover:bg-slate-900 hover:text-yellow-400",
             })}
           >
             Registrarse

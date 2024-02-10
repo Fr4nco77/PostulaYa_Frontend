@@ -27,7 +27,7 @@ export const addSkill = async (name: string) => {
     } catch (error) {
         return {
             error: {
-                title: "Error interno.",
+                title: "Error Interno",
                 name: "Error al agregar la habilidad."
             }
         }
@@ -44,7 +44,7 @@ export async function createApplication({ rawFormData, skills, token }: { rawFor
             errors: dataVerified.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos inválidos/incompletos.",
+                name: "Datos Inválidos/Incompletos",
                 message: "Creación de aplicación fallida.",
             }
         }
@@ -72,7 +72,7 @@ export async function createApplication({ rawFormData, skills, token }: { rawFor
             errors: {},
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Creación de aplicación fallida.",
             }
         }
@@ -101,7 +101,7 @@ export async function deleteApplication({ token, applicationID }: { token: strin
         return {
             success: false,
             data: {
-                name: "Error interno",
+                name: "Error Interno",
                 message: "Ocurrio un error al eliminar la postulación."
             }
         }
@@ -118,7 +118,7 @@ export async function updateApplication({ rawFormData, token, applicationID }: {
             errors: dataVerified.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos inválidos/incompletos",
+                name: "Datos Inválidos/Incompletos",
                 message: 'Actualizacion de postulación fallida.',
             }
         }
@@ -146,7 +146,7 @@ export async function updateApplication({ rawFormData, token, applicationID }: {
             errors: {},
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: 'Actualizacion de postulación fallida.',
             }
         }
@@ -163,7 +163,7 @@ export async function updateSkills({ token, applicationID, skills }: { token: st
             success: false,
             data: {
                 name: "Datos Invalidos",
-                message: "Error al actualizar las habilidades",
+                message: "Error al actualizar las habilidades.",
             }
         }
     }
@@ -186,13 +186,12 @@ export async function updateSkills({ token, applicationID, skills }: { token: st
             data
         }
     } catch (error) {
-        console.log(error);
         return {
             errors: {},
             success: false,
             data: {
                 name: "Error Interno",
-                message: "Ocurrio un error inesperado"
+                message: "Ocurrio un error inesperado."
             }
         }
     }

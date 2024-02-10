@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     default: "PostulaYa",
   },
   description:
-    "Optimiza tu búsqueda laboral con PostulaYa: registra postulaciones, analiza estadísticas y organiza tu historial profesional. Una guía estratégica para avanzar hacia tu empleo soñado. ¡Descubre más con PostulaYa!",
+    "Optimiza tu búsqueda laboral con PostulaYa: registra postulaciones, analiza estadísticas y organiza tu historial profesional. Descubre una guía estratégica para avanzar hacia tu empleo soñado. ¡Inicia tu viaje hacia el éxito laboral con PostulaYa hoy mismo!",
 };
 
 export default function RootLayout({

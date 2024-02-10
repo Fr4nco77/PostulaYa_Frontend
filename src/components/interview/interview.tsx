@@ -24,12 +24,12 @@ export default function Interview({ interview }: { interview: any }) {
       <DialogTrigger asChild>
         <Button
           size="icon"
-          className="bg-yellow-400 text-slate-900 hover:bg-slate-900 hover:text-yellow-400"
+          className="bg-yellow-400 text-slate-900 transition duration-300 hover:bg-slate-900 hover:text-yellow-400"
         >
           <FileText />
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-slate-50 max-h-screen overflow-y-auto">
+      <DialogContent className="max-h-screen overflow-y-auto bg-slate-50">
         <DialogHeader>
           <DialogTitle className="text-3xl font-black text-slate-900">
             {interview.position}
@@ -61,7 +61,7 @@ export default function Interview({ interview }: { interview: any }) {
           <Textarea
             disabled
             value={interview.preparation}
-            className="disabled:cursor-text"
+            className="disabled:cursor-text disabled:border-slate-600"
           />
         </div>
         <strong>Preguntas/Actividades</strong>
@@ -74,7 +74,7 @@ export default function Interview({ interview }: { interview: any }) {
                   <Textarea
                     disabled
                     value={interview.answers[index]}
-                    className="disabled:cursor-text"
+                    className="disabled:cursor-text disabled:border-slate-600"
                   />
                 </AccordionContent>
               </AccordionItem>
@@ -82,9 +82,9 @@ export default function Interview({ interview }: { interview: any }) {
           })}
         </Accordion>
         <DialogFooter>
-          <span className="text-xs">
-            *La información presentada es de carácter referencial y puede estar
-            sujeta a cambios.
+          <span className="text-xs font-bold">
+            <span className="text-red-600">*</span>La información presentada es
+            de carácter referencial y puede estar sujeta a cambios.
           </span>
         </DialogFooter>
       </DialogContent>

@@ -6,7 +6,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { columnsBook } from "@/lib/dataComponents";
+import {
+  columnsBook,
+  modalitysNames,
+  modalitysValues,
+  statusNames,
+  statusValues,
+} from "@/lib/dataComponents";
 import { ApplicationQuery } from "@/lib/definitions";
 import { fetchApplications } from "@/lib/data/application";
 import Actions from "./actions";
@@ -56,72 +62,76 @@ export default async function ApplicationTable({
         </TableRow>
       </TableHeader>
       <TableBody>
-        {applications?.map((row: any) => {
+        {applications?.map((application: any) => {
           return (
-            <TableRow key={row._id}>
-              <TableCell>{row.created_at.split("T")[0]}</TableCell>
-              <TableCell>{row.position}</TableCell>
-              <TableCell>{row.company}</TableCell>
-              <TableCell>{row.location}</TableCell>
+            <TableRow key={application._id}>
+              <TableCell>{application.created_at.split("T")[0]}</TableCell>
+              <TableCell>{application.position}</TableCell>
+              <TableCell>{application.company}</TableCell>
+              <TableCell>{application.location}</TableCell>
               <TableCell>
                 <Badge
                   className={clsx("max-h-7 w-auto cursor-default", {
                     "bg-purple-200 text-purple-600 hover:bg-purple-200":
-                      row.modality === "Remoto",
+                      application.modality === "Remote",
                     "bg-orange-200 text-orange-600 hover:bg-orange-200":
-                      row.modality === "Hibrido",
+                      application.modality === "Hybrid",
                     "bg-slate-200 text-slate-600 hover:bg-slate-200":
-                      row.modality === "Presencial",
+                      application.modality === "In-person",
                   })}
                 >
-                  {row.modality === "Remoto" ? (
+                  {application.modality === "Remote" ? (
                     <Home className="mr-1 max-h-5 w-auto" />
                   ) : (
                     <Building className="mr-1 max-h-5 w-auto" />
                   )}
-                  {row.modality}
+                  {
+                    modalitysNames[
+                      modalitysValues.indexOf(application.modality)
+                    ]
+                  }
                 </Badge>
               </TableCell>
               <TableCell>
                 <Badge
                   className={clsx("max-h-7 w-auto cursor-default", {
                     "bg-blue-200 text-blue-600 hover:bg-blue-200":
-                      row.type === "Full-Time",
+                      application.workday === "Full-Time",
                     "bg-gray-200 text-gray-600 hover:bg-gray-200":
-                      row.type === "Part-Time",
+                      application.workday === "Part-Time",
                   })}
                 >
-                  {row.type === "Full-Time" ? (
+                  {application.workday === "Full-Time" ? (
                     <Timer className="mr-1 max-h-5 w-auto" />
                   ) : (
                     <TimerOff className="mr-1 max-h-5 w-auto" />
                   )}
-                  {row.type}
+                  {application.workday}
                 </Badge>
               </TableCell>
               <TableCell>
                 <Badge
                   className={clsx("max-h-7 w-auto cursor-default", {
                     "bg-green-200 text-green-600 hover:bg-green-200":
-                      row.status === "En Proceso",
+                      application.status === "In Progress",
                     "bg-red-200 text-red-600 hover:bg-red-200":
-                      row.status === "Finalizado",
+                      application.status === "Completed",
                     "bg-yellow-300 text-slate-600 hover:bg-yellow-300":
-                      row.status === "Postulado",
+                      application.status === "Applied",
                   })}
                 >
-                  {row.status === "En Proceso" ? (
+                  {application.status === "In Progress" ? (
                     <Clock4 className="mr-1 max-h-5 w-auto" />
-                  ) : row.status === "Finalizado" ? (
+                  ) : application.status === "Completed" ? (
                     <XCircle className="mr-1 max-h-5 w-auto" />
                   ) : (
                     <CheckCircle2 className="mr-1 max-h-5 w-auto" />
                   )}
-                  {row.status}
+                  {statusNames[statusValues.indexOf(application.status)]}
                 </Badge>
               </TableCell>
               <TableCell>
-                <Actions token={token} applicationID={row._id} />
+                <Actions token={token} applicationID={application._id} />
               </TableCell>
             </TableRow>
           );

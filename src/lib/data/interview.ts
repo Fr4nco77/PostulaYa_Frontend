@@ -21,7 +21,7 @@ export async function fetchUserInterviews({ token, application }: { token: strin
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Si el error persiste comunicate con el administrador."
             }
         }
@@ -48,7 +48,7 @@ export async function fetchAllInterviews({ query }: { query: string }) {
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Si el error persiste comunicate con el administrador."
             }
         }
@@ -75,7 +75,7 @@ export async function fetchInterviewsPages({ query }: { query: string }) {
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Si el error persiste comunicate con el administrador."
             }
         }

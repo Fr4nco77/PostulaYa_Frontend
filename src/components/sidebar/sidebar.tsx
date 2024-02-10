@@ -20,27 +20,28 @@ export default function Sidebar({
 
   return (
     <nav
+      role="navigation"
       className={cn(
-        "flex items-center justify-between bg-slate-100 px-6 py-4 shadow-lg lg:flex-col",
+        "flex items-center justify-between bg-slate-100 px-6 py-4 shadow-lg lg:flex-col lg:px-4",
         className,
       )}
       {...props}
     >
       <Image
-        src="/Logo_simple.svg"
-        alt="PostulaYa"
-        priority={true}
-        width={40}
-        height={0}
-        className="mx-auto hidden h-auto lg:block"
-      />
-      <Image
-        src="Logo.svg"
+        src="/Logo.svg"
         alt="PostulaYa"
         width={157.61}
-        height={0}
-        priority={true}
-        className="h-auto lg:hidden"
+        height={47.98}
+        priority
+        className="lg:hidden"
+      />
+      <Image
+        src="/Logo_simple.svg"
+        alt="PostulaYa"
+        width={40}
+        height={40}
+        priority
+        className="mx-auto hidden lg:block"
       />
       <MobilMenu>
         {children}
@@ -53,8 +54,12 @@ export default function Sidebar({
         <Exit />
       </ul>
       <div className="hidden lg:block">
-        <Avatar className="mb-1 border border-[rgb(8,11,28)]">
-          <AvatarImage src={userImage} className="h-auto w-full" />
+        <Avatar className="mb-1 border border-slate-600">
+          <AvatarImage
+            src={userImage}
+            alt="User Image"
+            className="h-auto w-full"
+          />
           <AvatarFallback>
             <Skeleton className="h-full w-full rounded-full" />
           </AvatarFallback>

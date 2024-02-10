@@ -43,9 +43,9 @@ export default function Landing() {
           </div>
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
-              <h3 className="relative text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
+              <h2 className="relative text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
                 Registra y analiza tus postulaciones
-              </h3>
+              </h2>
               <p className="relative mx-auto mt-6 max-w-7xl leading-8">
                 PostulaYa te brinda la capacidad de evaluar tu progreso y tomar
                 decisiones fundamentadas. Registra cada postulación con
@@ -134,25 +134,26 @@ export default function Landing() {
             <div className="relative">
               <div className="mt-6 sm:mt-12 sm:text-center">
                 <h2 className="relative text-3xl font-black tracking-tight text-gray-900 sm:text-4xl md:mx-auto md:max-w-4xl md:text-5xl md:leading-tight">
-                  Potencia Tu Futuro Profesional con PostulaYa
+                  Impulsa Tu Carrera con PostulaYa
                 </h2>
                 <p className="relative mx-auto mt-6 max-w-2xl italic text-gray-700 sm:text-lg">
-                  Haz que tu búsqueda laboral sea más efectiva hoy mismo con
-                  PostulaYa. Regístrate ahora y descubre un camino estratégico
-                  hacia tu empleo soñado. Transforma tu carrera con estadísticas
-                  claras, organización eficiente y preparación asertiva. ¡No
-                  pierdas más tiempo, inicia tu viaje hacia el éxito laboral!
+                  Potencia tu búsqueda laboral desde hoy con PostulaYa.
+                  Regístrate para acceder a herramientas inteligentes,
+                  estadísticas perspicaces, asesoramiento personalizado y
+                  preparación asertiva. ¡No pierdas más tiempo, inicia tu viaje
+                  hacia el éxito laboral!
                 </p>
               </div>
               <div className="relative mt-6 flex flex-col items-center sm:mx-auto sm:mt-12 sm:max-w-lg">
                 <Link
                   href="/sign_up"
+                  aria-label="Registrarse en PostulaYa"
                   className={buttonVariants({
                     className:
-                      "bg-yellow-400 text-slate-900 hover:bg-slate-900 hover:text-yellow-400",
+                      "bg-yellow-400 font-semibold text-slate-900 transition duration-300 hover:bg-slate-900 hover:text-yellow-400",
                   })}
                 >
-                  Empieza Ahora
+                  ¡Potencia Tu Carrera Ahora!
                 </Link>
               </div>
             </div>

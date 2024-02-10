@@ -13,22 +13,28 @@ export default function FormCreateNote({ token }: { token: string }) {
   const [errors, setErrors] = useState<Errors>({});
   const { toast } = useToast();
 
-  const handleCreate = useCallback(async (formData: FormData) => {
-    const rawFormData = Object.fromEntries(formData.entries());
+  const handleCreate = useCallback(
+    async (formData: FormData) => {
+      const rawFormData = Object.fromEntries(formData.entries());
 
-    const { errors, success, data } = await createNote({ token, rawFormData });
-    setErrors(errors);
-
-    if (!success) {
-      return toast({
-        variant: "destructive",
-        title: data.name,
-        description: data.message,
+      const { errors, success, data } = await createNote({
+        token,
+        rawFormData,
       });
-    }
+      setErrors(errors);
 
-    toast({ variant: "warning", title: data.message });
-  }, []);
+      if (!success) {
+        return toast({
+          variant: "destructive",
+          title: data.name,
+          description: data.message,
+        });
+      }
+
+      toast({ variant: "warning", title: data.message });
+    },
+    [toast, token],
+  );
 
   return (
     <form action={handleCreate} className="flex flex-col gap-2 ">
@@ -39,7 +45,7 @@ export default function FormCreateNote({ token }: { token: string }) {
         <Input
           id="title"
           name="title"
-          placeholder="Preparativos Entrevista"
+          placeholder="Preparativos para entrevista"
           className={errors?.title && "border-red-500"}
         />
       </div>
@@ -50,8 +56,10 @@ export default function FormCreateNote({ token }: { token: string }) {
         <Textarea
           id="body"
           name="body"
-          placeholder="Investigar la empresa, repasar logros y mostrar confianza."
-          className={`resize-none ${errors?.body && "border-red-500"}`}
+          placeholder="Investiga la empresa, prepara preguntas..."
+          className={`resize-none border-slate-600 ${
+            errors?.body && "border-red-500"
+          }`}
         />
       </div>
       <ButtonSubmit>Agregar Nota</ButtonSubmit>

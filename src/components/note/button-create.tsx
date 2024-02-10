@@ -28,7 +28,7 @@ export default function ButtonCreate({
           size="sm"
           variant="outline"
           className={cn(
-            "bg-yellow-400 hover:bg-slate-900 hover:text-yellow-400",
+            "bg-yellow-400 transition duration-300 hover:bg-slate-900 hover:text-yellow-400",
             className,
           )}
           {...props}

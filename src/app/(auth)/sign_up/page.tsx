@@ -7,6 +7,8 @@ import Image from "next/image";
 
 export const metadata: Metadata = {
   title: "Registro",
+  description:
+    "Únete a PostulaYa para optimizar tu búsqueda laboral: registra postulaciones, analiza estadísticas y organiza tu historial profesional. Accede a herramientas inteligentes, estadísticas detalladas y preparación asertiva. ¡Descubre el camino hacia tu empleo soñado con PostulaYa!",
 };
 
 export default function SignUp() {
@@ -18,7 +20,7 @@ export default function SignUp() {
             <Link href="/">
               <Image
                 src="/Logo.svg"
-                alt="PostulaYa"
+                alt="Logo de PostulaYa"
                 width={172.5}
                 height={52.5}
                 priority={true}
@@ -50,7 +52,7 @@ export default function SignUp() {
       <section className="relative hidden h-full w-1/2 lg:block">
         <Image
           src="/sign_up.jpg"
-          alt="Forma Parte del Éxito"
+          alt="Usuarios de PostulaYa interactuando y utilizando la plataforma para mejorar sus búsquedas laborales."
           width={undefined}
           height={undefined}
           priority={true}

@@ -17,12 +17,14 @@ import { ButtonSubmit } from "@/components/ui/button-submit";
 import { Textarea } from "@/components/ui/textarea";
 import { createInterview } from "@/lib/actions/interview";
 import Questions_Answers from "./questions&answers";
+import { feelingsNames, feelingsValues } from "@/lib/dataComponents";
 
 interface FormProps extends HTMLAttributes<HTMLFormElement> {
   token: string;
   application: string;
   position: string;
   company: string;
+  category: string;
 }
 
 export default function FormCreateInterview({
@@ -31,40 +33,45 @@ export default function FormCreateInterview({
   application,
   position,
   company,
+  category,
   ...props
 }: FormProps) {
   const { toast } = useToast();
   const [errors, setErrors] = useState<Errors>({});
 
-  const handleSubmit = useCallback(async (formData: FormData) => {
-    const rawFormData = Object.fromEntries(formData.entries());
+  const handleSubmit = useCallback(
+    async (formData: FormData) => {
+      const rawFormData = Object.fromEntries(formData.entries());
 
-    const { errors, success, data } = await createInterview({
-      token,
-      rawFormData,
-      application,
-    });
-    setErrors(errors);
-
-    if (!success) {
-      return toast({
-        variant: "destructive",
-        title: data.name,
-        description: data.message,
+      const { errors, success, data } = await createInterview({
+        token,
+        rawFormData,
+        application,
       });
-    }
+      setErrors(errors);
 
-    toast({
-      variant: "warning",
-      title: data.message,
-    });
-  }, []);
+      if (!success) {
+        return toast({
+          variant: "destructive",
+          title: data.name,
+          description: data.message,
+        });
+      }
+
+      toast({
+        variant: "warning",
+        title: data.message,
+      });
+    },
+    [toast, token, application],
+  );
 
   return (
     <form action={handleSubmit} className="grid gap-4 py-4" {...props}>
       <input type="text" hidden name="application" defaultValue={application} />
       <input type="text" hidden name="position" defaultValue={position} />
       <input type="text" hidden name="company" defaultValue={company} />
+      <input type="text" hidden name="category" defaultValue={category} />
       <div className="grid grid-cols-4 items-center gap-4">
         <Label
           htmlFor="interviewer"
@@ -107,11 +114,14 @@ export default function FormCreateInterview({
               <SelectValue placeholder="¿Cómo te sentias?" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="Inseguro">Inseguro</SelectItem>
-              <SelectItem value="Preocupado">Preocupado</SelectItem>
-              <SelectItem value="Neutral">Neutral</SelectItem>
-              <SelectItem value="Confiado">Confiado</SelectItem>
-              <SelectItem value="Muy motivado">Muy motivado</SelectItem>
+              {feelingsNames.map((feeling, index) => {
+                if (!index) return;
+                return (
+                  <SelectItem key={feeling} value={feelingsValues[index]}>
+                    {feeling}
+                  </SelectItem>
+                );
+              })}
             </SelectContent>
           </Select>
         </div>
@@ -126,8 +136,10 @@ export default function FormCreateInterview({
         <Textarea
           id="preparation"
           name="preparation"
-          placeholder="He enfocado mi tiempo en destacar mi experiencia relevante, resaltar mis logros profesionales y afinar mi capacidad para comunicar mis habilidades"
-          className={`col-span-3 resize-none ${errors?.preparation && "border-red-500"}`}
+          placeholder="Me preparé abordando.."
+          className={`col-span-3 resize-none border-slate-600 ${
+            errors?.preparation && "border-red-500"
+          }`}
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
@@ -140,8 +152,10 @@ export default function FormCreateInterview({
         <Textarea
           id="feedback"
           name="feedback"
-          placeholder="Tu desempeño durante la entrevista fue impresionante. Destacaron especialmente tu habilidad para comunicar tus logros de manera clara y efectiva, así como tu enfoque proactivo para abordar los desafíos"
-          className={`col-span-3 resize-none ${errors?.feedback && "border-red-500"}`}
+          placeholder="El entrevistador proporcionó comentarios sobre..."
+          className={`col-span-3 resize-none border-slate-600 ${
+            errors?.feedback && "border-red-500"
+          }`}
         />
       </div>
       <div className="grid grid-cols-4 items-center gap-4">
@@ -154,8 +168,10 @@ export default function FormCreateInterview({
         <Textarea
           id="observation"
           name="observation"
-          placeholder="En algunos momentos, podría haber proporcionado ejemplos más específicos para respaldar mis experiencias y habilidades."
-          className={`col-span-3 resize-none ${errors?.observation && "border-red-500"}`}
+          placeholder="Observaciones o comentarios adicionales..."
+          className={`col-span-3 resize-none border-slate-600 ${
+            errors?.observation && "border-red-500"
+          }`}
         />
       </div>
       <Questions_Answers />

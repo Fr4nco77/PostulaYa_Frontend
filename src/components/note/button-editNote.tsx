@@ -21,7 +21,7 @@ export function EditNote({ _id, token, title, body, favorite }: EditProps) {
         <Button
           variant="ghost"
           size="icon"
-          className="h-7 w-7 rounded-full p-1 hover:bg-slate-900 hover:text-yellow-400"
+          className="h-7 w-7 p-1 transition duration-300 hover:bg-slate-900 hover:text-yellow-400"
         >
           <Pencil />
         </Button>

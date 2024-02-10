@@ -20,34 +20,42 @@ export default function Form() {
   const [errors, setErrors] = useState<Errors>({});
 
   //Manejador del submit del formulario (server action)
-  const handleSubmit = useCallback(async (formData: FormData) => {
-    const { password, checkPassword } = Object.fromEntries(formData.entries());
+  const handleSubmit = useCallback(
+    async (formData: FormData) => {
+      const { password, checkPassword } = Object.fromEntries(
+        formData.entries(),
+      );
 
-    //verifica que alla token y que las contraseñas coincidan
-    if (!token) return router.push("/sign_in");
-    if (password !== checkPassword) {
-      return toast({
-        variant: "destructive",
-        description: "Las contraseñas no coinciden.",
+      //verifica que alla token y que las contraseñas coincidan
+      if (!token) return router.push("/sign_in");
+      if (password !== checkPassword) {
+        return toast({
+          variant: "destructive",
+          description: "Las contraseñas no coinciden",
+        });
+      }
+
+      //Se utiliza resetPassword para verificar la data y finalmente restablecer la contraseña
+      const { errors, success, data } = await resetPassword({
+        token,
+        password,
       });
-    }
+      setErrors(errors);
 
-    //Se utiliza resetPassword para verificar la data y finalmente restablecer la contraseña
-    const { errors, success, data } = await resetPassword({ token, password });
-    setErrors(errors);
+      //Dependiendo del resultado anterior se modifica la ui
+      if (!success) {
+        return toast({
+          variant: "destructive",
+          title: data.name,
+          description: data.message,
+        });
+      }
 
-    //Dependiendo del resultado anterior se modifica la ui
-    if (!success) {
-      return toast({
-        variant: "destructive",
-        title: data.name,
-        description: data.message,
-      });
-    }
-
-    toast({ variant: "warning", title: data.message });
-    router.push("/sign_in");
-  }, []);
+      toast({ variant: "warning", title: data.message });
+      router.push("/sign_in");
+    },
+    [router, toast, token],
+  );
 
   return (
     <form className="my-6 grid w-full gap-4" action={handleSubmit}>
@@ -61,7 +69,7 @@ export default function Form() {
         />
       </div>
       <div className="grid gap-2">
-        <Label htmlFor="checkPassword">Confirmar contraseña</Label>
+        <Label htmlFor="checkPassword">Confirmar Contraseña</Label>
         <div className="flex w-full items-center space-x-2">
           <Input
             id="checkPassword"
@@ -75,7 +83,7 @@ export default function Form() {
             onClick={() => setShowPassword(!showPassword)}
             size="icon"
             variant="outline"
-            className="border-slate-600"
+            className="border-slate-600 transition duration-300 hover:bg-slate-900 hover:text-yellow-400"
           >
             {showPassword ? <Eye /> : <EyeOff />}
           </Button>

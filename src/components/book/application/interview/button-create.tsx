@@ -17,6 +17,7 @@ interface CreateProps extends HTMLAttributes<HTMLButtonElement> {
   application: string;
   position: string;
   company: string;
+  category: string;
 }
 
 export default function CreateInterview({
@@ -25,6 +26,7 @@ export default function CreateInterview({
   application,
   position,
   company,
+  category,
   ...props
 }: CreateProps) {
   return (
@@ -57,6 +59,7 @@ export default function CreateInterview({
           application={application}
           position={position}
           company={company}
+          category={category}
         />
       </DialogContent>
     </Dialog>

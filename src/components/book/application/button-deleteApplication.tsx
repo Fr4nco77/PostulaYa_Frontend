@@ -44,7 +44,7 @@ export function DeleteApplication({
       });
     }
     router.push("/app/book");
-  }, [token, applicationID]);
+  }, [router, toast, token, applicationID]);
 
   return (
     <AlertDialog>
@@ -67,8 +67,9 @@ export function DeleteApplication({
             ¿Seguro que quieres eliminar esta postulación?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            Cada aplicación es valiosa para evaluar y potenciar tu progreso en
-            la búsqueda laboral.
+            Tus postulaciones son valiosas y contribuyen a evaluar y potenciar
+            tu progreso profesional. Ten en cuenta que eliminar esta postulación
+            podría afectar tu historial y estadísticas.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>

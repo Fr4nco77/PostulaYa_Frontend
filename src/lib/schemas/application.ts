@@ -6,11 +6,11 @@ export const validateApplication = z.object({
             invalid_type_error: "Posición inválida."
         })
             .trim()
-            .min(3, 'La posición debe tener al menos 3 caracteres')
-            .max(25, 'La posición no puede tener más de 25 caracteres'),
+            .min(3, 'La posición debe tener al menos 3 caracteres.')
+            .max(30, 'La posición no puede tener más de 30 caracteres.'),
     modality:
-        z.enum(["Presencial", "Remoto", "Hibrido"]),
-    type:
+        z.enum(["In-person", "Remote", "Hybrid"]),
+    workday:
         z.enum(["Full-Time", "Part-Time"]),
     recluter:
         z.optional(
@@ -26,11 +26,7 @@ export const validateApplication = z.object({
             .trim()
             .min(1, "Empresa inválida."),
     category:
-        z.string({
-            invalid_type_error: "Categoria inválida."
-        })
-            .trim()
-            .min(1, "Categoria inválida."),
+        z.enum(["Technology and Information Technology", "Health and Medical Sciences", "Marketing and Advertising", "Education", "Finance and Accounting", "Engineering and Construction", "Human Resources", "Customer Service", "Gastronomy and Hospitality"]),
     location:
         z.string({
             invalid_type_error: "Ubicación inválida."
@@ -38,13 +34,13 @@ export const validateApplication = z.object({
             .trim()
             .min(1, "Ubicación inválida."),
     platform:
-        z.enum(["Linkedin", "Indeed", "Glassdoor", "Get on Board", "Computrabajo", "Otra"]),
+        z.enum(["Linkedin", "Indeed", "Glassdoor", "Get on Board", "Computrabajo", "Other"]),
     url:
         z.string({
             invalid_type_error: "Url inválido."
         })
             .trim()
-            .url("Url inválido")
+            .url("Url inválido.")
     ,
     skills:
         z.array(
@@ -59,16 +55,16 @@ export const validateApplication = z.object({
 
 export const validateUpdateApplication = validateApplication.extend({
     status:
-        z.enum(["Postulado", "En Proceso", "Finalizado"]),
+        z.enum(["Applied", "In Progress", "Completed"]),
     skills: z.optional(
         z.array(
             z.string({
-                invalid_type_error: 'Habilidad/es Invalida'
+                invalid_type_error: 'Habilidad/es Invalida.'
             })
                 .trim()
-                .min(1, 'Habilidades Invalidas')
+                .min(1, 'Habilidades Invalidas.')
         )
-            .min(3, "Debes colocar un minimo de tres habilidades"),
+            .min(3, "Debes colocar un minimo de tres habilidades."),
     )
 })
 
@@ -76,10 +72,10 @@ export const validateUpdateSkills = z.object({
     skills:
         z.array(
             z.string({
-                invalid_type_error: 'Habilidad/es Invalida'
+                invalid_type_error: 'Habilidad/es Invalida.'
             })
                 .trim()
-                .min(1, 'Habilidad/es Invalidas')
+                .min(1, 'Habilidad/es Invalidas.')
         )
-            .min(3, "Debes colocar un minimo de tres habilidades"),
+            .min(3, "Debes colocar un minimo de tres habilidades."),
 })

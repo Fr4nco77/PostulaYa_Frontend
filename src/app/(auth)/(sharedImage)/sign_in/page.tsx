@@ -6,7 +6,9 @@ import Image from "next/image";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Inicio de Sesion",
+  title: "Inicio de Sesión",
+  description:
+    "Inicia sesión en PostulaYa para acceder a oportunidades laborales, organizar tu búsqueda de empleo y avanzar en tu carrera. ¡Bienvenido de nuevo a tu camino hacia el éxito profesional!",
 };
 
 export default function SingIn() {
@@ -16,14 +18,14 @@ export default function SingIn() {
         <Link href="/">
           <Image
             src="/Logo.svg"
-            alt="PostulaYa"
+            alt="Logo dePostulaYa"
             width={172.5}
             height={52.5}
             priority={true}
           />
         </Link>
         <h1 className="mt-3 text-4xl ">
-          <strong>Hola de nuevo 👋</strong>
+          <strong>¡Hola de nuevo! 👋</strong>
         </h1>
       </header>
       <GoogleButton className="my-5 w-full" />

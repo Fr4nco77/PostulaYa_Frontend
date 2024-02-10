@@ -42,14 +42,19 @@ export default async function Skills({
       <Separator className="bg-slate-300" />
       <div className="flex w-full flex-col gap-3">
         {userSkillsCount > 0 ? (
-          <span>
-            Tienes{" "}
+          userSkillsCount === requiredSkills.length ? (
             <span className="font-bold text-green-600">
-              {userSkillsCount}{" "}
-              {userSkillsCount > 1 ? "habilidades" : "habilidad"}
-            </span>{" "}
-            de las requeridas para este puesto.
-          </span>
+              ¡Tienes todas las habilidades requeridas para este puesto! 🚀
+            </span>
+          ) : (
+            <span>
+              Tienes{" "}
+              <span className="font-bold text-green-600">
+                {userSkillsCount} habilidad{userSkillsCount !== 1 && "es"}
+              </span>{" "}
+              de las requeridas para este puesto.
+            </span>
+          )
         ) : (
           <span className="font-bold text-red-600">
             De momento no tienes ninguna habilidad de las requeridas para este
@@ -61,7 +66,7 @@ export default async function Skills({
             <Badge
               key={_id}
               className={cn(
-                "cursor-default",
+                "cursor-default transition duration-300",
                 userSkillNames.includes(name)
                   ? "bg-green-200 text-green-600 hover:bg-green-200"
                   : "bg-red-200 text-red-600 hover:bg-red-200",

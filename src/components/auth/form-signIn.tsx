@@ -22,30 +22,33 @@ export default function Form() {
   const [errors, setErrors] = useState<Errors>({});
 
   //Manejador de submit del formulario
-  const handleSubmit = useCallback(async (formData: FormData) => {
-    const rawFormData = Object.fromEntries(formData.entries());
+  const handleSubmit = useCallback(
+    async (formData: FormData) => {
+      const rawFormData = Object.fromEntries(formData.entries());
 
-    //Ejecuto "loginUser" para validar los datos provistos por el usuario y logearlo finalmente
-    const { errors, success, data } = await loginUser(rawFormData);
-    setErrors(errors);
+      //Ejecuto "loginUser" para validar los datos provistos por el usuario y logearlo finalmente
+      const { errors, success, data } = await loginUser(rawFormData);
+      setErrors(errors);
 
-    //Dependiendo de el resultado de exito/error de lo anterior manejo la ui
-    if (!success) {
-      return toast({
-        variant: "destructive",
-        title: data.name,
-        description: data.message,
-      });
-    }
-    toast({ variant: "warning", title: data.message });
+      //Dependiendo de el resultado de exito/error de lo anterior manejo la ui
+      if (!success) {
+        return toast({
+          variant: "destructive",
+          title: data.name,
+          description: data.message,
+        });
+      }
+      toast({ variant: "warning", title: data.message });
 
-    //En caso de exito guardo la informacion provista en cookies
-    const config = configCookies();
-    const { token, image } = data.response;
-    Cookies.set("authorization", token, config);
-    Cookies.set("_image", image, config);
-    setTimeout(() => router.push("/app"), 1000);
-  }, []);
+      //En caso de exito guardo la informacion provista en cookies
+      const config = configCookies();
+      const { token, image } = data.response;
+      Cookies.set("authorization", token, config);
+      Cookies.set("_image", image, config);
+      setTimeout(() => router.push("/app"), 1000);
+    },
+    [router, toast],
+  );
 
   return (
     <form className="my-5 grid w-full gap-4" action={handleSubmit}>
@@ -84,7 +87,7 @@ export default function Form() {
             onClick={() => setShowPassword(!showPassword)}
             size="icon"
             variant="outline"
-            className="border-slate-600 hover:bg-slate-900 hover:text-yellow-400"
+            className="border-slate-600 transition duration-300 hover:bg-slate-900 hover:text-yellow-400"
           >
             {showPassword ? <Eye /> : <EyeOff />}
           </Button>

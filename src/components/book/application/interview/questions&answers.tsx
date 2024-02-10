@@ -33,7 +33,7 @@ export default function Questions_Answers() {
           type="button"
           size="icon"
           variant="ghost"
-          className="text-slate-900 hover:bg-slate-900 hover:text-yellow-400"
+          className="text-slate-900 transition duration-300 hover:bg-slate-900 hover:text-yellow-400"
           onClick={addQuestion}
         >
           <Plus />
@@ -57,7 +57,7 @@ export default function Questions_Answers() {
                   type="button"
                   variant="ghost"
                   size="icon"
-                  className="text-gray-500 hover:bg-transparent hover:text-red-500"
+                  className="text-gray-500 transition duration-300 hover:bg-transparent hover:text-red-500"
                   onClick={() => removeQuestion(question.id)}
                 >
                   <Trash2 />
@@ -70,8 +70,8 @@ export default function Questions_Answers() {
             <Textarea
               id={`answer-${question.id}`}
               name={`answer-${question.id}`}
-              placeholder="Ingrese la respuesta"
-              className="col-span-3 resize-none"
+              placeholder="Mi último proyecto fue..."
+              className="col-span-3 resize-none border-slate-600"
             />
           </div>
         </div>

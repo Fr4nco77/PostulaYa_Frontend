@@ -19,17 +19,17 @@ export default async function Notes({
   const { success, data } = await fetchNotes({ token });
   if (!success) {
     return (
-      <div className="flex h-full w-full flex-col items-center justify-center">
+      <main className="flex h-full w-full flex-col items-center justify-center">
         <h2 className="text-3xl font-bold">{data.name}</h2>
         <span>{data.message}</span>
-      </div>
+      </main>
     );
   }
 
   return (
     <main
       className={cn(
-        "gap-5 overflow-y-auto rounded-lg border bg-slate-50 p-3 lg:gap-8",
+        "gap-5 overflow-y-auto rounded-lg border border-slate-300 bg-slate-50 p-3 lg:gap-8",
         className,
       )}
       {...props}
@@ -39,10 +39,10 @@ export default async function Notes({
           return (
             <div
               key={_id}
-              className="w-full max-w-xs rounded-xl bg-yellow-400 p-3 shadow-md"
+              className="w-full max-w-xs rounded-lg bg-yellow-400 p-3 shadow-md"
             >
               <div className="flex items-center justify-between">
-                <h4 className="truncate font-medium">{title}</h4>
+                <h4 className="truncate font-semibold">{title}</h4>
                 <div className="flex items-center gap-2">
                   <AddFavorite _id={_id} token={token} favorite={favorite!} />
                   <EditNote
@@ -52,20 +52,22 @@ export default async function Notes({
                     body={body}
                     favorite={favorite}
                   />
-                  <DeleteNote _id={_id} token={token} className="h-7 w-7 p-1" />
+                  <DeleteNote _id={_id} token={token} />
                 </div>
               </div>
               <Textarea
                 defaultValue={body}
                 disabled
-                className="resize-none disabled:cursor-text"
+                className="resize-none disabled:cursor-text disabled:border-yellow-400  disabled:text-black"
               />
             </div>
           );
         })
       ) : (
         <div className="flex h-full items-center justify-center">
-          <span className="text-xl font-medium">No hay notas agregadas</span>
+          <span className="text-xl font-medium text-slate-600">
+            No hay notas agregadas
+          </span>
         </div>
       )}
     </main>

@@ -5,8 +5,8 @@ import {
   categoryValues,
   modalitysNames,
   modalitysValues,
-  typesNames,
-  typesValues,
+  workdaysNames,
+  workdaysValues,
 } from "@/lib/dataComponents";
 
 export default function Searchbar() {
@@ -30,10 +30,10 @@ export default function Searchbar() {
           values={modalitysValues}
         />
         <Filter
-          placeholder="Tipo"
-          query="type"
-          names={typesNames}
-          values={typesValues}
+          placeholder="Jornada"
+          query="workday"
+          names={workdaysNames}
+          values={workdaysValues}
         />
       </div>
     </header>

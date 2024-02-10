@@ -42,7 +42,7 @@ export default function Form({ _id, token, title, body }: FormProps) {
     <form action={handleEdit} className="flex flex-col gap-2 ">
       <div className="h-auto w-full">
         <Label htmlFor="title" hidden>
-          Titulo
+          Título
         </Label>
         <Input
           id="title"
@@ -59,7 +59,9 @@ export default function Form({ _id, token, title, body }: FormProps) {
           id="body"
           name="body"
           defaultValue={body}
-          className={`resize-none ${errors?.body && "border-red-500"}`}
+          className={`resize-none border-slate-600 ${
+            errors?.body && "border-red-500"
+          }`}
         />
       </div>
       <ButtonSubmit>Guardar Cambios</ButtonSubmit>

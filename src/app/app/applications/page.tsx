@@ -10,8 +10,10 @@ import { Suspense } from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Vacantes"
-}
+  title: "Vacantes",
+  description:
+    "Explora las últimas vacantes disponibles con detalles sobre puestos, empresas, ubicaciones y habilidades requeridas. Encuentra la oportunidad laboral perfecta para ti en PostulaYa.",
+};
 
 export default async function Applications({
   searchParams,
@@ -22,7 +24,7 @@ export default async function Applications({
   const { data } = await fetchAllPagesApplications({ query });
 
   return (
-    <div className="flex h-full w-full max-w-[850px] flex-col gap-3 xl:max-w-7xl">
+    <main className="flex h-full w-full max-w-[850px] flex-col gap-3 xl:max-w-7xl">
       <Searchbar />
       <Suspense
         key={query}
@@ -36,7 +38,7 @@ export default async function Applications({
       >
         <ApplicationTable query={query} />
       </Suspense>
-      <div className="flex w-full flex-col-reverse items-center justify-center gap-4 sm:justify-end md:flex-row md:gap-8">
+      <section className="flex w-full flex-col-reverse items-center justify-center gap-4 sm:justify-end md:flex-row md:gap-8">
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">Postulaciones por pagina</span>
           <Filter
@@ -48,7 +50,7 @@ export default async function Applications({
           />
         </div>
         <Pagination totalPages={data.response.totalPages} />
-      </div>
-    </div>
+      </section>
+    </main>
   );
 }

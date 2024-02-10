@@ -32,7 +32,7 @@ export type Application = {
     position: string;
     modality: string;
     category: string;
-    type: string;
+    workday: string;
     recluter: string;
     company: string;
     location: string;
@@ -61,6 +61,7 @@ export type User = {
 export type Interview = {
     position: string;
     company: string;
+    category: string;
     interviewer: string;
     user: {[key: string]: string};
     duration: string;

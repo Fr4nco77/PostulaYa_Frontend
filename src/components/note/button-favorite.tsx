@@ -29,21 +29,21 @@ export default function AddFavorite({
     });
     if (!success) {
       toast({
-        variant: "warning",
+        variant: "destructive",
         title: data?.name,
         description: data?.message,
       });
     }
 
     setIsLoading(false);
-  }, [favorite]);
+  }, [_id, toast, token, favorite]);
 
   return (
     <Button
       size="icon"
       variant="ghost"
       className={clsx(
-        "h-7 w-7 rounded-full p-1 hover:bg-slate-900 hover:text-yellow-400",
+        "h-7 w-7 p-1 transition duration-300 hover:bg-slate-900 hover:text-yellow-400",
         {
           "text-slate-900": favorite,
           "text-yellow-600": !favorite,

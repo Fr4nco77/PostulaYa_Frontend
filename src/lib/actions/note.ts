@@ -13,7 +13,7 @@ export async function createNote({ token, rawFormData }: { token: string, rawFor
             errors: dataVerified.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos inválidos.",
+                name: "Datos Inválidos",
                 message: 'Creacion de nota fallida.',
             }
         }
@@ -41,7 +41,7 @@ export async function createNote({ token, rawFormData }: { token: string, rawFor
             errors: {},
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno.",
                 message: "Ocurrio un error inesperado."
             }
         }
@@ -57,7 +57,7 @@ export async function updateNote({ _id, token, rawFormData }: { _id: string, tok
             errors: dataVerified.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos inválidos.",
+                name: "Datos Inválidos",
                 message: 'Actualización de nota fallida.',
             }
         }
@@ -85,7 +85,7 @@ export async function updateNote({ _id, token, rawFormData }: { _id: string, tok
             errors: {},
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error inesperado."
             }
         }
@@ -114,7 +114,7 @@ export async function addFavorite({ _id, token, favorite }: { _id: string, token
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error inesperado."
             }
         }
@@ -143,7 +143,7 @@ export async function deleteNote({ _id, token }: { _id: string, token: string })
         return {
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error inesperado."
             }
         }

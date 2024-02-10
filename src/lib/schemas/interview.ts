@@ -19,6 +19,12 @@ export const validateCreate = z.object({
         })
             .trim()
             .min(1, "Empresa inválida."),
+    category:
+        z.string({
+            invalid_type_error: "Categoria inválida."
+        })
+            .trim()
+            .min(1, "Categoria inválida."),
     interviewer:
         z.string({
             invalid_type_error: "Entrevistador inválido."
@@ -44,14 +50,14 @@ export const validateCreate = z.object({
                 .min(1, "Preparación inválida.")
         ),
     feeling:
-        z.enum(["Inseguro", "Preocupado", "Neutral", "Confiado", "Muy motivado"]),
+        z.enum(["Insecure", "Worried", "Neutral", "Confident", "Very motivated"]),
     feedback:
         z.optional(
             z.string({
-                invalid_type_error: "Feedback inválido"
+                invalid_type_error: "Feedback inválido."
             })
                 .trim()
-                .min(1, "Feedback inválido")
+                .min(1, "Feedback inválido.")
         ),
     observation:
         z.optional(

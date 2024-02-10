@@ -35,7 +35,7 @@ export default function Interviews({ data }: { data: any }) {
 
   const { interviews } = data.response;
   return (
-    <div className="flex h-full w-full justify-center md:justify-between lg:max-h-[500px] xl:max-h-[515px]">
+    <main className="flex h-full w-full justify-center md:justify-between lg:max-h-[500px] xl:max-h-[515px]">
       <div className="flex w-full lg:w-1/2">
         {!data.response.interviews.length ? (
           <div className="flex w-full max-w-7xl grow flex-col items-center justify-center rounded-lg bg-slate-100 p-3 shadow-xl">
@@ -68,13 +68,13 @@ export default function Interviews({ data }: { data: any }) {
                     <TableCell className="max-w-[115px] truncate">
                       {interview.company}
                     </TableCell>
-                    <TableCell className="lg:hidden text-center">
+                    <TableCell className="text-center lg:hidden">
                       <Interview interview={interview} />
                     </TableCell>
-                    <TableCell className="hidden lg:block text-center">
+                    <TableCell className="hidden text-center lg:block">
                       <Button
                         size="icon"
-                        className="bg-yellow-400 text-slate-900 hover:bg-slate-900 hover:text-yellow-400"
+                        className="bg-yellow-400 text-slate-900 transition duration-300 hover:bg-slate-900 hover:text-yellow-400"
                         onClick={() => handleInterviewClick(interview)}
                       >
                         <FileInput />
@@ -125,7 +125,7 @@ export default function Interviews({ data }: { data: any }) {
               <Textarea
                 disabled
                 value={selectedInterview.preparation}
-                className="disabled:cursor-text"
+                className="disabled:cursor-text disabled:border-slate-600"
               />
             </div>
             <strong>Preguntas/Actividades</strong>
@@ -139,7 +139,7 @@ export default function Interviews({ data }: { data: any }) {
                         <Textarea
                           disabled
                           value={selectedInterview.answers[index]}
-                          className="disabled:cursor-text"
+                          className="disabled:cursor-text disabled:border-slate-600"
                         />
                       </AccordionContent>
                     </AccordionItem>
@@ -147,7 +147,7 @@ export default function Interviews({ data }: { data: any }) {
                 )}
               </Accordion>
             </div>
-            <span className="text-xs">
+            <span className="text-xs font-bold">
               <span className="text-red-600">*</span>La información presentada
               es de carácter referencial y puede estar sujeta a cambios.
             </span>
@@ -155,13 +155,13 @@ export default function Interviews({ data }: { data: any }) {
         ) : (
           <Image
             src="/Logo.svg"
-            alt="PostulaYa"
+            alt="Logo de PostulaYa"
+            priority
             width={250}
-            height={0}
-            className="h-auto"
+            height={76.13}
           />
         )}
       </div>
-    </div>
+    </main>
   );
 }

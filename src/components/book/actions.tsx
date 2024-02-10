@@ -42,7 +42,7 @@ export default function Actions({
         description: data.message,
       });
     }
-  }, []);
+  }, [applicationID, toast, token]);
 
   return (
     <AlertDialog>
@@ -51,7 +51,7 @@ export default function Actions({
           <MoreHorizontal />
         </DropdownMenuTrigger>
         <DropdownMenuContent sideOffset={5}>
-          <DropdownMenuItem className="cursor-pointer focus:bg-[rgb(8,11,28)] focus:text-yellow-400">
+          <DropdownMenuItem className="cursor-pointer transition duration-300 focus:bg-[rgb(8,11,28)] focus:text-yellow-400">
             <Link
               href={`/app/book/${applicationID}`}
               className="flex items-start justify-start"
@@ -61,7 +61,7 @@ export default function Actions({
             </Link>
           </DropdownMenuItem>
           <AlertDialogTrigger asChild>
-            <DropdownMenuItem className="cursor-pointer focus:bg-red-500">
+            <DropdownMenuItem className="cursor-pointer transition duration-300 focus:bg-red-500">
               <Trash2 className="mr-2 h-5 w-5" /> Eliminar
             </DropdownMenuItem>
           </AlertDialogTrigger>
@@ -79,14 +79,15 @@ export default function Actions({
             ¿Seguro que quieres eliminar esta postulación?
           </AlertDialogTitle>
           <AlertDialogDescription>
-            Cada aplicación es valiosa para evaluar y potenciar tu progreso en
-            la búsqueda laboral.
+            Tus postulaciones son valiosas y contribuyen a evaluar y potenciar
+            tu progreso profesional. Ten en cuenta que eliminar esta postulación
+            podría afectar tu historial y estadísticas.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
           <AlertDialogAction
-            className="bg-red-600 hover:bg-red-500"
+            className="bg-red-600 transition duration-300 hover:bg-red-500"
             onClick={handlerDelete}
           >
             Eliminar

@@ -16,7 +16,7 @@ export default function CreateApplication({ token }: { token: string }) {
       <DialogTrigger asChild>
         <Button
           variant="outline"
-          className="flex flex-grow bg-yellow-400 hover:bg-slate-900 hover:text-yellow-400"
+          className="flex flex-grow bg-yellow-400 transition duration-300 hover:bg-slate-900 hover:text-yellow-400"
         >
           <Plus className="mr-1"/>
           Agregar

@@ -39,11 +39,11 @@ export default function Filter({
       }
       replace(`${pathname}?${params.toString()}`);
     },
-    [searchParams],
+    [searchParams, pathname, query, replace],
   );
 
   return (
-    <div className={cn("flex flex-1", className)} {...props}>
+    <div className={cn("flex max-lg:flex-1", className)} {...props}>
       <Select
         defaultValue={searchParams.get(query)?.toString()}
         onValueChange={handleFilter}
@@ -53,7 +53,11 @@ export default function Filter({
         </SelectTrigger>
         <SelectContent>
           {values?.map((value: string, index: number) => (
-            <SelectItem key={value} value={value} className="focus:bg-[rgb(8,11,28)] focus:text-yellow-400">
+            <SelectItem
+              key={value}
+              value={value}
+              className="transition duration-300 focus:bg-[rgb(8,11,28)] focus:text-yellow-400"
+            >
               {names[index]}
             </SelectItem>
           ))}

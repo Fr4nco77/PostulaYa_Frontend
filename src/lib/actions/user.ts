@@ -16,7 +16,7 @@ export async function createUser(credentials: RawFormData) {
             errors: validatedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos inválidos.",
+                name: "Datos Inválidos",
                 message: 'Registro fallido.'
             },
         }
@@ -43,7 +43,7 @@ export async function createUser(credentials: RawFormData) {
             errors: {},
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Registro fallido.",
             }
         }
@@ -62,8 +62,8 @@ export async function loginUser(credentials: RawFormData) {
             errors: verifiedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos inválidos",
-                message: 'Inicio de sesión fallido',
+                name: "Datos Inválidos",
+                message: 'Inicio de sesión fallido.',
             }
         }
     }
@@ -89,8 +89,8 @@ export async function loginUser(credentials: RawFormData) {
             errors: {},
             success: false,
             data: {
-                name: "Error interno",
-                message: "Inicio de sesión fallido",
+                name: "Error Interno",
+                message: "Inicio de sesión fallido.",
             }
         }
     }
@@ -108,7 +108,7 @@ export async function sendResetEmail(email: FormValue) {
             errors: verifiedField.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos inválidos.",
+                name: "Datos Inválidos",
                 message: 'Envio de email fallido.',
             }
         }
@@ -135,7 +135,7 @@ export async function sendResetEmail(email: FormValue) {
             errors: {},
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Envio de email fallido.",
             }
         }
@@ -155,7 +155,7 @@ export async function resetPassword(resetData: RawFormData) {
             errors: verifiedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos inválidos.",
+                name: "Datos Inválidos",
                 message: 'Restablecimiento de contraseña fallido.',
             }
         }
@@ -183,7 +183,7 @@ export async function resetPassword(resetData: RawFormData) {
             errors: {},
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Restablecimiento de contraseña fallido.",
             }
         }
@@ -200,7 +200,7 @@ export async function updateUser({ token, userData }: { token: string, userData:
             errors: verifiedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Datos inválidos.",
+                name: "Datos Inválidos",
                 message: 'Actualizacion de usuario fallida.',
             }
         }
@@ -228,7 +228,7 @@ export async function updateUser({ token, userData }: { token: string, userData:
             errors: {},
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Actualizacion fallida.",
             }
         }
@@ -245,7 +245,7 @@ export async function sendFeedback({ token, rawFormData }: { token: string, rawF
             errors: verifiedFields.error.flatten().fieldErrors,
             success: false,
             data: {
-                name: "Campos inválidos.",
+                name: "Datos Inválidos",
                 message: "Envio de feedback fallido."
             }
         }
@@ -272,7 +272,7 @@ export async function sendFeedback({ token, rawFormData }: { token: string, rawF
             errors: {},
             success: false,
             data: {
-                name: "Error interno.",
+                name: "Error Interno",
                 message: "Ocurrio un error inesperado."
             }
         }

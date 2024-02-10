@@ -49,10 +49,10 @@ export default function Modalitys({
         setIsLoading(false);
       }
     });
-  }, []);
+  }, [token]);
 
   return (
-    <div className={cn("rounded-lg bg-[rgb(8,11,28)]", className)} {...props}>
+    <article className={cn("rounded-lg bg-[rgb(8,11,28)]", className)} {...props}>
       {isLoading ? (
         <Skeleton className="h-full w-full" />
       ) : (
@@ -91,6 +91,6 @@ export default function Modalitys({
           }}
         />
       )}
-    </div>
+    </article>
   );
 }

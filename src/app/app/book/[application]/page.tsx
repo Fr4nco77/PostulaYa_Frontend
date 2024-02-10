@@ -21,6 +21,14 @@ import { cookies } from "next/headers";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Metadata } from "next";
+import {
+  categoryNames,
+  categoryValues,
+  modalitysNames,
+  modalitysValues,
+  statusNames,
+  statusValues,
+} from "@/lib/dataComponents";
 
 export const metadata: Metadata = {
   title: "Postulación",
@@ -46,7 +54,7 @@ export default async function Application({
     position,
     modality,
     category,
-    type,
+    workday,
     recluter,
     company,
     location,
@@ -67,7 +75,7 @@ export default async function Application({
             className={`${buttonVariants({
               variant: "ghost",
               size: "sm",
-            })} rounded-3xl hover:bg-slate-200`}
+            })} rounded-3xl transition duration-300 hover:bg-slate-200`}
           >
             <ChevronLeft className="mr-2 h-4 w-4" /> Volver
           </Link>
@@ -96,7 +104,7 @@ export default async function Application({
           </span>
           <span>
             <strong>Rubro: </strong>
-            {` ${category}`}
+            {` ${categoryNames[categoryValues.indexOf(category)]}`}
           </span>
           <span>
             <strong>Plataforma usada:</strong> {` ${platform}`}
@@ -112,53 +120,53 @@ export default async function Application({
             <Badge
               className={clsx("max-h-7 cursor-default", {
                 "bg-green-200 text-green-600 hover:bg-green-200":
-                  status === "En Proceso",
+                  status === "In Progress",
                 "bg-red-200 text-red-600 hover:bg-red-200":
-                  status === "Finalizado",
+                  status === "Completed",
                 "bg-yellow-300 text-slate-600 hover:bg-yellow-300":
-                  status === "Postulado",
+                  status === "Applied",
               })}
             >
-              {status === "En Proceso" ? (
+              {status === "In Progress" ? (
                 <Clock4 className="mr-1 max-h-5 w-auto" />
-              ) : status === "Finalizado" ? (
+              ) : status === "Completed" ? (
                 <XCircle className="mr-1 max-h-5 w-auto" />
               ) : (
                 <CheckCircle2 className="mr-1 max-h-5 w-auto" />
               )}
-              {status}
+              {statusNames[statusValues.indexOf(status)]}
             </Badge>
             <Badge
               className={clsx("max-h-7 w-auto cursor-default", {
                 "bg-purple-200 text-purple-600 hover:bg-purple-200":
-                  modality === "Remoto",
+                  modality === "Remote",
                 "bg-orange-200 text-orange-600 hover:bg-orange-200":
-                  modality === "Hibrido",
+                  modality === "Hybrid",
                 "bg-slate-200 text-slate-600 hover:bg-slate-200":
-                  modality === "Presencial",
+                  modality === "In-person",
               })}
             >
-              {modality === "Remoto" ? (
+              {modality === "Remote" ? (
                 <Home className="mr-1 max-h-5 w-auto" />
               ) : (
                 <Building className="mr-1 max-h-5 w-auto" />
               )}
-              {modality}
+              {modalitysNames[modalitysValues.indexOf(modality)]}
             </Badge>
             <Badge
               className={clsx("max-h-7 w-auto cursor-default", {
                 "bg-blue-200 text-blue-600 hover:bg-blue-200":
-                  type === "Full-Time",
+                  workday === "Full-Time",
                 "bg-gray-200 text-gray-600 hover:bg-gray-200":
-                  type === "Part-Time",
+                  workday === "Part-Time",
               })}
             >
-              {type === "Full-Time" ? (
+              {workday === "Full-Time" ? (
                 <Timer className="mr-1 max-h-5 w-auto" />
               ) : (
                 <TimerOff className="mr-1 max-h-5 w-auto" />
               )}
-              {type}
+              {workday}
             </Badge>
           </div>
           <div className="flex flex-wrap items-center justify-between gap-2">
@@ -183,6 +191,7 @@ export default async function Application({
         application={_id}
         position={position}
         company={company}
+        category={category}
         className="flex h-full w-full flex-col md:mt-10 md:max-w-sm"
       />
     </div>

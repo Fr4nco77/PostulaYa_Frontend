@@ -19,12 +19,11 @@ export default async function MobilMenu({ children }: { children: ReactNode }) {
         <SheetHeader>
           <SheetTitle>
             <Image
-              src="Logo.svg"
+              src="/Logo.svg"
               alt="PostulaYa"
               width={157.61}
-              height={0}
-              priority={true}
-              className="h-auto"
+              height={47.98}
+              priority
             />
           </SheetTitle>
         </SheetHeader>

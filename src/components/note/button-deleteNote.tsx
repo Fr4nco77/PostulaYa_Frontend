@@ -30,14 +30,17 @@ export default function DeleteNote({
         description: data.message,
       });
     }
-  }, []);
+  }, [_id, toast, token]);
 
   return (
     <Button
       variant="ghost"
       size="icon"
       onClick={handleDelete}
-      className={cn("rounded-full text-slate-900 hover:bg-red-500", className)}
+      className={cn(
+        "h-7 w-7 p-1 text-slate-900 transition duration-300 hover:bg-red-500",
+        className,
+      )}
       {...props}
     >
       <Trash2 />

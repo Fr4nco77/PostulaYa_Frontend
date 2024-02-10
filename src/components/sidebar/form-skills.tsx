@@ -88,7 +88,7 @@ export default function Form({
           <Input
             id="skill"
             ref={inputRef}
-            placeholder="NextJs"
+            placeholder="React"
             className={errors?.skills && "border-red-500"}
           />
           <Button
@@ -96,7 +96,7 @@ export default function Form({
             type="button"
             onClick={addSkills}
             disabled={isLoading}
-            className="hover:bg-slate-900 hover:text-yellow-400"
+            className="transition duration-300 hover:bg-slate-900 hover:text-yellow-400"
           >
             {isLoading ? <Loader2 className="animate-spin" /> : <Plus />}
           </Button>
@@ -108,7 +108,7 @@ export default function Form({
             id={_id}
             key={_id}
             onClick={() => removeSkill(_id)}
-            className="cursor-pointer hover:bg-slate-900 hover:text-yellow-400"
+            className="cursor-pointer transition duration-300 hover:bg-slate-900 hover:text-yellow-400"
           >
             {`${name}`}
             <X width={17} height={17} />

@@ -9,6 +9,8 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Entrevistas",
+  description:
+    "Descubre una amplia variedad de entrevistas realizadas por profesionales en nuestra sección de Entrevistas. Obtén insights valiosos, consejos y prepárate para tus futuras entrevistas laborales. Explora experiencias reales y empodérate para destacar en tus propias entrevistas. ¡Prepárate para el éxito profesional con nuestra colección de entrevistas inspiradoras!",
 };
 
 export default async function InterviewsPage({
@@ -24,7 +26,7 @@ export default async function InterviewsPage({
     <div className="flex h-full w-full max-w-[850px] flex-col gap-5 xl:max-w-7xl">
       <SearchBar />
       <Interviews data={data} />
-      <div className="flex w-full flex-col-reverse items-center justify-center gap-4 sm:justify-end md:flex-row md:gap-8">
+      <section className="flex w-full flex-col-reverse items-center justify-center gap-4 sm:justify-end md:flex-row md:gap-8">
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">Entrevistas por pagina</span>
           <Filter
@@ -36,7 +38,7 @@ export default async function InterviewsPage({
           />
         </div>
         <Pagination totalPages={totalPages} />
-      </div>
+      </section>
     </div>
   );
 }

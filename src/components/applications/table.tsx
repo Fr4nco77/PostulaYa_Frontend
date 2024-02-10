@@ -25,6 +25,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { buttonVariants } from "../ui/button";
+import { modalitysNames, modalitysValues } from "@/lib/dataComponents";
 
 export default async function ApplicationTable({ query }: { query: string }) {
   const { success, data } = await fetchAllApplications({ query });
@@ -45,7 +46,6 @@ export default async function ApplicationTable({ query }: { query: string }) {
   }
 
   const { applications } = data.response;
-
   return (
     <Table>
       <TableHeader>
@@ -69,8 +69,8 @@ export default async function ApplicationTable({ query }: { query: string }) {
               <TableCell>
                 <TooltipProvider>
                   <Tooltip>
-                    <TooltipTrigger className="relative group">
-                      <ClipboardList className="text-slate-600 hover:text-slate-400" />
+                    <TooltipTrigger className="group relative">
+                      <ClipboardList className="text-slate-600 transition duration-300 hover:text-slate-400" />
                       <div className="absolute right-0 top-0 group-hover:hidden">
                         <span className="relative flex h-2 w-2">
                           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-sky-400 opacity-75"></span>
@@ -78,8 +78,8 @@ export default async function ApplicationTable({ query }: { query: string }) {
                         </span>
                       </div>
                     </TooltipTrigger>
-                    <TooltipContent className="flex max-w-xs flex-col gap-2 border-slate-900 bg-slate-100">
-                      <h4 className="text-md font-black text-slate-900">
+                    <TooltipContent className="flex max-w-xs flex-col gap-2 border-slate-600 bg-slate-100">
+                      <h4 className="text-lg font-black text-slate-900">
                         Habilidades Requeridas
                       </h4>
                       <div className="flex flex-wrap gap-1">
@@ -88,7 +88,7 @@ export default async function ApplicationTable({ query }: { query: string }) {
                             return (
                               <Badge
                                 key={_id}
-                                className="cursor-default hover:bg-slate-900 hover:text-yellow-400"
+                                className="max-h-7 w-auto cursor-default transition duration-300 hover:bg-slate-900 hover:text-yellow-400"
                               >
                                 {name}
                               </Badge>
@@ -104,36 +104,40 @@ export default async function ApplicationTable({ query }: { query: string }) {
                 <Badge
                   className={clsx("max-h-7 w-auto cursor-default", {
                     "bg-purple-200 text-purple-600 hover:bg-purple-200":
-                      application.modality === "Remoto",
+                      application.modality === "Remote",
                     "bg-orange-200 text-orange-600 hover:bg-orange-200":
-                      application.modality === "Hibrido",
+                      application.modality === "Hybrid",
                     "bg-slate-200 text-slate-600 hover:bg-slate-200":
-                      application.modality === "Presencial",
+                      application.modality === "In-person",
                   })}
                 >
-                  {application.modality === "Remoto" ? (
+                  {application.modality === "Remote" ? (
                     <Home className="mr-1 max-h-5 w-auto" />
                   ) : (
                     <Building className="mr-1 max-h-5 w-auto" />
                   )}
-                  {application.modality}
+                  {
+                    modalitysNames[
+                      modalitysValues.indexOf(application.modality)
+                    ]
+                  }
                 </Badge>
               </TableCell>
               <TableCell>
                 <Badge
                   className={clsx("max-h-7 w-auto cursor-default", {
                     "bg-blue-200 text-blue-600 hover:bg-blue-200":
-                      application.type === "Full-Time",
+                      application.workday === "Full-Time",
                     "bg-gray-200 text-gray-600 hover:bg-gray-200":
-                      application.type === "Part-Time",
+                      application.workday === "Part-Time",
                   })}
                 >
-                  {application.type === "Full-Time" ? (
+                  {application.workday === "Full-Time" ? (
                     <Timer className="mr-1 max-h-5 w-auto" />
                   ) : (
                     <TimerOff className="mr-1 max-h-5 w-auto" />
                   )}
-                  {application.type}
+                  {application.workday}
                 </Badge>
               </TableCell>
               <TableCell>
@@ -142,7 +146,7 @@ export default async function ApplicationTable({ query }: { query: string }) {
                   target="_blank"
                   className={`${buttonVariants({
                     size: "sm",
-                  })} bg-yellow-400 text-slate-900  hover:bg-slate-900 hover:text-yellow-400`}
+                  })} bg-yellow-400 text-slate-900 transition duration-300 hover:bg-slate-900 hover:text-yellow-400`}
                 >
                   <span className="text-sm font-semibold">PostulaYa</span>
                   <ExternalLink className="ml-1 max-h-5 w-auto" />

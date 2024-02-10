@@ -13,12 +13,12 @@ export default function ResetPassword() {
         <header className="w-full">
           <Image
             src="/Logo.svg"
-            alt="PostulaYa"
+            alt="Logo de PostulaYa"
             width={172.5}
             height={52.5}
             priority={true}
           />
-          <h1 className="mt-3 text-4xl font-bold">Restablecer contraseña</h1>
+          <h1 className="mt-3 text-4xl font-bold">Restablecer Contraseña</h1>
           <span>Ingresa tu nueva contraseña</span>
         </header>
         <Form />

@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <section className="relative hidden h-full w-6/12 lg:block">
         <Image
           src="/sign_in.jpg"
-          alt="Transformamos Aspiraciones en Éxitos"
+          alt="Imagen de una mujer sonriendo mientras usa la plataforma en su computadora con el mensaje 'Transformamos Aspiraciones en Éxitos' en el fondo."
           width={undefined}
           height={undefined}
           priority={true}

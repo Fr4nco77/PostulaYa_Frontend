@@ -11,6 +11,7 @@ interface InterviewsProps extends HTMLAttributes<HTMLDivElement> {
   application: string;
   position: string;
   company: string;
+  category: string;
 }
 
 export default async function Interviews({
@@ -19,6 +20,7 @@ export default async function Interviews({
   application,
   position,
   company,
+  category,
   ...props
 }: InterviewsProps) {
   const { success, data } = await fetchUserInterviews({ token, application });
@@ -44,6 +46,7 @@ export default async function Interviews({
           application={application}
           position={position}
           company={company}
+          category={category}
         />
       </div>
       {!data.response.interviews.length ? (
@@ -53,13 +56,12 @@ export default async function Interviews({
       ) : (
         data.response.interviews.map((interview: any) => {
           return (
-            <>
+            <div key={interview._id} className="flex flex-col gap-3">
               <Separator className="bg-slate-300" />
-              <div
-                key={interview._id}
-                className="flex w-full items-center justify-between"
-              >
-                <span className="font-medium">{interview.created_at.split("T")[0]}</span>
+              <div className="flex w-full items-center justify-between">
+                <span className="font-medium">
+                  {interview.created_at.split("T")[0]}
+                </span>
                 <div className="flex items-center gap-2">
                   <ViewInterview interview={interview} />
                   <DeleteInterview
@@ -69,7 +71,7 @@ export default async function Interviews({
                   />
                 </div>
               </div>
-            </>
+            </div>
           );
         })
       )}
