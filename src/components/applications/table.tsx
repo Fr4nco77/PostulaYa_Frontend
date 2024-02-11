@@ -18,16 +18,16 @@ import clsx from "clsx";
 import {
   Building,
   ClipboardList,
-  ExternalLink,
   Home,
   Timer,
   TimerOff,
 } from "lucide-react";
-import Link from "next/link";
-import { buttonVariants } from "../ui/button";
 import { modalitysNames, modalitysValues } from "@/lib/dataComponents";
+import Actions from "./actions";
+import { cookies } from "next/headers";
 
 export default async function ApplicationTable({ query }: { query: string }) {
+  const token = cookies().get("authorization")?.value!;
   const { success, data } = await fetchAllApplications({ query });
 
   if (!success) {
@@ -141,16 +141,7 @@ export default async function ApplicationTable({ query }: { query: string }) {
                 </Badge>
               </TableCell>
               <TableCell>
-                <Link
-                  href={application.url}
-                  target="_blank"
-                  className={`${buttonVariants({
-                    size: "sm",
-                  })} bg-yellow-400 text-slate-900 transition duration-300 hover:bg-slate-900 hover:text-yellow-400`}
-                >
-                  <span className="text-sm font-semibold">PostulaYa</span>
-                  <ExternalLink className="ml-1 max-h-5 w-auto" />
-                </Link>
+                <Actions application={application} token={token} />
               </TableCell>
             </TableRow>
           );

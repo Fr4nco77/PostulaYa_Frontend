@@ -40,7 +40,6 @@ export type Application = {
     url: string;
     status: string;
     skills: Skills;
-    notes?: string[];
     created_at: string;
     updated_at: string;
 }
