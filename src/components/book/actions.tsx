@@ -61,7 +61,7 @@ export default function Actions({
             </Link>
           </DropdownMenuItem>
           <AlertDialogTrigger asChild>
-            <DropdownMenuItem className="cursor-pointer transition duration-300 focus:bg-red-500">
+            <DropdownMenuItem className="cursor-pointer transition duration-300 focus:bg-red-200 focus:text-red-600">
               <Trash2 className="mr-2 h-5 w-5" /> Eliminar
             </DropdownMenuItem>
           </AlertDialogTrigger>
@@ -87,7 +87,7 @@ export default function Actions({
         <AlertDialogFooter>
           <AlertDialogCancel>Cancelar</AlertDialogCancel>
           <AlertDialogAction
-            className="bg-red-600 transition duration-300 hover:bg-red-500"
+            className="bg-red-200 text-red-600 transition duration-300 hover:bg-red-600 hover:text-red-50"
             onClick={handlerDelete}
           >
             Eliminar

@@ -35,7 +35,7 @@ export const validateCreate = z.object({
         z.custom((value) => {
             const number = Number(value);
             if (isNaN(number) || number < 1) {
-                return { message: "Duración inválida." };
+                return false;
             }
 
             return true

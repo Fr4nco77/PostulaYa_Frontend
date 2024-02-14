@@ -57,7 +57,7 @@ export function DeleteInterview({
         <Button
           size="icon"
           className={cn(
-            "bg-red-200 text-red-600 transition duration-300 hover:bg-red-500 hover:text-slate-900",
+            "bg-red-200 text-red-600 transition duration-300 hover:bg-red-500 hover:text-slate-50",
             className,
           )}
           {...props}
@@ -65,7 +65,7 @@ export function DeleteInterview({
           <Trash2 />
         </Button>
       </AlertDialogTrigger>
-      <AlertDialogContent>
+      <AlertDialogContent className="bg-slate-50">
         <AlertDialogHeader>
           <AlertDialogTitle className="text-3xl font-black text-slate-900">
             ¿Quieres eliminar esta entrevista?

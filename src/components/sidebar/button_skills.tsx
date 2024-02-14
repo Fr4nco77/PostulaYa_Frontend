@@ -11,8 +11,7 @@ import {
 } from "@/components/ui/dialog";
 
 export default async function ButtonSkills({ token }: { token: string }) {
-  const { data } = await fetchUser({ token });
-  const { skills } = data.response;
+  const { success, data } = await fetchUser({ token });
 
   return (
     <Dialog>
@@ -32,8 +31,9 @@ export default async function ButtonSkills({ token }: { token: string }) {
       </DialogTrigger>
       <DialogContent className="bg-slate-50">
         <DialogHeader>
-          <DialogTitle className="text-4xl font-black text-slate-900">
-            Tus Habilidades
+          <DialogTitle className="flex items-end text-slate-900">
+            <Medal className="mr-2 h-full w-auto max-h-9" />
+            <span className="font-black text-4xl">Tus Habilidades</span>
           </DialogTitle>
           <DialogDescription>
             Edita y personaliza tu lista de habilidades según tu evolución
@@ -41,7 +41,7 @@ export default async function ButtonSkills({ token }: { token: string }) {
             actualizado.
           </DialogDescription>
         </DialogHeader>
-        <Form token={token} currentSkills={skills} />
+        <Form token={token} currentSkills={success ? data.response.skills : []} />
       </DialogContent>
     </Dialog>
   );

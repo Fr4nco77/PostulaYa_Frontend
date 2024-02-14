@@ -36,16 +36,16 @@ export default async function ApplicationTable({
 
   if (!success) {
     return (
-      <div className="flex w-full grow flex-col items-center justify-center rounded-md bg-slate-100 p-3 shadow-xl">
+      <div className="flex h-96 w-full flex-col items-center justify-center rounded-lg bg-slate-50 px-5 py-3 text-center shadow-md lg:grow">
         <h1 className="text-4xl font-black">{data.name}</h1>
-        <span>{data.message}</span>
+        <span className="text-gray-500 font-medium p-3 text-lg">{data.message}</span>
       </div>
     );
   } else if (!data.response.applications.length) {
     return (
-      <div className="flex w-full grow flex-col items-center justify-center rounded-md bg-slate-100 p-3 shadow-xl">
+      <div className="flex h-96 w-full flex-col items-center justify-center rounded-lg bg-slate-50 px-5 py-3 text-center shadow-md lg:grow">
         <h1 className="text-4xl font-black">No se encontraron coincidencias</h1>
-        <span>¡Anímate a aplicar y forma parte de nuestro equipo!</span>
+        <span className="text-gray-500 font-medium p-3 text-lg">¡Anímate a aplicar y forma parte de nuestro equipo!</span>
       </div>
     );
   }

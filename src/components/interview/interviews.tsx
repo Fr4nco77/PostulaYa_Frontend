@@ -34,15 +34,16 @@ export default function Interviews({ data }: { data: any }) {
   };
 
   const { interviews } = data.response;
+
   return (
     <main className="flex h-full w-full justify-center md:justify-between lg:max-h-[500px] xl:max-h-[515px]">
       <div className="flex w-full lg:w-1/2">
         {!data.response.interviews.length ? (
-          <div className="flex w-full max-w-7xl grow flex-col items-center justify-center rounded-lg bg-slate-100 p-3 shadow-xl">
-            <h1 className="text-2xl font-bold">
+          <div className="flex w-full max-w-7xl flex-col items-center justify-center rounded-lg bg-slate-50 px-5 py-3 text-center shadow-md lg:grow">
+            <h1 className="text-4xl font-black">
               No se encontraron coincidencias
             </h1>
-            <span>
+            <span className="p-3 text-lg font-medium text-gray-500">
               ¡De momento no hay nada por aquí, pero pronto algo aparecera!
             </span>
           </div>
@@ -52,7 +53,7 @@ export default function Interviews({ data }: { data: any }) {
               <TableRow>
                 <TableHead
                   colSpan={5}
-                  className="cursor-default rounded-tl-lg rounded-tr-lg bg-slate-100 py-4 text-3xl font-black text-slate-900 md:text-4xl"
+                  className="cursor-default rounded-tl-lg rounded-tr-lg p-4 text-3xl font-black text-slate-900 md:text-4xl"
                 >
                   Entrevistas
                 </TableHead>
@@ -92,7 +93,7 @@ export default function Interviews({ data }: { data: any }) {
           "hidden w-5/12 flex-col gap-3 overflow-y-auto rounded-lg border border-slate-400 p-5 lg:flex ",
           {
             "items-center justify-center border-dashed": !selectedInterview,
-            "border-solid bg-slate-100 shadow-xl": selectedInterview,
+            "border-solid bg-slate-50 shadow-md": selectedInterview,
           },
         )}
       >

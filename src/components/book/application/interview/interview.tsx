@@ -36,7 +36,7 @@ export default async function Interviews({
 
   return (
     <section
-      className={cn("gap-3 rounded-lg bg-slate-100 p-3 shadow-xl", className)}
+      className={cn("gap-3 rounded-lg bg-slate-50 p-3 shadow-md", className)}
       {...props}
     >
       <div className="flex w-full items-center justify-between">
@@ -50,7 +50,7 @@ export default async function Interviews({
         />
       </div>
       {!data.response.interviews.length ? (
-        <div className="flex h-full w-full items-center justify-center">
+        <div className="flex h-full w-full items-center justify-center font-medium text-gray-500 py-3">
           <span>No hay entrevistas registradas</span>
         </div>
       ) : (

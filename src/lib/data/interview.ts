@@ -41,13 +41,13 @@ export async function fetchAllInterviews({ query }: { query: string }) {
         const { success, data } = await response.json();
 
         return {
-            success,
-            data
+            successInterviews: success,
+            dataInterviews: data
         }
     } catch (error) {
         return {
-            success: false,
-            data: {
+            successInterviews: false,
+            dataInterviews: {
                 name: "Error Interno",
                 message: "Si el error persiste comunicate con el administrador."
             }
@@ -68,13 +68,13 @@ export async function fetchInterviewsPages({ query }: { query: string }) {
         const { success, data } = await response.json();
 
         return {
-            success,
-            totalPages: data.response.totalPages
+            successPages: success,
+            dataPages: data
         }
     } catch (error) {
         return {
-            success: false,
-            data: {
+            successPages: false,
+            dataPages: {
                 name: "Error Interno",
                 message: "Si el error persiste comunicate con el administrador."
             }

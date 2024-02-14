@@ -53,7 +53,7 @@ export function DeleteApplication({
           size="icon"
           variant="ghost"
           className={cn(
-            "text-slate-900 transition duration-300 hover:bg-red-500",
+            "text-slate-900 transition duration-300 hover:bg-red-600",
             className,
           )}
           {...props}

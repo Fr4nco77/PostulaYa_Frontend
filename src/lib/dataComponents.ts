@@ -22,4 +22,4 @@ export const feelingsNames = ["Todas", "Inseguro", "Preocupado", "Neutral", "Con
 export const feelingsValues = ["null", "Insecure", "Worried", "Neutral", "Confident", "Very motivated"];
 
 //Data para las tabla
-export const columnsBook = ["Fecha", "Posicion", "Empresa", "Ubicacion", "Modalidad", "Jornada", "Estado"];
+export const columnsBook = ["Fecha", "Posicion", "Empresa", "Ubicacion", "Modalidad", "Jornada", "Estado", ""];

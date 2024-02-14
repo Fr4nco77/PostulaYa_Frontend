@@ -10,10 +10,10 @@ import { Metadata } from "next";
 import Filter from "@/components/ui/select-filter";
 import { limit } from "@/lib/dataComponents";
 import { Separator } from "@/components/ui/separator";
-import Status from "@/components/book/charts/status";
-import ApplicationsByTime from "@/components/book/charts/applications";
-import Modalitys from "@/components/book/charts/modalitys";
-import Types from "@/components/book/charts/types";
+import ApplicationsByTime from "@/components/metrics/applicationsByTime";
+import Status from "@/components/metrics/status";
+import Modality from "@/components/metrics/modality";
+import Workdays from "@/components/metrics/workdays";
 
 export const metadata: Metadata = {
   title: "Bitácora",
@@ -26,17 +26,17 @@ export default async function Book({
 }) {
   const token = cookies().get("authorization")?.value!;
   const query = formatedQuery(searchParams);
-  const { totalPages } = await fetchApplicationsPages({ query, token });
+  const { success, data } = await fetchApplicationsPages({ query, token });
 
   return (
     <main className="flex h-full w-full max-w-[850px] flex-col gap-3 xl:max-w-7xl">
-      <section className="hidden h-28 w-full items-center justify-between lg:flex">
+      <section className="hidden h-32 w-full items-center justify-between lg:flex">
         <ApplicationsByTime token={token} className="h-full w-96" />
-        <Status token={token} className="h-full w-72 " />
-        <Modalitys token={token} className="hidden h-full w-60 xl:block" />
-        <Types token={token} className="hidden h-full w-60 xl:block" />
+        <Status token={token} className="h-full w-72" />
+        <Modality token={token} className="hidden h-full w-60 xl:block" />
+        <Workdays token={token} className="hidden h-full w-60 xl:block" />
       </section>
-      <Separator className="hidden lg:block" />
+      <Separator className="hidden lg:block bg-slate-300" />
       <Searchbar token={token} />
       <Suspense
         key={query}
@@ -61,7 +61,7 @@ export default async function Book({
             className="max-w-min"
           />
         </div>
-        <Pagination totalPages={totalPages} />
+        <Pagination totalPages={success ? data.response.totalPages : 0 } />
       </section>
     </main>
   );

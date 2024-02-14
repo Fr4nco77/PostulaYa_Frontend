@@ -210,7 +210,7 @@ export default function Form({ token }: { token: string }) {
       <div className="grid grid-cols-4 items-center gap-4">
         <Label
           htmlFor="workday"
-          className={`text-right ${errors?.type && "text-red-500"}`}
+          className={`text-right ${errors?.workday && "text-red-500"}`}
         >
           Jornada
         </Label>

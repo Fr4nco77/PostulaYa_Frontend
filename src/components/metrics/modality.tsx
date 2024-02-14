@@ -2,33 +2,12 @@
 
 import { useState, useEffect, HTMLAttributes } from "react";
 import { fetchModalityMetrics } from "@/lib/data/metrics";
-import { PolarArea } from "react-chartjs-2";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-  Colors,
-} from "chart.js";
+import { Doughnut } from "react-chartjs-2";
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
 import { Skeleton } from "../ui/skeleton";
 import { cn } from "@/lib/utils";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  ArcElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-  Colors,
-);
+ChartJS.register(ArcElement, Tooltip, Legend);
 
 interface ModalityProps extends HTMLAttributes<HTMLDivElement> {
   token: string;
@@ -51,6 +30,18 @@ export default function Modality({
             {
               label: "Postulaciones",
               data: data.response.data,
+              backgroundColor: [
+                "rgb(233 213 255)",
+                "rgb(226 232 240)",
+                "rgb(254 215 170)",
+              ],
+              borderColor: [
+                "rgb(147 51 234)",
+                "rgb(71 85 105)",
+                "rgb(234 88 12)",
+              ],
+              borderWidth: 1,
+              hoverOffset: 4,
             },
           ],
         };
@@ -58,21 +49,47 @@ export default function Modality({
         setIsLoading(false);
       }
     });
-  }, []);
+  }, [token]);
 
   return (
-    <div
-      className={cn(
-        "flex flex-col items-center justify-center rounded-xl bg-slate-100 shadow-lg",
-        className,
-      )}
+    <article
+      className={cn("flex rounded-lg bg-slate-50 shadow-md", className)}
       {...props}
     >
       {isLoading ? (
         <Skeleton className="h-full w-full" />
       ) : (
-        <PolarArea data={chartData} />
+        <div className="relative flex h-full w-full flex-col pb-3 pl-3 pt-7">
+          <div className="absolute left-5 top-1 z-10">
+            <span className="text-2xl font-bold text-slate-900">
+              Modalidades
+            </span>
+          </div>
+          <Doughnut
+            data={chartData}
+            options={{
+              maintainAspectRatio: false,
+              plugins: {
+                legend: {
+                  display: true,
+                  position: "left",
+                  labels: {
+                    boxWidth: 12,
+                  },
+                },
+                tooltip: {
+                  backgroundColor: "rgb(15 23 42)",
+                  titleColor: "rgb(250 204 21)",
+                },
+              },
+              animation: {
+                animateRotate: true,
+                animateScale: true,
+              },
+            }}
+          />
+        </div>
       )}
-    </div>
+    </article>
   );
 }

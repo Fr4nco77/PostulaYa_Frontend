@@ -20,8 +20,11 @@ export default async function Applications({
 }: {
   searchParams: { [key: string]: string };
 }) {
-  const query = formatedQuery(searchParams);
-  const { data } = await fetchAllPagesApplications({ query });
+  const query = formatedQuery({
+    limit: searchParams.limit || "10",
+    ...searchParams,
+  });
+  const { success, data } = await fetchAllPagesApplications({ query });
 
   return (
     <main className="flex h-full w-full max-w-[850px] flex-col gap-3 xl:max-w-7xl">
@@ -30,9 +33,9 @@ export default async function Applications({
         key={query}
         fallback={
           <TableSkeleton
-            rowCount={Number(searchParams.limit) || 6}
+            rowCount={Number(searchParams.limit) || 10}
             cellCount={8}
-            displayHeader={false}
+            displayHeader
           />
         }
       >
@@ -42,14 +45,14 @@ export default async function Applications({
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">Postulaciones por pagina</span>
           <Filter
-            placeholder="6"
+            placeholder="10"
             query="limit"
             names={limit}
             values={limit}
             className="max-w-min"
           />
         </div>
-        <Pagination totalPages={data.response.totalPages} />
+        <Pagination totalPages={success ? data.response.totalPages : 0} />
       </section>
     </main>
   );

@@ -25,12 +25,12 @@ export function ViewInterview({ interview }: { interview: Interview }) {
       <DialogTrigger asChild>
         <Button
           size="icon"
-          className="bg-slate-200 text-blue-600 transition duration-300 hover:bg-blue-600 hover:text-slate-900"
+          className="bg-blue-200 text-blue-600 transition duration-300 hover:bg-blue-600 hover:text-slate-50"
         >
           <Eye />
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-screen overflow-y-auto bg-slate-100">
+      <DialogContent className="max-h-screen overflow-y-auto bg-slate-50">
         <DialogHeader>
           <DialogTitle className="text-3xl font-black text-slate-900">
             {interview.created_at.split("T")[0]}

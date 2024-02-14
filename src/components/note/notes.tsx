@@ -29,7 +29,7 @@ export default async function Notes({
   return (
     <main
       className={cn(
-        "gap-5 overflow-y-auto rounded-lg border border-slate-300 bg-slate-50 p-3 lg:gap-8",
+        "gap-5 overflow-y-auto rounded-lg border-2 border-dashed border-slate-300 bg-slate-100 p-3 lg:gap-8",
         className,
       )}
       {...props}
@@ -39,7 +39,7 @@ export default async function Notes({
           return (
             <div
               key={_id}
-              className="w-full max-w-xs rounded-lg bg-yellow-400 p-3 shadow-md"
+              className="w-full max-w-xs rounded-lg bg-yellow-400 p-3 shadow-md max-[375px]:max-w-[250px]"
             >
               <div className="flex items-center justify-between">
                 <h4 className="truncate font-semibold">{title}</h4>
@@ -65,7 +65,7 @@ export default async function Notes({
         })
       ) : (
         <div className="flex h-full items-center justify-center">
-          <span className="text-xl font-medium text-slate-600">
+          <span className="my-48 text-center text-2xl font-bold">
             No hay notas agregadas
           </span>
         </div>

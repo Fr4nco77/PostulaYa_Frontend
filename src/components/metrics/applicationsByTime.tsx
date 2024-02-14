@@ -6,13 +6,9 @@ import {
   Chart as ChartJS,
   CategoryScale,
   LinearScale,
-  PointElement,
   LineElement,
-  Title,
   Tooltip,
-  Legend,
-  Filler,
-  Colors,
+  PointElement,
 } from "chart.js";
 import { fetchApplicationsByTime } from "@/lib/data/metrics";
 import {
@@ -25,17 +21,7 @@ import {
 import { cn } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-  Colors,
-);
+ChartJS.register(CategoryScale, LinearScale, LineElement, Tooltip, PointElement);
 
 interface ApplicationsProps extends HTMLAttributes<HTMLDivElement> {
   token: string;
@@ -59,8 +45,9 @@ export default function ApplicationsByTime({
             {
               label: "Postulaciones",
               data: data.response.data,
-              tension: 0.2,
-              fallbackContent: <span>Loading...</span>,
+              backgroundColor: "rgb(250 204 21)",
+              borderColor: "rgb(15 23 42)",
+              tension: 0.4,
             },
           ],
         };
@@ -68,46 +55,68 @@ export default function ApplicationsByTime({
         setIsLoading(false);
       }
     });
-  }, [period]);
-
-  const options = {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-    },
-  };
+  }, [period, token]);
 
   return (
-    <div
-      className={cn(
-        "flex flex-col items-center justify-center rounded-xl bg-slate-100 shadow-lg",
-        className,
-      )}
+    <article
+      className={cn("flex rounded-lg bg-slate-50 shadow-md", className)}
       {...props}
     >
       {isLoading ? (
         <Skeleton className="h-full w-full" />
       ) : (
-        <div className="relative flex h-full w-full flex-col items-center justify-end">
-          <div className="absolute right-0 top-0 z-10 md:right-5">
+        <div className="relative flex h-full w-full p-3 pt-7">
+          <div className="absolute left-8 top-1 z-10">
+            <span className="text-2xl font-bold text-slate-900">Actividad</span>
+          </div>
+          <div className="absolute right-5 top-1 z-10">
             <Select
               name="period"
               defaultValue={period}
               onValueChange={(value: "day" | "month") => setPeriod(value)}
             >
-              <SelectTrigger className="h-8 w-20">
+              <SelectTrigger className="h-7">
                 <SelectValue placeholder="" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="day">Diario</SelectItem>
-                <SelectItem value="month">Mensual</SelectItem>
+                <SelectItem
+                  value="day"
+                  className="focus:bg-slate-900 focus:text-yellow-400"
+                >
+                  Diario
+                </SelectItem>
+                <SelectItem
+                  value="month"
+                  className="focus:bg-slate-900 focus:text-yellow-400"
+                >
+                  Mensual
+                </SelectItem>
               </SelectContent>
             </Select>
           </div>
-          <Line data={chartData} options={options}/>
+          <Line
+            data={chartData}
+            options={{
+              maintainAspectRatio: false,
+              scales: {
+                y: {
+                  beginAtZero: true,
+                },
+              },
+              plugins: {
+                legend: {
+                  display: false,
+                },
+                tooltip: {
+                  displayColors: false,
+                  backgroundColor:"rgb(15 23 42)",
+                  titleColor: "rgb(250 204 21)",
+                },
+              },
+            }}
+          />
         </div>
       )}
-    </div>
+    </article>
   );
 }

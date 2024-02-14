@@ -25,7 +25,7 @@ export default function TableSkeleton({
 
     for (let j = 0; j < cellCount; j++) {
       cells.push(
-        <TableCell key={`cell ${j}`}>
+        <TableCell key={`cell ${j}`} className="h-[73px] xl:h-[62px]">
           <Skeleton className="h-3 w-28 rounded-xl" />
         </TableCell>,
       );

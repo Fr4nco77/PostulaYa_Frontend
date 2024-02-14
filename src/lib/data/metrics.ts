@@ -1,8 +1,8 @@
 import { unstable_noStore as noStore } from "next/cache";
 
-export async function fetchApplicationsMetrics({ token }: { token: string }) {
+export async function fetchUserMetrics({ token }: { token: string }) {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/metric/applications`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/metric/user`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",
@@ -103,9 +103,9 @@ export async function fetchModalityMetrics({ token }: { token: string }) {
     }
 }
 
-export async function fetchTypesMetrics({ token }: { token: string }) {
+export async function fetchWorkdaysMetrics({ token }: { token: string }) {
     try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/metric/types`, {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_BACKEND}/metric/workdays`, {
             method: "GET",
             headers: {
                 "Content-Type": "application/json",

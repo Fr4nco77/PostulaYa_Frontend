@@ -1,24 +1,33 @@
 "use client";
 
 import { useState, useEffect, HTMLAttributes } from "react";
+import { fetchWorkdaysMetrics } from "@/lib/data/metrics";
+import { Doughnut } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  ArcElement,
+  Tooltip,
+  Legend,
+} from "chart.js";
 import { cn } from "@/lib/utils";
 import { Skeleton } from "../ui/skeleton";
-import { fetchStatusMetrics } from "@/lib/data/metrics";
-import { Doughnut } from "react-chartjs-2";
-import { Chart as ChartJS, Title, ArcElement, Tooltip, Legend } from "chart.js";
 
-ChartJS.register(ArcElement, Title, Tooltip, Legend);
+ChartJS.register(
+  ArcElement,
+  Tooltip,
+  Legend,
+);
 
-interface StatusProps extends HTMLAttributes<HTMLDivElement> {
+interface TypesProps extends HTMLAttributes<HTMLDivElement> {
   token: string;
 }
 
-export default function Status({ className, token, ...props }: StatusProps) {
+export default function Workdays({ className, token, ...props }: TypesProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [chartData, setChartData] = useState<any>(null);
 
   useEffect(() => {
-    fetchStatusMetrics({ token }).then(({ success, data }) => {
+    fetchWorkdaysMetrics({ token }).then(({ success, data }) => {
       if (success) {
         const values = {
           labels: data.response.labels,
@@ -27,21 +36,18 @@ export default function Status({ className, token, ...props }: StatusProps) {
               label: "Postulaciones",
               data: data.response.data,
               backgroundColor: [
-                "rgb(253 224 71)",
-                "rgb(187 247 208)",
-                "rgb(254 202 202)",
+                "rgb(191 219 254)",
+                "rgb(229 231 235)",
               ],
               borderColor: [
-                "rgb(71 85 105)",
-                "rgb(22 163 74)",
-                "rgb(220 38 38)",
+                "rgb(37 99 235)",
+                "rgb(75 85 99)",
               ],
-              borderWidth: 2,
+              borderWidth: 1,
               hoverOffset: 4,
             },
           ],
         };
-
         setChartData(values);
         setIsLoading(false);
       }
@@ -58,7 +64,9 @@ export default function Status({ className, token, ...props }: StatusProps) {
       ) : (
         <div className="relative flex h-full w-full flex-col pb-3 pl-3 pt-7">
           <div className="absolute left-5 top-1 z-10">
-            <span className="text-2xl font-bold text-slate-900">Resumen</span>
+            <span className="text-2xl font-bold text-slate-900">
+              Jornadas
+            </span>
           </div>
           <Doughnut
             data={chartData}
@@ -73,7 +81,7 @@ export default function Status({ className, token, ...props }: StatusProps) {
                   },
                 },
                 tooltip: {
-                  backgroundColor:"rgb(15 23 42)",
+                  backgroundColor: "rgb(15 23 42)",
                   titleColor: "rgb(250 204 21)",
                 },
               },

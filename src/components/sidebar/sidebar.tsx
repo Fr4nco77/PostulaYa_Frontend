@@ -22,7 +22,7 @@ export default function Sidebar({
     <nav
       role="navigation"
       className={cn(
-        "flex items-center justify-between bg-slate-100 px-6 py-4 shadow-lg lg:flex-col lg:px-4",
+        "flex items-center justify-between bg-slate-50 px-6 py-4 shadow-lg lg:flex-col lg:px-4",
         className,
       )}
       {...props}

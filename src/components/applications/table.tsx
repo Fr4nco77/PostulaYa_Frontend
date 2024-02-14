@@ -15,13 +15,7 @@ import {
 import { fetchAllApplications } from "@/lib/data/application";
 import { Badge } from "../ui/badge";
 import clsx from "clsx";
-import {
-  Building,
-  ClipboardList,
-  Home,
-  Timer,
-  TimerOff,
-} from "lucide-react";
+import { Building, ClipboardList, Home, Timer, TimerOff } from "lucide-react";
 import { modalitysNames, modalitysValues } from "@/lib/dataComponents";
 import Actions from "./actions";
 import { cookies } from "next/headers";
@@ -32,14 +26,16 @@ export default async function ApplicationTable({ query }: { query: string }) {
 
   if (!success) {
     return (
-      <div className="flex w-full grow flex-col items-center justify-center rounded-md bg-slate-100 p-3 shadow-xl">
+      <div className="flex h-96 w-full flex-col items-center justify-center rounded-lg bg-slate-50 px-5 py-3 shadow-md lg:grow">
         <h1 className="text-4xl font-black">{data.name}</h1>
-        <span>{data.message}</span>
+        <span className="p-3 text-lg font-medium text-gray-500">
+          {data.message}
+        </span>
       </div>
     );
   } else if (!data.response.applications.length) {
     return (
-      <div className="flex w-full grow flex-col items-center justify-center rounded-md bg-slate-100 p-3 shadow-xl">
+      <div className="flex h-96 w-full flex-col items-center justify-center rounded-lg bg-slate-50 px-5 py-3 shadow-md lg:grow">
         <h1 className="text-4xl font-black">No se encontraron coincidencias</h1>
       </div>
     );
@@ -52,7 +48,7 @@ export default async function ApplicationTable({ query }: { query: string }) {
         <TableRow>
           <TableHead
             colSpan={8}
-            className="cursor-default rounded-tl-lg rounded-tr-lg bg-slate-100 py-4 text-3xl font-black text-slate-900 md:text-4xl"
+            className="cursor-default rounded-tl-lg rounded-tr-lg p-4 text-3xl font-black text-slate-900 md:text-4xl"
           >
             Vacantes Disponibles
           </TableHead>
@@ -78,7 +74,7 @@ export default async function ApplicationTable({ query }: { query: string }) {
                         </span>
                       </div>
                     </TooltipTrigger>
-                    <TooltipContent className="flex max-w-xs flex-col gap-2 border-slate-600 bg-slate-100">
+                    <TooltipContent className="flex max-w-xs flex-col gap-2 border-slate-600 bg-slate-50">
                       <h4 className="text-lg font-black text-slate-900">
                         Habilidades Requeridas
                       </h4>

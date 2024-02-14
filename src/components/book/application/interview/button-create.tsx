@@ -44,7 +44,7 @@ export default function CreateInterview({
           <Plus />
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-h-screen overflow-y-auto">
+      <DialogContent className="max-h-screen overflow-y-auto bg-slate-50">
         <DialogHeader>
           <DialogTitle className="text-3xl font-black text-slate-900">
             Registrar Entrevista

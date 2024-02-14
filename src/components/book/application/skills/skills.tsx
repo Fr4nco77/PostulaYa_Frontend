@@ -40,14 +40,14 @@ export default async function Skills({
         />
       </div>
       <Separator className="bg-slate-300" />
-      <div className="flex w-full flex-col gap-3">
+      <div className="flex w-full flex-col gap-3 font-bold">
         {userSkillsCount > 0 ? (
           userSkillsCount === requiredSkills.length ? (
-            <span className="font-bold text-green-600">
+            <span className="text-green-600">
               ¡Tienes todas las habilidades requeridas para este puesto! 🚀
             </span>
           ) : (
-            <span>
+            <span className="font-medium">
               Tienes{" "}
               <span className="font-bold text-green-600">
                 {userSkillsCount} habilidad{userSkillsCount !== 1 && "es"}
@@ -56,7 +56,7 @@ export default async function Skills({
             </span>
           )
         ) : (
-          <span className="font-bold text-red-600">
+          <span className="text-red-600">
             De momento no tienes ninguna habilidad de las requeridas para este
             puesto.
           </span>

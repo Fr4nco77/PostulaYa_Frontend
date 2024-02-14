@@ -17,7 +17,7 @@ export const createInterview = async ({ token, rawFormData, application }: { tok
             success: false,
             data: {
                 name: "Datos inválidos/incompletos.",
-                message: 'Registro de entrevista fallida.',
+                message: 'Registro de entrevista fallido.',
             }
         }
     }

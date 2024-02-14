@@ -19,13 +19,25 @@ export default async function InterviewsPage({
   searchParams: { query?: string; limit?: string };
 }) {
   const query = formatedQuery(searchParams);
-  const { totalPages } = await fetchInterviewsPages({ query });
-  const { success, data } = await fetchAllInterviews({ query });
+  const { successPages, dataPages } = await fetchInterviewsPages({ query });
+  const { successInterviews, dataInterviews } = await fetchAllInterviews({
+    query,
+  });
 
   return (
     <div className="flex h-full w-full max-w-[850px] flex-col gap-5 xl:max-w-7xl">
       <SearchBar />
-      <Interviews data={data} />
+      {!successInterviews ? (
+        <div className="flex h-96 w-full flex-col items-center justify-center rounded-lg bg-slate-50 px-5 py-3 shadow-md lg:grow">
+          <h1 className="text-4xl font-black">{dataInterviews.name}</h1>
+          <span className="p-3 text-lg font-medium text-gray-500">
+            {dataInterviews.message}
+          </span>
+        </div>
+      ) : (
+        <Interviews data={dataInterviews} />
+      )}
+
       <section className="flex w-full flex-col-reverse items-center justify-center gap-4 sm:justify-end md:flex-row md:gap-8">
         <div className="flex items-center gap-2">
           <span className="text-sm font-medium">Entrevistas por pagina</span>
@@ -37,7 +49,9 @@ export default async function InterviewsPage({
             className="max-w-min"
           />
         </div>
-        <Pagination totalPages={totalPages} />
+        <Pagination
+          totalPages={successPages ? dataPages.response.totalPages : 0}
+        />
       </section>
     </div>
   );
