@@ -41,7 +41,7 @@ export default function Interviews({ data }: { data: any }) {
         {!data.response.interviews.length ? (
           <div className="flex w-full max-w-7xl flex-col items-center justify-center rounded-lg bg-slate-50 px-5 py-3 text-center shadow-md lg:grow">
             <h1 className="text-4xl font-black">
-              No se encontraron coincidencias
+              No se encontraron entrevistas
             </h1>
             <span className="p-3 text-lg font-medium text-gray-500">
               ¡De momento no hay nada por aquí, pero pronto algo aparecera!

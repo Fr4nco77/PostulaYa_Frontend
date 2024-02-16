@@ -44,17 +44,28 @@ export default function Landing() {
           <div className="mx-auto max-w-7xl px-6 lg:px-8">
             <div className="mx-auto max-w-2xl text-center">
               <h2 className="relative text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl">
-                Registra y analiza tus postulaciones
+                Registra, Analiza y Encuentra
               </h2>
-              <p className="relative mx-auto mt-6 max-w-7xl leading-8">
-                PostulaYa te brinda la capacidad de evaluar tu progreso y tomar
-                decisiones fundamentadas. Registra cada postulación con
-                facilidad, analiza estadísticas clave y organiza meticulosamente
-                un historial detallado de todas tus actividades en la búsqueda
-                de empleo. Más que datos, PostulaYa te ofrece una guía
-                estratégica para avanzar con confianza hacia tu empleo soñado.
-                Descubre una nueva perspectiva en tu búsqueda laboral con
-                PostulaYa.
+              <p className="relative mx-auto mt-6 max-w-7xl text-lg leading-8 md:text-xl">
+                PostulaYa potencia tu capacidad para evaluar tu progreso y tomar
+                decisiones fundamentadas en tu búsqueda laboral. Registra cada
+                postulación con facilidad, analiza estadísticas clave y organiza
+                meticulosamente un historial detallado de tus actividades. Pero
+                eso es solo el comienzo. <br />
+                <br />
+                Explora diariamente nuestras vacantes actualizadas, ofreciéndote
+                oportunidades frescas y emocionantes. Además, accede a nuestra
+                sección exclusiva de entrevistas de la comunidad, diseñada para
+                que aprendas y te prepares asertivamente para futuras
+                entrevistas.{" "}
+                <strong>
+                  En PostulaYa, no solo te proporcionamos datos; te ofrecemos
+                  una guía estratégica integral que te impulsa con confianza
+                  hacia tu empleo soñado.
+                </strong>{" "}
+                Descubre una nueva perspectiva y transforma tu enfoque hacia el
+                éxito profesional con PostulaYa, tu aliado estratégico en la
+                búsqueda laboral.
               </p>
             </div>
           </div>
@@ -136,7 +147,7 @@ export default function Landing() {
                 <h2 className="relative text-3xl font-black tracking-tight text-gray-900 sm:text-4xl md:mx-auto md:max-w-4xl md:text-5xl md:leading-tight">
                   Impulsa Tu Carrera con PostulaYa
                 </h2>
-                <p className="relative mx-auto mt-6 max-w-2xl italic text-gray-700 sm:text-lg">
+                <p className="relative mx-auto mt-6 max-w-2xl text-lg italic text-gray-700 sm:text-xl">
                   Potencia tu búsqueda laboral desde hoy con PostulaYa.
                   Regístrate para acceder a herramientas inteligentes,
                   estadísticas perspicaces, asesoramiento personalizado y

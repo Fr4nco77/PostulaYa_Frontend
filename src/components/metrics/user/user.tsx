@@ -29,7 +29,10 @@ export default async function User({
     rateInterviews,
     averageResponseTime,
   } = data.response;
+
   const [userSkillsCount, missingSkillsCount] = skills.data.response.data;
+  const skillsPorcent = !missingSkillsCount ? "0 %" : `${Math.round((userSkillsCount * 100) / (userSkillsCount + missingSkillsCount))} %`;
+
   return (
     <section
       className={cn(
@@ -78,9 +81,7 @@ export default async function User({
       <Card
         icon={<BarChart2 className="h-8 w-8 text-yellow-400" />}
         title="Habilidades Dominadas"
-        data={`${
-          (userSkillsCount * 100) / (userSkillsCount + missingSkillsCount)
-        } %`}
+        data={skillsPorcent}
         displayTooltip
         dataTooltip="Refleja tu dominio en las habilidades necesarias para tus postulaciones, mostrando tu capacidad para cumplir con las expectativas laborales"
       />

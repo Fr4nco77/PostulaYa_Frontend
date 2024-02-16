@@ -36,7 +36,7 @@ export default async function ApplicationTable({ query }: { query: string }) {
   } else if (!data.response.applications.length) {
     return (
       <div className="flex h-96 w-full flex-col items-center justify-center rounded-lg bg-slate-50 px-5 py-3 shadow-md lg:grow">
-        <h1 className="text-4xl font-black">No se encontraron coincidencias</h1>
+        <h1 className="text-4xl font-black">No se encontraron vacantes</h1>
       </div>
     );
   }

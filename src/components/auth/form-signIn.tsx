@@ -41,11 +41,13 @@ export default function Form() {
       toast({ variant: "warning", title: data.message });
 
       //En caso de exito guardo la informacion provista en cookies
-      const config = configCookies();
-      const { token, image } = data.response;
-      Cookies.set("authorization", token, config);
-      Cookies.set("_image", image, config);
-      setTimeout(() => router.push("/app"), 1000);
+      if (data.response) {
+        const config = configCookies();
+        const { token, image } = data.response;
+        Cookies.set("authorization", token, config);
+        Cookies.set("_image", image, config);
+        setTimeout(() => router.push("/app"), 1000);
+      }
     },
     [router, toast],
   );

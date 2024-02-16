@@ -29,7 +29,7 @@ export default function Feedback() {
         <Form token={token} />
       </div>
       <Image
-        src="/feedback.jpg"
+        src="/feedback.webp"
         alt="¿Interesado en patrocinar el éxito de nuestra comunidad? Contáctanos en postulaya@outlook.com"
         width={383}
         height={575}

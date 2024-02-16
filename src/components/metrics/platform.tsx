@@ -61,6 +61,13 @@ export default function Platforms({
             data={chartData}
             options={{
               maintainAspectRatio: false,
+              scales: {
+                r: {
+                  ticks: {
+                    display: false
+                  }
+                }
+              },
               plugins: {
                 legend: {
                   display: false,

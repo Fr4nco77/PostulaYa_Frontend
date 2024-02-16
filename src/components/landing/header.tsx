@@ -29,7 +29,7 @@ export default function Header() {
                     "mt-10 space-y-4 font-semibold bg-yellow-400 text-slate-900 transition duration-300 hover:bg-slate-900 hover:text-yellow-400",
                 })}
               >
-                Descubre tu Próximo Empleo
+                Encuentra tu Próximo Empleo Ahora
               </Link>
             </div>
           </div>
@@ -74,7 +74,7 @@ export default function Header() {
             <div className="relative ml-auto pl-4 sm:max-w-4xl sm:px-0 lg:flex lg:h-full lg:max-w-none lg:items-center xl:pl-12">
               <Image
                 className="w-full rounded-l-3xl lg:w-auto 2xl:h-full 2xl:max-w-none 2xl:rounded-3xl"
-                src="/landing_header.jpg"
+                src="/landing_header.webp"
                 alt="Plataforma para búsqueda laboral: Gestiona postulaciones, entrevistas y obtén información valiosa en PostulaYa"
                 priority={true}
                 width={1080}

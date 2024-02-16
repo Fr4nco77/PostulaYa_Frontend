@@ -51,7 +51,7 @@ export default function SignUp() {
       </main>
       <section className="relative hidden h-full w-1/2 lg:block">
         <Image
-          src="/sign_up.jpg"
+          src="/sign_up.webp"
           alt="Usuarios de PostulaYa interactuando y utilizando la plataforma para mejorar sus búsquedas laborales."
           width={undefined}
           height={undefined}
@@ -60,7 +60,7 @@ export default function SignUp() {
           sizes="(max-width: full) 100vw"
           className="object-cover object-left-top"
         />
-        <div className="absolute bottom-16 left-0 max-w-sm px-6 xl:bottom-14 xl:max-w-md 2xl:bottom-6">
+        <div className="absolute bottom-11 left-0 max-w-sm px-6 xl:bottom-14 xl:max-w-md 2xl:bottom-6">
           <span className="text-4xl font-black tracking-tight text-yellow-400 2xl:text-5xl">
             Nuestros Usuarios Siguen Eligiéndonos. Descubre por Qué.
           </span>

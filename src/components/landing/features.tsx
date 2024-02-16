@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 export default function Features() {
   return (
     <section
@@ -10,17 +12,20 @@ export default function Features() {
             Gestiona y potencia tu búsqueda
           </h3>
           <p className="relative mt-4 text-lg leading-relaxed text-gray-500 sm:text-xl">
-            Observa tu avance de manera clara y precisa mediante nuestro
+            Obtén una visión clara y precisa de tu progreso a través de nuestro
             completo panel de control. Accede a estadísticas esenciales que
-            incluyen tus postulaciones diarias, el tiempo promedio de respuesta
-            y valiosas sugerencias de aprendizaje, entre otros aspectos
-            fundamentales.
+            abarcan desde tus postulaciones diarias hasta la frecuencia de
+            entrevistas, pasando por el tiempo promedio de respuesta y valiosas
+            sugerencias de aprendizaje, entre otros aspectos.
           </p>
         </div>
         <div className="relative mt-12 sm:mt-16 lg:col-start-1 lg:mt-0">
           <div className="pr-4 sm:ml-48 sm:pr-6 md:-ml-16 lg:relative lg:m-0 lg:flex lg:h-full lg:items-center lg:px-0">
-            <img
-              src={`https://images.unsplash.com/photo-1516321497487-e288fb19713f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMzczODV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDY3Mjc0ODh8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080`}
+            <Image
+              src="/dashboard.png"
+              width={1080}
+              height={720}
+              priority
               className="3xl:max-w-3xl ml-auto max-h-screen w-auto rounded-r-2xl object-contain lg:right-0 2xl:max-h-[44rem] 2xl:max-w-2xl 2xl:rounded-2xl"
               alt="Visualización de Estadísticas Clave de Postulaciones Diarias y Tiempo de Respuesta"
             />
@@ -33,16 +38,20 @@ export default function Features() {
             Organiza tus postulaciones
           </h3>
           <p className="relative mt-4 text-lg leading-relaxed text-gray-500 sm:text-xl">
-            Utiliza nuestra Bitácora para registrar, buscar y organizar tus
-            postulaciones de manera eficiente. Mantén un seguimiento detallado
-            de las empresas a las que has aplicado y registra tus actividades en
-            la búsqueda laboral de forma organizada.
+            Explora nuestra Bitácora para registrar, buscar y organizar
+            eficientemente tus postulaciones. Mantén un seguimiento detallado de
+            las empresas a las que has aplicado y lleva un registro organizado
+            de tus actividades en la búsqueda laboral. En PostulaYa, la Bitácora
+            es tu aliada para mantener el control y avanzar con confianza hacia
+            el empleo soñado.
           </p>
         </div>
         <div className="preview-menu-wrapper relative mt-12 sm:mt-16 lg:mt-0">
           <div className="pl-4 sm:-mr-6 sm:pl-6 md:-mr-16 lg:relative lg:m-0 lg:flex lg:h-full lg:items-center lg:px-0">
-            <img
-              src={`https://images.unsplash.com/photo-1585399000684-d2f72660f092?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMzczODV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDY3Mjc0ODh8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080`}
+            <Image
+              src="/book.png"
+              width={1080}
+              height={720}
               className="3xl:max-w-3xl mr-auto max-h-screen w-auto  rounded-l-2xl object-contain lg:left-0 2xl:max-h-[44rem] 2xl:max-w-2xl 2xl:rounded-2xl"
               alt="Bitácora de Postulaciones: Registra y Organiza Eficientemente tus Postulaciones"
             />
@@ -62,8 +71,10 @@ export default function Features() {
         </div>
         <div className="relative mt-12 sm:mt-16 lg:col-start-1 lg:mt-0">
           <div className="pr-4 sm:ml-48 sm:pr-6 md:-ml-16 lg:relative lg:m-0 lg:flex lg:h-full lg:items-center lg:px-0">
-            <img
-              src={`https://images.unsplash.com/photo-1516321497487-e288fb19713f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMzczODV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDY3Mjc0ODh8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080`}
+            <Image
+              src="/notes.png"
+              width={1080}
+              height={720}
               className="3xl:max-w-3xl ml-auto max-h-screen w-auto rounded-r-2xl object-contain lg:right-0 2xl:max-h-[44rem] 2xl:max-w-2xl 2xl:rounded-2xl"
               alt="Creación de Notas en PostulaYa: Captura Ideas y Reflexiones para Impulsar tu Éxito Laboral"
             />
@@ -84,8 +95,10 @@ export default function Features() {
         </div>
         <div className="preview-menu-wrapper relative mt-12 sm:mt-16 lg:mt-0">
           <div className="pl-4 sm:-mr-6 sm:pl-6 md:-mr-16 lg:relative lg:m-0 lg:flex lg:h-full lg:items-center lg:px-0">
-            <img
-              src={`https://images.unsplash.com/photo-1585399000684-d2f72660f092?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMzczODV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDY3Mjc0ODh8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080`}
+            <Image
+              src="/vacancies.png"
+              width={1080}
+              height={720}
               className="3xl:max-w-3xl mr-auto max-h-screen w-auto  rounded-l-2xl object-contain lg:left-0 2xl:max-h-[44rem] 2xl:max-w-2xl 2xl:rounded-2xl"
               alt="Exploración de Vacantes en PostulaYa: Conéctate con Oportunidades Laborales Constantemente Actualizadas"
             />
@@ -99,15 +112,18 @@ export default function Features() {
           </h3>
           <p className="relative mt-4 text-lg leading-relaxed text-gray-500 sm:text-xl">
             Prepárate como un profesional. En la sección de entrevistas, accede
-            a una lista detallada de entrevistas realizadas por otros usuarios.
-            Esta funcionalidad única te permite revisar preguntas frecuentes
-            hechas por empresas específicas para prepararte de manera asertiva.
+            a una lista detallada de entrevistas realizadas por nuestra
+            comunidad. Esta funcionalidad única te permite revisar preguntas
+            frecuentes hechas por empresas específicas para prepararte de manera
+            asertiva.
           </p>
         </div>
         <div className="relative mt-12 sm:mt-16 lg:col-start-1 lg:mt-0">
           <div className="pr-4 sm:ml-48 sm:pr-6 md:-ml-16 lg:relative lg:m-0 lg:flex lg:h-full lg:items-center lg:px-0">
-            <img
-              src={`https://images.unsplash.com/photo-1516321497487-e288fb19713f?crop=entropy&amp;cs=tinysrgb&amp;fit=max&amp;fm=jpg&amp;ixid=M3wzMzczODV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MDY3Mjc0ODh8&amp;ixlib=rb-4.0.3&amp;q=80&amp;w=1080`}
+            <Image
+              src="/interviews.png"
+              width={1080}
+              height={720}
               className="3xl:max-w-3xl ml-auto max-h-screen w-auto rounded-r-2xl object-contain lg:right-0 2xl:max-h-[44rem] 2xl:max-w-2xl 2xl:rounded-2xl"
               alt="Sección de Entrevistas en PostulaYa: Revisa Preguntas Frecuentes para una Preparación Asertiva"
             />
