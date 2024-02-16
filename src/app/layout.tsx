@@ -29,6 +29,7 @@ export default function RootLayout({
           type="image/<generated>"
           sizes="<generated>"
         />
+        <meta name="google-site-verification" content="3ZZ3JfyF_R4OQ9Nfi1fBD9lJcQ_aa50TMbuGhlR3Auw" />
       </head>
       <body className={`${inter.className} scroll-smooth bg-slate-50`}>
         {children}
