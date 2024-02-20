@@ -60,12 +60,9 @@ export default function Landing() {
                 entrevistas.{" "}
                 <strong>
                   En PostulaYa, no solo te proporcionamos datos; te ofrecemos
-                  una guía estratégica integral que te impulsa con confianza
-                  hacia tu empleo soñado.
+                  una guía estratégica completa que te impulsa con confianza
+                  hacia tu trabajo ideal.
                 </strong>{" "}
-                Descubre una nueva perspectiva y transforma tu enfoque hacia el
-                éxito profesional con PostulaYa, tu aliado estratégico en la
-                búsqueda laboral.
               </p>
             </div>
           </div>

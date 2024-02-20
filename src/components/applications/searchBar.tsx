@@ -13,7 +13,7 @@ export default function Searchbar() {
   return (
     <header className="flex h-auto w-full flex-col items-center justify-between gap-2 md:flex-row">
       <Search
-        placeholder="¿Buscas alguna posición o empresa?"
+        placeholder="¿Posición, empresa o ubicación?"
         className="max-w-xs lg:max-w-md"
       />
       <div className="flex flex-wrap gap-2">
