@@ -50,7 +50,7 @@ export default function Actions({
         description: data.message,
       });
     } else {
-      toast({ variant: "warning", title: data.message });
+      toast({ variant: "success", title: data.message });
     }
   }, [toast, token, application]);
 

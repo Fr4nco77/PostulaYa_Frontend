@@ -30,7 +30,7 @@ export default function Form({ token }: { token: string }) {
         });
       }
 
-      toast({ title: data.message });
+      toast({ variant: "success", title: data.message });
     },
     [toast, token],
   );

@@ -31,7 +31,7 @@ export default function FormCreateNote({ token }: { token: string }) {
         });
       }
 
-      toast({ variant: "warning", title: data.message });
+      toast({ variant: "success", title: data.message });
     },
     [toast, token],
   );

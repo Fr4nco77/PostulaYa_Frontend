@@ -75,7 +75,7 @@ export default function Form({
       });
     }
 
-    toast({ variant: "warning", title: data.message });
+    toast({ variant: "success", title: data.message });
   };
 
   return (

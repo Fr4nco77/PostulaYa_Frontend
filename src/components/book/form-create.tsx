@@ -92,7 +92,7 @@ export default function Form({ token }: { token: string }) {
       }
 
       toast({
-        variant: "warning",
+        variant: "success",
         title: data.message,
       });
     },

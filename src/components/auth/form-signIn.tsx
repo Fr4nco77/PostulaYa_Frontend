@@ -38,7 +38,7 @@ export default function Form() {
           description: data.message,
         });
       }
-      toast({ variant: "warning", title: data.message });
+      toast({ variant: "success", title: data.message });
 
       //En caso de exito guardo la informacion provista en cookies
       if (data.response) {

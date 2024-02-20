@@ -51,7 +51,7 @@ export default function Form() {
         });
       }
 
-      toast({ variant: "warning", title: data.message });
+      toast({ variant: "success", title: data.message });
       router.push("/sign_in");
     },
     [router, toast, token],

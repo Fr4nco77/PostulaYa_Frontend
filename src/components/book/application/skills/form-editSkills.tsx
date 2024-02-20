@@ -83,7 +83,7 @@ export default function Form({
     }
 
     toast({
-      variant: "warning",
+      variant: "success",
       title: data.message,
     });
   };

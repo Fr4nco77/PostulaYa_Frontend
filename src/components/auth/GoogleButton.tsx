@@ -41,7 +41,7 @@ export default function GoogleButton({ className, ...props }: ButtonProps) {
         }
 
         toast({
-          variant: "warning",
+          variant: "success",
           title: data.message,
         });
         //En caso de exito seteo las cookies
