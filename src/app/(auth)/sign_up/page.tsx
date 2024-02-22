@@ -16,7 +16,7 @@ export default function SignUp() {
     <div className="flex h-screen w-screen">
       <main className="flex h-full w-full items-center justify-center lg:w-1/2">
         <div className="flex w-full max-w-md flex-col items-center justify-center p-10 lg:max-w-lg">
-          <div className="mb-4 w-full">
+          <div className="w-full">{/* Agregar mb-4 al div cuando termine el proceso de verificacion de google */}
             <Link href="/">
               <Image
                 src="/Logo.svg"
@@ -30,8 +30,8 @@ export default function SignUp() {
               <strong>Crear Cuenta</strong>
             </h1>
           </div>
-          <GoogleButton className="my-5 w-full" />
-          <Separator />
+          {/* <GoogleButton className="my-5 w-full" />
+          <Separator /> */}
           <Form />
           <div className="w-full text-center">
             <span>

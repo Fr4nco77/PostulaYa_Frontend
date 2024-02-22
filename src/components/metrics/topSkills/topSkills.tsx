@@ -39,7 +39,7 @@ export default async function TopSkills({
         data={topRequiredSkills}
         color="bg-blue-200 text-blue-600"
         displayTooltip
-        dataTooltip="Lista de las habilidades más demandadas de acuerdo a tus postulaciones"
+        dataTooltip="Lista de las habilidades más demandadas de acuerdo a tus postulaciones."
       />
       <Card
         icon={<Wrench className="h-8 w-8" />}

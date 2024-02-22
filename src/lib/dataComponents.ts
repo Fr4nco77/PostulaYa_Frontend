@@ -11,7 +11,7 @@ export const statusValues = ["null", "Applied", "In Progress", "Completed"];
 export const orderNames = ["Ascendente", "Descendente"];
 export const orderValues = ["asc", "desc"];
 
-export const limit = ["6", "10", "15", "20"];
+export const limit = ["6", "10", "15", "20", "30"];
 
 export const categoryNames = ["Todas", "Tecnología e Informática", "Salud y Ciencias Médicas", "Marketing y Publicidad", "Educación", "Finanzas y Contabilidad", "Ingeniería y Construcción", "Recursos Humanos", "Servicios al Cliente", "Gastronomía y Hospitalidad"]
 export const categoryValues = ["null", "Technology and Information Technology", "Health and Medical Sciences", "Marketing and Advertising", "Education", "Finance and Accounting", "Engineering and Construction", "Human Resources", "Customer Service", "Gastronomy and Hospitality"]

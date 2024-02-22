@@ -67,7 +67,7 @@ export default function Card({
               <TooltipTrigger>
                 <HelpCircle className="h-4 text-gray-400 transition duration-300 hover:text-gray-500" />
               </TooltipTrigger>
-              <TooltipContent className="w-36 bg-slate-900 text-xs text-yellow-400">
+              <TooltipContent className="w-36 border-slate-600 bg-slate-50 text-xs font-medium text-slate-900">
                 {dataTooltip}
               </TooltipContent>
             </Tooltip>

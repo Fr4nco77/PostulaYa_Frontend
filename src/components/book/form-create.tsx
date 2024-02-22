@@ -143,7 +143,7 @@ export default function Form({ token }: { token: string }) {
           className={`col-span-3 ${errors?.location && "border-red-500"}`}
         />
       </div>
-      <div className="grid grid-cols-4 items-center gap-4">
+      {/* <div className="grid grid-cols-4 items-center gap-4">
         <Label
           htmlFor="recluter"
           className={`text-right ${errors?.recluter && "text-red-500"}`}
@@ -156,7 +156,7 @@ export default function Form({ token }: { token: string }) {
           placeholder="Gabriela Rodríguez"
           className={`col-span-3 ${errors?.recluter && "border-red-500"}`}
         />
-      </div>
+      </div> */}
       <div className="grid grid-cols-4 items-center gap-4">
         <Label
           htmlFor="category"

@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function SingIn() {
   return (
     <div className="flex w-full max-w-md flex-col items-center justify-center p-10 lg:max-w-lg">
-      <header className="mb-4 w-full">
+      <header className="w-full">{/* Agregar mb-4 al div cuando termine el proceso de verificacion de google */}
         <Link href="/">
           <Image
             src="/Logo.svg"
@@ -28,8 +28,8 @@ export default function SingIn() {
           <strong>¡Hola de nuevo! 👋</strong>
         </h1>
       </header>
-      <GoogleButton className="my-5 w-full" />
-      <Separator />
+      {/* <GoogleButton className="my-5 w-full" />
+      <Separator /> */}
       <Form />
       <div className="w-full text-center">
         <span>

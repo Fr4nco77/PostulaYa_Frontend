@@ -45,7 +45,7 @@ export default function Searchbar({ token }: { token: string }) {
           names={orderNames}
           values={orderValues}
         />
-        <CreateApplication token={token} />
+        <CreateApplication token={token} basicStyle={false}/>
       </div>
     </div>
   );
