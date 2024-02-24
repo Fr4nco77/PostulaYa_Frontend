@@ -37,7 +37,7 @@ export default function ButtonCreate({
           <span>Crear Nota</span>
         </Button>
       </DialogTrigger>
-      <DialogContent className="bg-slate-50">
+      <DialogContent className="max-h-screen bg-slate-50">
         <DialogHeader>
           <DialogTitle className="text-4xl font-black text-slate-900">Crear Nota</DialogTitle>
           <DialogDescription>¿Qué no deberías olvidar?</DialogDescription>

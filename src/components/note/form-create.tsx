@@ -57,7 +57,7 @@ export default function FormCreateNote({ token }: { token: string }) {
           id="body"
           name="body"
           placeholder="Investiga la empresa, prepara preguntas..."
-          className={`resize-none border-slate-600 ${
+          className={`max-h-96 resize-y border-slate-600 ${
             errors?.body && "border-red-500"
           }`}
         />

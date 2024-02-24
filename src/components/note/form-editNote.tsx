@@ -59,7 +59,7 @@ export default function Form({ _id, token, title, body }: FormProps) {
           id="body"
           name="body"
           defaultValue={body}
-          className={`resize-none border-slate-600 ${
+          className={`max-h-96 resize-y border-slate-600 ${
             errors?.body && "border-red-500"
           }`}
         />
