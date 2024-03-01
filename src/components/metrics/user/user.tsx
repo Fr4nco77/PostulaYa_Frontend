@@ -33,7 +33,7 @@ export default async function User({
 
   const [userSkillsCount, missingSkillsCount] = skills.data.response.data;
   const skillsPorcent = !missingSkillsCount
-    ? "0 %"
+    ? "100 %"
     : `${Math.round(
         (userSkillsCount * 100) / (userSkillsCount + missingSkillsCount),
       )} %`;
